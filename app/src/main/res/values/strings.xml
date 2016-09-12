@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Cana</string>
+    <string name="permission_title">Required permission</string>
+    <string name="permission_pass">Start out app</string>
+</resources>
+
