@@ -12,8 +12,11 @@ import org.androidannotations.annotations.EBean;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ToastManager;
 import cn.ac.ict.cana.models.Exam;
+import cn.ac.ict.cana.models.History;
+import cn.ac.ict.cana.providers.HistoryProvider;
 
 /**
  * Author: saukymo
@@ -45,8 +48,9 @@ public class ExamAdapter extends BaseAdapter {
         examView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastManager toastManager = new ToastManager(mContext);
-                toastManager.show("Start exam");
+                HistoryProvider historyProvider = new HistoryProvider(DataBaseHelper.getInstance(mContext));
+                History history = new History(0, "Stride");
+                historyProvider.InsertHistory(history);
             }
         });
         return examView;

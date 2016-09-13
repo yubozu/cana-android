@@ -14,7 +14,9 @@ import org.androidannotations.annotations.RootContext;
 import java.util.Locale;
 
 import cn.ac.ict.cana.R;
+import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.pages.ExamPage;
+import cn.ac.ict.cana.pages.HistoryPage;
 import cn.ac.ict.cana.pages.UserPage;
 
 /**
@@ -45,23 +47,24 @@ public class MainAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(final ViewGroup container, final int position) {
         switch (position) {
-            case 1:
-//                view = UserPage.InitialUserPageView(mContext);
-
+            case 0:
                 view = ExamPage.InitialExamPageView(mContext);
                 Log.d("MainAdapter exam", String.valueOf(mContext));
                 break;
-            case 0:
+            case 1:
                 view = UserPage.InitialUserPageView(mContext);
                 Log.d("MainAdapter user", String.valueOf(mContext));
+                break;
+            case 2:
+                view = HistoryPage.InitialHistoryPageView(mContext);
                 break;
             case 3:
                 view = LayoutInflater.from(mContext).inflate(R.layout.pageview_setting, null, false);
                 break;
-            default:
-                view = LayoutInflater.from(mContext).inflate(R.layout.adapter_main, null, false);
-                final TextView txtPage = (TextView) view.findViewById(R.id.txt_vp_item_page);
-                txtPage.setText(String.format(Locale.CHINA, "Page #%d", position));
+//            default:
+//                view = LayoutInflater.from(mContext).inflate(R.layout.adapter_main, null, false);
+//                final TextView txtPage = (TextView) view.findViewById(R.id.txt_vp_item_page);
+//                txtPage.setText(String.format(Locale.CHINA, "Page #%d", position));
         }
 
         container.addView(view);

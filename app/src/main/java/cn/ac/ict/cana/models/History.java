@@ -15,6 +15,10 @@ public class History {
     public History(long historyUserId, String historyType){
         userId = historyUserId;
         type = historyType;
+
+        // TODO: set as app storage path;
+        filePath = "test file path";
+        isUpload = false;
     }
 
     public History(long historyId, long historyUserId, String historyType, String historyFilePath, boolean historyIsUpload, String historyCreatedTime) {

@@ -4,8 +4,10 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -31,6 +33,9 @@ public class PermissionActivity extends Activity {
 
     @ViewById(R.id.bt_permission_pass)
     Button button;
+    @ViewById(R.id.tv_permission_info)
+    TextView tvPermissionInfo;
+
     @ViewById(R.id.lv_permission_not_granted)
     ListView lvPermission;
 
@@ -109,6 +114,7 @@ public class PermissionActivity extends Activity {
     public void PermissionCheckStatus() {
         boolean is_passed = mPermissionAdapter.getCount() == 0;
         if (is_passed) {
+            tvPermissionInfo.setVisibility(View.INVISIBLE);
             button.setText(R.string.permission_pass);
         } else {
             button.setText(String.format(Locale.CHINA, "%d permission remained", mPermissionAdapter.getCount()));
