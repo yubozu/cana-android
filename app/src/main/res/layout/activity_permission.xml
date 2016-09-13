@@ -5,18 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.AppCompatTextView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/permission_title"/>
+        android:text="@string/permission_not_granted"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_permission"
+    <ListView
+        android:id="@+id/lv_permission_not_granted"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:scrollbars="vertical"
         />
-    <android.support.v7.widget.AppCompatButton
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/permission_granted"/>
+
+    <ListView
+        android:id="@+id/lv_permission_granted"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:scrollbars="vertical"
+        />
+
+    <Button
         android:id="@+id/bt_permission_pass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

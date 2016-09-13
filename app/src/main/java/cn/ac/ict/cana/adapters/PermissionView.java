@@ -1,8 +1,8 @@
 package cn.ac.ict.cana.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.SwitchCompat;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import org.androidannotations.annotations.EViewGroup;
@@ -20,8 +20,7 @@ import cn.ac.ict.cana.models.Permission;
 public class PermissionView extends LinearLayout {
 
     @ViewById(R.id.tv_permission_name) public TextView tvPermissionName;
-    @ViewById(R.id.tv_permission_description) public TextView tvPermissionDescription;
-    @ViewById(R.id.sw_permission_status) public SwitchCompat swPermissionStatus;
+    @ViewById(R.id.sw_permission_status) public Switch swPermissionStatus;
 
     public PermissionView(Context context) {
         super(context);
@@ -29,7 +28,6 @@ public class PermissionView extends LinearLayout {
 
     public void bind(Permission permission) {
         tvPermissionName.setText(permission.permissionName);
-        tvPermissionDescription.setText(permission.permissionDescription);
         swPermissionStatus.setChecked(permission.permissionStatus);
     }
 }

@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.AppCompatTextView
+    <TextView
         android:id="@+id/tv_permission_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"/>
+        />
 
-    <android.support.v7.widget.AppCompatTextView
+    <TextView
         android:id="@+id/tv_permission_description"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@+id/tv_permission_name"/>
+        />
 
-    <android.support.v7.widget.SwitchCompat
+    <Switch
         android:id="@+id/sw_permission_status"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"/>
-</LinearLayout>
+       />
+</RelativeLayout>

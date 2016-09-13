@@ -1,13 +1,23 @@
 package cn.ac.ict.cana.adapters;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.ActivityCompat;
+import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.Switch;
 
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 
-import cn.ac.ict.cana.helpers.RecyclerViewAdapterBase;
-import cn.ac.ict.cana.helpers.ViewWrapper;
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.ac.ict.cana.R;
+import cn.ac.ict.cana.helpers.ToastManager;
 import cn.ac.ict.cana.models.Permission;
 
 /**
@@ -17,21 +27,71 @@ import cn.ac.ict.cana.models.Permission;
  */
 
 @EBean
-public class PermissionAdapter extends RecyclerViewAdapterBase<Permission, PermissionView> {
+public class PermissionAdapter extends BaseAdapter {
 
+    @Bean ToastManager toastManager;
     @RootContext Context mContext;
 
+    private List<Permission> mPermissionSet;
+
     @Override
-    protected PermissionView onCreateItemView(ViewGroup parent, int viewType) {
-        return PermissionView_.build(mContext);
+    public View getView(final int position, View view, ViewGroup parent) {
+        final PermissionView permissionView;
+        if (view == null) {
+            permissionView = PermissionView_.build(mContext);
+        } else {
+            permissionView = (PermissionView) view;
+        }
+
+        permissionView.bind(getItem(position));
+
+        Permission permission = mPermissionSet.get(position);
+
+        permissionView.bind(permission);
+        Switch swPermissionStatus = (Switch) permissionView.findViewById(R.id.sw_permission_status);
+        swPermissionStatus.setChecked(permission.permissionStatus);
+
+        if (permission.permissionStatus) {
+            swPermissionStatus.setVisibility(View.INVISIBLE);
+        } else {
+            swPermissionStatus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Log.d("CheckedChanged", String.valueOf(mPermissionSet.size()) + "," + String.valueOf(position));
+                    ActivityCompat.requestPermissions((Activity) mContext, new String[]{mPermissionSet.get(position).permissionName}, position);
+                }
+            });
+        }
+
+        return permissionView;
+
+    }
+
+    public void setList(ArrayList<Permission> permissionSet) {
+        mPermissionSet = permissionSet;
+    }
+    @Override
+    public int getCount() {
+        return mPermissionSet.size();
     }
 
     @Override
-    public void onBindViewHolder(ViewWrapper<PermissionView> viewHolder, int position) {
-        PermissionView permissionview = viewHolder.getView();
-        Permission permission = mItems.get(position);
-
-        permissionview.bind(permission);
+    public Permission getItem(int position) {
+        return mPermissionSet.get(position);
     }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    public void addItem(Permission permission){
+        mPermissionSet.add(permission);
+    }
+
+    public void deleteItem(int position) {
+        mPermissionSet.remove(position);
+    }
+
 
 }
