@@ -3,17 +3,24 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/lv_history"
+    <cn.ac.ict.cana.widget.TreeView
+        android:id="@+id/tree_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@null"
+        android:fadingEdge="none"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:groupIndicator="@null"
+        android:scrollbars="none"
+        android:smoothScrollbar="true"
         android:layout_weight="0.1"/>
 
     <Button
         android:id="@+id/bt_upload"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="upload"
-        android:layout_alignParentBottom="true"/>
+        android:text="@string/btn_upload" />
 
 </LinearLayout>

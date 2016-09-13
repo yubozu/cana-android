@@ -1,5 +1,9 @@
 package cn.ac.ict.cana.models;
 
+import android.content.Context;
+
+import static java.util.UUID.randomUUID;
+
 /**
  * Author: saukymo
  * Date: 9/13/16
@@ -11,13 +15,25 @@ public class History {
     public String filePath;
     public boolean isUpload;
     public String createdTime;
+    public String ext;
 
-    public History(long historyUserId, String historyType){
+    public History(Context context, long historyUserId, String historyType){
         userId = historyUserId;
         type = historyType;
 
         // TODO: set as app storage path;
-        filePath = "test file path";
+        switch (type) {
+            case "Face":
+                ext = ".mp4";
+                break;
+            case "Sound":
+                ext = ".mp3";
+                break;
+            default:
+                ext = ".txt";
+        }
+        filePath = context.getFilesDir().getAbsolutePath()+"/" + randomUUID().toString() + ext;
+
         isUpload = false;
     }
 

@@ -10,4 +10,9 @@
         android:id="@+id/tv_exam_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/bt_add_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_symbol"/>
 </LinearLayout>
