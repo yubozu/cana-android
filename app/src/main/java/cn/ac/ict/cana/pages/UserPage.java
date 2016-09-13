@@ -40,7 +40,7 @@ public class UserPage{
             public void onClick(View v) {
                 User user = new User("testname", 18, true);
                 user.id = userProvider.InsertUser(user);
-                userList.add(user);
+                userAdapter.addItem(user);
                 userAdapter.notifyDataSetChanged();
                 lvUser.setSelection(lvUser.getCount() - 1);
             }

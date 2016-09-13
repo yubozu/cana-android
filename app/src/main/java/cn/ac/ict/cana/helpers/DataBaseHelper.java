@@ -32,8 +32,20 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     // History table
     public static final String HISTORY_TABLE_NAME = "history_table";
     public static final String HISTORY_ID = "_id";
+    public static final String HISTORY_USER_ID = "history_user_id";
+    public static final String HISTORY_TYPE = "history_type";
+    public static final String HISTORY_FILE = "history_file";
+    public static final String HISTORY_IS_UPLOADED = "history_is_uploaded";
+    public static final String HISTORY_CREATE_TIME = "history_create_time";
 
-
+    private static final String HISTORY_TABLE_CREATE = "CREATE TABLE " + HISTORY_TABLE_NAME + "("
+            + HISTORY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + HISTORY_USER_ID + " INTEGER NOT NULL,"
+            + HISTORY_TYPE + " CHAR(20) NOT NULL,"
+            + HISTORY_FILE + " CHAR(256) NOT NULL,"
+            + HISTORY_IS_UPLOADED + " INTEGER NOT NULL,"
+            + HISTORY_CREATE_TIME + " TIMESTAMP NOT NULL DEFAULT current_timestamp"
+            + ");";
 
     private volatile static DataBaseHelper mDataBaseHelper;
 
@@ -56,13 +68,12 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(USER_TABLE_CREATE);
+        db.execSQL(HISTORY_TABLE_CREATE);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldeVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS" + USER_TABLE_NAME);
-
-        onCreate(db);
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // No need.
     }
 
 }

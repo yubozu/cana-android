@@ -24,7 +24,6 @@
         app:ntb_scaled="true"
         app:ntb_tinted="true"
         app:ntb_title_mode="all"
-        app:ntb_typeface="fonts/custom_typeface.ttf"
         app:ntb_swiped="true"
         app:ntb_bg_color="#000"
         app:ntb_icon_size_fraction="0.5" />

@@ -7,7 +7,7 @@ import android.content.pm.PackageManager;
  * Date: 9/12/16
  */
 public class Permission{
-    public String permissionName;
+    public final String permissionName;
     public Boolean permissionStatus;
 
     public Permission(String permission) {

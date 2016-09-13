@@ -16,6 +16,10 @@ public class ToastManager {
     @RootContext
     Context context;
 
+    public ToastManager(Context ctx) {
+        context = ctx;
+    }
+
     @UiThread(propagation = UiThread.Propagation.REUSE)
     public void show(CharSequence text) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show();

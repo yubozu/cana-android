@@ -6,21 +6,21 @@ package cn.ac.ict.cana.models;
  */
 public class User {
     public long id;
-    public String name;
-    public int age;
-    public boolean gender;
+    public final String name;
+    public final int age;
+    public final boolean gender;
 
-    public User(long user_id, String user_name, int user_age, boolean user_gender) {
-        id = user_id;
-        name = user_name;
-        age = user_age;
-        gender = user_gender;
+    public User(long userId, String userName, int userAge, boolean userGender) {
+        id = userId;
+        name = userName;
+        age = userAge;
+        gender = userGender;
     }
 
-    public User(String user_name, int user_age, boolean user_gender) {
+    public User(String userName, int userAge, boolean userGender) {
         id = 0;
-        name = user_name;
-        age = user_age;
-        gender = user_gender;
+        name = userName;
+        age = userAge;
+        gender = userGender;
     }
 }

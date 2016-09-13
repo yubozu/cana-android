@@ -1,6 +1,7 @@
 package cn.ac.ict.cana.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ public class UserView extends LinearLayout {
     }
 
     public void bind(User user) {
+        Log.d("UserView", String.valueOf(tvUserName));
         tvUserId.setText(String.valueOf(user.id));
         tvUserName.setText(user.name);
         tvUserAge.setText(String.valueOf(user.age));

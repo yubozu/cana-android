@@ -27,6 +27,7 @@ import java.util.Locale;
 
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.adapters.MainAdapter;
+import cn.ac.ict.cana.helpers.ToastManager;
 
 /**
  * Author: saukymo
@@ -38,6 +39,7 @@ public class MainActivity extends Activity {
     @ViewById(R.id.ntb) NavigationTabBar navigationTabBar;
     @ViewById(R.id.vp_horizontal_ntb) ViewPager viewPager;
     @Bean MainAdapter mMainAdapter;
+
     @AfterViews
     public void init() {
         viewPager.setAdapter(mMainAdapter);
@@ -47,7 +49,7 @@ public class MainActivity extends Activity {
                 new NavigationTabBar.Model.Builder(
                         ContextCompat.getDrawable(this, R.drawable.ic_test),
                         Color.parseColor(colors[0])
-                ).title("Test")
+                ).title("Exam")
                         .build()
         );
         models.add(
@@ -72,7 +74,7 @@ public class MainActivity extends Activity {
                         .build()
         );
         navigationTabBar.setModels(models);
-        navigationTabBar.setViewPager(viewPager, 0);
+        navigationTabBar.setViewPager(viewPager, 2);
         navigationTabBar.setBgColor(Color.parseColor("#9b92b3"));
         navigationTabBar.setTitleSize(40);
         navigationTabBar.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

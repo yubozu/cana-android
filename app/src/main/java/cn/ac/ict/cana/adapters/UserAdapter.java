@@ -31,6 +31,7 @@ public class UserAdapter extends BaseAdapter {
     public View getView(final int position, View view, ViewGroup parent) {
         final UserView userView;
         if (view == null) {
+
             userView = UserView_.build(mContext);
         } else {
             userView = (UserView) view;
@@ -61,14 +62,8 @@ public class UserAdapter extends BaseAdapter {
         return position;
     }
 
-    public void addItem(User permission){
-        users.add(permission);
+    public void addItem(User user){
+        users.add(user);
     }
-
-    public void deleteItem(int position) {
-        users.remove(position);
-    }
-
-
 
 }
