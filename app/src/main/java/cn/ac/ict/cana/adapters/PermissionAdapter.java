@@ -43,11 +43,10 @@ public class PermissionAdapter extends BaseAdapter {
             permissionView = (PermissionView) view;
         }
 
-        permissionView.bind(getItem(position));
 
-        Permission permission = mPermissionSet.get(position);
-
+        Permission permission = getItem(position);
         permissionView.bind(permission);
+
         Switch swPermissionStatus = (Switch) permissionView.findViewById(R.id.sw_permission_status);
         swPermissionStatus.setChecked(permission.permissionStatus);
 
