@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/freebie_9"
+    android:paddingStart="@dimen/material_layout_keylines_screen_edge_margin"
+    android:paddingEnd="@dimen/material_layout_keylines_screen_edge_margin"
+    android:paddingTop="@dimen/material_component_cards_primary_title_top_padding">
 
     <ListView
         android:id="@+id/lv_user"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.1"/>
+        android:layout_weight="0.1"
+        android:divider="@color/freebie_1"/>
 
     <Button
         android:id="@+id/bt_add_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_symbol" />
+        android:text="@string/add_symbol"
+        android:textColor="@color/freebie_1"
+        android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
+        android:background="@color/freebie_4"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
 
 </LinearLayout>

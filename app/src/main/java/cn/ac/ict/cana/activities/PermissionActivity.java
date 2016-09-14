@@ -6,8 +6,11 @@ import android.content.pm.PackageManager;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.cengalabs.flatui.FlatUI;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
@@ -41,6 +44,8 @@ public class PermissionActivity extends Activity {
 
     @ViewById(R.id.lv_permission_granted)
     ListView lvPermissionGranted;
+    @ViewById(R.id.layout_permission)
+    LinearLayout lyPermission;
 
     @Bean
     ToastManager toastManager;
@@ -55,7 +60,6 @@ public class PermissionActivity extends Activity {
     @AfterViews
     protected void init(){
         InitialPermissionCheckList();
-
         PermissionCheckStatus();
     }
 
@@ -114,11 +118,20 @@ public class PermissionActivity extends Activity {
     public void PermissionCheckStatus() {
         boolean is_passed = mPermissionAdapter.getCount() == 0;
         if (is_passed) {
-            tvPermissionInfo.setVisibility(View.INVISIBLE);
+//            tvPermissionInfo.setVisibility(View.GONE);
+//            lvPermission.setVisibility(View.GONE);
+            lyPermission.setVisibility(View.GONE);
             button.setText(R.string.permission_pass);
+            button.setBackgroundColor(getResources().getColor(R.color.freebie_4));
         } else {
             button.setText(String.format(Locale.CHINA, "%d permission remained", mPermissionAdapter.getCount()));
         }
         button.setEnabled(is_passed);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FlatUI.initDefaultValues(this);
     }
 }

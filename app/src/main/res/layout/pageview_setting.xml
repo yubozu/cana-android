@@ -1,25 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/freebie_9"
+    android:paddingStart="@dimen/material_layout_keylines_screen_edge_margin"
+    android:paddingEnd="@dimen/material_layout_keylines_screen_edge_margin"
+    android:paddingTop="@dimen/material_component_cards_primary_title_top_padding" >
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Device"/>
+        android:text="Device"
+        android:textColor="@color/freebie_6"
+        android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
+        android:background="@color/freebie_1"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:text="Logs"/>
+        android:text="Logs"
+        android:textColor="@color/freebie_6"
+        android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
+        android:background="@color/freebie_1"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Support"/>
+        android:text="Support"
+        android:textColor="@color/freebie_6"
+        android:layout_marginTop="@dimen/material_component_cards_primary_title_top_padding"
+        android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
+        android:background="@color/freebie_1"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="About"/>
+        android:text="About"
+        android:textColor="@color/freebie_6"
+        android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
+        android:background="@color/freebie_1"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
 
 </LinearLayout>

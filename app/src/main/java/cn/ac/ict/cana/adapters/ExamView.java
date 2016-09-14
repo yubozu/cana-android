@@ -2,6 +2,7 @@ package cn.ac.ict.cana.adapters;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,8 +21,8 @@ import cn.ac.ict.cana.models.Exam;
 @EViewGroup(R.layout.adapter_exam)
 public class ExamView extends LinearLayout {
 
-    @ViewById(R.id.tv_exam_name) public TextView tvExamName;
-    @ViewById(R.id.tv_exam_description) public TextView tvExamDescription;
+    @ViewById(R.id.bt_add_history)
+    Button btAddHistory;
 
     public Context mContext;
 
@@ -31,9 +32,7 @@ public class ExamView extends LinearLayout {
     }
 
     public void bind(Exam exam) {
-        Log.d("ExamView", String.valueOf(tvExamName));
         Log.d("ExamView", String.valueOf(exam.name));
-        tvExamName.setText(exam.name);
-        tvExamDescription.setText(exam.description);
+        btAddHistory.setText(exam.name.toUpperCase());
     }
 }

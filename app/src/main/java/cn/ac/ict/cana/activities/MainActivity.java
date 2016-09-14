@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,6 +39,7 @@ import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.adapters.MainAdapter;
 import cn.ac.ict.cana.events.ResponseEvent;
 import cn.ac.ict.cana.helpers.ToastManager;
+import dmax.dialog.SpotsDialog;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -59,7 +61,9 @@ public class MainActivity extends Activity {
     @Bean MainAdapter mMainAdapter;
     @Bean ToastManager toastManager;
 
-    private ProgressDialog mProgressDialog;
+//    private ProgressDialog mProgressDialog;
+    private SpotsDialog mProgressDialog;
+
     private OkHttpClient client;
     private int success, failed, total;
     @AfterViews
@@ -70,39 +74,40 @@ public class MainActivity extends Activity {
                 .readTimeout(30, TimeUnit.SECONDS)
                 .build();
         viewPager.setAdapter(mMainAdapter);
-        final String[] colors = getResources().getStringArray(R.array.default_preview);
+        int color =  Color.parseColor("#68BED9");
+
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
         models.add(
                 new NavigationTabBar.Model.Builder(
                         ContextCompat.getDrawable(this, R.drawable.ic_test),
-                        Color.parseColor(colors[0])
+                       color
                 ).title("Exam")
                         .build()
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
                         ContextCompat.getDrawable(this, R.drawable.ic_user),
-                        Color.parseColor(colors[1])
+                        color
                 ).title("User")
                         .build()
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
                         ContextCompat.getDrawable(this, R.drawable.ic_history),
-                        Color.parseColor(colors[2])
+                        color
                 ).title("History")
                         .build()
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
                         ContextCompat.getDrawable(this, R.drawable.ic_settings),
-                        Color.parseColor(colors[3])
+                        color
                 ).title("Setting")
                         .build()
         );
         navigationTabBar.setModels(models);
         navigationTabBar.setViewPager(viewPager, 2);
-        navigationTabBar.setBgColor(Color.parseColor("#9b92b3"));
+        navigationTabBar.setBgColor(Color.parseColor("#F3F5F7"));
         navigationTabBar.setTitleSize(40);
         navigationTabBar.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -180,19 +185,23 @@ public class MainActivity extends Activity {
     //ProgressBar
     private void initProgressBar() {
         if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.setIndeterminate(true);
-            mProgressDialog.setCancelable(false);
+//            mProgressDialog = new ProgressDialog(this, R.layout.processdialog);
+//            mProgressDialog.setIndeterminate(true);
+//            mProgressDialog.setCancelable(false);
+            mProgressDialog = new SpotsDialog(this, R.style.Custom);
         }
     }
 
     public void showProgressBar(boolean show, String message) {
         initProgressBar();
         if (show) {
+//            mProgressDialog.setMessage(message);
+//            mProgressDialog.show();
             mProgressDialog.setMessage(message);
             mProgressDialog.show();
         } else {
-            mProgressDialog.hide();
+//            mProgressDialog.hide();
+            mProgressDialog.dismiss();
         }
     }
 

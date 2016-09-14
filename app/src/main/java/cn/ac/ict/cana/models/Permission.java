@@ -13,7 +13,6 @@ public class Permission{
     public Permission(String permission) {
         permissionName = permission;
         permissionStatus = true;
-
     }
 
 }

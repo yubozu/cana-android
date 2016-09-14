@@ -30,7 +30,8 @@ dependencies {
     compile 'com.github.devlight.navigationtabbar:navigationtabbar:1.2.5'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'org.greenrobot:eventbus:3.0.0'
-
+    compile 'com.github.eluleci:flatui:3.0.0'
+    compile 'com.github.d-max:spots-dialog:0.4@aar'
     apt "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"
 }

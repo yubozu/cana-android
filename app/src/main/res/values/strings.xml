@@ -2,8 +2,8 @@
     <string name="app_name">Cana</string>
     <string name="permission_not_granted">We still need these permission:</string>
     <string name="permission_granted">Granted permission:</string>
-    <string name="permission_pass">Continue</string>
-    <string name="add_symbol">+</string>
-    <string name="btn_upload">Upload</string>
+    <string name="permission_pass">CONTINUE</string>
+    <string name="add_symbol">ADD</string>
+    <string name="btn_upload">UPLOAD</string>
 </resources>
 

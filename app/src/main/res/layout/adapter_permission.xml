@@ -3,23 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/material_component_lists_padding_above_list">
 
-    <TextView
-        android:id="@+id/tv_permission_name"
+    <Button
+        android:id="@+id/btn_permission_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/material_component_lists_single_line_height"
+        android:paddingStart="@dimen/material_component_button_text_left_and_right_padding"
+        android:maxLines="1"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/material_component_lists_single_line_text_size"
+        android:background="@color/freebie_2"
+        android:textColor="@color/freebie_1"
+        style="@style/Widget.AppCompat.Button.Borderless"
         />
-
-    <TextView
-        android:id="@+id/tv_permission_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-
-    <Switch
-        android:id="@+id/sw_permission_status"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-       />
 </RelativeLayout>

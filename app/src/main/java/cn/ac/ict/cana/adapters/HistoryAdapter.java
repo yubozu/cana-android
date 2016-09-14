@@ -180,9 +180,9 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
         holder.name.setText(mGroups.get(groupPosition));
         holder.onlineNum.setText(String.format(Locale.CHINA, "%s", getChildrenCount(groupPosition) + "/" + getChildrenCount(groupPosition)));
         if (isExpanded) {
-            holder.indicator.setImageResource(R.drawable.indicator_expanded);
+            holder.indicator.setImageResource(R.drawable.ic_expanded);
         } else {
-            holder.indicator.setImageResource(R.drawable.indicator_unexpanded);
+            holder.indicator.setImageResource(R.drawable.ic_unexpanded);
         }
 
         return convertView;

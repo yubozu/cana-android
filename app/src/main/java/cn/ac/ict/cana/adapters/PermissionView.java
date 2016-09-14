@@ -1,10 +1,16 @@
 package cn.ac.ict.cana.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.SwitchCompat;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
+import com.cengalabs.flatui.FlatUI;
+import com.cengalabs.flatui.views.FlatToggleButton;
+
+import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
@@ -19,15 +25,13 @@ import cn.ac.ict.cana.models.Permission;
 @EViewGroup(R.layout.adapter_permission)
 public class PermissionView extends LinearLayout {
 
-    @ViewById(R.id.tv_permission_name) public TextView tvPermissionName;
-    @ViewById(R.id.sw_permission_status) public Switch swPermissionStatus;
+    @ViewById(R.id.btn_permission_name) public TextView btnPermissionName;
 
     public PermissionView(Context context) {
         super(context);
     }
 
     public void bind(Permission permission) {
-        tvPermissionName.setText(permission.permissionName);
-        swPermissionStatus.setChecked(permission.permissionStatus);
+        btnPermissionName.setText(permission.permissionName);
     }
 }
