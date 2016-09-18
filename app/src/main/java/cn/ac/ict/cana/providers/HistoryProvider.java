@@ -99,10 +99,7 @@ public class HistoryProvider {
 
 
     public void uploadHistories(ArrayList<ContentValues> items) {
-        ArrayList<Long> ids = new ArrayList<>();
-        for (ContentValues item: items) {
-            ids.add((Long) item.get("id"));
-        }
+        ArrayList<Long> ids = getIds(items);
         ArrayList<History> histories = getHistoriesByIds(ids);
         final int total = ids.size();
         for (int i = 0; i < items.size(); i++) {
@@ -152,5 +149,22 @@ public class HistoryProvider {
         ContentValues args = new ContentValues();
         args.put(DataBaseHelper.HISTORY_IS_UPLOADED, 1);
         mDatabase.update(DataBaseHelper.HISTORY_TABLE_NAME,  args, "_id=" + id, null);
+    }
+
+    public void deleteHistories(ArrayList<ContentValues> items) {
+        ArrayList<Long> ids = getIds(items);
+
+        String idString = TextUtils.join(",", ids);
+        String QueryString = String.format("DELETE FROM " +DataBaseHelper.HISTORY_TABLE_NAME + " WHERE " +DataBaseHelper.HISTORY_ID + " IN (%s)", new String[]{idString});
+
+        mDatabase.execSQL(QueryString);
+    }
+
+    private ArrayList<Long> getIds(ArrayList<ContentValues> items) {
+        ArrayList<Long> ids = new ArrayList<>();
+        for (ContentValues item: items) {
+            ids.add((Long) item.get("id"));
+        }
+        return ids;
     }
 }

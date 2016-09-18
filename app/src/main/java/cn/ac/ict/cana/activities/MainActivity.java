@@ -80,36 +80,6 @@ public class MainActivity extends Activity {
         navigationTabBar.setViewPager(viewPager, 2);
         navigationTabBar.setBgColor(Color.parseColor("#F3F5F7"));
         navigationTabBar.setTitleSize(40);
-        navigationTabBar.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(final int position, final float positionOffset, final int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(final int position) {
-                navigationTabBar.getModels().get(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(final int state) {
-
-            }
-        });
-
-        navigationTabBar.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < navigationTabBar.getModels().size(); i++) {
-                    final NavigationTabBar.Model model = navigationTabBar.getModels().get(i);
-                    navigationTabBar.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                        }
-                    }, i * 100);
-                }
-            }
-        }, 500);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

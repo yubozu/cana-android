@@ -14,6 +14,7 @@ import org.greenrobot.eventbus.Subscribe;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -41,30 +42,22 @@ public class HistoryPage{
         final HistoryProvider historyProvider = new HistoryProvider(DataBaseHelper.getInstance(context));
 
         final TreeView treeView = (TreeView)view.findViewById(R.id.tree_view);
-        ArrayList<ArrayList<ContentValues>> mChild = new ArrayList<>();
-        for(int i=0;i<6;i++)
-        {
-            mChild.add(new ArrayList<ContentValues>());
-        }
+        ArrayList<ArrayList<History>> mChild = new ArrayList<ArrayList<History>>(){{
+                for (int i=0; i<6; i++) {
+                    add(new ArrayList<History>());
+                }}
+        };
         ArrayList<String> mGroup = new ArrayList<> (Arrays.asList("Stride", "Face", "Sound", "Stand", "Tapping", "Recognition"));
         ArrayList<History> historyList = historyProvider.getHistories();
 
         for (History history: historyList) {
-            ContentValues content = new ContentValues();
-            content.put("id", history.id);
-            content.put("user_id", history.userId);
-            content.put("file", history.filePath);
-            content.put("type", history.type);
-            content.put("is_uploaded", history.isUpload);
-            content.put("created_time", history.createdTime);
-            Log.d("HistoryPage", String.valueOf(history.type));
-            mChild.get(mGroup.indexOf(history.type)).add(content);
+            mChild.get(mGroup.indexOf(history.type)).add(history);
         }
         final HistoryAdapter historyAdapter = new HistoryAdapter(context,treeView,mGroup,mChild);
         treeView.setAdapter(historyAdapter);
 
-        Button button = (Button) view.findViewById(R.id.bt_upload);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button uploadButton = (Button) view.findViewById(R.id.bt_upload);
+        uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -73,6 +66,17 @@ public class HistoryPage{
 
                 MainActivity activity = (MainActivity) context;
                 activity.showProgressBar(true, "Start Uploading..");
+            }
+        });
+
+        Button deleteButton = (Button) view.findViewById(R.id.bt_delete);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<ContentValues> Ids  = new ArrayList<>(historyAdapter.getCheckedIds());
+                historyProvider.deleteHistories(Ids);
+
+                historyAdapter.removeItems(Ids);
             }
         });
         return view;

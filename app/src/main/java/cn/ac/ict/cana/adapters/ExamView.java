@@ -32,7 +32,6 @@ public class ExamView extends LinearLayout {
     }
 
     public void bind(Exam exam) {
-        Log.d("ExamView", String.valueOf(exam.name));
         btAddHistory.setText(exam.name.toUpperCase());
     }
 }

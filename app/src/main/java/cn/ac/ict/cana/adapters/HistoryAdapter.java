@@ -39,12 +39,12 @@ import cn.ac.ict.cana.widget.TreeView;
 public class HistoryAdapter extends BaseTreeViewAdapter {
     private LayoutInflater mInflater;
     ArrayList<String> mGroups;
-    ArrayList<ArrayList<ContentValues>> mChildren;
+    ArrayList<ArrayList<History>> mChildren;
 //    private final Set<Long> mCheckedItems = new HashSet<>();
     private final Set<ContentValues> mCheckedItems = new HashSet<>();
     private Context mContext;
 
-    public HistoryAdapter(Context context, TreeView treeView, ArrayList<String> mGroups, ArrayList<ArrayList<ContentValues>> mChildren) {
+    public HistoryAdapter(Context context, TreeView treeView, ArrayList<String> mGroups, ArrayList<ArrayList<History>> mChildren) {
         super(treeView);
         this.mGroups = mGroups;
         this.mChildren = mChildren;
@@ -120,19 +120,19 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
             convertView = View.inflate(mContext, R.layout.adapter_history, null);
         }
 
-        ContentValues content = mChildren.get(groupPosition).get(childPosition);
+        History history = mChildren.get(groupPosition).get(childPosition);
         ChildHolder holder = getChildHolder(convertView);
 
         // In android Studio, these have to extract a new variable;
-        final long id = (long) content.get("id");
-        final long userId = (long) content.get("user_id");
-        final boolean isUploaded = (boolean) content.get("is_uploaded");
+        final long id = history.id;
+        final long userId = history.userId;
+        final boolean isUploaded = history.isUpload;
         holder.tvHistoryId.setText(String.valueOf(id));
         holder.tvHistoryUserId.setText(String.valueOf(userId));
-        holder.tvHistoryType.setText((String) content.get("type"));
-        holder.tvHistoryFile.setText((String) content.get("file"));
+        holder.tvHistoryType.setText(history.type);
+        holder.tvHistoryFile.setText(history.filePath);
         holder.tvHistoryIsUploaded.setText(String.valueOf(isUploaded));
-        holder.tvHistoryCreatedTime.setText((String) content.get("created_time"));
+        holder.tvHistoryCreatedTime.setText(history.createdTime);
 
         final ContentValues contentValues = new ContentValues();
         contentValues.put("id", id);
@@ -223,7 +223,25 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
         Log.d("History adapter", String.valueOf(event.id));
         ContentValues content = (ContentValues) getChild(event.groupPosition, event.childPosition);
         content.put("is_uploaded", event.success);
-        this.notifyDataSetChanged();
+        notifyDataSetChanged();
+    }
+
+    public void removeItems(ArrayList<ContentValues> Items){
+        for (ContentValues item: Items) {
+            int groupPosition = (int) item.get("groupPosition");
+            int childPosition = (int) item.get("childPosition");
+
+            mCheckedItems.clear();
+
+            ArrayList<History> Group = mChildren.get(groupPosition);
+            Group.remove(Group.get(childPosition));
+            notifyDataSetChanged();
+        }
+    }
+
+    public void insertItem(int GroupPosition, History history) {
+        mChildren.get(GroupPosition).add(history);
+        notifyDataSetChanged();
     }
 
 }

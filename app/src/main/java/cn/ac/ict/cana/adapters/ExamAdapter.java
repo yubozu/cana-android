@@ -14,13 +14,16 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import cn.ac.ict.cana.R;
+import cn.ac.ict.cana.activities.MainActivity;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.models.Exam;
 import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.providers.HistoryProvider;
+import cn.ac.ict.cana.widget.TreeView;
 
 /**
  * Author: saukymo
@@ -33,7 +36,7 @@ public class ExamAdapter extends BaseAdapter {
     public ExamAdapter(Context context){
         mContext = context;
     }
-
+    static ArrayList<String> mGroup = new ArrayList<> (Arrays.asList("Stride", "Face", "Sound", "Stand", "Tapping", "Recognition"));
     private List<Exam> exams;
 
     @Override
@@ -73,6 +76,11 @@ public class ExamAdapter extends BaseAdapter {
                 }
 
                 historyProvider.InsertHistory(history);
+
+                MainActivity mainActivity = (MainActivity) mContext;
+                TreeView treeView = (TreeView) mainActivity.findViewById(R.id.tree_view);
+                HistoryAdapter historyAdapter = (HistoryAdapter) treeView.getExpandableListAdapter();
+                historyAdapter.insertItem(mGroup.indexOf(history.type), history);
             }
         });
         return examView;

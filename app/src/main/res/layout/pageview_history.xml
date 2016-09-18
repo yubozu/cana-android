@@ -18,6 +18,7 @@
         android:scrollbars="none"
         android:smoothScrollbar="true"
         android:layout_weight="0.1"
+        android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
         />
 
     <Button
@@ -30,6 +31,18 @@
         android:textColor="@color/freebie_1"
         android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
         android:background="@color/freebie_4"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
+
+    <Button
+        android:id="@+id/bt_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_delete"
+        android:layout_marginStart="@dimen/material_layout_keylines_screen_edge_margin"
+        android:layout_marginEnd="@dimen/material_layout_keylines_screen_edge_margin"
+        android:textColor="@color/freebie_4"
+        android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
+        android:background="@color/freebie_1"
         style="@style/Widget.AppCompat.Button.Borderless"/>
 
 </LinearLayout>

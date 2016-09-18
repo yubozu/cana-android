@@ -11,6 +11,10 @@ import android.widget.TextView;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Locale;
 
 import cn.ac.ict.cana.R;
@@ -28,6 +32,7 @@ public class MainAdapter extends PagerAdapter {
 
     @RootContext Context mContext;
     public View view;
+    HashMap<Integer, View> ViewMap = new HashMap<>();
 
     @Override
     public int getCount() {
@@ -41,33 +46,37 @@ public class MainAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(final ViewGroup container, final int position, final Object object) {
-        container.removeView((View) object);
     }
 
     @Override
     public Object instantiateItem(final ViewGroup container, final int position) {
-        switch (position) {
-            case 0:
-                view = ExamPage.InitialExamPageView(mContext);
-                Log.d("MainAdapter exam", String.valueOf(mContext));
-                break;
-            case 1:
-                view = UserPage.InitialUserPageView(mContext);
-                Log.d("MainAdapter user", String.valueOf(mContext));
-                break;
-            case 2:
-                view = HistoryPage.InitialHistoryPageView(mContext);
-                break;
-            case 3:
-                view = LayoutInflater.from(mContext).inflate(R.layout.pageview_setting, null, false);
-                break;
-//            default:
-//                view = LayoutInflater.from(mContext).inflate(R.layout.adapter_main, null, false);
-//                final TextView txtPage = (TextView) view.findViewById(R.id.txt_vp_item_page);
-//                txtPage.setText(String.format(Locale.CHINA, "Page #%d", position));
-        }
 
-        container.addView(view);
+        //TODO: I'm sure that there must be a better solution.
+        if (!ViewMap.containsKey(position)) {
+            switch (position) {
+                case 0:
+                    view = ExamPage.InitialExamPageView(mContext);
+                    Log.d("MainAdapter exam", String.valueOf(mContext));
+                    break;
+                case 1:
+                    view = UserPage.InitialUserPageView(mContext);
+                    Log.d("MainAdapter user", String.valueOf(mContext));
+                    break;
+                case 2:
+                    view = HistoryPage.InitialHistoryPageView(mContext);
+                    Log.d("MainAdapter history", String.valueOf(mContext));
+                    break;
+                case 3:
+                    view = View.inflate(mContext, R.layout.pageview_setting, null);
+                    Log.d("MainAdapter setting", String.valueOf(mContext));
+                    break;
+            }
+
+            container.addView(view);
+            ViewMap.put(position, view);
+        } else {
+            view = ViewMap.get(position);
+        }
         return view;
     }
 
