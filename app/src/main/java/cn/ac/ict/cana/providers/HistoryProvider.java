@@ -3,7 +3,13 @@ package cn.ac.ict.cana.providers;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Pair;
+
+import org.greenrobot.eventbus.EventBus;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +19,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
+import cn.ac.ict.cana.events.ResponseEvent;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.models.History;
 import okhttp3.Call;
@@ -31,11 +39,18 @@ import okhttp3.Response;
  */
 public class HistoryProvider {
     private SQLiteDatabase mDatabase;
+    private OkHttpClient client;
+
     private String[] mHistoryColumns = {DataBaseHelper.HISTORY_ID, DataBaseHelper.HISTORY_USER_ID, DataBaseHelper.HISTORY_TYPE, DataBaseHelper.HISTORY_FILE,
             DataBaseHelper.HISTORY_IS_UPLOADED, "datetime(history_create_time, 'localtime') as history_create_time"};
 
     public HistoryProvider(DataBaseHelper dataBaseHelper) {
         mDatabase = dataBaseHelper.getWritableDatabase();
+        client = new OkHttpClient.Builder()
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .writeTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .build();
     }
 
     public long InsertHistory(History history) {
@@ -74,28 +89,68 @@ public class HistoryProvider {
     }
 
     public  ArrayList<History> getHistoriesByIds(ArrayList<Long> ids) {
-        ArrayList<History> histories = getHistories();
-        Iterator<History> iterator = histories.iterator();
-        while (iterator.hasNext()) {
-            History history = iterator.next();
-            if (!ids.contains(history.id)) iterator.remove();
-        }
-        return histories;
+        String idString = TextUtils.join(",", ids);
+        String QueryString = String.format("SELECT * FROM " + DataBaseHelper.HISTORY_TABLE_NAME + " WHERE " +DataBaseHelper.HISTORY_ID + " IN (%s)", new String[]{idString});
+        Log.d("QueryString", QueryString);
+        Cursor cursor = mDatabase.rawQuery(QueryString, null);
+
+        return loadHistoryFromCursor(cursor);
     }
 
-    public ArrayList<Request> getUploadRequest(ArrayList<Long> ids) {
+
+    public void uploadHistories(ArrayList<ContentValues> items) {
+        ArrayList<Long> ids = new ArrayList<>();
+        for (ContentValues item: items) {
+            ids.add((Long) item.get("id"));
+        }
         ArrayList<History> histories = getHistoriesByIds(ids);
-        ArrayList<Request> requests = new ArrayList<>();
-        for (History history: histories) {
+        final int total = ids.size();
+        for (int i = 0; i < items.size(); i++) {
+            final History history = histories.get(i);
+            ContentValues item = items.get(i);
+            final int groupPosition = (int) item.get("groupPosition");
+            final int childPosition = (int) item.get("childPosition");
+            Log.d("GetUploadRequest", history.toString());
             String url = "http://web.ngrok.cc/cana-api/upload";
             File file = new File(history.filePath);
             RequestBody formBody = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
                     .addFormDataPart("data", file.getName(),
                             RequestBody.create(MediaType.parse("text/plain"), file))
+                    .addFormDataPart("id", String.valueOf(history.id))
                     .build();
-            requests.add(new Request.Builder().url(url).post(formBody).build());
+            Request request = new Request.Builder().url(url).post(formBody).build();
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    Log.e("Upload Failed", e.toString());
+                    EventBus.getDefault().post(new ResponseEvent(false, history.id, total, groupPosition, childPosition));
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    boolean result = false;
+                    String jsonData = response.body().string();
+                    try {
+                        // TODO: Change to Gson
+                        JSONObject Jobject = new JSONObject(jsonData);
+                        Log.d("toJson", Jobject.toString());
+                        Log.d("toJson", "ResponseId: " + Jobject.get("id").toString());
+                        long historyId= Long.parseLong((String) Jobject.get("id"));
+                        updateHistoryUploadedById(historyId);
+                        result = true;
+                    }catch (JSONException e) {
+                        Log.e("toJson", e.toString());
+                    }
+                    EventBus.getDefault().post(new ResponseEvent(result, history.id, total, groupPosition, childPosition));
+                }
+            });
         }
-        return requests;
+    }
+
+    public void updateHistoryUploadedById(Long id) {
+        ContentValues args = new ContentValues();
+        args.put(DataBaseHelper.HISTORY_IS_UPLOADED, 1);
+        mDatabase.update(DataBaseHelper.HISTORY_TABLE_NAME,  args, "_id=" + id, null);
     }
 }

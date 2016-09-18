@@ -1,12 +1,15 @@
 package cn.ac.ict.cana.pages;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,24 +41,24 @@ public class HistoryPage{
         final HistoryProvider historyProvider = new HistoryProvider(DataBaseHelper.getInstance(context));
 
         final TreeView treeView = (TreeView)view.findViewById(R.id.tree_view);
-        ArrayList<ArrayList<Map>> mChild = new ArrayList<>();
+        ArrayList<ArrayList<ContentValues>> mChild = new ArrayList<>();
         for(int i=0;i<6;i++)
         {
-            mChild.add(new ArrayList<Map>());
+            mChild.add(new ArrayList<ContentValues>());
         }
         ArrayList<String> mGroup = new ArrayList<> (Arrays.asList("Stride", "Face", "Sound", "Stand", "Tapping", "Recognition"));
         ArrayList<History> historyList = historyProvider.getHistories();
 
         for (History history: historyList) {
-            Map<String,Object> map = new HashMap<>();
-            map.put("id", history.id);
-            map.put("user_id", history.userId);
-            map.put("file", history.filePath);
-            map.put("type", history.type);
-            map.put("is_uploaded", history.isUpload);
-            map.put("created_time", history.createdTime);
+            ContentValues content = new ContentValues();
+            content.put("id", history.id);
+            content.put("user_id", history.userId);
+            content.put("file", history.filePath);
+            content.put("type", history.type);
+            content.put("is_uploaded", history.isUpload);
+            content.put("created_time", history.createdTime);
             Log.d("HistoryPage", String.valueOf(history.type));
-            mChild.get(mGroup.indexOf(history.type)).add(map);
+            mChild.get(mGroup.indexOf(history.type)).add(content);
         }
         final HistoryAdapter historyAdapter = new HistoryAdapter(context,treeView,mGroup,mChild);
         treeView.setAdapter(historyAdapter);
@@ -65,12 +68,11 @@ public class HistoryPage{
             @Override
             public void onClick(View v) {
 
-                ArrayList<Long> Ids  = new ArrayList<>(historyAdapter.getCheckedIds());
-                ArrayList<Request> requests = historyProvider.getUploadRequest(Ids);
+                ArrayList<ContentValues> Ids  = new ArrayList<>(historyAdapter.getCheckedIds());
+                historyProvider.uploadHistories(Ids);
 
                 MainActivity activity = (MainActivity) context;
-                activity.startUpload(requests);
-
+                activity.showProgressBar(true, "Start Uploading..");
             }
         });
         return view;

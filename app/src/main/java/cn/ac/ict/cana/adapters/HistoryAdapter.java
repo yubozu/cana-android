@@ -1,6 +1,8 @@
 package cn.ac.ict.cana.adapters;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,15 +12,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.androidannotations.annotations.EBean;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import cn.ac.ict.cana.R;
+import cn.ac.ict.cana.events.ResponseEvent;
 import cn.ac.ict.cana.helpers.ToastManager;
 import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.widget.BaseTreeViewAdapter;
@@ -32,16 +39,18 @@ import cn.ac.ict.cana.widget.TreeView;
 public class HistoryAdapter extends BaseTreeViewAdapter {
     private LayoutInflater mInflater;
     ArrayList<String> mGroups;
-    ArrayList<ArrayList<Map>> mChildren;
-    private final Set<Long> mCheckedItems = new HashSet<>();
+    ArrayList<ArrayList<ContentValues>> mChildren;
+//    private final Set<Long> mCheckedItems = new HashSet<>();
+    private final Set<ContentValues> mCheckedItems = new HashSet<>();
     private Context mContext;
 
-    public HistoryAdapter(Context context, TreeView treeView, ArrayList<String> mGroups, ArrayList<ArrayList<Map>> mChildren) {
+    public HistoryAdapter(Context context, TreeView treeView, ArrayList<String> mGroups, ArrayList<ArrayList<ContentValues>> mChildren) {
         super(treeView);
         this.mGroups = mGroups;
         this.mChildren = mChildren;
         mContext = context;
         mInflater = LayoutInflater.from(context);
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -105,13 +114,13 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild,
+    public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild,
                              View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.adapter_history, null);
         }
 
-        Map content = mChildren.get(groupPosition).get(childPosition);
+        ContentValues content = mChildren.get(groupPosition).get(childPosition);
         ChildHolder holder = getChildHolder(convertView);
 
         // In android Studio, these have to extract a new variable;
@@ -125,16 +134,19 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
         holder.tvHistoryIsUploaded.setText(String.valueOf(isUploaded));
         holder.tvHistoryCreatedTime.setText((String) content.get("created_time"));
 
-
-        holder.cbHistory.setChecked(mCheckedItems.contains(id));
+        final ContentValues contentValues = new ContentValues();
+        contentValues.put("id", id);
+        contentValues.put("groupPosition", groupPosition);
+        contentValues.put("childPosition", childPosition);
+        holder.cbHistory.setChecked(mCheckedItems.contains(contentValues));
         holder.cbHistory.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
                 final CheckBox cb = (CheckBox) v;
                 if (cb.isChecked()) {
-                    mCheckedItems.add(id);
+                    mCheckedItems.add(contentValues);
                 } else {
-                    mCheckedItems.remove(id);
+                    mCheckedItems.remove(contentValues);
                 }
             }
         });
@@ -142,7 +154,7 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
         return convertView;
     }
 
-    public Set<Long> getCheckedIds() {
+    public Set<ContentValues> getCheckedIds() {
         return mCheckedItems;
     }
 
@@ -205,4 +217,13 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
                 (groupPosition) + "/" + getChildrenCount(groupPosition)));
         header.setAlpha(alpha);
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void update(ResponseEvent event){
+        Log.d("History adapter", String.valueOf(event.id));
+        ContentValues content = (ContentValues) getChild(event.groupPosition, event.childPosition);
+        content.put("is_uploaded", event.success);
+        this.notifyDataSetChanged();
+    }
+
 }

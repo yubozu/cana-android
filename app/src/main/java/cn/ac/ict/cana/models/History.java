@@ -21,7 +21,6 @@ public class History {
         userId = historyUserId;
         type = historyType;
 
-        // TODO: set as app storage path;
         switch (type) {
             case "Face":
                 ext = ".mp4";
