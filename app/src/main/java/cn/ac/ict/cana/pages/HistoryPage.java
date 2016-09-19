@@ -1,36 +1,20 @@
 package cn.ac.ict.cana.pages;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 
-import org.greenrobot.eventbus.Subscribe;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.activities.MainActivity;
 import cn.ac.ict.cana.adapters.HistoryAdapter;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
-import cn.ac.ict.cana.helpers.ToastManager;
 import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.providers.HistoryProvider;
 import cn.ac.ict.cana.widget.TreeView;
-import okhttp3.Request;
 
 /**
  * Author: saukymo

@@ -1,10 +1,8 @@
 package cn.ac.ict.cana.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;

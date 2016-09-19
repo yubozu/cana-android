@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.Pair;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
@@ -13,12 +12,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import cn.ac.ict.cana.events.ResponseEvent;

@@ -3,7 +3,6 @@ package cn.ac.ict.cana.activities;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;

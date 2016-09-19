@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-
 import android.util.Log;
 import android.widget.Button;
 
@@ -26,7 +25,6 @@ import cn.ac.ict.cana.adapters.MainAdapter;
 import cn.ac.ict.cana.events.CheckedItemChangedEvent;
 import cn.ac.ict.cana.events.ResponseEvent;
 import cn.ac.ict.cana.helpers.ToastManager;
-import cn.ac.ict.cana.widget.TreeView;
 import dmax.dialog.SpotsDialog;
 
 /**

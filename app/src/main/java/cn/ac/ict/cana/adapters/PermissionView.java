@@ -1,16 +1,9 @@
 package cn.ac.ict.cana.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.SwitchCompat;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
-import com.cengalabs.flatui.FlatUI;
-import com.cengalabs.flatui.views.FlatToggleButton;
-
-import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 

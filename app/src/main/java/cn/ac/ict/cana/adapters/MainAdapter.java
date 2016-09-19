@@ -3,22 +3,15 @@ package cn.ac.ict.cana.adapters;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Locale;
 
 import cn.ac.ict.cana.R;
-import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.pages.ExamPage;
 import cn.ac.ict.cana.pages.HistoryPage;
 import cn.ac.ict.cana.pages.UserPage;

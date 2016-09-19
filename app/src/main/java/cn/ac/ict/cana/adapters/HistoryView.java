@@ -1,7 +1,6 @@
 package cn.ac.ict.cana.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 

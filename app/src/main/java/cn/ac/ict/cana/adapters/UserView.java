@@ -3,14 +3,12 @@ package cn.ac.ict.cana.adapters;
 import android.content.Context;
 import android.util.Log;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
 import cn.ac.ict.cana.R;
-import cn.ac.ict.cana.models.Permission;
 import cn.ac.ict.cana.models.User;
 
 /**

@@ -1,7 +1,5 @@
 package cn.ac.ict.cana.models;
 
-import android.content.pm.PackageManager;
-
 /**
  * Author: saukymo
  * Date: 9/12/16
