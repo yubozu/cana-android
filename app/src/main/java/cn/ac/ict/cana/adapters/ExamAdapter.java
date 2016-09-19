@@ -20,6 +20,7 @@ import java.util.List;
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.activities.MainActivity;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
+import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.Exam;
 import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.providers.HistoryProvider;
@@ -36,7 +37,7 @@ public class ExamAdapter extends BaseAdapter {
     public ExamAdapter(Context context){
         mContext = context;
     }
-    static ArrayList<String> mGroup = new ArrayList<> (Arrays.asList("Stride", "Face", "Sound", "Stand", "Tapping", "Recognition"));
+    static ArrayList<String> mGroup = ModuleHelper.ModuleList;
     private List<Exam> exams;
 
     @Override
@@ -49,7 +50,7 @@ public class ExamAdapter extends BaseAdapter {
             examView = (ExamView) view;
         }
 
-        Exam exam = getItem(position);
+        final Exam exam = getItem(position);
         examView.bind(exam);
 
         Button btAddHistory = (Button) examView.findViewById(R.id.bt_add_history);
@@ -57,7 +58,7 @@ public class ExamAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 HistoryProvider historyProvider = new HistoryProvider(DataBaseHelper.getInstance(mContext));
-                History history = new History(mContext, 0, "Stride");
+                History history = new History(mContext, 0, exam.name);
 
                 // Example: How to write data to file.
                 File file = new File(history.filePath);
@@ -75,7 +76,7 @@ public class ExamAdapter extends BaseAdapter {
                     Log.e("ExamAdapter", e.toString());
                 }
 
-                historyProvider.InsertHistory(history);
+                history.id = historyProvider.InsertHistory(history);
 
                 MainActivity mainActivity = (MainActivity) mContext;
                 TreeView treeView = (TreeView) mainActivity.findViewById(R.id.tree_view);

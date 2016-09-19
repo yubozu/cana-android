@@ -6,11 +6,34 @@ package cn.ac.ict.cana.models;
  */
 public class Exam {
     public final String name;
-    public final String description;
 
-    public Exam(String examName, String examDescription) {
+    @Deprecated
+    public Exam(String examName) {
         name = examName;
-        description = examDescription;
     }
 
+    public Exam(Builder builder) {
+        this.name = builder.name;
+    }
+
+    public static class Builder {
+
+        private String name;
+
+        public Builder() {
+        }
+
+        public Builder setActivity() {
+            return this;
+        }
+
+        public Builder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Exam build() {
+            return new Exam(this);
+        }
+    }
 }

@@ -3,6 +3,7 @@ package cn.ac.ict.cana.adapters;
 import android.content.ContentValues;
 import android.content.Context;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,16 +18,16 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 import cn.ac.ict.cana.R;
+import cn.ac.ict.cana.events.CheckedItemChangedEvent;
 import cn.ac.ict.cana.events.ResponseEvent;
-import cn.ac.ict.cana.helpers.ToastManager;
+import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.widget.BaseTreeViewAdapter;
 import cn.ac.ict.cana.widget.TreeView;
@@ -148,6 +149,7 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
                 } else {
                     mCheckedItems.remove(contentValues);
                 }
+                EventBus.getDefault().post(new CheckedItemChangedEvent(mCheckedItems.size()));
             }
         });
 
@@ -221,22 +223,39 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void update(ResponseEvent event){
         Log.d("History adapter", String.valueOf(event.id));
-        ContentValues content = (ContentValues) getChild(event.groupPosition, event.childPosition);
-        content.put("is_uploaded", event.success);
+        History history = (History) getChild(event.groupPosition, event.childPosition);
+        history.isUpload = true;
         notifyDataSetChanged();
     }
 
     public void removeItems(ArrayList<ContentValues> Items){
+        /*
+         * First cache histories to delete. And then delete them all.
+         * This way is really slow and redundant.
+         */
+
+        SparseArray<ArrayList<History>> pedding = new SparseArray<ArrayList<History>>(){{
+            for (int i=0; i<ModuleHelper.ModuleList.size(); i++) {
+                put(i, new ArrayList<History>());
+            }}
+        };
+
         for (ContentValues item: Items) {
             int groupPosition = (int) item.get("groupPosition");
             int childPosition = (int) item.get("childPosition");
-
+            Log.d("HistoryAdapter", String.format("groupPosition: %d, childPosition: %d", groupPosition, childPosition));
             mCheckedItems.clear();
-
-            ArrayList<History> Group = mChildren.get(groupPosition);
-            Group.remove(Group.get(childPosition));
-            notifyDataSetChanged();
+            EventBus.getDefault().post(new CheckedItemChangedEvent(mCheckedItems.size()));
+            pedding.get(groupPosition).add(mChildren.get(groupPosition).get(childPosition));
         }
+
+        for (int i=0; i<ModuleHelper.ModuleList.size(); i++) {
+            for (History history: pedding.get(i)) {
+                mChildren.get(i).remove(history);
+            }
+        }
+
+        notifyDataSetChanged();
     }
 
     public void insertItem(int GroupPosition, History history) {

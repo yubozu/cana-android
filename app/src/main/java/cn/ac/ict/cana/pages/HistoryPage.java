@@ -25,6 +25,7 @@ import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.activities.MainActivity;
 import cn.ac.ict.cana.adapters.HistoryAdapter;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
+import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.helpers.ToastManager;
 import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.providers.HistoryProvider;
@@ -43,11 +44,11 @@ public class HistoryPage{
 
         final TreeView treeView = (TreeView)view.findViewById(R.id.tree_view);
         ArrayList<ArrayList<History>> mChild = new ArrayList<ArrayList<History>>(){{
-                for (int i=0; i<6; i++) {
+                for (int i=0; i<ModuleHelper.ModuleList.size(); i++) {
                     add(new ArrayList<History>());
                 }}
         };
-        ArrayList<String> mGroup = new ArrayList<> (Arrays.asList("Stride", "Face", "Sound", "Stand", "Tapping", "Recognition"));
+        ArrayList<String> mGroup = ModuleHelper.ModuleList;
         ArrayList<History> historyList = historyProvider.getHistories();
 
         for (History history: historyList) {
@@ -68,6 +69,7 @@ public class HistoryPage{
                 activity.showProgressBar(true, "Start Uploading..");
             }
         });
+        uploadButton.setEnabled(false);
 
         Button deleteButton = (Button) view.findViewById(R.id.bt_delete);
         deleteButton.setOnClickListener(new View.OnClickListener() {

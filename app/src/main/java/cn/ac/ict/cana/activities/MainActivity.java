@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 
 import android.util.Log;
+import android.widget.Button;
 
 import com.gigamole.navigationtabbar.ntb.NavigationTabBar;
 
@@ -22,8 +23,10 @@ import java.util.Locale;
 
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.adapters.MainAdapter;
+import cn.ac.ict.cana.events.CheckedItemChangedEvent;
 import cn.ac.ict.cana.events.ResponseEvent;
 import cn.ac.ict.cana.helpers.ToastManager;
+import cn.ac.ict.cana.widget.TreeView;
 import dmax.dialog.SpotsDialog;
 
 /**
@@ -96,6 +99,16 @@ public class MainActivity extends Activity {
             toastManager.show(String.format(Locale.CHINA, "Success: %d, Failed %d.", success, failed));
             success = 0;
             failed = 0;
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    public  void onCheckedItemChangedEvent(CheckedItemChangedEvent event) {
+        Button uploadButton = (Button) findViewById(R.id.bt_upload);
+        if (event.count == 0) {
+            uploadButton.setEnabled(false);
+        } else {
+            uploadButton.setEnabled(true);
         }
     }
 

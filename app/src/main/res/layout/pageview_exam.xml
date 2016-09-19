@@ -11,6 +11,8 @@
         android:id="@+id/lv_exam"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:divider="@color/freebie_1"
+        android:scrollbars="none"
     />
 
 </LinearLayout>

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.adapters.ExamAdapter;
+import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.Exam;
 
 /**
@@ -24,7 +25,10 @@ public class ExamPage {
         ArrayList<Exam> examList = new ArrayList<>();
         final ExamAdapter examAdapter = new ExamAdapter(context);
 
-        examList.add(new Exam("stride", "stride description"));
+
+        for (String examName: ModuleHelper.ModuleList) {
+            examList.add(new Exam.Builder().setName(examName).build());
+        }
 
         examAdapter.setList(examList);
         lvExam.setAdapter(examAdapter);
