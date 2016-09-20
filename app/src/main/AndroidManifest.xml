@@ -22,6 +22,14 @@
         </activity>
         <activity android:name=".activities.MainActivity_"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity android:name=".modules.count.StartActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity android:name=".modules.count.CountMainActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity android:name=".modules.count.NextActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity android:name=".activities.UserActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
     </application>
 
 </manifest>

@@ -41,7 +41,6 @@
         android:layout_marginStart="@dimen/material_layout_keylines_screen_edge_margin"
         android:layout_marginEnd="@dimen/material_layout_keylines_screen_edge_margin"
         android:textColor="@color/freebie_4"
-        android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
         android:background="@color/freebie_1"
         style="@style/Widget.AppCompat.Button.Borderless"/>
 

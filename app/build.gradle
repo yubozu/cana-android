@@ -32,6 +32,7 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.github.eluleci:flatui:3.0.0'
     compile 'com.github.d-max:spots-dialog:0.4@aar'
+    compile 'com.wrapp.floatlabelededittext:library:0.0.6'
     apt "org.androidannotations:androidannotations:$AAVersion"
     compile "org.androidannotations:androidannotations-api:$AAVersion"
 }

@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
+        android:scrollbars="none"
         android:divider="@color/freebie_1"/>
 
     <Button
@@ -20,7 +21,7 @@
         android:layout_height="wrap_content"
         android:text="@string/add_symbol"
         android:textColor="@color/freebie_1"
-        android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
+        android:layout_marginTop="@dimen/material_component_dialogs_padding_around_buttons"
         android:background="@color/freebie_4"
         style="@style/Widget.AppCompat.Button.Borderless"/>
 

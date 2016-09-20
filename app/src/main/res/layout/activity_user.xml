@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/freebie_9"
+    android:paddingStart="@dimen/material_layout_keylines_screen_edge_margin"
+    android:paddingEnd="@dimen/material_layout_keylines_screen_edge_margin"
+    android:paddingTop="@dimen/material_component_cards_primary_title_top_padding"
+    >
+
+    <com.cengalabs.flatui.views.FlatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:gravity="center_vertical"
+        android:text="Create a new user or choose an exist one."
+        android:textSize="16dp"
+        flatui:fl_theme="@array/freebie_theme" />
+
+    <LinearLayout
+        android:id="@+id/layout_add_new_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.cengalabs.flatui.views.FlatEditText
+            android:id="@+id/edittext_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:maxLines="1"
+            android:gravity="center_vertical"
+            android:hint="Username"
+            android:singleLine="true"
+            android:includeFontPadding="true"
+            flatui:fl_fieldStyle="fl_flat"
+            flatui:fl_theme="@array/freebie_edittext" />
+
+        <com.cengalabs.flatui.views.FlatEditText
+            android:id="@+id/edittext_age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:maxLines="1"
+            android:gravity="center_vertical"
+            android:hint="Age"
+            android:singleLine="true"
+            android:inputType="number"
+            android:includeFontPadding="true"
+            flatui:fl_fieldStyle="fl_flat"
+            flatui:fl_theme="@array/freebie_edittext" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dip"
+            android:orientation="horizontal">
+
+                <com.cengalabs.flatui.views.FlatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:gravity="center_vertical"
+                    android:text="Female"
+                    android:textSize="16dp"
+                    flatui:fl_theme="@array/freebie_theme" />
+
+                <com.cengalabs.flatui.views.FlatToggleButton
+                    android:id="@+id/toggle_gender"
+                    android:layout_width="72dp"
+                    android:layout_height="36dp"
+                    android:text="Full Flat"
+                    android:textOn="Female"
+                    android:textOff="Male"
+                    android:checked="true"
+                    flatui:fl_space="14dp"
+                    flatui:fl_cornerRadius="18dp"
+                    flatui:fl_theme="@array/freebie_toggle"
+                    />
+
+                <com.cengalabs.flatui.views.FlatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:gravity="center_vertical"
+                    android:text="Male"
+                    android:textSize="16dp"
+                    flatui:fl_theme="@array/freebie_theme" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bt_save_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/material_component_dialogs_padding_around_buttons"
+            android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
+            android:text="SAVE"
+            android:textColor="@color/freebie_1"
+            android:background="@color/freebie_2"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        <Button
+            android:id="@+id/bt_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
+            android:text="CANCEL"
+            android:textColor="@color/freebie_2"
+            android:background="@color/freebie_1"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lv_user"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:divider="@color/freebie_1"
+        android:scrollbars="none"
+        />
+
+    <Button
+        android:id="@+id/bt_add_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/material_component_dialogs_padding_around_buttons"
+        android:text="@string/add_symbol"
+        android:textColor="@color/freebie_1"
+        android:background="@color/freebie_4"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
+
+    <Button
+        android:id="@+id/bt_continue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/material_component_dialogs_padding_around_buttons"
+        android:text="CONTINUE"
+        android:textColor="@color/freebie_4"
+        android:background="@color/freebie_1"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
+
+</LinearLayout>

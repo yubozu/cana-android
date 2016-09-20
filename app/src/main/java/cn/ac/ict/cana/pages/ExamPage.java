@@ -11,6 +11,8 @@ import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.adapters.ExamAdapter;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.Exam;
+import cn.ac.ict.cana.modules.count.CountMainActivity;
+import cn.ac.ict.cana.modules.count.StartActivity;
 
 /**
  * Author: saukymo
@@ -27,7 +29,7 @@ public class ExamPage {
 
 
         for (String examName: ModuleHelper.ModuleList) {
-            examList.add(new Exam.Builder().setName(examName).build());
+            examList.add(new Exam.Builder().setName(examName).setActivity(new StartActivity()).build());
         }
 
         examAdapter.setList(examList);

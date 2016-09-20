@@ -38,8 +38,22 @@
 
     <integer-array name="freebie_theme">
         <item>@color/freebie_4</item> <!-- really much darker color of main color -->
-        <item>@color/freebie_2</item> <!-- a bit darker color of your main color -->
-        <item>@color/freebie_9</item> <!-- main color of your theme -->
+        <item>@color/freebie_9</item> <!-- a bit darker color of your main color -->
+        <item>@color/freebie_2</item> <!-- main color of your theme -->
+        <item>@color/freebie_9</item> <!-- really much lighter color of main color -->
+    </integer-array>
+
+    <integer-array name="freebie_edittext">
+        <item>@color/freebie_4</item> <!-- really much darker color of main color -->
+        <item>@color/freebie_9</item> <!-- a bit darker color of your main color -->
+        <item>@color/freebie_1</item> <!-- main color of your theme -->
+        <item>@color/freebie_6</item> <!-- really much lighter color of main color -->
+    </integer-array>
+
+    <integer-array name="freebie_toggle">
+        <item>@color/freebie_4</item> <!-- really much darker color of main color -->
+        <item>@color/freebie_1</item> <!-- a bit darker color of your main color -->
+        <item>@color/freebie_2</item> <!-- main color of your theme -->
         <item>@color/freebie_1</item> <!-- really much lighter color of main color -->
     </integer-array>
 </resources>
