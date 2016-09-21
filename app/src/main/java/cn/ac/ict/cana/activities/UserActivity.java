@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.adapters.UserAdapter;
 import cn.ac.ict.cana.events.NewHistoryFile;
+import cn.ac.ict.cana.events.NewUser;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.User;
@@ -87,7 +88,7 @@ public class UserActivity extends Activity {
         btSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (etUsername.getText() != null && etAge.getText() != null) {
+                if (etUsername.getText() != "" && etAge.getText() != "") {
                     String username = etUsername.getText().toString();
                     int age = Integer.parseInt(etAge.getText().toString());
 
@@ -95,8 +96,8 @@ public class UserActivity extends Activity {
                     User user = new User(username, age, tgGender.isChecked());
                     Log.d("UserActivity", "Add new user uuid:" + user.uuid);
                     user.id = userProvider.InsertUser(user);
-                    userAdapter.addItem(user);
-
+//                    userAdapter.addItem(user);
+                    EventBus.getDefault().post(new NewUser(user));
 
                     resetForm();
                 }

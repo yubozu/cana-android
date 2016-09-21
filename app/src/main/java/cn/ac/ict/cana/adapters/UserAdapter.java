@@ -2,19 +2,29 @@ package cn.ac.ict.cana.adapters;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.androidannotations.annotations.AfterExtras;
+import org.androidannotations.annotations.AfterInject;
+import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EBean;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.ac.ict.cana.R;
+import cn.ac.ict.cana.events.NewUser;
+import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.models.User;
+import cn.ac.ict.cana.providers.UserProvider;
 
 /**
  * Author: saukymo
@@ -24,14 +34,29 @@ import cn.ac.ict.cana.models.User;
 public class UserAdapter extends BaseAdapter {
 
     private Context mContext;
-    public UserAdapter(Context context){
-        mContext = context;
-    }
+
     public User selectedUser = null;
     private List<User> users;
 
     // temporary solution.
     private int[] textViews = {R.id.tv_user_name, R.id.tv_user_id, R.id.tv_user_age, R.id.tv_user_gender};
+
+    public UserAdapter(Context context) {
+        mContext = context;
+        EventBus.getDefault().register(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void insert(NewUser event){
+        Log.d("HistroyAdapter", event.toString());
+        User user = event.user;
+//        UserProvider userProvider = new UserProvider(DataBaseHelper.getInstance(mContext));
+//        User user = userProvider.getUserByUuid(uuid);
+
+        Log.d("UserAdapter", "Insert new user:" + user.uuid);
+        addItem(user);
+        notifyDataSetChanged();
+    }
 
     @Override
     public View getView(final int position, View view, ViewGroup parent) {
