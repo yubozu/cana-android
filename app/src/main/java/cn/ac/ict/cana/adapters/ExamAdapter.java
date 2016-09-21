@@ -56,35 +56,35 @@ public class ExamAdapter extends BaseAdapter {
         btAddHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (exam.hasActivity()) {
+
                     exam.go(mContext);
-                }else {
-                    HistoryProvider historyProvider = new HistoryProvider(DataBaseHelper.getInstance(mContext));
-                    History history = new History(mContext, 0, exam.name);
 
-                    // Example: How to write data to file.
-                    File file = new File(history.filePath);
-                    try {
-                        FileWriter fileWrite = new FileWriter(file, true);
-                        BufferedWriter bufferedWriter = new BufferedWriter(fileWrite);
+//                    HistoryProvider historyProvider = new HistoryProvider(DataBaseHelper.getInstance(mContext));
+//                    History history = new History(mContext, 0, exam.name);
+//
+//                    // Example: How to write data to file.
+//                    File file = new File(history.filePath);
+//                    try {
+//                        FileWriter fileWrite = new FileWriter(file, true);
+//                        BufferedWriter bufferedWriter = new BufferedWriter(fileWrite);
+//
+//                        bufferedWriter.write("Test data.");
+//
+//                        //Important! Have a new line in the end of txt file.
+//                        bufferedWriter.newLine();
+//                        bufferedWriter.close();
+//                        fileWrite.close();
+//                    } catch (IOException e) {
+//                        Log.e("ExamAdapter", e.toString());
+//                    }
+//
+//                    history.id = historyProvider.InsertHistory(history);
 
-                        bufferedWriter.write("Test data.");
+//                    MainActivity mainActivity = (MainActivity) mContext;
+//                    TreeView treeView = (TreeView) mainActivity.findViewById(R.id.tree_view);
+//                    HistoryAdapter historyAdapter = (HistoryAdapter) treeView.getExpandableListAdapter();
+//                    historyAdapter.insertItem(mGroup.indexOf(history.type), history);
 
-                        //Important! Have a new line in the end of txt file.
-                        bufferedWriter.newLine();
-                        bufferedWriter.close();
-                        fileWrite.close();
-                    } catch (IOException e) {
-                        Log.e("ExamAdapter", e.toString());
-                    }
-
-                    history.id = historyProvider.InsertHistory(history);
-
-                    MainActivity mainActivity = (MainActivity) mContext;
-                    TreeView treeView = (TreeView) mainActivity.findViewById(R.id.tree_view);
-                    HistoryAdapter historyAdapter = (HistoryAdapter) treeView.getExpandableListAdapter();
-                    historyAdapter.insertItem(mGroup.indexOf(history.type), history);
-                }
             }
         });
         return examView;

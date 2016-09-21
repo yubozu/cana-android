@@ -33,18 +33,6 @@ public class UserPage{
         userAdapter.setList(userList);
         lvUser.setAdapter(userAdapter);
 
-
-        Button button = (Button) view.findViewById(R.id.bt_add_user);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                User user = new User("testname", 18, true);
-                user.id = userProvider.InsertUser(user);
-                userAdapter.addItem(user);
-                userAdapter.notifyDataSetChanged();
-                lvUser.setSelection(lvUser.getCount() - 1);
-            }
-        });
         return view;
     }
 }

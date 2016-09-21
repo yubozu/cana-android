@@ -1,6 +1,9 @@
 package cn.ac.ict.cana.activities;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,12 +13,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.adapters.UserAdapter;
+import cn.ac.ict.cana.events.NewHistoryFile;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
+import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.User;
+import cn.ac.ict.cana.modules.count.StartActivity;
 import cn.ac.ict.cana.providers.UserProvider;
 
 /**
@@ -27,12 +35,15 @@ public class UserActivity extends Activity {
     Button btAdd;
     Button btSave;
     Button btCancel;
+    Button btContinue;
     ListView lvUser;
     TextView etUsername;
     TextView etAge;
     ToggleButton tgGender;
 
     UserProvider userProvider = new UserProvider(DataBaseHelper.getInstance(this));
+
+    SharedPreferences settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +53,20 @@ public class UserActivity extends Activity {
     }
 
     protected void init() {
+        settings = getSharedPreferences("Cana", 0);
+
         linearLayout = (LinearLayout) findViewById(R.id.layout_add_new_user);
         btAdd = (Button) findViewById(R.id.bt_add_user);
         btSave = (Button) findViewById(R.id.bt_save_user);
         btCancel = (Button) findViewById(R.id.bt_cancel);
+        btContinue = (Button) findViewById(R.id.bt_continue);
         lvUser = (ListView) findViewById(R.id.lv_user);
         etUsername = (TextView) findViewById(R.id.edittext_username);
         etAge = (TextView) findViewById(R.id.edittext_age);
         tgGender = (ToggleButton) findViewById(R.id.toggle_gender);
         linearLayout.setVisibility(View.GONE);
 
-        final UserProvider userProvider = new UserProvider(DataBaseHelper.getInstance(this));
+        userProvider = new UserProvider(DataBaseHelper.getInstance(this));
         final ArrayList<User> userList = userProvider.getUsers();
         Log.d("MainAdapter", userList.toString());
 
@@ -79,6 +93,7 @@ public class UserActivity extends Activity {
 
 
                     User user = new User(username, age, tgGender.isChecked());
+                    Log.d("UserActivity", "Add new user uuid:" + user.uuid);
                     user.id = userProvider.InsertUser(user);
                     userAdapter.addItem(user);
 
@@ -95,6 +110,39 @@ public class UserActivity extends Activity {
             }
         });
 
+        btContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (userAdapter.selectedUser != null) {
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putString("selectedUser", userAdapter.selectedUser.uuid);
+                    editor.apply();
+                    StartModuleActivity();
+                }
+            }
+        });
+
+    }
+
+    private void StartModuleActivity() {
+        Intent intent = new Intent();
+
+        Class module;
+        settings = getSharedPreferences("Cana", Context.MODE_PRIVATE);
+        String ModuleName = settings.getString("ModuleName", "None");
+
+        Log.d("StartModule", ModuleName);
+        switch (ModuleName) {
+            case ModuleHelper.MODULE_COUNT:
+                module = StartActivity.class;
+                break;
+            default:
+                module = MainActivity_.class;
+        }
+
+        intent.setClass(this, module);
+        startActivity(intent);
+        finish();
     }
 
     private void resetForm() {

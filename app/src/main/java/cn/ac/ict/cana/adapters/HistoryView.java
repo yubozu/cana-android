@@ -33,7 +33,7 @@ public class HistoryView extends LinearLayout {
 
     public void bind(History history) {
         tvHistoryId.setText(String.valueOf(history.id));
-        tvHistoryUserId.setText(String.valueOf(history.userId));
+        tvHistoryUserId.setText(history.uuid);
         tvHistoryType.setText(history.type);
         tvHistoryFile.setText(history.filePath);
         tvHistoryIsUpload.setText(String.valueOf(history.isUpload));

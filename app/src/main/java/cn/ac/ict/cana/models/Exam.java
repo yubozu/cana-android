@@ -3,7 +3,13 @@ package cn.ac.ict.cana.models;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import cn.ac.ict.cana.activities.MainActivity;
 import cn.ac.ict.cana.activities.UserActivity;
 
 /**
@@ -12,7 +18,7 @@ import cn.ac.ict.cana.activities.UserActivity;
  */
 public class Exam {
     public final String name;
-    private Activity activity;
+    SharedPreferences settings;
 
     @Deprecated
     public Exam(String examName) {
@@ -20,33 +26,27 @@ public class Exam {
     }
 
     public Exam(Builder builder) {
-
         this.name = builder.name;
-        this.activity = builder.activity;
     }
 
     public void go(Context context) {
         Intent intent = new Intent();
-//        intent.setClass(context, activity.getClass());
+
+        settings = context.getSharedPreferences("Cana", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings .edit();
+
+        editor.putString("ModuleName", name);
+        editor.apply();
+
         intent.setClass(context, UserActivity.class);
         context.startActivity(intent);
-    }
 
-    public boolean hasActivity() {
-        return activity != null;
     }
 
     public static class Builder {
 
         private String name;
-        private Activity activity;
-
         public Builder() {
-        }
-
-        public Builder setActivity(Activity activity) {
-            this.activity = activity;
-            return this;
         }
 
         public Builder setName(String name) {

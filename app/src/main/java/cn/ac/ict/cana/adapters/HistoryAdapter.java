@@ -2,6 +2,7 @@ package cn.ac.ict.cana.adapters;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -22,9 +23,12 @@ import java.util.Set;
 
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.events.CheckedItemChangedEvent;
+import cn.ac.ict.cana.events.NewHistoryFile;
 import cn.ac.ict.cana.events.ResponseEvent;
+import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.History;
+import cn.ac.ict.cana.providers.HistoryProvider;
 import cn.ac.ict.cana.widget.BaseTreeViewAdapter;
 import cn.ac.ict.cana.widget.TreeView;
 
@@ -122,10 +126,10 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
 
         // In android Studio, these have to extract a new variable;
         final long id = history.id;
-        final long userId = history.userId;
+        final String uuid = history.uuid;
         final boolean isUploaded = history.isUpload;
         holder.tvHistoryId.setText(String.valueOf(id));
-        holder.tvHistoryUserId.setText(String.valueOf(userId));
+        holder.tvHistoryUserId.setText(uuid);
         holder.tvHistoryType.setText(history.type);
         holder.tvHistoryFile.setText(history.filePath);
         holder.tvHistoryIsUploaded.setText(String.valueOf(isUploaded));
@@ -224,6 +228,19 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
         notifyDataSetChanged();
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void insert(NewHistoryFile event){
+        Log.d("HistroyAdapter", event.toString());
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences("Cana", Context.MODE_PRIVATE);
+        long historyId = sharedPreferences.getLong("HistoryId", 0);
+
+        HistoryProvider historyProvider = new HistoryProvider(DataBaseHelper.getInstance(mContext));
+        History history = historyProvider.getHistory(historyId);
+
+        insertItem(history);
+        notifyDataSetChanged();
+    }
+
     public void removeItems(ArrayList<ContentValues> Items){
         /*
          * First cache histories to delete. And then delete them all.
@@ -254,8 +271,10 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
         notifyDataSetChanged();
     }
 
-    public void insertItem(int GroupPosition, History history) {
-        mChildren.get(GroupPosition).add(history);
+    public void insertItem(History history) {
+        Log.d("HistoryAdapter", "insertItem: " + history.toString());
+        int groupPosition = ModuleHelper.ModuleList.indexOf(history.type);
+        mChildren.get(groupPosition).add(history);
         notifyDataSetChanged();
     }
 

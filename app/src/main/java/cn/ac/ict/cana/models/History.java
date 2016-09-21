@@ -10,15 +10,15 @@ import static java.util.UUID.randomUUID;
  */
 public class History {
     public long id;
-    public final long userId;
+    public final String uuid;
     public final String type;
     public String filePath;
     public boolean isUpload;
     public String createdTime;
     public String ext;
 
-    public History(Context context, long historyUserId, String historyType){
-        userId = historyUserId;
+    public History(Context context, String uuid, String historyType){
+        this.uuid = uuid;
         type = historyType;
 
         switch (type) {
@@ -36,9 +36,9 @@ public class History {
         isUpload = false;
     }
 
-    public History(long historyId, long historyUserId, String historyType, String historyFilePath, boolean historyIsUpload, String historyCreatedTime) {
+    public History(long historyId, String uuid, String historyType, String historyFilePath, boolean historyIsUpload, String historyCreatedTime) {
         id = historyId;
-        userId = historyUserId;
+        this.uuid = uuid;
         type = historyType;
         filePath = historyFilePath;
         isUpload = historyIsUpload;

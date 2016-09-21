@@ -2,9 +2,12 @@ package cn.ac.ict.cana.modules.count;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -12,9 +15,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import cn.ac.ict.cana.R;
+import cn.ac.ict.cana.events.NewHistoryFile;
+import cn.ac.ict.cana.helpers.DataBaseHelper;
+import cn.ac.ict.cana.helpers.ModuleHelper;
+import cn.ac.ict.cana.models.History;
+import cn.ac.ict.cana.providers.HistoryProvider;
 
 /**
  * Created by zhongxi on 2016/8/22.
@@ -28,8 +42,6 @@ public class NextActivity extends Activity {
     private int counttoRight;
     private boolean isRight;
     private ArrayList<String> result;
-    private String filePath;
-//    private Patient patient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +64,6 @@ public class NextActivity extends Activity {
     public void init(){
         intent = this.getIntent();
         randomStr = intent.getStringExtra("data");
-//        patient = (Patient) getIntent().getSerializableExtra("patient");
         randomStr = randomStr.substring(0,6);
         nextet = (EditText)findViewById(R.id.nextet);
         nextet.setInputType(EditorInfo.TYPE_CLASS_PHONE);
@@ -99,20 +110,17 @@ public class NextActivity extends Activity {
         builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String context = randomStr;
+                String content = randomStr;
                 if(isRight){
-                    context+=";1";
+                    content+=";1";
                 }else{
-                    context+=";0";
+                    content+=";0";
                 }
                 for(String x: result){
-                    context+=";"+x;
+                    content+=";"+x;
                 }
-//                CognitionRecord record = new CognitionRecord(patient,System.currentTimeMillis(),context);
-//                record.setRigthStr(randomStr);
-//                record.setTryData(result);
-//                record.saveToStorage();
-//                new DataManager(getApplicationContext()).addToSQLite(record);
+
+                saveToStorage(content);
                 startActivity(new Intent(NextActivity.this,StartActivity.class));
                 finish();
                 dialog.dismiss();
@@ -129,5 +137,38 @@ public class NextActivity extends Activity {
         });
 
         builder.create().show();
+    }
+
+    public void saveToStorage(String content){
+        SharedPreferences sharedPreferences = getSharedPreferences("Cana", Context.MODE_PRIVATE);
+        String uuid = sharedPreferences.getString("selectedUser", "None");
+        HistoryProvider historyProvider = new HistoryProvider(DataBaseHelper.getInstance(this));
+        History history = new History(this, uuid, ModuleHelper.MODULE_COUNT);
+
+        // Example: How to write data to file.
+        File file = new File(history.filePath);
+        try {
+            FileWriter fileWrite = new FileWriter(file, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWrite);
+
+            bufferedWriter.write(content);
+
+            //Important! Have a new line in the end of txt file.
+            bufferedWriter.newLine();
+            bufferedWriter.close();
+            fileWrite.close();
+        } catch (IOException e) {
+            Log.e("ExamAdapter", e.toString());
+        }
+
+        history.id = historyProvider.InsertHistory(history);
+
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putLong("HistoryId", history.id);
+        editor.apply();
+
+        Log.d("CountSaveToStorage", String.valueOf(history.id));
+        EventBus.getDefault().post(new NewHistoryFile());
     }
 }

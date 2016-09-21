@@ -8,12 +8,12 @@ import java.util.Arrays;
  * Date: 9/19/16
  */
 public class ModuleHelper {
-    final static String MODULE_COUNT = "Count";
-    final static String MODULE_FACE = "Face";
-    final static String MODULE_SOUND = "Sound";
-    final static String MODULE_STAND = "Stand";
-    final static String MODULE_STRIDE = "Stride";
-    final static String MODULE_TAPPING = "Tapping";
+    public final static String MODULE_COUNT = "Count";
+    public final static String MODULE_FACE = "Face";
+    public final static String MODULE_SOUND = "Sound";
+    public final static String MODULE_STAND = "Stand";
+    public final static String MODULE_STRIDE = "Stride";
+    public final static String MODULE_TAPPING = "Tapping";
 
     public final static ArrayList<String> ModuleList= new ArrayList<>(Arrays.asList(MODULE_COUNT, MODULE_FACE, MODULE_SOUND, MODULE_STAND, MODULE_STRIDE, MODULE_TAPPING));
 }

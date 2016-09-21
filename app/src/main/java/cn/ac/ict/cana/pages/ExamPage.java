@@ -29,7 +29,7 @@ public class ExamPage {
 
 
         for (String examName: ModuleHelper.ModuleList) {
-            examList.add(new Exam.Builder().setName(examName).setActivity(new StartActivity()).build());
+            examList.add(new Exam.Builder().setName(examName).build());
         }
 
         examAdapter.setList(examList);

@@ -19,14 +19,7 @@ import cn.ac.ict.cana.R;
  */
 public class StartActivity extends Activity {
 
-    EditText et_patient;
-    EditText et_age;
-    RadioGroup rg_gender;
-    boolean isFemale = true;
-    String patientName;
-    int age;
     Button bt_begin;
-    View patientView;
     Vibrator vibrator;
     MediaPlayer mp;
     long[] pattern = {100, 400};
@@ -36,43 +29,17 @@ public class StartActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_count_start);
+
         init();
     }
 
     public void init(){
-//        patientView = findViewById(R.id.congnition_patient);
-//        et_patient = (EditText)patientView.findViewById(R.id.et_name);
-//        et_age = (EditText)patientView.findViewById(R.id.et_age);
-//        rg_gender = (RadioGroup) patientView.findViewById(R.id.rg_gender);
-//        rg_gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-//                int checkedId = radioGroup.getCheckedRadioButtonId();
-//                isFemale = checkedId == R.id.rb_female ? true : false;
-//            }
-//        });
 
         bt_begin = (Button)findViewById(R.id.congnition_begin);
         bt_begin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
-//                patientName = et_patient.getText().toString().trim();
-//                age = Integer.parseInt(et_age.getText().toString().trim());
-//
-//                if (patientName == null || patientName.equals("")) {
-//                    Toast.makeText(StartActivity.this, getResources().getString(R.string.patientnotnull), Toast.LENGTH_SHORT).show();
-//                    et_patient.requestFocus();
-//                } else {
                     mp.start();
-//                    Intent intent = new Intent(getApplicationContext(), CountMainActivity.class);
-//                    Patient patient = new Patient(patientName, age, isFemale);
-//                    intent.putExtra("patient", patient);
-//                    startActivity(intent);
-//                    finish();
-//                }
             }
         });
 
@@ -83,8 +50,6 @@ public class StartActivity extends Activity {
             public void onCompletion(MediaPlayer mp) {
                 vibrator.vibrate(pattern, -1);
                 Intent intent = new Intent(getApplicationContext(), CountMainActivity.class);
-//                Patient patient = new Patient(patientName, age, isFemale);
-//                intent.putExtra("patient", patient);
                 startActivity(intent);
                 finish();
             }

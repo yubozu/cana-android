@@ -17,12 +17,14 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     // User-info table
     public static final String USER_TABLE_NAME = "user_table";
     public static final String USER_ID = "_id";
+    public static final String USER_UUID = "user_uuid";
     public static final String USER_NAME = "user_name";
     public static final String USER_AGE = "user_age";
     public static final String USER_GENDER = "user_gender";
 
     private static final String USER_TABLE_CREATE = "CREATE TABLE " + USER_TABLE_NAME + "("
             + USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + USER_UUID + " CHAR(256) NOT NULL,"
             + USER_NAME + " CHAR(256) NOT NULL,"
             + USER_AGE + " INTEGER NOT NULL,"
             + USER_GENDER + " INTEGER NOT NULL"
@@ -31,7 +33,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     // History table
     public static final String HISTORY_TABLE_NAME = "history_table";
     public static final String HISTORY_ID = "_id";
-    public static final String HISTORY_USER_ID = "history_user_id";
+    public static final String HISTORY_USER_UUID = "history_user_uuid";
     public static final String HISTORY_TYPE = "history_type";
     public static final String HISTORY_FILE = "history_file";
     public static final String HISTORY_IS_UPLOADED = "history_is_uploaded";
@@ -39,7 +41,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
     private static final String HISTORY_TABLE_CREATE = "CREATE TABLE " + HISTORY_TABLE_NAME + "("
             + HISTORY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + HISTORY_USER_ID + " INTEGER NOT NULL,"
+            + HISTORY_USER_UUID + " CHAR(256) NOT NULL,"
             + HISTORY_TYPE + " CHAR(20) NOT NULL,"
             + HISTORY_FILE + " CHAR(256) NOT NULL,"
             + HISTORY_IS_UPLOADED + " INTEGER NOT NULL,"

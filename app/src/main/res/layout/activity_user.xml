@@ -147,6 +147,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/material_component_dialogs_padding_around_buttons"
+        android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
         android:text="CONTINUE"
         android:textColor="@color/freebie_4"
         android:background="@color/freebie_1"

@@ -3,11 +3,14 @@ package cn.ac.ict.cana.providers;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.text.TextUtils;
 import android.util.Log;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
 import cn.ac.ict.cana.helpers.DataBaseHelper;
+import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.models.User;
 
 /**
@@ -17,7 +20,7 @@ import cn.ac.ict.cana.models.User;
 public class UserProvider {
 
     private SQLiteDatabase mDatabase;
-    private String[] mUserColumns = {DataBaseHelper.USER_ID, DataBaseHelper.USER_NAME, DataBaseHelper.USER_AGE, DataBaseHelper.USER_GENDER};
+    private String[] mUserColumns = {DataBaseHelper.USER_ID, DataBaseHelper.USER_UUID, DataBaseHelper.USER_NAME, DataBaseHelper.USER_AGE, DataBaseHelper.USER_GENDER};
 
     public UserProvider(DataBaseHelper dataBaseHelper) {
         mDatabase = dataBaseHelper.getWritableDatabase();
@@ -26,6 +29,7 @@ public class UserProvider {
     public long InsertUser(User user) {
         ContentValues values = new ContentValues();
 
+        values.put(DataBaseHelper.USER_UUID, user.uuid);
         values.put(DataBaseHelper.USER_NAME, user.name);
         values.put(DataBaseHelper.USER_AGE, user.age);
         values.put(DataBaseHelper.USER_GENDER, user.gender?1 : 0);
@@ -34,18 +38,40 @@ public class UserProvider {
     }
 
     public ArrayList<User> getUsers() {
-        ArrayList<User> users = new ArrayList<>();
         Cursor cursor = mDatabase.query(DataBaseHelper.USER_TABLE_NAME, mUserColumns, null, null, null, null, DataBaseHelper.USER_ID);
-        Log.d("UserProvider", String.valueOf(cursor.getCount()));
+        Log.d("UserProvider", "Total user number: " + String.valueOf(cursor.getCount()));
+        return loadUsersFromCursor(cursor);
+    }
+
+    private ArrayList<User> loadUsersFromCursor(Cursor cursor) {
+        ArrayList<User> users = new ArrayList<>();
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
-                users.add(new User(cursor.getLong(cursor.getColumnIndex(DataBaseHelper.USER_ID)), cursor.getString(cursor.getColumnIndex(DataBaseHelper.USER_NAME)),
-                        cursor.getInt(cursor.getColumnIndex(DataBaseHelper.USER_AGE)), cursor.getInt(cursor.getColumnIndex(DataBaseHelper.USER_GENDER)) == 1));
+                long id = cursor.getLong(cursor.getColumnIndex(DataBaseHelper.USER_ID));
+                String uuid = cursor.getString(cursor.getColumnIndex(DataBaseHelper.USER_UUID));
+                String name = cursor.getString(cursor.getColumnIndex(DataBaseHelper.USER_NAME));
+                int age = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.USER_AGE));
+                boolean gender = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.USER_GENDER)) == 1;
+                users.add(new User(id, uuid, name, age, gender));
             }
             cursor.close();
         }
-        Log.d("UserProvider", users.toString());
         return users;
+    }
+
+    public ArrayList<User> getUsersByUuids(ArrayList<String> uuids) {
+        Log.d("UserProvider", "getUsersByUuids");
+        ArrayList<String> newUuids = new ArrayList<>();
+        for (String uuid: uuids) {
+            newUuids.add("'" + uuid + "'");
+        }
+
+        String uuidString = TextUtils.join(",", newUuids);
+        String QueryString = String.format("SELECT * FROM " + DataBaseHelper.USER_TABLE_NAME + " WHERE " +DataBaseHelper.USER_UUID + " IN (%s)", new String[]{uuidString});
+
+        Log.d("getUsersByUuids", QueryString);
+        Cursor cursor = mDatabase.rawQuery(QueryString, null);
+        return loadUsersFromCursor(cursor);
     }
 
 }
