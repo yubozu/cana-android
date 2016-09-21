@@ -13,7 +13,7 @@
         android:layout_marginStart="14.0dip"
         android:scaleType="center"
         android:contentDescription="@null"
-        android:src="@drawable/indicator_expanded" />
+        android:src="@drawable/indicator_unexpanded" />
 
     <TextView
         android:id="@+id/group_name"
