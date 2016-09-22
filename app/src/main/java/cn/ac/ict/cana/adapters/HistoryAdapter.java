@@ -247,7 +247,7 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
          * This way is really slow and redundant.
          */
 
-        SparseArray<ArrayList<History>> pedding = new SparseArray<ArrayList<History>>(){{
+        SparseArray<ArrayList<History>> pending = new SparseArray<ArrayList<History>>(){{
             for (int i=0; i<ModuleHelper.ModuleList.size(); i++) {
                 put(i, new ArrayList<History>());
             }}
@@ -259,11 +259,11 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
             Log.d("HistoryAdapter", String.format("groupPosition: %d, childPosition: %d", groupPosition, childPosition));
             mCheckedItems.clear();
             EventBus.getDefault().post(new CheckedItemChangedEvent(mCheckedItems.size()));
-            pedding.get(groupPosition).add(mChildren.get(groupPosition).get(childPosition));
+            pending.get(groupPosition).add(mChildren.get(groupPosition).get(childPosition));
         }
 
         for (int i=0; i<ModuleHelper.ModuleList.size(); i++) {
-            for (History history: pedding.get(i)) {
+            for (History history: pending.get(i)) {
                 mChildren.get(i).remove(history);
             }
         }

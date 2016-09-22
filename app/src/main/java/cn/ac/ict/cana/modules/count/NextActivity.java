@@ -24,6 +24,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import cn.ac.ict.cana.R;
+import cn.ac.ict.cana.activities.MainActivity;
+import cn.ac.ict.cana.activities.MainActivity_;
 import cn.ac.ict.cana.events.NewHistoryFile;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
@@ -121,7 +123,7 @@ public class NextActivity extends Activity {
                 }
 
                 saveToStorage(content);
-                startActivity(new Intent(NextActivity.this,StartActivity.class));
+                startActivity(new Intent(NextActivity.this,MainActivity_.class));
                 finish();
                 dialog.dismiss();
             }
@@ -130,7 +132,7 @@ public class NextActivity extends Activity {
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(NextActivity.this,StartActivity.class));
+                startActivity(new Intent(NextActivity.this, MainActivity_.class));
                 finish();
                 dialog.dismiss();
             }

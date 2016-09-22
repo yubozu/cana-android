@@ -25,6 +25,7 @@ import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.User;
 import cn.ac.ict.cana.modules.count.StartActivity;
+import cn.ac.ict.cana.modules.stride.StrideMainActivity;
 import cn.ac.ict.cana.providers.UserProvider;
 
 /**
@@ -119,6 +120,7 @@ public class UserActivity extends Activity {
                     editor.putString("selectedUser", userAdapter.selectedUser.uuid);
                     editor.apply();
                     StartModuleActivity();
+                    finish();
                 }
             }
         });
@@ -133,15 +135,8 @@ public class UserActivity extends Activity {
         String ModuleName = settings.getString("ModuleName", "None");
 
         Log.d("StartModule", ModuleName);
-        switch (ModuleName) {
-            case ModuleHelper.MODULE_COUNT:
-                module = StartActivity.class;
-                break;
-            default:
-                module = MainActivity_.class;
-        }
 
-        intent.setClass(this, module);
+        intent.setClass(this, ModuleHelper.getModule(ModuleName));
         startActivity(intent);
         finish();
     }
