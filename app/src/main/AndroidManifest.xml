@@ -39,6 +39,12 @@
         <activity android:name=".modules.stride.StrideMainActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
 
+        <!-- Module: Stand-->
+        <activity android:name=".modules.stand.StandMainActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity android:name=".modules.stand.StandTestingActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+
     </application>
 
 </manifest>

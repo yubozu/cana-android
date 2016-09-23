@@ -40,8 +40,7 @@ public class MainActivity extends Activity {
     @Bean ToastManager toastManager;
 
     private SpotsDialog mProgressDialog;
-
-    private int success, failed, total;
+    private int success, failed;
 
     @AfterViews
     public void init() {
@@ -90,8 +89,6 @@ public class MainActivity extends Activity {
         } else {
           failed += 1;
         }
-        mProgressDialog.setMessage(String.format(Locale.CHINA, "Uploading...(%d/%d)", success + failed, total));
-        Log.d("onResponse", String.format(Locale.CHINA, "Uploading...(%d/%d)", success + failed, total));
         if (success + failed >= event.total) {
             showProgressBar(false, "");
             toastManager.show(String.format(Locale.CHINA, "Success: %d, Failed %d.", success, failed));
@@ -100,7 +97,7 @@ public class MainActivity extends Activity {
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public  void onCheckedItemChangedEvent(CheckedItemChangedEvent event) {
         Button uploadButton = (Button) findViewById(R.id.bt_upload);
         if (event.count == 0) {
