@@ -10,6 +10,7 @@ import java.util.Arrays;
 
 import cn.ac.ict.cana.activities.MainActivity_;
 import cn.ac.ict.cana.modules.count.StartActivity;
+import cn.ac.ict.cana.modules.face.FaceMainActivity;
 import cn.ac.ict.cana.modules.stand.StandMainActivity;
 import cn.ac.ict.cana.modules.stride.StrideMainActivity;
 
@@ -38,6 +39,9 @@ public class ModuleHelper {
                 break;
             case MODULE_STAND:
                 module = StandMainActivity.class;
+                break;
+            case MODULE_FACE:
+                module = FaceMainActivity.class;
                 break;
             default:
                 module = MainActivity_.class;

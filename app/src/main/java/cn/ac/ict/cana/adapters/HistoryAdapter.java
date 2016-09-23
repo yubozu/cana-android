@@ -224,7 +224,7 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
     public void update(ResponseEvent event){
         Log.d("History adapter", String.valueOf(event.id));
         History history = (History) getChild(event.groupPosition, event.childPosition);
-        history.isUpload = true;
+        history.isUpload = event.success;
         notifyDataSetChanged();
     }
 

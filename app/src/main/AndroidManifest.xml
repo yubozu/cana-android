@@ -45,6 +45,11 @@
         <activity android:name=".modules.stand.StandTestingActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
 
+        <!-- Module: Face-->
+        <activity android:name=".modules.face.FaceMainActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity android:name=".modules.face.VideoCaptureActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
     </application>
 
 </manifest>
