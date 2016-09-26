@@ -5,12 +5,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
 import cn.ac.ict.cana.helpers.DataBaseHelper;
-import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.models.User;
 
 /**
@@ -59,7 +57,7 @@ public class UserProvider {
         return users;
     }
 
-    public ArrayList<User> getUsersByUuids(ArrayList<String> uuids) {
+    ArrayList<User> getUsersByUuids(ArrayList<String> uuids) {
         Log.d("UserProvider", "getUsersByUuids");
         ArrayList<String> newUuids = new ArrayList<>();
         for (String uuid: uuids) {

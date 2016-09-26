@@ -19,13 +19,10 @@ import java.util.ArrayList;
 
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.adapters.UserAdapter;
-import cn.ac.ict.cana.events.NewHistoryFile;
 import cn.ac.ict.cana.events.NewUser;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.User;
-import cn.ac.ict.cana.modules.count.StartActivity;
-import cn.ac.ict.cana.modules.stride.StrideMainActivity;
 import cn.ac.ict.cana.providers.UserProvider;
 
 /**

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.widget.Button;
 
 import com.gigamole.navigationtabbar.ntb.NavigationTabBar;
@@ -77,7 +76,7 @@ public class MainActivity extends Activity {
                         .build()
         );
         navigationTabBar.setModels(models);
-        navigationTabBar.setViewPager(viewPager, 2);
+        navigationTabBar.setViewPager(viewPager, 0);
         navigationTabBar.setBgColor(Color.parseColor("#F3F5F7"));
         navigationTabBar.setTitleSize(40);
     }

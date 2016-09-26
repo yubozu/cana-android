@@ -161,7 +161,7 @@ public class GoActivity extends Activity {
                         currentTrail++;
                         if (currentTrail > trailCount) {
                             saveToStorage();
-                            Intent intent = new Intent(getApplicationContext(), MainActivity_.class);
+                            Intent intent = new Intent(GoActivity.this, MainActivity_.class);
                             startActivity(intent);
                             finish();
                         } else {

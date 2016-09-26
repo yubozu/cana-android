@@ -18,12 +18,12 @@ package cn.ac.ict.cana.modules.face.recorder;
 
 public interface VideoRecorderInterface {
 
-	public abstract void onRecordingStopped(String message);
+	void onRecordingStopped(String message);
 
-	public abstract void onRecordingStarted();
+	void onRecordingStarted();
 
-	public abstract void onRecordingSuccess();
+	void onRecordingSuccess();
 
-	public abstract void onRecordingFailed(String message);
+	void onRecordingFailed(String message);
 
 }

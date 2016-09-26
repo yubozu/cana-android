@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import cn.ac.ict.cana.R;
+import cn.ac.ict.cana.activities.MainActivity_;
 import cn.ac.ict.cana.events.NewHistoryFile;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
@@ -121,6 +123,8 @@ public class StandTestingActivity extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 saveToStorage();
+                startActivity(new Intent(StandTestingActivity.this, MainActivity_.class));
+                finish();
                 finish();
             }
         });

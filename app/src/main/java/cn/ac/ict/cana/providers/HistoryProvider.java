@@ -85,7 +85,7 @@ public class HistoryProvider {
         return histories;
     }
 
-    public ArrayList<History> getHistoriesByIds(ArrayList<Long> ids) {
+    private ArrayList<History> getHistoriesByIds(ArrayList<Long> ids) {
         String idString = TextUtils.join(",", ids);
         String QueryString = String.format("SELECT * FROM " + DataBaseHelper.HISTORY_TABLE_NAME + " WHERE " +DataBaseHelper.HISTORY_ID + " IN (%s)", new String[]{idString});
         Log.d("HistoryProvider", "QueryString" + QueryString);
@@ -120,8 +120,11 @@ public class HistoryProvider {
                     .setType(MultipartBody.FORM)
                     .addFormDataPart("data", file.getName(),
                             RequestBody.create(MediaType.parse("text/plain"), file))
-                    .addFormDataPart("id", String.valueOf(history.id))
                     .addFormDataPart("uuid", user.uuid)
+                    .addFormDataPart("name", user.name)
+                    .addFormDataPart("gender", user.gender?"Female":"Male")
+                    .addFormDataPart("date", history.createdTime)
+                    .addFormDataPart("type", history.type)
                     // TODO: fill in all information. Check with content write in file.
                     .build();
             Request request = new Request.Builder().url(url).post(formBody).build();
@@ -140,9 +143,7 @@ public class HistoryProvider {
                         // TODO: Change to Gson
                         JSONObject Jobject = new JSONObject(jsonData);
                         Log.d("toJson", Jobject.toString());
-                        Log.d("toJson", "ResponseId: " + Jobject.get("id").toString());
-                        long historyId= Long.parseLong((String) Jobject.get("id"));
-                        updateHistoryUploadedById(historyId);
+                        updateHistoryUploadedById(history.id);
                         result = true;
                     }catch (JSONException e) {
                         Log.e("toJson", e.toString());
@@ -153,7 +154,7 @@ public class HistoryProvider {
         }
     }
 
-    public void updateHistoryUploadedById(Long id) {
+    private void updateHistoryUploadedById(Long id) {
         ContentValues args = new ContentValues();
         args.put(DataBaseHelper.HISTORY_IS_UPLOADED, 1);
         mDatabase.update(DataBaseHelper.HISTORY_TABLE_NAME,  args, "_id=" + id, null);

@@ -38,14 +38,11 @@ import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import cn.ac.ict.cana.R;
+import cn.ac.ict.cana.activities.MainActivity_;
 import cn.ac.ict.cana.events.NewHistoryFile;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
@@ -295,10 +292,8 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
     }
 
     private void finishCompleted() {
-//        final Intent result = new Intent();
-//        result.putExtra(EXTRA_OUTPUT_FILENAME, mVideoFile.getFullPath());
-//        this.setResult(RESULT_OK, result);
         saveToStorage();
+        startActivity(new Intent(this,MainActivity_.class));
         finish();
     }
 

@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import cn.ac.ict.cana.R;
-import cn.ac.ict.cana.activities.MainActivity;
 import cn.ac.ict.cana.activities.MainActivity_;
 import cn.ac.ict.cana.events.NewHistoryFile;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
@@ -56,7 +55,7 @@ public class NextActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                startActivity(new Intent(NextActivity.this,StartActivity.class));
+                startActivity(new Intent(NextActivity.this,CountMainActivity.class));
                 finish();
                 break;
         }
@@ -123,7 +122,7 @@ public class NextActivity extends Activity {
                 }
 
                 saveToStorage(content);
-                startActivity(new Intent(NextActivity.this,MainActivity_.class));
+                startActivity(new Intent(NextActivity.this, MainActivity_.class));
                 finish();
                 dialog.dismiss();
             }

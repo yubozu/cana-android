@@ -26,9 +26,9 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
 
         <!-- Module: Count-->
-        <activity android:name=".modules.count.StartActivity"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity android:name=".modules.count.CountMainActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity android:name=".modules.count.CountingActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity android:name=".modules.count.NextActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
@@ -50,6 +50,15 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity android:name=".modules.face.VideoCaptureActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+
+        <!-- Module: Tapper-->
+        <activity android:name=".modules.tapper.TapperMainActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+
+        <!-- Module: Sound-->
+        <activity android:name=".modules.sound.SoundMainActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+
     </application>
 
 </manifest>
