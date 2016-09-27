@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <Button
-        android:id="@+id/btn_start_tiper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="开始测试" />
-
+    android:background="@color/freebie_9"
+    android:paddingStart="@dimen/material_layout_keylines_screen_edge_margin"
+    android:paddingEnd="@dimen/material_layout_keylines_screen_edge_margin"
+    android:paddingTop="@dimen/material_component_cards_primary_title_top_padding"
+    >
 
     <LinearLayout
         android:id="@+id/ll_result"
@@ -25,7 +21,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="0" />
+            android:text="@string/zero" />
 
         <TextView
             android:id="@+id/tv_right_count"
@@ -33,7 +29,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="0" />
+            android:text="@string/zero" />
     </LinearLayout>
 
     <LinearLayout
@@ -49,7 +45,8 @@
             android:background="@drawable/tapper_click"
             android:enabled="false"
             android:gravity="center"
-            android:text="食指"
+            android:textColor="@color/freebie_1"
+            android:text="@string/tapper_index_finger"
             android:textSize="30sp" />
 
         <TextView
@@ -65,14 +62,23 @@
             android:background="@drawable/tapper_click"
             android:enabled="false"
             android:gravity="center"
-            android:text="中指"
+            android:textColor="@color/freebie_1"
+            android:text="@string/tapper_middle_finger"
             android:textSize="30sp" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/tv_info"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="请用食指和中指以最快的速度点击这两个按钮10秒!"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:text="@string/tapper_tips"
         android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btn_start_tapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/PrimaryButton"
+        android:text="@string/btn_begin" />
 </LinearLayout>

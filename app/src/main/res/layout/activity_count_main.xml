@@ -1,21 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_main"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/freebie_9"
-    android:weightSum="1">
-
-
+    android:orientation="vertical"
+    android:paddingStart="@dimen/material_layout_keylines_screen_edge_margin"
+    android:paddingEnd="@dimen/material_layout_keylines_screen_edge_margin"
+    android:id="@+id/main">
 
     <TextView
-        android:id="@+id/tvnum"
-        android:gravity="center"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:textSize="80sp"
-        android:textStyle="bold"
-        android:visibility="invisible"
-        />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:text="@string/module_count"
+        android:textColor="@color/freebie_4"
+        android:textSize="@dimen/material_component_text_title_text_size" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:text="@string/count_tips"
+        android:lineSpacingMultiplier="1.3"
+        android:layout_weight="0.1"
+        android:textColor="@color/freebie_6"
+        android:textSize="@dimen/material_component_lists_single_line_text_size" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id = "@+id/count_begin"
+        style="@style/PrimaryButton"
+        android:text="@string/btn_continue"/>
 
 </LinearLayout>

@@ -18,7 +18,7 @@ import java.util.Random;
 
 import cn.ac.ict.cana.R;
 
-public class CountingActivity extends Activity {
+public class CountGameActivity extends Activity {
 
     Handler mHandler = new Handler();
     private ScaleAnimation scaleAnimation;
@@ -47,7 +47,7 @@ public class CountingActivity extends Activity {
         height = defaultDisplay.getHeight() - 300;
         delayMillis = 200;
         random = new Random();
-        setContentView(R.layout.activity_count_main);
+        setContentView(R.layout.activity_count_game);
 
 
         tvnum = (TextView) findViewById(R.id.tvnum);
@@ -81,7 +81,7 @@ public class CountingActivity extends Activity {
                     genRandomNumber();
                 } else {
                     Intent intent = new Intent();
-                    intent.setClass(CountingActivity.this, NextActivity.class);
+                    intent.setClass(CountGameActivity.this, CountConfirmActivity.class);
                     intent.putExtra("data", randomStr);
 //                    intent.putExtra("patient", patient);
                     startActivity(intent);

@@ -105,12 +105,12 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
                     case 5:
                         timer.cancel();
                         mp2.start();
-                        tvHint.setText("请放松,直视前方");
+                        tvHint.setText(getString(R.string.face_task_2));
                         break;
                     case 10:
                         timer.cancel();
                         mp3.start();
-                        tvHint.setText("请微笑并露出牙齿");
+                        tvHint.setText(getString(R.string.face_task_3));
                         break;
                     case 15:
                         timer.cancel();
@@ -183,7 +183,7 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
         tvHint = (TextView) findViewById(R.id.tv_hint);
         //   if (mVideoCaptureView == null) return; // Wrong orientation
 
-        tvHint.setText("请闭眼");
+        tvHint.setText(getString(R.string.face_task_1));
         tvHint.getBackground().setAlpha(100);
         iv_bt.setVisibility(View.INVISIBLE);
         new Handler().postDelayed(new Runnable() {
@@ -307,7 +307,7 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
     }
 
     private void finishError(final String message) {
-        Toast.makeText(getApplicationContext(), "Can't capture video: " + message, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), getString(R.string.face_finish_error) + message, Toast.LENGTH_LONG).show();
 
         final Intent result = new Intent();
         result.putExtra(EXTRA_ERROR_MESSAGE, message);

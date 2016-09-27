@@ -123,4 +123,6 @@
     <dimen name="material_component_text_full_width_single_line_text_field_text_top_and_bottom_padding">20dp</dimen>
     <!-- Toolbars -->
     <!-- Tooltips -->
+    <!-- Title -->
+    <dimen name="material_component_text_title_text_size">25sp</dimen>
 </resources>

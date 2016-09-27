@@ -28,9 +28,9 @@
         <!-- Module: Count-->
         <activity android:name=".modules.count.CountMainActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
-        <activity android:name=".modules.count.CountingActivity"
+        <activity android:name=".modules.count.CountGameActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
-        <activity android:name=".modules.count.NextActivity"
+        <activity android:name=".modules.count.CountConfirmActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
 
         <!-- Module: Stride-->

@@ -9,13 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="请大声朗读以下这段话:今天我的心情特别好!"
-        android:textSize="60dp" />
+        android:text="@string/sound_task_2"
+        android:textSize="@dimen/material_component_lists_single_line_text_size" />
 
     <Button
         android:id="@+id/btn_start_recorder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="开始录音" />
+        style="@style/PrimaryButton"
+        android:text="@string/btn_start_record" />
 
 </LinearLayout>

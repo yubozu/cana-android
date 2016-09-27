@@ -19,7 +19,6 @@
 		android:gravity="center"
 		android:id="@+id/tv_hint"
 		android:background="#000000"
-		android:text="0000"
 		android:layout_centerHorizontal="true"
 		android:layout_alignParentBottom="true"/>
 </RelativeLayout>

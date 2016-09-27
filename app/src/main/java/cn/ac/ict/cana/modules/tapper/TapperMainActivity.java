@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,7 +40,7 @@ public class TapperMainActivity extends Activity {
     TextView tvLeft;
     @BindView(R.id.tv_right_count)
     TextView tvRight;
-    @BindView(R.id.btn_start_tiper)
+    @BindView(R.id.btn_start_tapper)
     Button btnStart;
     @BindView(R.id.btn_left)
     Button btnLeft;
@@ -58,10 +60,10 @@ public class TapperMainActivity extends Activity {
     }
 
 
-    @OnClick({R.id.btn_start_tiper, R.id.btn_left, R.id.btn_right})
+    @OnClick({R.id.btn_start_tapper, R.id.btn_left, R.id.btn_right})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_start_tiper:
+            case R.id.btn_start_tapper:
                 new MyCount(10000, 1000).start();
                 setEnable(false, true);
                 break;
@@ -90,18 +92,19 @@ public class TapperMainActivity extends Activity {
 
         @Override
         public void onTick(long l) {
-            btnStart.setText("测试倒计时:" + (l / 1000));
+            btnStart.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.freebie_2));
+            btnStart.setText(String.format(Locale.CHINA, getString(R.string.tapper_count_down), (l / 1000)));
         }
 
         @Override
         public void onFinish() {
             showDialog();
-            btnStart.setText("开始测试!");
+            btnStart.setText(getString(R.string.btn_begin));
         }
     }
 
     public void showDialog() {
-        new AlertDialog.Builder(this).setCancelable(false).setTitle("结束").setMessage("请确定是否保存?").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(this).setCancelable(false).setTitle(getString(R.string.dialog_title)).setMessage(getString(R.string.dialog_content)).setPositiveButton(getString(R.string.btn_save), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 saveToStorage();
@@ -110,11 +113,12 @@ public class TapperMainActivity extends Activity {
                 initNum();
                 setEnable(true, false);
             }
-        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        }).setNegativeButton(getString(R.string.btn_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 content.clear();
                 initNum();
+                btnStart.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.freebie_4));
                 setEnable(true, false);
             }
         }).show();

@@ -14,6 +14,7 @@ import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -67,21 +68,20 @@ public class GoActivity extends Activity {
         distance = bundle.getInt("distance");
 
         goContent = (TextView) findViewById(R.id.tv_go);
-        goContent.setText("Please be prepared!");
         btnGo = (Button) findViewById(R.id.btn_go);
         btnGo.setOnClickListener(new onBtnClickListener());
-        btnGo.setBackgroundColor(Color.BLUE);
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         mp = MediaPlayer.create(getApplicationContext(), R.raw.countdown);
         mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 flag = true;
-                btnGo.setText("Stop");
-                btnGo.setBackgroundColor(Color.RED);
+                btnGo.setText(getString(R.string.btn_finish));
+                btnGo.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.freebie_2));
+                btnGo.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.freebie_1));
                 btnGo.setVisibility(View.VISIBLE);
                 vibrator.vibrate(pattern, -1);
-                goContent.setText("The Test is on going...");
+                goContent.setText(getString(R.string.stride_testing));
                 start=true;
 
             }
@@ -150,9 +150,9 @@ public class GoActivity extends Activity {
             } else {
                 stop();
                 builder = new AlertDialog.Builder(GoActivity.this);
-                builder.setTitle("Dialog Title");
-                builder.setMessage("Dialog Content");
-                builder.setPositiveButton("Positive Accept", new DialogInterface.OnClickListener() {
+                builder.setTitle(getString(R.string.dialog_title));
+                builder.setMessage(getString(R.string.dialog_content));
+                builder.setPositiveButton(getString(R.string.btn_save), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         accList.add(accFloatVectors);
@@ -169,7 +169,7 @@ public class GoActivity extends Activity {
                         }
                     }
                 });
-                builder.setNegativeButton("Negative Discard", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         prepare(currentTrail);
@@ -186,7 +186,7 @@ public class GoActivity extends Activity {
     private void prepare(int currentTrail) {
 
         mp.start();
-        goContent.setText(String.format(Locale.CHINA, "即将检测: 第 %d 个来回,共 %d 个来回", currentTrail, trailCount));
+        goContent.setText(String.format(Locale.CHINA, getString(R.string.stride_next_turn), currentTrail, trailCount));
         btnGo.setVisibility(View.GONE);
         accFloatVectors = new ArrayList<>();
         gyroFloatVectors = new ArrayList<>();

@@ -63,7 +63,7 @@ public class SoundMainActivity extends FragmentActivity {
     }
 
     public void showDialog(final boolean isFirstPager) {
-        new AlertDialog.Builder(this).setCancelable(false).setTitle("结束").setMessage("请确定是否保存?").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        new AlertDialog.Builder(this).setCancelable(false).setTitle(getString(R.string.dialog_title)).setMessage(R.string.dialog_content).setPositiveButton(getString(R.string.btn_save), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 SaveToStorage();
@@ -74,7 +74,7 @@ public class SoundMainActivity extends FragmentActivity {
                     finish();
                 }
             }
-        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        }).setNegativeButton(getString(R.string.btn_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 File file = new File(path);

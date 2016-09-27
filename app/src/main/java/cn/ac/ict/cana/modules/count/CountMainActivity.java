@@ -25,14 +25,14 @@ public class CountMainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_count_start);
+        setContentView(R.layout.activity_count_main);
 
         init();
     }
 
     public void init(){
 
-        bt_begin = (Button)findViewById(R.id.congnition_begin);
+        bt_begin = (Button)findViewById(R.id.count_begin);
         bt_begin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,7 +46,7 @@ public class CountMainActivity extends Activity {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 vibrator.vibrate(pattern, -1);
-                Intent intent = new Intent(getApplicationContext(), CountingActivity.class);
+                Intent intent = new Intent(getApplicationContext(), CountGameActivity.class);
                 startActivity(intent);
                 finish();
             }

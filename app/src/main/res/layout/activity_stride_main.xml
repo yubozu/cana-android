@@ -1,131 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="cn.ac.ict.cana.modules.stride.StrideMainActivity"
-    android:background="#FFFFFF">
+    android:background="@color/freebie_9"
+    android:paddingStart="@dimen/material_layout_keylines_screen_edge_margin"
+    android:paddingEnd="@dimen/material_layout_keylines_screen_edge_margin"
+    android:paddingTop="@dimen/material_component_cards_primary_title_top_padding">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:text="@string/module_stride"
+        android:textColor="@color/freebie_4"
+        android:textSize="@dimen/material_component_text_title_text_size" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/main"
-        android:layout_margin="10dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
-        <TextView
+        android:orientation="horizontal">
+
+        <com.cengalabs.flatui.views.FlatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp"
-            android:text="Stride Testing"
-            android:textSize="30sp" />
+            android:layout_margin="5dip"
+            android:gravity="center_vertical"
+            android:text="@string/stride_trail_numbers"
+            android:textSize="16sp"
+            flatui:fl_theme="@array/freebie_theme" />
 
-        <LinearLayout
+        <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/labelStyle"
+            android:orientation="horizontal"
+            android:id = "@+id/rg_trail">
+            <RadioButton
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Trails" />
-
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id = "@+id/rg_trail">
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="#000000"
-                    android:layout_height="match_parent"
-                    android:text="1"
-                    android:checked="true"
-                    android:id="@+id/trail_1"/>
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textColor="#000000"
-                    android:text="2"
-                    android:id="@+id/trail_2"/>
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textColor="#000000"
-                    android:text="3"
-                    android:id="@+id/trail_3"/>
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textColor="#000000"
-                    android:text="4"
-                    android:id="@+id/trail_4"/>
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textColor="#000000"
-                    android:text="5"
-                    android:id="@+id/trail_5"/>
-
-            </RadioGroup>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                style="@style/labelStyle"
+                android:layout_weight="1"
+                android:textColor="#000000"
+                android:layout_height="match_parent"
+                android:text="@string/one"
+                android:checked="true"
+                android:id="@+id/trail_1"/>
+            <RadioButton
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Distance" />
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="#000000"
+                android:text="@string/two"
+                android:id="@+id/trail_2"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="#000000"
+                android:text="3"
+                android:id="@+id/trail_3"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="#000000"
+                android:text="4"
+                android:id="@+id/trail_4"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textColor="#000000"
+                android:text="5"
+                android:id="@+id/trail_5"/>
 
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id = "@+id/rg_distance">
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="3"
-                    android:textColor="#000000"
-                    android:checked="true"
-                    android:layout_marginRight="10dp"
-                    android:id="@+id/distance_3"/>
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:text="10"
-                    android:textColor="#000000"
-                    android:id="@+id/distance_10"/>
-            </RadioGroup>
-        </LinearLayout>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id = "@+id/bt_begin"
-            android:layout_margin="20dp"
-            android:background="#5d83d9"
-            android:text="Begin"
-            android:textColor="#FFFFFF"
-            android:textSize="30sp" />
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/iv_info"/>
+        </RadioGroup>
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.cengalabs.flatui.views.FlatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:gravity="center_vertical"
+            android:text="@string/stride_distance"
+            android:textSize="16sp"
+            flatui:fl_theme="@array/freebie_theme" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id = "@+id/rg_distance">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="3"
+                android:textColor="#000000"
+                android:checked="true"
+                android:layout_marginRight="10dp"
+                android:id="@+id/distance_3"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="10"
+                android:textColor="#000000"
+                android:id="@+id/distance_10"/>
+        </RadioGroup>
+    </LinearLayout>
+
+    <ImageView
+        android:contentDescription="@string/stride_image_description"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:src="@drawable/iv_info"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id = "@+id/bt_begin"
+        android:text="@string/btn_begin"
+        style="@style/PrimaryButton"/>
+
+
 </LinearLayout>
+

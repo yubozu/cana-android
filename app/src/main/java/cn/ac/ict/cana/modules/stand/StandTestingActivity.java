@@ -117,20 +117,20 @@ public class StandTestingActivity extends Activity {
     private void showDialog()
     {
         builder = new AlertDialog.Builder(StandTestingActivity.this);
-        builder.setTitle("iTug Stopped");
-        builder.setMessage("Please accept or reject this try");
-        builder.setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+        builder.setTitle(getString(R.string.dialog_title));
+        builder.setMessage(getString(R.string.dialog_content));
+        builder.setPositiveButton(getString(R.string.btn_save), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 saveToStorage();
                 startActivity(new Intent(StandTestingActivity.this, MainActivity_.class));
                 finish();
-                finish();
             }
         });
-        builder.setNegativeButton("Discard", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.btn_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(StandTestingActivity.this, MainActivity_.class));
                 finish();
             }
         });

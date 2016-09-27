@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.activities.MainActivity_;
@@ -34,20 +35,20 @@ import cn.ac.ict.cana.providers.HistoryProvider;
 /**
  * Created by zhongxi on 2016/8/22.
  */
-public class NextActivity extends Activity {
+public class CountConfirmActivity extends Activity {
 
     private String randomStr;
     private EditText nextet;
     private Button nextbtn;
     private Intent intent;
-    private int counttoRight;
+    private int times;
     private boolean isRight;
     private ArrayList<String> result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_count_next);
+        setContentView(R.layout.activity_count_confirm);
         init();
     }
 
@@ -55,7 +56,7 @@ public class NextActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                startActivity(new Intent(NextActivity.this,CountMainActivity.class));
+                startActivity(new Intent(CountConfirmActivity.this,CountMainActivity.class));
                 finish();
                 break;
         }
@@ -66,9 +67,9 @@ public class NextActivity extends Activity {
         intent = this.getIntent();
         randomStr = intent.getStringExtra("data");
         randomStr = randomStr.substring(0,6);
-        nextet = (EditText)findViewById(R.id.nextet);
+        nextet = (EditText)findViewById(R.id.et_answer);
         nextet.setInputType(EditorInfo.TYPE_CLASS_PHONE);
-        nextbtn = (Button) findViewById(R.id.nextbtn);
+        nextbtn = (Button) findViewById(R.id.btn_confirm);
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,9 +77,8 @@ public class NextActivity extends Activity {
                 result.add(str);
                 if(str.equals(randomStr)){
                     isRight = true;
-                    int shuchu = counttoRight+1;
-                    Toast.makeText(NextActivity.this,"Right!\nJust "+shuchu+" times!",Toast.LENGTH_SHORT).show();
-                    String msg = "正确答案是："+randomStr+"\n您的输入为：";
+                    Toast.makeText(CountConfirmActivity.this, String.format(Locale.CHINA, getString(R.string.count_times), times + 1),Toast.LENGTH_SHORT).show();
+                    String msg = String.format(Locale.CHINA, getString(R.string.count_right_answer), randomStr);
                     for (String x:result){
                         msg+="\n"+x;
                     }
@@ -86,16 +86,16 @@ public class NextActivity extends Activity {
 
                 }else{
                     if(!isRight) {
-                        counttoRight++;
-                        if(counttoRight>=5){
-                            String msg = "正确答案是："+randomStr+"\n您的输入为：";
+                        times++;
+                        if(times >=5){
+                            String msg = String.format(Locale.CHINA, getString(R.string.count_right_answer), randomStr);
                             for (String x:result){
                                 msg+="\n"+x;
                             }
                             dialog(msg);
                         }
                     }
-                    Toast.makeText(NextActivity.this,"Wrong!\nTry "+counttoRight+" times!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CountConfirmActivity.this, String.format(Locale.CHINA, getString(R.string.count_wrong_answer), times),Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -104,11 +104,11 @@ public class NextActivity extends Activity {
     }
 
     protected void dialog(String msg) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(NextActivity.this);
-        builder.setMessage(msg+"\n保存此次测试结果吗？");
+        AlertDialog.Builder builder = new AlertDialog.Builder(CountConfirmActivity.this);
+        builder.setMessage(getString(R.string.dialog_content));
 
-        builder.setTitle("测试结果");
-        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+        builder.setTitle(getString(R.string.dialog_title));
+        builder.setPositiveButton(getString(R.string.btn_save), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String content = randomStr;
@@ -122,16 +122,16 @@ public class NextActivity extends Activity {
                 }
 
                 saveToStorage(content);
-                startActivity(new Intent(NextActivity.this, MainActivity_.class));
+                startActivity(new Intent(CountConfirmActivity.this, MainActivity_.class));
                 finish();
                 dialog.dismiss();
             }
         });
 
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.btn_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(NextActivity.this, MainActivity_.class));
+                startActivity(new Intent(CountConfirmActivity.this, MainActivity_.class));
                 finish();
                 dialog.dismiss();
             }

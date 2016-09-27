@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_stand_testing"
     android:layout_width="match_parent"
@@ -27,37 +25,29 @@
         app:tickCircleDuration="total_time"
         android:layout_marginBottom="10dp"/>
 
+    <ImageView
+        android:layout_margin="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:src="@drawable/iv_stand_example"/>
+
     <com.daimajia.numberprogressbar.NumberProgressBar
         android:id="@+id/pb_x"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        custom:progress_text_visibility="invisible"
-        custom:progress_unreached_bar_height="5dp"
-        custom:progress_reached_bar_height="5dp"
-        android:layout_margin="2dp"
+        style="@style/ProgressBar"
         />
     <com.daimajia.numberprogressbar.NumberProgressBar
         android:id="@+id/pb_y"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        custom:progress_text_visibility="invisible"
-        custom:progress_unreached_bar_height="5dp"
-        custom:progress_reached_bar_height="5dp"
-        android:layout_margin="2dp"
+        style="@style/ProgressBar"
         />
     <com.daimajia.numberprogressbar.NumberProgressBar
         android:id="@+id/pb_z"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        custom:progress_text_visibility="invisible"
-        custom:progress_unreached_bar_height="5dp"
-        custom:progress_reached_bar_height="5dp"
-        android:layout_margin="2dp"
+        style="@style/ProgressBar"
         />
-    <ImageView
-        android:layout_margin="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/iv_stand_example"/>
-
 </LinearLayout>

@@ -1,10 +1,26 @@
 <resources>
     <string name="app_name">迦娜</string>
+    <!-- numbers -->
+    <string name="zero">0</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+
     <!-- permission -->
     <string name="permission_tips">请点击下面的按钮并允许权限</string>
     <string name="permission_granted">已经允许的权限有:</string>
     <string name="permission_denied">权限被拒绝</string>
     <string name="permission_remained">还需要允许%1$d项权限</string>
+
+    <!-- dialog -->
+    <string name="dialog_title">测试结果</string>
+    <string name="dialog_content">是否保存此次结果</string>
 
     <!-- button -->
     <string name="btn_add">添加</string>
@@ -13,6 +29,10 @@
     <string name="btn_delete">删除</string>
     <string name="btn_cancel">取消</string>
     <string name="btn_save">保存</string>
+    <string name="btn_confirm">确认</string>
+    <string name="btn_begin">开始测试</string>
+    <string name="btn_start_record">开始录音</string>
+    <string name="btn_finish">完成测试</string>
 
     <!-- page -->
     <string name="page_exam">检测</string>
@@ -47,5 +67,39 @@
     <string name="user_male">男</string>
     <string name="user_female">女</string>
 
+    <!-- Count -->
+    <string name="count_tips">数字记忆，一款记忆能力的儿童类小游戏。想要锻炼好记忆，教你的宝宝从小开始，从数字开始练起，小孩子的记忆能力是最好的，学得快，容易上手，而且还记得牢。今天这款游戏是专门为你的宝宝量身定做的，监督着他，你们一起来玩玩记忆游戏吧！</string>
+    <string name="count_hint">请输入看到的数字</string>
+    <string name="count_times">正确!一共进行了%1$d次尝试。您的输入为:</string>
+    <string name="count_right_answer">正确的答案是%1$s。</string>
+    <string name="count_wrong_answer">输入有误!一共尝试了%1$d次。</string>
+
+    <!-- Face -->
+    <string name="face_tips">请打开手机扬声器，仔细聆听语音提示，并按照提示完成相应动作。</string>
+    <string name="face_task_1">请闭眼</string>
+    <string name="face_task_2">请放松，直视前方</string>
+    <string name="face_task_3">请微笑并露出牙齿</string>
+    <string name="face_finish_error">视频拍摄失败，错误:</string>
+
+    <!-- Sound -->
+    <string name="sound_task_1">请大声清楚的回答我:\n昨天晚上，您在哪吃的晚餐，吃了些什么?</string>
+    <string name="sound_task_2">请大声朗读以下这段话:\n今天我的心情特别好!</string>
+
+    <!-- Stand -->
+    <string name="stand_image_description">示例图</string>
+
+    <!-- Stride -->
+    <string name="stride_image_description">示例图</string>
+    <string name="stride_trail_numbers">测试来回次数</string>
+    <string name="stride_distance">每次测试行走距离</string>
+    <string name="stride_prepare">请做好准备</string>
+    <string name="stride_testing">正在测试</string>
+    <string name="stride_next_turn">"即将检测: 第 %1$d 个来回,共 %2$d 个来回"</string>
+
+    <!-- Tapper -->
+    <string name="tapper_index_finger">食指</string>
+    <string name="tapper_middle_finger">中指</string>
+    <string name="tapper_tips">请用食指和中指以最快的速度点击这两个按钮10秒!</string>
+    <string name="tapper_count_down">测试倒计时: %d</string>
 </resources>
 
