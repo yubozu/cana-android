@@ -3,6 +3,7 @@ package cn.ac.ict.cana.adapters;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.providers.HistoryProvider;
+import cn.ac.ict.cana.providers.UserProvider;
 import cn.ac.ict.cana.widget.BaseTreeViewAdapter;
 import cn.ac.ict.cana.widget.TreeView;
 
@@ -42,12 +44,13 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
     private ArrayList<ArrayList<History>> mChildren;
     private final Set<ContentValues> mCheckedItems = new HashSet<>();
     private Context mContext;
-
+    private UserProvider userProvider;
     public HistoryAdapter(Context context, TreeView treeView, ArrayList<String> mGroups, ArrayList<ArrayList<History>> mChildren) {
         super(treeView);
         this.mGroups = mGroups;
         this.mChildren = mChildren;
         mContext = context;
+        this.userProvider = new UserProvider(DataBaseHelper.getInstance(context));
         EventBus.getDefault().register(this);
     }
 
@@ -92,19 +95,13 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
     }
 
     private class ChildHolder {
-        TextView tvHistoryId;
-        TextView tvHistoryUserId;
-        TextView tvHistoryType;
-        TextView tvHistoryFile;
+        TextView tvHistoryUserName;
         TextView tvHistoryIsUploaded;
         TextView tvHistoryCreatedTime;
         CheckBox cbHistory;
 
         private ChildHolder(View view) {
-            tvHistoryId = (TextView) view. findViewById(R.id.tv_history_id);
-            tvHistoryUserId = (TextView) view.findViewById(R.id.tv_history_user_id);
-            tvHistoryType = (TextView) view. findViewById(R.id.tv_history_type);
-            tvHistoryFile = (TextView) view.findViewById(R.id.tv_history_file);
+            tvHistoryUserName = (TextView) view.findViewById(R.id.tv_history_user_name);
             tvHistoryIsUploaded = (TextView) view. findViewById(R.id.tv_history_is_upload);
             tvHistoryCreatedTime = (TextView) view.findViewById(R.id.tv_history_created_time);
             cbHistory = (CheckBox) view.findViewById(R.id.cb_history);
@@ -125,12 +122,16 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
         final long id = history.id;
         final String uuid = history.uuid;
         final boolean isUploaded = history.isUpload;
-        holder.tvHistoryId.setText(String.valueOf(id));
-        holder.tvHistoryUserId.setText(uuid);
-        holder.tvHistoryType.setText(history.type);
-        holder.tvHistoryFile.setText(history.filePath);
-        holder.tvHistoryIsUploaded.setText(String.valueOf(isUploaded));
-        holder.tvHistoryCreatedTime.setText(history.createdTime);
+        holder.tvHistoryUserName.setText("测试用户: " + userProvider.getUsernameByUuid(uuid));
+
+        if (isUploaded) {
+            holder.tvHistoryIsUploaded.setText("已上传");
+            holder.tvHistoryIsUploaded.setTextColor(ContextCompat.getColor(mContext, R.color.freebie_2));
+        } else {
+            holder.tvHistoryIsUploaded.setText("未上传");
+            holder.tvHistoryIsUploaded.setTextColor(ContextCompat.getColor(mContext, R.color.freebie_4));
+        }
+        holder.tvHistoryCreatedTime.setText("测试时间: " + history.createdTime);
 
         final ContentValues contentValues = new ContentValues();
         contentValues.put("id", id);
@@ -219,11 +220,11 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void update(ResponseEvent event){
-        Log.d("History adapter", String.valueOf(event.id));
+        Log.d("History adapter", String.valueOf(event.id) + "g:" + event.groupPosition + " c:" + event.childPosition);
         History history = (History) getChild(event.groupPosition, event.childPosition);
         history.isUpload |= event.success;
         if (event.success) {
-            final ContentValues contentValues = new ContentValues();
+            ContentValues contentValues = new ContentValues();
             contentValues.put("id", event.id);
             contentValues.put("groupPosition", event.groupPosition);
             contentValues.put("childPosition", event.childPosition);

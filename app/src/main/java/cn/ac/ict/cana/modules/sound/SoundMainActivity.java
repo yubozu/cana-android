@@ -77,9 +77,15 @@ public class SoundMainActivity extends FragmentActivity {
         }).setNegativeButton(getString(R.string.btn_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
                 File file = new File(path);
                 if (file.exists()) {
                     file.delete();
+                }
+
+                if (!isFirstPager) {
+                    startActivity(new Intent(SoundMainActivity.this, MainActivity_.class));
+                    finish();
                 }
             }
         }).show();

@@ -4,10 +4,13 @@ package cn.ac.ict.cana.modules.sound;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,7 +47,7 @@ public class SecondFragment extends Fragment {
     @OnClick(R.id.btn_start_recorder)
     public void click() {
         if (mBtnStartRecorder.isEnabled()) {
-            mActivity.prepareRecorder(fileName + "_", "第二段录音_");
+            mActivity.prepareRecorder(fileName + "_", "second_");
         }
         setEnable(false);
         new MyCount(10000, 1000).start();
@@ -58,7 +61,8 @@ public class SecondFragment extends Fragment {
      * 恢复状态并释放资源
      */
     private void release() {
-        mBtnStartRecorder.setText("开始录音!");
+        mBtnStartRecorder.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.freebie_4));
+        mBtnStartRecorder.setText(getString(R.string.btn_start_record));
         setEnable(true);
         mActivity.releaseRecorder();
     }
@@ -71,13 +75,14 @@ public class SecondFragment extends Fragment {
 
         @Override
         public void onTick(long l) {
-            mBtnStartRecorder.setText("录音倒计时:" + (l / 1000));
+            mBtnStartRecorder.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.freebie_2));
+            mBtnStartRecorder.setText(String.format(Locale.CHINA, getString(R.string.sound_count_down), (l / 1000)));
         }
 
         @Override
         public void onFinish() {
             release();
-            mActivity.showDialog(true);
+            mActivity.showDialog(false);
         }
     }
 }

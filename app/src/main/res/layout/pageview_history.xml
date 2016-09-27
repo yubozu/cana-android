@@ -16,6 +16,8 @@
         android:focusableInTouchMode="true"
         android:groupIndicator="@null"
         android:scrollbars="none"
+        android:childDivider="@color/freebie_9"
+        android:dividerHeight="1dp"
         android:smoothScrollbar="true"
         android:layout_weight="0.1"
         android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"

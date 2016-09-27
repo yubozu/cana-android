@@ -126,7 +126,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
-        android:divider="@color/freebie_1"
+        android:divider="@color/freebie_9"
+        android:dividerHeight="1dp"
         android:scrollbars="none"
         />
 

@@ -39,7 +39,7 @@ public class UserAdapter extends BaseAdapter {
     private List<User> users;
 
     // temporary solution.
-    private int[] textViews = {R.id.tv_user_name, R.id.tv_user_id, R.id.tv_user_age, R.id.tv_user_gender};
+    private int[] textViews = {R.id.tv_user_name, R.id.tv_user_age, R.id.tv_user_gender};
 
     public UserAdapter(Context context) {
         mContext = context;

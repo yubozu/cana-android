@@ -84,6 +84,7 @@
     <!-- Sound -->
     <string name="sound_task_1">请大声清楚的回答我:\n昨天晚上，您在哪吃的晚餐，吃了些什么?</string>
     <string name="sound_task_2">请大声朗读以下这段话:\n今天我的心情特别好!</string>
+    <string name="sound_count_down">录音倒计时: %1$d秒</string>
 
     <!-- Stand -->
     <string name="stand_image_description">示例图</string>

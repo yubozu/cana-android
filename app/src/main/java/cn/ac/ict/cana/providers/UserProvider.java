@@ -72,4 +72,15 @@ public class UserProvider {
         return loadUsersFromCursor(cursor);
     }
 
+    public String getUsernameByUuid(String uuid){
+        String username = "";
+        String QueryString = String.format("SELECT " + DataBaseHelper.USER_NAME + " FROM " + DataBaseHelper.USER_TABLE_NAME + " WHERE " +DataBaseHelper.USER_UUID + " = '%s'", uuid);
+        Cursor cursor = mDatabase.rawQuery(QueryString, null);
+        if (cursor.moveToNext()) {
+            username = cursor.getString(cursor.getColumnIndex(DataBaseHelper.USER_NAME));
+        }
+        cursor.close();
+        return username;
+    }
+
 }

@@ -19,7 +19,6 @@ import cn.ac.ict.cana.models.User;
 @EViewGroup(R.layout.adapter_user)
 public class UserView extends LinearLayout {
 
-    @ViewById(R.id.tv_user_id) public TextView tvUserId;
     @ViewById(R.id.tv_user_name) public TextView tvUserName;
     @ViewById(R.id.tv_user_age) public TextView tvUserAge;
     @ViewById(R.id.tv_user_gender) public TextView tvUserGender;
@@ -32,10 +31,13 @@ public class UserView extends LinearLayout {
 
     public void bind(User user) {
         Log.d("UserView", String.valueOf(tvUserName));
-        tvUserId.setText(String.valueOf(user.id));
-        tvUserName.setText(user.name);
-        tvUserAge.setText(String.valueOf(user.age));
-        tvUserGender.setText(String.valueOf(user.gender));
+        tvUserName.setText("姓名: " + user.name);
+        tvUserAge.setText("年龄: " + String.valueOf(user.age));
+        if (user.gender) {
+            tvUserGender.setText("性别: 女");
+        } else {
+            tvUserGender.setText("性别: 男");
+        }
     }
 }
 
