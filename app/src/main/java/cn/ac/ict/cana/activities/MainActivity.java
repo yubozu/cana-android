@@ -51,28 +51,28 @@ public class MainActivity extends Activity {
                 new NavigationTabBar.Model.Builder(
                         ContextCompat.getDrawable(this, R.drawable.ic_test),
                        color
-                ).title("Exam")
+                ).title(getResources().getString(R.string.page_exam))
                         .build()
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
                         ContextCompat.getDrawable(this, R.drawable.ic_user),
                         color
-                ).title("User")
+                ).title(getResources().getString(R.string.page_user))
                         .build()
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
                         ContextCompat.getDrawable(this, R.drawable.ic_history),
                         color
-                ).title("History")
+                ).title(getResources().getString(R.string.page_history))
                         .build()
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
                         ContextCompat.getDrawable(this, R.drawable.ic_settings),
                         color
-                ).title("Setting")
+                ).title(getResources().getString(R.string.page_setting))
                         .build()
         );
         navigationTabBar.setModels(models);
@@ -90,7 +90,11 @@ public class MainActivity extends Activity {
         }
         if (success + failed >= event.total) {
             showProgressBar(false, "");
-            toastManager.show(String.format(Locale.CHINA, "Success: %d, Failed %d.", success, failed));
+            if (failed > 0) {
+                toastManager.show(String.format(Locale.CHINA, getResources().getString(R.string.upload_failed), success, failed));
+            } else {
+                toastManager.show(getResources().getString(R.string.upload_success));
+            }
             success = 0;
             failed = 0;
         }

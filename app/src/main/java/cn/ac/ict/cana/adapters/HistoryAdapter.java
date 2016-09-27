@@ -38,10 +38,8 @@ import cn.ac.ict.cana.widget.TreeView;
  */
 
 public class HistoryAdapter extends BaseTreeViewAdapter {
-    private LayoutInflater mInflater;
-    ArrayList<String> mGroups;
-    ArrayList<ArrayList<History>> mChildren;
-//    private final Set<Long> mCheckedItems = new HashSet<>();
+    private  ArrayList<String> mGroups;
+    private ArrayList<ArrayList<History>> mChildren;
     private final Set<ContentValues> mCheckedItems = new HashSet<>();
     private Context mContext;
 
@@ -50,7 +48,6 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
         this.mGroups = mGroups;
         this.mChildren = mChildren;
         mContext = context;
-        mInflater = LayoutInflater.from(context);
         EventBus.getDefault().register(this);
     }
 
@@ -103,7 +100,7 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
         TextView tvHistoryCreatedTime;
         CheckBox cbHistory;
 
-        public ChildHolder(View view) {
+        private ChildHolder(View view) {
             tvHistoryId = (TextView) view. findViewById(R.id.tv_history_id);
             tvHistoryUserId = (TextView) view.findViewById(R.id.tv_history_user_id);
             tvHistoryType = (TextView) view. findViewById(R.id.tv_history_type);
@@ -175,7 +172,7 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
         ImageView indicator;
         TextView onlineNum;
 
-        public GroupHolder(View view) {
+        private GroupHolder(View view) {
             name = (TextView) view.findViewById(R.id.group_name);
             indicator = (ImageView) view.findViewById(R.id.group_indicator);
             onlineNum = (TextView) view.findViewById(R.id.online_count);
@@ -191,7 +188,7 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
 
         GroupHolder holder = getGroupHolder(convertView);
 
-        holder.name.setText(mGroups.get(groupPosition));
+        holder.name.setText(ModuleHelper.getName(mContext, mGroups.get(groupPosition)));
         holder.onlineNum.setText(String.format(Locale.CHINA, "%s", getChildrenCount(groupPosition) + "/" + getChildrenCount(groupPosition)));
         if (isExpanded) {
             holder.indicator.setImageResource(R.drawable.ic_expanded);
@@ -237,7 +234,7 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void insert(NewHistoryFile event){
-        Log.d("HistroyAdapter", event.toString());
+        Log.d("HistoryAdapter", event.toString());
         SharedPreferences sharedPreferences = mContext.getSharedPreferences("Cana", Context.MODE_PRIVATE);
         long historyId = sharedPreferences.getLong("HistoryId", 0);
 

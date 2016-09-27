@@ -26,7 +26,6 @@ public class ExamAdapter extends BaseAdapter {
     public ExamAdapter(Context context){
         mContext = context;
     }
-    static ArrayList<String> mGroup = ModuleHelper.ModuleList;
     private List<Exam> exams;
 
     @Override
@@ -53,8 +52,8 @@ public class ExamAdapter extends BaseAdapter {
         return examView;
     }
 
-    public void setList(ArrayList<Exam> examlist) {
-        exams = examlist;
+    public void setList(ArrayList<Exam> examList) {
+        exams = examList;
     }
 
     @Override

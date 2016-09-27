@@ -8,6 +8,7 @@ import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
 import cn.ac.ict.cana.R;
+import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.Exam;
 
 /**
@@ -30,6 +31,6 @@ public class ExamView extends LinearLayout {
     }
 
     public void bind(Exam exam) {
-        btAddHistory.setText(exam.name.toUpperCase());
+        btAddHistory.setText(ModuleHelper.getName(mContext, exam.name));
     }
 }

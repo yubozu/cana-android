@@ -72,6 +72,9 @@ public class UserActivity extends Activity {
         final UserAdapter userAdapter = new UserAdapter(this);
 
         userAdapter.setList(userList);
+        if (userList.size() > 0) {
+            userAdapter.selectedUser = userList.get(0);
+        }
         lvUser.setAdapter(userAdapter);
 
 
@@ -86,7 +89,7 @@ public class UserActivity extends Activity {
         btSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (etUsername.getText() != "" && etAge.getText() != "") {
+                if (!etUsername.getText().toString().equals("") && !etAge.getText().toString().equals("")) {
                     String username = etUsername.getText().toString();
                     int age = Integer.parseInt(etAge.getText().toString());
 
@@ -94,7 +97,7 @@ public class UserActivity extends Activity {
                     User user = new User(username, age, tgGender.isChecked());
                     Log.d("UserActivity", "Add new user uuid:" + user.uuid);
                     user.id = userProvider.InsertUser(user);
-//                    userAdapter.addItem(user);
+                    userAdapter.selectedUser = user;
                     EventBus.getDefault().post(new NewUser(user));
 
                     resetForm();
@@ -116,7 +119,7 @@ public class UserActivity extends Activity {
                     SharedPreferences.Editor editor = settings.edit();
                     editor.putString("selectedUser", userAdapter.selectedUser.uuid);
                     editor.apply();
-                    StartModuleActivity();
+                    startModuleActivity();
                     finish();
                 }
             }
@@ -124,10 +127,9 @@ public class UserActivity extends Activity {
 
     }
 
-    private void StartModuleActivity() {
+    private void startModuleActivity() {
         Intent intent = new Intent();
 
-        Class module;
         settings = getSharedPreferences("Cana", Context.MODE_PRIVATE);
         String ModuleName = settings.getString("ModuleName", "None");
 

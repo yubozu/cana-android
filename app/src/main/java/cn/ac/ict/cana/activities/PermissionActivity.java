@@ -3,6 +3,8 @@ package cn.ac.ict.cana.activities;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -60,6 +62,11 @@ public class PermissionActivity extends Activity {
     protected void init(){
         InitialPermissionCheckList();
         PermissionCheckStatus();
+        //如果程序开始运行时,所有的权限都已经开通了的话,直接跳过这个界面;
+        if  (mPermissionAdapter.getCount() == 0) {
+            Log.d("Permission", "Skip permission");
+            startOurApp();
+        }
     }
 
     @AfterInject
@@ -89,9 +96,9 @@ public class PermissionActivity extends Activity {
     }
 
     @Click(R.id.bt_permission_pass)
-    public void StartOurApp(){
-
-        toastManager.show("Start main activity.");
+    public void startOurApp(){
+        Log.d("PermissionActivity", "Start Main activity");
+//        toastManager.show("Start main activity.");
         MainActivity_.intent(PermissionActivity.this).start();
         PermissionActivity.this.finish();
     }
@@ -106,7 +113,7 @@ public class PermissionActivity extends Activity {
             mPermissionGrantedAdapter.addItem(permission);
 
         } else {
-            toastManager.show("Permission Denied");
+            toastManager.show(getResources().getString(R.string.permission_denied));
         }
         mPermissionAdapter.notifyDataSetChanged();
         mPermissionGrantedAdapter.notifyDataSetChanged();
@@ -120,10 +127,10 @@ public class PermissionActivity extends Activity {
 //            tvPermissionInfo.setVisibility(View.GONE);
 //            lvPermission.setVisibility(View.GONE);
             lyPermission.setVisibility(View.GONE);
-            button.setText(R.string.permission_pass);
-            button.setBackgroundColor(getResources().getColor(R.color.freebie_4));
+            button.setText(R.string.btn_continue);
+            button.setBackgroundColor(ContextCompat.getColor(this, R.color.freebie_4));
         } else {
-            button.setText(String.format(Locale.CHINA, "%d permission remained", mPermissionAdapter.getCount()));
+            button.setText(String.format(Locale.CHINA, getResources().getString(R.string.permission_remained), mPermissionAdapter.getCount()));
         }
         button.setEnabled(is_passed);
     }
