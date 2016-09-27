@@ -61,7 +61,6 @@ public class HistoryPage{
             public void onClick(View v) {
                 ArrayList<ContentValues> Ids  = new ArrayList<>(historyAdapter.getCheckedIds());
                 historyProvider.deleteHistories(Ids);
-
                 historyAdapter.removeItems(Ids);
             }
         });

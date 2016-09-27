@@ -224,7 +224,14 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
     public void update(ResponseEvent event){
         Log.d("History adapter", String.valueOf(event.id));
         History history = (History) getChild(event.groupPosition, event.childPosition);
-        history.isUpload = event.success;
+        history.isUpload |= event.success;
+        if (event.success) {
+            final ContentValues contentValues = new ContentValues();
+            contentValues.put("id", event.id);
+            contentValues.put("groupPosition", event.groupPosition);
+            contentValues.put("childPosition", event.childPosition);
+            mCheckedItems.remove(contentValues);
+        }
         notifyDataSetChanged();
     }
 
@@ -257,10 +264,11 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
             int groupPosition = (int) item.get("groupPosition");
             int childPosition = (int) item.get("childPosition");
             Log.d("HistoryAdapter", String.format("groupPosition: %d, childPosition: %d", groupPosition, childPosition));
-            mCheckedItems.clear();
-            EventBus.getDefault().post(new CheckedItemChangedEvent(mCheckedItems.size()));
             pending.get(groupPosition).add(mChildren.get(groupPosition).get(childPosition));
         }
+
+        mCheckedItems.clear();
+        EventBus.getDefault().post(new CheckedItemChangedEvent(mCheckedItems.size()));
 
         for (int i=0; i<ModuleHelper.ModuleList.size(); i++) {
             for (History history: pending.get(i)) {

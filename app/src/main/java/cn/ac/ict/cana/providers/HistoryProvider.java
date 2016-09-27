@@ -36,15 +36,16 @@ public class HistoryProvider {
     private SQLiteDatabase mDatabase;
     private OkHttpClient client;
     private UserProvider userProvider;
-
+    private String baseUrl = "b4cce327.ngrok.io";
     private String[] mHistoryColumns = {DataBaseHelper.HISTORY_ID, DataBaseHelper.HISTORY_USER_UUID, DataBaseHelper.HISTORY_TYPE, DataBaseHelper.HISTORY_FILE,
             DataBaseHelper.HISTORY_IS_UPLOADED, "datetime(history_create_time, 'localtime') as history_create_time"};
+    private int total;
 
     public HistoryProvider(DataBaseHelper dataBaseHelper) {
         userProvider = new UserProvider(dataBaseHelper);
         mDatabase = dataBaseHelper.getWritableDatabase();
         client = new OkHttpClient.Builder()
-                .connectTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(10, TimeUnit.SECONDS)
                 .writeTimeout(60, TimeUnit.SECONDS)
                 .readTimeout(60, TimeUnit.SECONDS)
                 .build();
@@ -99,22 +100,37 @@ public class HistoryProvider {
         return loadHistoryFromCursor(cursor).get(0);
     }
 
+    private User getUser(ArrayList<User> users, History history) {
+        for (int j = 0; j < users.size(); j++) {
+            if (history.uuid.equals(users.get(j).uuid)) {
+                return users.get(j);
+            }
+        }
+        return null;
+    }
+
     public void uploadHistories(ArrayList<ContentValues> items) {
         ArrayList<Long> ids = getIds(items);
         ArrayList<History> histories = getHistoriesByIds(ids);
         ArrayList<String> uuids = getUuids(histories);
-
         ArrayList<User> users = userProvider.getUsersByUuids(uuids);
 
-        final int total = ids.size();
+        total = items.size();
         for (int i = 0; i < items.size(); i++) {
+            Log.d("uploadHistories", "Uploading #" + String.valueOf(i));
             final History history = histories.get(i);
-            final User user = users.get(i);
+            final User user = getUser(users, history);
+
             ContentValues item = items.get(i);
+
             final int groupPosition = (int) item.get("groupPosition");
             final int childPosition = (int) item.get("childPosition");
+            if (user == null) {
+                EventBus.getDefault().post(new ResponseEvent(false, history.id, total, groupPosition, childPosition));
+                continue;
+            }
             Log.d("GetUploadRequest", "Filepath: " + history.filePath + "; User name: " + user.name + ";");
-            String url = "http://web.ngrok.cc/cana-api/upload";
+            String url = "http://" + baseUrl + "/cana-api/upload";
             File file = new File(history.filePath);
             RequestBody formBody = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
