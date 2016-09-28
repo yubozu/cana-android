@@ -1,9 +1,11 @@
 package cn.ac.ict.cana.activities;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.widget.Button;
 
 import com.gigamole.navigationtabbar.ntb.NavigationTabBar;
@@ -21,11 +23,11 @@ import java.util.Locale;
 
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.adapters.MainAdapter;
-import cn.ac.ict.cana.events.CancelUploadEvent;
 import cn.ac.ict.cana.events.CheckedItemChangedEvent;
 import cn.ac.ict.cana.events.ResponseEvent;
 import cn.ac.ict.cana.helpers.ToastManager;
 import dmax.dialog.SpotsDialog;
+import okhttp3.Call;
 
 /**
  * Author: saukymo
@@ -39,6 +41,7 @@ public class MainActivity extends Activity {
     @Bean MainAdapter mMainAdapter;
     @Bean ToastManager toastManager;
 
+    public ArrayList<Call> callArrayList;
     private SpotsDialog mProgressDialog;
     private int success, failed;
 
@@ -95,6 +98,9 @@ public class MainActivity extends Activity {
     }
 
     private void finishUpload(){
+        if (failed + success == 0){
+            return;
+        }
         showProgressBar(false, "");
         if (failed > 0) {
             toastManager.show(String.format(Locale.CHINA, getResources().getString(R.string.upload_failed), success, failed));
@@ -115,10 +121,24 @@ public class MainActivity extends Activity {
         }
     }
 
+    public void cancelUpload(){
+        Log.d("cancelUpload", "Number of upload call: " + callArrayList.size());
+        for (Call call: callArrayList){
+            call.cancel();
+        }
+    }
+
     //ProgressBar
     private void initProgressBar() {
         if (mProgressDialog == null) {
             mProgressDialog = new SpotsDialog(this, R.style.Custom);
+//            mProgressDialog.setCancelable(false);
+            mProgressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    onBackPressed();
+                }
+            });
         }
     }
 
@@ -146,7 +166,8 @@ public class MainActivity extends Activity {
 
     @Override
     public void onBackPressed(){
-        EventBus.getDefault().post(new CancelUploadEvent());
-        finishUpload();
+        Log.d("onBackPressed", "Function entered");
+        cancelUpload();
     }
+
 }
