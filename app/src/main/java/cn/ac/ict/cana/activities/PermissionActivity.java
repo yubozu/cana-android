@@ -2,6 +2,7 @@ package cn.ac.ict.cana.activities;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -99,7 +100,8 @@ public class PermissionActivity extends Activity {
     public void startOurApp(){
         Log.d("PermissionActivity", "Start Main activity");
 //        toastManager.show("Start main activity.");
-        MainActivity_.intent(PermissionActivity.this).start();
+        Intent intent = new Intent(PermissionActivity.this,WelcomeActivity.class);
+        startActivity(intent);
         PermissionActivity.this.finish();
     }
 
