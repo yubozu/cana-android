@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -245,5 +246,7 @@ public class GoActivity extends Activity {
 
         Log.d("CountSaveToStorage", String.valueOf(history.id));
         EventBus.getDefault().post(new NewHistoryEvent());
+
+        Toast.makeText(getApplicationContext(), StrideEvaluation.evaluation(history),Toast.LENGTH_SHORT).show();
     }
 }
