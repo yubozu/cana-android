@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -57,15 +56,12 @@ public class GoActivity extends Activity {
     AlertDialog.Builder builder;
     int currentTrail = 1;
     int trailCount;
-    int distance;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stride_go);
         Bundle bundle = getIntent().getExtras();
         trailCount = bundle.getInt("trail");
-        distance = bundle.getInt("distance");
 
         goContent = (TextView) findViewById(R.id.tv_go);
         btnGo = (Button) findViewById(R.id.btn_go);
@@ -76,7 +72,7 @@ public class GoActivity extends Activity {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 flag = true;
-                btnGo.setText(getString(R.string.btn_finish));
+                btnGo.setText(String.format(getString(R.string.stride_btn_text),currentTrail,trailCount));
                 btnGo.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.freebie_2));
                 btnGo.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.freebie_1));
                 btnGo.setVisibility(View.VISIBLE);
@@ -91,7 +87,7 @@ public class GoActivity extends Activity {
         accEventListener = new AccEventListener();
         gyroEventListener = new GyroEventListener();
         flag = false;
-
+        prepare(currentTrail);
     }
 
     private void register() {
@@ -145,7 +141,11 @@ public class GoActivity extends Activity {
 
         @Override
         public void onClick(View v) {
-            if (!flag) {
+            if (currentTrail<trailCount) {
+                stop();
+                accList.add(accFloatVectors);
+                gyroList.add(gyroFloatVectors);
+                currentTrail++;
                 prepare(currentTrail);
             } else {
                 stop();
@@ -157,28 +157,21 @@ public class GoActivity extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
                         accList.add(accFloatVectors);
                         gyroList.add(gyroFloatVectors);
-
-                        currentTrail++;
-                        if (currentTrail > trailCount) {
-                            saveToStorage();
-                            Intent intent = new Intent(GoActivity.this, MainActivity_.class);
-                            startActivity(intent);
-                            finish();
-                        } else {
-                            prepare(currentTrail);
-                        }
+                        saveToStorage();
+                        Intent intent = new Intent(GoActivity.this, MainActivity_.class);
+                        startActivity(intent);
+                        finish();
                     }
                 });
                 builder.setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        prepare(currentTrail);
+                        MainActivity_.intent(GoActivity.this).start();
+                        finish();
                     }
                 });
                 builder.show();
-                flag = false;
             }
-
 
         }
     }
@@ -187,7 +180,9 @@ public class GoActivity extends Activity {
 
         mp.start();
         goContent.setText(String.format(Locale.CHINA, getString(R.string.stride_next_turn), currentTrail, trailCount));
+
         btnGo.setVisibility(View.GONE);
+
         accFloatVectors = new ArrayList<>();
         gyroFloatVectors = new ArrayList<>();
         register();
@@ -217,7 +212,7 @@ public class GoActivity extends Activity {
         try {
             FileWriter fileWrite = new FileWriter(file, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWrite);
-
+            bufferedWriter.write(trailCount+"\n");
             for (ArrayList<FloatVector> trail: accList){
                 bufferedWriter.write("ACC " + (accList.indexOf(trail) + 1) + "\n");
                 for (FloatVector acc: trail) {

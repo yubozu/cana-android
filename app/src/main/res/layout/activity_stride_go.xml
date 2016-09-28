@@ -8,7 +8,6 @@
     android:paddingStart="@dimen/material_layout_keylines_screen_edge_margin"
     android:paddingEnd="@dimen/material_layout_keylines_screen_edge_margin"
     android:paddingTop="@dimen/material_component_cards_primary_title_top_padding">
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
