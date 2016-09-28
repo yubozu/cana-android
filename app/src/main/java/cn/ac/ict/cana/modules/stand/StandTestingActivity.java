@@ -10,6 +10,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -43,6 +44,7 @@ public class StandTestingActivity extends Activity {
     private TickTockView ttv;
     AlertDialog.Builder builder;
     Vibrator vibrator;
+    MediaPlayer mp;
     long[] pattern = {100, 400};
     SensorManager sm;
     AccEventListener accEventListener;
@@ -50,19 +52,30 @@ public class StandTestingActivity extends Activity {
     ArrayList<FloatVector> accVectors;
     ArrayList<FloatVector> gyroVectors;
     boolean start = true;
+    boolean isRight = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stand_testing);
+        isRight = getIntent().getBooleanExtra("isRight",true);
 
     }
     private void init(){
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         accVectors = new ArrayList<>();
         gyroVectors = new ArrayList<>();
-        initSensors();
-        initProgressBars();
-        initTickTockView();
+        mp = MediaPlayer.create(getApplicationContext(), R.raw.countdown);
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                vibrator.vibrate(pattern, -1);
+                initSensors();
+                initProgressBars();
+                initTickTockView();
+            }
+        });
+        mp.start();
+
     }
     private void initTickTockView()
     {
@@ -195,7 +208,7 @@ public class StandTestingActivity extends Activity {
         try {
             FileWriter fileWrite = new FileWriter(file, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWrite);
-
+            bufferedWriter.write(isRight+"\n");
             for (FloatVector acc: accVectors) {
                 bufferedWriter.write(acc.timeStamp + ", " + acc.x + ", " + acc.y + ", " + acc.z + "\n");
                 Log.d("GoActivity", String.valueOf(acc.timeStamp));

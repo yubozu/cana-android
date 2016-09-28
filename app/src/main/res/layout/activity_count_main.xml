@@ -17,7 +17,6 @@
         android:text="@string/module_count"
         android:textColor="@color/freebie_4"
         android:textSize="@dimen/material_component_text_title_text_size" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="0dp"

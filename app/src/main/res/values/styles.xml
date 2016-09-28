@@ -1,5 +1,4 @@
-<resources
-    xmlns:custom="http://schemas.android.com/apk/res-auto">
+<resources>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -39,6 +38,13 @@
         <item name="progress_unreached_bar_height">5dp</item>
         <item name="progress_reached_bar_height">5dp</item>
         <item name="android:layout_margin">2dp</item>
+    </style>
+    <style name = "module_tips">
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name = "android:layout_margin">10dp</item>
+        <item name="android:lineSpacingMultiplier">1.3</item>
+        <item name="android:textColor">@color/freebie_6</item>
+        <item name="android:textSize">@dimen/material_component_lists_single_line_text_size</item>
     </style>
 
 

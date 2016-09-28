@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -17,6 +18,65 @@
         android:text="@string/module_stand"
         android:textColor="@color/freebie_4"
         android:textSize="@dimen/material_component_text_title_text_size" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.cengalabs.flatui.views.FlatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:gravity="center_vertical"
+            android:text="@string/stand_chooseFoot"
+            android:textSize="16sp"
+            flatui:fl_theme="@array/freebie_theme" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dip"
+            android:orientation="horizontal">
+
+            <com.cengalabs.flatui.views.FlatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:gravity="center_vertical"
+                android:text="@string/stand_left"
+                android:textSize="16sp"
+                flatui:fl_theme="@array/freebie_theme" />
+
+            <com.cengalabs.flatui.views.FlatToggleButton
+                android:id="@+id/toggle_foot"
+                android:layout_width="72dp"
+                android:layout_height="36dp"
+                android:text=""
+                android:textOn=""
+                android:textOff=""
+                android:checked="true"
+                flatui:fl_space="14dp"
+                flatui:fl_cornerRadius="18dp"
+                flatui:fl_theme="@array/freebie_toggle"
+                />
+
+            <com.cengalabs.flatui.views.FlatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:gravity="center_vertical"
+                android:text="@string/stand_right"
+                android:textSize="16sp"
+                flatui:fl_theme="@array/freebie_theme" />
+
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@string/stand_tips"
+        style="@style/module_tips"
+        android:layout_weight="0.1"
+      />
 
     <ImageView
         android:contentDescription="@string/stand_image_description"

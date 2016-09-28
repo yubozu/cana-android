@@ -88,6 +88,10 @@
 
     <!-- Stand -->
     <string name="stand_image_description">示例图</string>
+    <string name="stand_tips">请点击开始后,手持设备,双手交叉并单腿站立10秒钟</string>
+    <string name="stand_left">左脚</string>
+    <string name="stand_right">右脚</string>
+    <string name="stand_chooseFoot">请选择抬起脚:</string>
 
     <!-- Stride -->
     <string name="stride_image_description">示例图</string>
