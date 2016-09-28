@@ -7,6 +7,8 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,6 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import cn.ac.ict.cana.events.CancelUploadEvent;
 import cn.ac.ict.cana.events.ResponseEvent;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.models.History;
@@ -40,6 +43,7 @@ public class HistoryProvider {
     private String[] mHistoryColumns = {DataBaseHelper.HISTORY_ID, DataBaseHelper.HISTORY_USER_UUID, DataBaseHelper.HISTORY_TYPE, DataBaseHelper.HISTORY_FILE,
             DataBaseHelper.HISTORY_IS_UPLOADED, "datetime(history_create_time, 'localtime') as history_create_time"};
     private int total;
+    private ArrayList<Call> uploadCall;
 
     public HistoryProvider(DataBaseHelper dataBaseHelper) {
         userProvider = new UserProvider(dataBaseHelper);
@@ -114,7 +118,7 @@ public class HistoryProvider {
         ArrayList<History> histories = getHistoriesByIds(ids);
         ArrayList<String> uuids = getUuids(histories);
         ArrayList<User> users = userProvider.getUsersByUuids(uuids);
-
+        uploadCall = new ArrayList<>();
         total = items.size();
         for (int i = 0; i < items.size(); i++) {
             Log.d("uploadHistories", "Uploading #" + String.valueOf(i));
@@ -144,15 +148,18 @@ public class HistoryProvider {
                     // TODO: fill in all information. Check with content write in file.
                     .build();
             Request request = new Request.Builder().url(url).post(formBody).build();
-            client.newCall(request).enqueue(new Callback() {
+            Call call = client.newCall(request);
+            call.enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
+                    uploadCall.remove(call);
                     Log.e("Upload Failed", e.toString());
                     EventBus.getDefault().post(new ResponseEvent(false, history.id, total, groupPosition, childPosition));
                 }
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
+                    uploadCall.remove(call);
                     boolean result = false;
                     String jsonData = response.body().string();
                     try {
@@ -167,6 +174,7 @@ public class HistoryProvider {
                     EventBus.getDefault().post(new ResponseEvent(result, history.id, total, groupPosition, childPosition));
                 }
             });
+            uploadCall.add(call);
         }
     }
 
@@ -200,5 +208,12 @@ public class HistoryProvider {
             uuids.add(history.uuid);
         }
         return uuids;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void cancelUpload(CancelUploadEvent event){
+        for (Call call: uploadCall){
+            call.cancel();
+        }
     }
 }

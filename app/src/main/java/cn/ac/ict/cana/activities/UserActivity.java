@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.adapters.UserAdapter;
-import cn.ac.ict.cana.events.NewUser;
+import cn.ac.ict.cana.events.NewUserEvent;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.User;
@@ -98,7 +98,7 @@ public class UserActivity extends Activity {
                     Log.d("UserActivity", "Add new user uuid:" + user.uuid);
                     user.id = userProvider.InsertUser(user);
                     userAdapter.selectedUser = user;
-                    EventBus.getDefault().post(new NewUser(user));
+                    EventBus.getDefault().post(new NewUserEvent(user));
 
                     resetForm();
                 }

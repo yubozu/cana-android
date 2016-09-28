@@ -21,6 +21,7 @@ import java.util.Locale;
 
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.adapters.MainAdapter;
+import cn.ac.ict.cana.events.CancelUploadEvent;
 import cn.ac.ict.cana.events.CheckedItemChangedEvent;
 import cn.ac.ict.cana.events.ResponseEvent;
 import cn.ac.ict.cana.helpers.ToastManager;
@@ -89,15 +90,19 @@ public class MainActivity extends Activity {
           failed += 1;
         }
         if (success + failed >= event.total) {
-            showProgressBar(false, "");
-            if (failed > 0) {
-                toastManager.show(String.format(Locale.CHINA, getResources().getString(R.string.upload_failed), success, failed));
-            } else {
-                toastManager.show(getResources().getString(R.string.upload_success));
-            }
-            success = 0;
-            failed = 0;
+            finishUpload();
         }
+    }
+
+    private void finishUpload(){
+        showProgressBar(false, "");
+        if (failed > 0) {
+            toastManager.show(String.format(Locale.CHINA, getResources().getString(R.string.upload_failed), success, failed));
+        } else {
+            toastManager.show(getResources().getString(R.string.upload_success));
+        }
+        success = 0;
+        failed = 0;
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -137,5 +142,11 @@ public class MainActivity extends Activity {
     public void onStop() {
         EventBus.getDefault().unregister(this);
         super.onStop();
+    }
+
+    @Override
+    public void onBackPressed(){
+        EventBus.getDefault().post(new CancelUploadEvent());
+        finishUpload();
     }
 }

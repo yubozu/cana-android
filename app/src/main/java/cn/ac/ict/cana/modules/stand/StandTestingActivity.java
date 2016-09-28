@@ -28,7 +28,7 @@ import java.util.Calendar;
 
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.activities.MainActivity_;
-import cn.ac.ict.cana.events.NewHistoryFile;
+import cn.ac.ict.cana.events.NewHistoryEvent;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.History;
@@ -222,6 +222,6 @@ public class StandTestingActivity extends Activity {
         editor.apply();
 
         Log.d("CountSaveToStorage", String.valueOf(history.id));
-        EventBus.getDefault().post(new NewHistoryFile());
+        EventBus.getDefault().post(new NewHistoryEvent());
     }
 }
