@@ -45,11 +45,10 @@ public class HistoryPage{
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                ArrayList<ContentValues> Ids  = new ArrayList<>(historyAdapter.getCheckedIds());
-                historyProvider.uploadHistories(Ids);
-
                 MainActivity activity = (MainActivity) context;
+                ArrayList<ContentValues> Ids  = new ArrayList<>(historyAdapter.getCheckedIds());
+
+                activity.callArrayList = historyProvider.uploadHistories(Ids);
                 activity.showProgressBar(true, "Start Uploading..");
             }
         });

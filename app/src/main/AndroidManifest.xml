@@ -21,42 +21,55 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.MainActivity_"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity android:name=".activities.UserActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
 
         <!-- Module: Count-->
         <activity android:name=".modules.count.CountMainActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity android:name=".modules.count.CountGameActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity android:name=".modules.count.CountConfirmActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
 
         <!-- Module: Stride-->
         <activity android:name=".modules.stride.GoActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity android:name=".modules.stride.StrideMainActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
 
         <!-- Module: Stand-->
         <activity android:name=".modules.stand.StandMainActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity android:name=".modules.stand.StandTestingActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
 
         <!-- Module: Face-->
         <activity android:name=".modules.face.FaceMainActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity android:name=".modules.face.VideoCaptureActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
 
         <!-- Module: Tapper-->
         <activity android:name=".modules.tapper.TapperMainActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
 
         <!-- Module: Sound-->
         <activity android:name=".modules.sound.SoundMainActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
 
     </application>

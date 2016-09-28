@@ -1,7 +1,6 @@
 package cn.ac.ict.cana.adapters;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.androidannotations.annotations.AfterExtras;
-import org.androidannotations.annotations.AfterInject;
-import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EBean;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -21,10 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.ac.ict.cana.R;
-import cn.ac.ict.cana.events.NewUser;
-import cn.ac.ict.cana.helpers.DataBaseHelper;
+import cn.ac.ict.cana.events.NewUserEvent;
 import cn.ac.ict.cana.models.User;
-import cn.ac.ict.cana.providers.UserProvider;
 
 /**
  * Author: saukymo
@@ -47,7 +41,7 @@ public class UserAdapter extends BaseAdapter {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void insert(NewUser event){
+    public void insert(NewUserEvent event){
         Log.d("HistroyAdapter", event.toString());
         User user = event.user;
 //        UserProvider userProvider = new UserProvider(DataBaseHelper.getInstance(mContext));

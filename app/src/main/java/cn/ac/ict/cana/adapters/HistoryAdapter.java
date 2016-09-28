@@ -24,7 +24,7 @@ import java.util.Set;
 
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.events.CheckedItemChangedEvent;
-import cn.ac.ict.cana.events.NewHistoryFile;
+import cn.ac.ict.cana.events.NewHistoryEvent;
 import cn.ac.ict.cana.events.ResponseEvent;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
@@ -234,8 +234,8 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void insert(NewHistoryFile event){
-        Log.d("HistoryAdapter", event.toString());
+    public void insert(NewHistoryEvent event){
+        Log.d("HistroyAdapter", event.toString());
         SharedPreferences sharedPreferences = mContext.getSharedPreferences("Cana", Context.MODE_PRIVATE);
         long historyId = sharedPreferences.getLong("HistoryId", 0);
 

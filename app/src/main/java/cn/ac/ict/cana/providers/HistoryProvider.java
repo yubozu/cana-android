@@ -40,6 +40,7 @@ public class HistoryProvider {
     private String[] mHistoryColumns = {DataBaseHelper.HISTORY_ID, DataBaseHelper.HISTORY_USER_UUID, DataBaseHelper.HISTORY_TYPE, DataBaseHelper.HISTORY_FILE,
             DataBaseHelper.HISTORY_IS_UPLOADED, "datetime(history_create_time, 'localtime') as history_create_time"};
     private int total;
+    private ArrayList<Call> callList;
 
     public HistoryProvider(DataBaseHelper dataBaseHelper) {
         userProvider = new UserProvider(dataBaseHelper);
@@ -109,19 +110,29 @@ public class HistoryProvider {
         return null;
     }
 
-    public void uploadHistories(ArrayList<ContentValues> items) {
+    private History getHistory(ArrayList<History> histories, ContentValues item){
+        long id = (long) item.get("id");
+        for (History history: histories) {
+            if (history.id == id) {
+                return history;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Call> uploadHistories(ArrayList<ContentValues> items) {
         ArrayList<Long> ids = getIds(items);
         ArrayList<History> histories = getHistoriesByIds(ids);
         ArrayList<String> uuids = getUuids(histories);
         ArrayList<User> users = userProvider.getUsersByUuids(uuids);
-
+        callList = new ArrayList<>();
         total = items.size();
         for (int i = 0; i < items.size(); i++) {
             Log.d("uploadHistories", "Uploading #" + String.valueOf(i));
-            final History history = histories.get(i);
-            final User user = getUser(users, history);
-
+//            final History history = histories.get(i);
             ContentValues item = items.get(i);
+            final History history = getHistory(histories, item);
+            final User user = getUser(users, history);
 
             final int groupPosition = (int) item.get("groupPosition");
             final int childPosition = (int) item.get("childPosition");
@@ -144,15 +155,18 @@ public class HistoryProvider {
                     // TODO: fill in all information. Check with content write in file.
                     .build();
             Request request = new Request.Builder().url(url).post(formBody).build();
-            client.newCall(request).enqueue(new Callback() {
+            Call call = client.newCall(request);
+            call.enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
+                    callList.remove(call);
                     Log.e("Upload Failed", e.toString());
                     EventBus.getDefault().post(new ResponseEvent(false, history.id, total, groupPosition, childPosition));
                 }
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
+                    callList.remove(call);
                     boolean result = false;
                     String jsonData = response.body().string();
                     try {
@@ -167,7 +181,9 @@ public class HistoryProvider {
                     EventBus.getDefault().post(new ResponseEvent(result, history.id, total, groupPosition, childPosition));
                 }
             });
+            callList.add(call);
         }
+        return  callList;
     }
 
     private void updateHistoryUploadedById(Long id) {
@@ -201,4 +217,5 @@ public class HistoryProvider {
         }
         return uuids;
     }
+
 }

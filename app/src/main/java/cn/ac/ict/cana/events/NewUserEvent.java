@@ -6,9 +6,9 @@ import cn.ac.ict.cana.models.User;
  * Author: saukymo
  * Date: 9/21/16
  */
-public class NewUser {
+public class NewUserEvent {
     final public User user;
-    public NewUser(User user) {
+    public NewUserEvent(User user) {
         this.user = user;
     }
 }
