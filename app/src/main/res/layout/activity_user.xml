@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/material_component_dialogs_padding_around_buttons"
             android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
-            android:text="SAVE"
+            android:text="@string/btn_save"
             android:textColor="@color/freebie_1"
             android:background="@color/freebie_2"
             style="@style/Widget.AppCompat.Button.Borderless"/>
