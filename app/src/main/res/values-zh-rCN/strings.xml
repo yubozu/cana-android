@@ -107,7 +107,11 @@
     <!-- Tapper -->
     <string name="tapper_index_finger">食指</string>
     <string name="tapper_middle_finger">中指</string>
-    <string name="tapper_tips">请用食指和中指以最快的速度点击这两个按钮10秒!</string>
+    <string name="tapper_tips">请用食指和中指以最快的速度交替点击按钮,持续10秒钟</string>
     <string name="tapper_count_down">测试倒计时: %d</string>
+    <string name = "tapper_main_hand">请选择测试手:</string>
+    <string name = "tapper_main_lefthand">左手</string>
+    <string name="tapper_main_righthand">右手</string>
+    <string name="tapper_image_description">示例图</string>
 </resources>
 

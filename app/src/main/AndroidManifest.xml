@@ -67,6 +67,10 @@
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
 
         <!-- Module: Tapper-->
+
+        <activity android:name=".modules.tapper.TapperTestingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity android:name=".modules.tapper.TapperMainActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
