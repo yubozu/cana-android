@@ -18,6 +18,8 @@ public class FloatVector implements Serializable {
         this.z = z;
         this.timeStamp = System.currentTimeMillis();
     }
+    public FloatVector(){}
+
 }
 
 

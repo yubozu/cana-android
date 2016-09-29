@@ -58,63 +58,17 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textColor="#000000"
-                android:text="3"
+                android:text="@string/three"
                 android:id="@+id/trail_3"/>
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textColor="#000000"
-                android:text="4"
-                android:id="@+id/trail_4"/>
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textColor="#000000"
-                android:text="5"
-                android:id="@+id/trail_5"/>
 
         </RadioGroup>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <com.cengalabs.flatui.views.FlatTextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <com.cengalabs.flatui.views.FlatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:gravity="center_vertical"
-            android:text="@string/stride_distance"
-            android:textSize="16sp"
-            flatui:fl_theme="@array/freebie_theme" />
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id = "@+id/rg_distance">
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="3"
-                android:textColor="#000000"
-                android:checked="true"
-                android:layout_marginRight="10dp"
-                android:id="@+id/distance_3"/>
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:text="10"
-                android:textColor="#000000"
-                android:id="@+id/distance_10"/>
-        </RadioGroup>
-    </LinearLayout>
+        style="@style/module_tips"
+        android:text="@string/stride_main_tip"
+        />
 
     <ImageView
         android:contentDescription="@string/stride_image_description"

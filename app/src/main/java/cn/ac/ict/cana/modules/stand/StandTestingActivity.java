@@ -14,6 +14,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.bcgdv.asia.lib.ticktock.TickTockView;
 import com.daimajia.numberprogressbar.NumberProgressBar;
@@ -208,11 +209,12 @@ public class StandTestingActivity extends Activity {
             FileWriter fileWrite = new FileWriter(file, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWrite);
             bufferedWriter.write(isRight+"\n");
+            bufferedWriter.write("ACC \n");
             for (FloatVector acc: accVectors) {
                 bufferedWriter.write(acc.timeStamp + ", " + acc.x + ", " + acc.y + ", " + acc.z + "\n");
                 Log.d("GoActivity", String.valueOf(acc.timeStamp));
             }
-
+            bufferedWriter.write("GYRO \n");
             for (FloatVector gyro: gyroVectors) {
                 bufferedWriter.write(gyro.timeStamp + ", " + gyro.x + ", " + gyro.y + ", " + gyro.z + "\n");
             }
@@ -235,5 +237,6 @@ public class StandTestingActivity extends Activity {
 
         Log.d("CountSaveToStorage", String.valueOf(history.id));
         EventBus.getDefault().post(new NewHistoryEvent());
+        Toast.makeText(getApplicationContext(), StandEvaluation.evaluation(history),Toast.LENGTH_SHORT).show();
     }
 }

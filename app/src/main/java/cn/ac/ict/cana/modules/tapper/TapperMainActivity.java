@@ -1,31 +1,12 @@
 package cn.ac.ict.cana.modules.tapper;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ToggleButton;
 
-import org.greenrobot.eventbus.EventBus;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Locale;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.events.NewHistoryEvent;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
@@ -34,73 +15,31 @@ import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.providers.HistoryProvider;
 
 public class TapperMainActivity extends Activity {
-
-    @BindView(R.id.tv_left_count)
-    TextView tvLeft;
-    @BindView(R.id.tv_right_count)
-    TextView tvRight;
-    @BindView(R.id.btn_start_tapper)
-    Button btnStart;
-    @BindView(R.id.btn_left)
-    Button btnLeft;
-    @BindView(R.id.btn_right)
-    Button btnRight;
-
-    private int leftCount, rightCount;
-    private ArrayList<String> content;
-
-
+    private Button bt_begin;
+    private ToggleButton toggleHand;
+    private boolean isRight = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tapper_main);
-        ButterKnife.bind(this);
-        content = new ArrayList<>();
+        initWidget();
     }
 
+    private void initWidget()
+    {
+        toggleHand = (ToggleButton)findViewById(R.id.toggle_hand);
 
-    @OnClick({R.id.btn_start_tapper, R.id.btn_left, R.id.btn_right})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_start_tapper:
-                new MyCount(10000, 1000).start();
-                setEnable(false, true);
-                break;
-            case R.id.btn_left:
-                tvLeft.setText(String.valueOf(++leftCount));
-                content.add("left:" + System.currentTimeMillis());
-                break;
-            case R.id.btn_right:
-                tvRight.setText(String.valueOf(++rightCount));
-                content.add("right:" + System.currentTimeMillis());
-                break;
-        }
-    }
+        bt_begin = (Button)findViewById(R.id.bt_begin);
+        bt_begin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isRight = toggleHand.isChecked();
+                Intent intent = new Intent(TapperMainActivity.this,TapperTestingActivity.class);
+                intent.putExtra("isRight",isRight);
+                startActivity(intent);
 
-    private void setEnable(boolean enabled, boolean enabled2) {
-        btnStart.setEnabled(enabled);
-        btnLeft.setEnabled(enabled2);
-        btnRight.setEnabled(enabled2);
-    }
-
-    class MyCount extends CountDownTimer {
-
-        MyCount(long millisInFuture, long countDownInterval) {
-            super(millisInFuture, countDownInterval);
-        }
-
-        @Override
-        public void onTick(long l) {
-            btnStart.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.freebie_2));
-            btnStart.setText(String.format(Locale.CHINA, getString(R.string.tapper_count_down), (l / 1000)));
-        }
-
-        @Override
-        public void onFinish() {
-            showDialog();
-            btnStart.setText(getString(R.string.btn_begin));
-        }
-    }
+            }
+        });
 
     public void showDialog() {
         new AlertDialog.Builder(this).setCancelable(false).setTitle(getString(R.string.dialog_title)).setMessage(getString(R.string.dialog_content)).setPositiveButton(getString(R.string.btn_save), new DialogInterface.OnClickListener() {
@@ -125,45 +64,6 @@ public class TapperMainActivity extends Activity {
         }).show();
     }
 
-    private void initNum() {
-        leftCount = 0;
-        rightCount = 0;
-        tvLeft.setText(String.valueOf(0));
-        tvRight.setText(String.valueOf(0));
     }
 
-    public void saveToStorage(){
-        SharedPreferences sharedPreferences = getSharedPreferences("Cana", Context.MODE_PRIVATE);
-        String uuid = sharedPreferences.getString("selectedUser", "None");
-        HistoryProvider historyProvider = new HistoryProvider(DataBaseHelper.getInstance(this));
-        History history = new History(this, uuid, ModuleHelper.MODULE_TAPPER);
-
-        // Example: How to write data to file.
-        File file = new File(history.filePath);
-        try {
-            FileWriter fileWrite = new FileWriter(file, true);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWrite);
-
-            for (String line : content){
-                bufferedWriter.write(line + "\n");
-            }
-
-            //Important! Have a new line in the end of txt file.
-            bufferedWriter.newLine();
-            bufferedWriter.close();
-            fileWrite.close();
-        } catch (IOException e) {
-            Log.e("ExamAdapter", e.toString());
-        }
-
-        history.id = historyProvider.InsertHistory(history);
-
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putLong("HistoryId", history.id);
-        editor.apply();
-
-        Log.d("CountSaveToStorage", String.valueOf(history.id));
-        EventBus.getDefault().post(new NewHistoryEvent());
-    }
 }

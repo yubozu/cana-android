@@ -1,7 +1,7 @@
 package cn.ac.ict.cana.helpers;
 
 import android.content.Context;
-import android.content.res.Resources;
+import android.support.v4.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
