@@ -7,10 +7,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -29,6 +32,7 @@ import cn.ac.ict.cana.events.NewHistoryEvent;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.History;
+import cn.ac.ict.cana.modules.stand.StandEvaluation;
 import cn.ac.ict.cana.providers.HistoryProvider;
 
 /**
@@ -68,6 +72,7 @@ public class CountConfirmActivity extends Activity {
         randomStr = randomStr.substring(0,6);
         nextet = (EditText)findViewById(R.id.et_answer);
         nextet.setInputType(EditorInfo.TYPE_CLASS_PHONE);
+        nextet.addTextChangedListener(mTextWatcher);
         nextbtn = (Button) findViewById(R.id.btn_confirm);
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,5 +175,31 @@ public class CountConfirmActivity extends Activity {
 
         Log.d("CountSaveToStorage", String.valueOf(history.id));
         EventBus.getDefault().post(new NewHistoryEvent());
+
+        Toast.makeText(getApplicationContext(), CountEvaluation.evaluation(history),Toast.LENGTH_SHORT).show();
     }
+
+    TextWatcher mTextWatcher = new TextWatcher() {
+
+        private CharSequence temp;
+        private int editStart;
+        private int editEnd;
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            temp = charSequence;
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if(temp.length()>=6){
+                ((InputMethodManager)getSystemService(INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(CountConfirmActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
+    };
 }

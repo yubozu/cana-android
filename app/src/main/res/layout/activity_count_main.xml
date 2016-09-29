@@ -17,6 +17,14 @@
         android:text="@string/module_count"
         android:textColor="@color/freebie_4"
         android:textSize="@dimen/material_component_text_title_text_size" />
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:scaleType="fitCenter"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/count" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -34,5 +42,7 @@
         android:id = "@+id/count_begin"
         style="@style/PrimaryButton"
         android:text="@string/btn_continue"/>
+
+
 
 </LinearLayout>
