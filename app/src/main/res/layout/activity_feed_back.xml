@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/freebie_9"
+    android:paddingStart="@dimen/material_component_button_text_left_and_right_padding"
+    android:paddingEnd="@dimen/material_component_button_text_left_and_right_padding"
+    android:paddingTop="@dimen/material_component_bottom_sheet_edge_top_bottom_margins"
+    android:paddingBottom="@dimen/material_component_bottom_sheet_edge_top_bottom_margins">
+
+    <TextView
+        android:id="@+id/tv_module_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:text="@string/module_count"
+        android:textColor="@color/freebie_4"
+        android:textSize="@dimen/material_component_text_title_text_size" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        />
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_save"
+        style="@style/PrimaryButton"
+        />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_cancel"
+        style="@style/Button"
+        />
+
+</LinearLayout>

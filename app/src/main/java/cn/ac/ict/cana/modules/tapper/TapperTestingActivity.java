@@ -29,7 +29,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ac.ict.cana.R;
-import cn.ac.ict.cana.activities.MainActivity_;
 import cn.ac.ict.cana.events.NewHistoryEvent;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
@@ -115,7 +114,7 @@ public class TapperTestingActivity extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 saveToStorage();
-                startActivity(new Intent(TapperTestingActivity.this, MainActivity_.class));
+                startActivity(new Intent(TapperTestingActivity.this, ModuleHelper.getActivityAfterExam()));
                 finish();
                 initNum();
                 setEnable(false);
@@ -126,6 +125,8 @@ public class TapperTestingActivity extends Activity {
                 content.clear();
                 initNum();
                 setEnable(false);
+                startActivity(new Intent(TapperTestingActivity.this, ModuleHelper.getActivityAfterExam()));
+                finish();
             }
         }).show();
     }

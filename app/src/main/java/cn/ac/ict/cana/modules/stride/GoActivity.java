@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import cn.ac.ict.cana.R;
-import cn.ac.ict.cana.activities.MainActivity_;
 import cn.ac.ict.cana.events.NewHistoryEvent;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
@@ -159,7 +158,7 @@ public class GoActivity extends Activity {
                         accList.add(accFloatVectors);
                         gyroList.add(gyroFloatVectors);
                         saveToStorage();
-                        Intent intent = new Intent(GoActivity.this, MainActivity_.class);
+                        Intent intent = new Intent(GoActivity.this, ModuleHelper.getActivityAfterExam());
                         startActivity(intent);
                         finish();
                     }
@@ -167,7 +166,8 @@ public class GoActivity extends Activity {
                 builder.setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        MainActivity_.intent(GoActivity.this).start();
+                        Intent intent = new Intent(GoActivity.this, ModuleHelper.getActivityAfterExam());
+                        startActivity(intent);
                         finish();
                     }
                 });

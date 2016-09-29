@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import cn.ac.ict.cana.R;
-import cn.ac.ict.cana.activities.MainActivity_;
 import cn.ac.ict.cana.events.NewHistoryEvent;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
@@ -137,14 +136,14 @@ public class StandTestingActivity extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 saveToStorage();
-                startActivity(new Intent(StandTestingActivity.this, MainActivity_.class));
+                startActivity(new Intent(StandTestingActivity.this, ModuleHelper.getActivityAfterExam()));
                 finish();
             }
         });
         builder.setNegativeButton(getString(R.string.btn_cancel), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(StandTestingActivity.this, MainActivity_.class));
+                startActivity(new Intent(StandTestingActivity.this, ModuleHelper.getActivityAfterExam()));
                 finish();
             }
         });

@@ -70,5 +70,5 @@ public class StandEvaluation {
 
         return accFloatVectors.size()+"";
     }
-    
+
 }
