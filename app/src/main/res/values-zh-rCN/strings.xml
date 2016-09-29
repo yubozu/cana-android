@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">PD助手</string>
-    <string name="welcome_tip">ICT \n 2016</string>
+    <string name="welcome_image">示例图</string>
+    <string name="welcome_tip">ICT</string>
+    <string name="welcome_year">2016</string>
     <!-- numbers -->
     <string name="zero">0</string>
     <string name="one">1</string>
@@ -109,8 +111,8 @@
     <string name="tapper_middle_finger">中指</string>
     <string name="tapper_tips">请用食指和中指以最快的速度交替点击按钮,持续10秒钟</string>
     <string name="tapper_count_down">测试倒计时: %d</string>
-    <string name = "tapper_main_hand">请选择测试手:</string>
-    <string name = "tapper_main_lefthand">左手</string>
+    <string name="tapper_main_hand">请选择测试手:</string>
+    <string name="tapper_main_lefthand">左手</string>
     <string name="tapper_main_righthand">右手</string>
     <string name="tapper_image_description">示例图</string>
 </resources>
