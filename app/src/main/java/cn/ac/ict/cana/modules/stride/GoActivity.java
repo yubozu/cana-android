@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -30,7 +29,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import cn.ac.ict.cana.R;
-import cn.ac.ict.cana.activities.MainActivity_;
 import cn.ac.ict.cana.events.NewHistoryEvent;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
@@ -161,7 +159,7 @@ public class GoActivity extends Activity {
                         currentTrail++;
                         if (currentTrail > trailCount) {
                             saveToStorage();
-                            Intent intent = new Intent(GoActivity.this, MainActivity_.class);
+                            Intent intent = new Intent(GoActivity.this, ModuleHelper.getActivityAfterExam());
                             startActivity(intent);
                             finish();
                         } else {
@@ -172,6 +170,9 @@ public class GoActivity extends Activity {
                 builder.setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(GoActivity.this, ModuleHelper.getActivityAfterExam());
+                        startActivity(intent);
+                        finish();
                         prepare(currentTrail);
                     }
                 });

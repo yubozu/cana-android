@@ -33,7 +33,7 @@
     <string name="btn_begin">开始测试</string>
     <string name="btn_start_record">开始录音</string>
     <string name="btn_finish">完成测试</string>
-
+    <string name="btn_discard">bu保存</string>
     <!-- page -->
     <string name="page_exam">检测</string>
     <string name="page_user">用户</string>

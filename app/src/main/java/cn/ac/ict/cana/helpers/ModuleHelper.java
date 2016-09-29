@@ -1,18 +1,25 @@
 package cn.ac.ict.cana.helpers;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
+import android.content.res.Resources;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import cn.ac.ict.cana.R;
+import cn.ac.ict.cana.activities.FeedBackActivity;
 import cn.ac.ict.cana.activities.MainActivity_;
+import cn.ac.ict.cana.modules.count.CountEvaluation;
 import cn.ac.ict.cana.modules.count.CountMainActivity;
+import cn.ac.ict.cana.modules.face.FaceEvaluation;
 import cn.ac.ict.cana.modules.face.FaceMainActivity;
+import cn.ac.ict.cana.modules.sound.SoundEvaluation;
 import cn.ac.ict.cana.modules.sound.SoundMainActivity;
+import cn.ac.ict.cana.modules.stand.StandEvaluation;
 import cn.ac.ict.cana.modules.stand.StandMainActivity;
+import cn.ac.ict.cana.modules.stride.StrideEvaluation;
 import cn.ac.ict.cana.modules.stride.StrideMainActivity;
+import cn.ac.ict.cana.modules.tapper.TapperEvaluation;
 import cn.ac.ict.cana.modules.tapper.TapperMainActivity;
 
 /**
@@ -72,6 +79,37 @@ public class ModuleHelper {
                 break;
             default:
                 module = MainActivity_.class;
+        }
+        return module;
+    }
+
+    public static Class getActivityAfterExam(){
+        return FeedBackActivity.class;
+    }
+
+    public static Class getEvaluation(String moduleName) {
+        Class module;
+        switch (moduleName) {
+            case MODULE_COUNT:
+                module = CountEvaluation.class;
+                break;
+            case MODULE_STRIDE:
+                module = StrideEvaluation.class;
+                break;
+            case MODULE_STAND:
+                module = StandEvaluation.class;
+                break;
+            case MODULE_FACE:
+                module = FaceEvaluation.class;
+                break;
+            case MODULE_TAPPER:
+                module = TapperEvaluation.class;
+                break;
+            case MODULE_SOUND:
+                module = SoundEvaluation.class;
+                break;
+            default:
+                throw new Resources.NotFoundException();
         }
         return module;
     }

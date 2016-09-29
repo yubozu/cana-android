@@ -42,7 +42,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import cn.ac.ict.cana.R;
-import cn.ac.ict.cana.activities.MainActivity_;
 import cn.ac.ict.cana.events.NewHistoryEvent;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
@@ -293,7 +292,7 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
 
     private void finishCompleted() {
         saveToStorage();
-        startActivity(new Intent(this,MainActivity_.class));
+        startActivity(new Intent(this, ModuleHelper.getActivityAfterExam()));
         finish();
     }
 

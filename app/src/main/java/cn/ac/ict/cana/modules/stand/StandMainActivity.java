@@ -32,7 +32,7 @@ public class StandMainActivity extends Activity {
                 Intent intent = new Intent(StandMainActivity.this,StandTestingActivity.class);
                 intent.putExtra("isRight",isRight);
                 startActivity(intent);
-
+                finish();
             }
         });
 
