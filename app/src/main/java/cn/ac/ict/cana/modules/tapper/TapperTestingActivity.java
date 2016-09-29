@@ -69,6 +69,7 @@ public class TapperTestingActivity extends Activity {
             }
         });
         mp.start();
+        setEnable(false);
     }
 
     private void initTickTockView()
@@ -169,5 +170,16 @@ public class TapperTestingActivity extends Activity {
         Log.d("CountSaveToStorage", String.valueOf(history.id));
         EventBus.getDefault().post(new NewHistoryEvent());
         Toast.makeText(getApplicationContext(),TappingEvaluation.evaluation(history),Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(mp.isPlaying())
+        {
+            mp.stop();
+            mp.release();
+            mp = null;
+        }
     }
 }
