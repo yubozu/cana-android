@@ -12,9 +12,8 @@ import cn.ac.ict.cana.R;
 
 public class StrideMainActivity extends Activity {
 
-    RadioGroup rg_distance, rg_trail;
+    RadioGroup rg_trail;
     int trail = 1;
-    int distance = 3;
     Button bt_begin;
 
     @Override
@@ -25,7 +24,6 @@ public class StrideMainActivity extends Activity {
     }
 
     private void initWidget() {
-        rg_distance = (RadioGroup) findViewById(R.id.rg_distance);
         rg_trail = (RadioGroup) findViewById(R.id.rg_trail);
         bt_begin = (Button) findViewById(R.id.bt_begin);
         bt_begin.setOnClickListener(new onBeginListener());
@@ -37,25 +35,17 @@ public class StrideMainActivity extends Activity {
                 trail = Integer.parseInt(rb.getText().toString());
             }
         });
-        rg_distance.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                int radioButtonId = group.getCheckedRadioButtonId();
-                RadioButton rb = (RadioButton) findViewById(radioButtonId);
-                distance = Integer.parseInt(rb.getText().toString());
-            }
-        });
     }
 
     class onBeginListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), GoActivity.class);
+            Intent intent = new Intent(getApplicationContext(), GoActivity.class);
 
-                intent.putExtra("trail", trail);
-                intent.putExtra("distance", distance);
-                startActivity(intent);
+            intent.putExtra("trail", trail);
+            startActivity(intent);
+            finish();
 
         }
     }

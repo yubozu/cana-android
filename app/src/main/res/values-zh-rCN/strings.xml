@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">迦娜</string>
+    <string name="app_name">PD助手</string>
+    <string name="welcome_tip">ICT \n 2016</string>
     <!-- numbers -->
     <string name="zero">0</string>
     <string name="one">1</string>
@@ -95,11 +96,13 @@
 
     <!-- Stride -->
     <string name="stride_image_description">示例图</string>
+    <string name="stride_main_tip">请将设备放置于胸前,完成起立、行走、转身、行走、坐下,点击开始测试,5秒钟后测试开始。</string>
     <string name="stride_trail_numbers">测试来回次数</string>
     <string name="stride_distance">每次测试行走距离</string>
     <string name="stride_prepare">请做好准备</string>
     <string name="stride_testing">正在测试</string>
     <string name="stride_next_turn">"即将检测: 第 %1$d 个来回,共 %2$d 个来回"</string>
+    <string name="stride_btn_text">"完成第 %1$d 个来回,共 %2$d 个来回"</string>
 
     <!-- Tapper -->
     <string name="tapper_index_finger">食指</string>
