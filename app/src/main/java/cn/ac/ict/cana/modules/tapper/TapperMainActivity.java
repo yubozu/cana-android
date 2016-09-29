@@ -8,11 +8,6 @@ import android.widget.Button;
 import android.widget.ToggleButton;
 
 import cn.ac.ict.cana.R;
-import cn.ac.ict.cana.events.NewHistoryEvent;
-import cn.ac.ict.cana.helpers.DataBaseHelper;
-import cn.ac.ict.cana.helpers.ModuleHelper;
-import cn.ac.ict.cana.models.History;
-import cn.ac.ict.cana.providers.HistoryProvider;
 
 public class TapperMainActivity extends Activity {
     private Button bt_begin;
@@ -41,28 +36,6 @@ public class TapperMainActivity extends Activity {
             }
         });
 
-    public void showDialog() {
-        new AlertDialog.Builder(this).setCancelable(false).setTitle(getString(R.string.dialog_title)).setMessage(getString(R.string.dialog_content)).setPositiveButton(getString(R.string.btn_save), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                saveToStorage();
-                startActivity(new Intent(TapperMainActivity.this, ModuleHelper.getActivityAfterExam()));
-                finish();
-                initNum();
-                setEnable(true, false);
-            }
-        }).setNegativeButton(getString(R.string.btn_cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                content.clear();
-                initNum();
-                btnStart.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.freebie_4));
-                setEnable(true, false);
-                startActivity(new Intent(TapperMainActivity.this, ModuleHelper.getActivityAfterExam()));
-                finish();
-            }
-        }).show();
-    }
 
     }
 
