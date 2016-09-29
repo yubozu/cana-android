@@ -10,17 +10,12 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.io.File;
 
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.activities.MainActivity_;
-import cn.ac.ict.cana.events.NewHistoryEvent;
-import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.History;
-import cn.ac.ict.cana.providers.HistoryProvider;
 
 public class SoundMainActivity extends FragmentActivity {
 
@@ -93,20 +88,15 @@ public class SoundMainActivity extends FragmentActivity {
 
     private void SaveToStorage(){
         SharedPreferences sharedPreferences = getSharedPreferences("Cana", Context.MODE_PRIVATE);
-        String uuid = sharedPreferences.getString("selectedUser", "None");
-        HistoryProvider historyProvider = new HistoryProvider(DataBaseHelper.getInstance(this));
-        History history = new History(this, uuid, ModuleHelper.MODULE_SOUND);
 
-        // Example: How to write data to file.
+        String filePath = History.getFilePath(this, ModuleHelper.MODULE_SOUND);
+
         File file = new File(path);
-        file.renameTo(new File(history.filePath));
-        history.id = historyProvider.InsertHistory(history);
+        Boolean result = file.renameTo(new File(filePath));
+        Log.d("SaveToStorage", "save file result: " + result);
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putLong("HistoryId", history.id);
+        editor.putString("HistoryFilePath", filePath);
         editor.apply();
-
-        Log.d("CountSaveToStorage", String.valueOf(history.id));
-        EventBus.getDefault().post(new NewHistoryEvent());
     }
 }

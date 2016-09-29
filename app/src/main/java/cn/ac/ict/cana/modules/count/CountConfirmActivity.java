@@ -15,8 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -25,11 +23,8 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import cn.ac.ict.cana.R;
-import cn.ac.ict.cana.events.NewHistoryEvent;
-import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.History;
-import cn.ac.ict.cana.providers.HistoryProvider;
 
 /**
  * Created by zhongxi on 2016/8/22.
@@ -141,12 +136,13 @@ public class CountConfirmActivity extends Activity {
 
     public void saveToStorage(String content){
         SharedPreferences sharedPreferences = getSharedPreferences("Cana", Context.MODE_PRIVATE);
-        String uuid = sharedPreferences.getString("selectedUser", "None");
-        HistoryProvider historyProvider = new HistoryProvider(DataBaseHelper.getInstance(this));
-        History history = new History(this, uuid, ModuleHelper.MODULE_COUNT);
+//        String uuid = sharedPreferences.getString("selectedUser", "None");
+//        HistoryProvider historyProvider = new HistoryProvider(DataBaseHelper.getInstance(this));
+////        History history = new History(this, uuid, ModuleHelper.MODULE_COUNT);
 
         // Example: How to write data to file.
-        File file = new File(history.filePath);
+        String filePath = History.getFilePath(this, ModuleHelper.MODULE_COUNT);
+        File file = new File(filePath);
         try {
             FileWriter fileWrite = new FileWriter(file, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWrite);
@@ -161,14 +157,13 @@ public class CountConfirmActivity extends Activity {
             Log.e("ExamAdapter", e.toString());
         }
 
-        history.id = historyProvider.InsertHistory(history);
+//        history.id = historyProvider.InsertHistory(history);
 
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putLong("HistoryId", history.id);
+        editor.putString("HistoryFilePath", filePath);
         editor.apply();
 
-        Log.d("CountSaveToStorage", String.valueOf(history.id));
-        EventBus.getDefault().post(new NewHistoryEvent());
+//        EventBus.getDefault().post(new NewHistoryEvent());
     }
 }

@@ -9,6 +9,7 @@ import java.util.Arrays;
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.activities.FeedBackActivity;
 import cn.ac.ict.cana.activities.MainActivity_;
+import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.modules.count.CountEvaluation;
 import cn.ac.ict.cana.modules.count.CountMainActivity;
 import cn.ac.ict.cana.modules.face.FaceEvaluation;
@@ -87,30 +88,22 @@ public class ModuleHelper {
         return FeedBackActivity.class;
     }
 
-    public static Class getEvaluation(String moduleName) {
-        Class module;
-        switch (moduleName) {
+    public static String getEvaluation(History history) {
+        switch (history.type) {
             case MODULE_COUNT:
-                module = CountEvaluation.class;
-                break;
+                return CountEvaluation.evaluation(history);
             case MODULE_STRIDE:
-                module = StrideEvaluation.class;
-                break;
+                return StrideEvaluation.evaluation(history);
             case MODULE_STAND:
-                module = StandEvaluation.class;
-                break;
+                return StandEvaluation.evaluation(history);
             case MODULE_FACE:
-                module = FaceEvaluation.class;
-                break;
+                return FaceEvaluation.evaluation(history);
             case MODULE_TAPPER:
-                module = TapperEvaluation.class;
-                break;
+                return TapperEvaluation.evaluation(history);
             case MODULE_SOUND:
-                module = SoundEvaluation.class;
-                break;
+                return SoundEvaluation.evaluation(history);
             default:
                 throw new Resources.NotFoundException();
         }
-        return module;
     }
 }
