@@ -120,10 +120,9 @@ public class FeedBackActivity extends Activity {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO:
                 SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(FeedBackActivity.this, SweetAlertDialog.WARNING_TYPE)
-                        .setTitleText("Are you sure?")
-                        .setContentText("Won't be able to recover this file!")
+                        .setTitleText(getString(R.string.are_you_sure))
+                        .setContentText(getString(R.string.cannot_recover))
                         .setConfirmText(getString(R.string.btn_cancel))
                         .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                             @Override

@@ -122,6 +122,8 @@
     <string name="rating">评分:</string>
     <string name="please_evaluate">请评估此次测试:</string>
     <string name="save_success">保存成功</string>
+    <string name="are_you_sure">你确定吗?</string>
+    <string name="cannot_recover">请注意,该操作将无法进行恢复。</string>
 
 </resources>
 
