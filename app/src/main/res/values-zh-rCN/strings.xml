@@ -3,6 +3,10 @@
     <string name="welcome_tip">帕金森病智慧医疗联合实验室</string>
     <string name="welcome_name">中科 宣武</string>
     <string name="second_back">再点击一次退出</string>
+    <string name="about">帕金森病智慧医疗联合实验室\n中国科学院计算技术研究所\n首都医科大学宣武医院</string>
+    <string name="device">尚未实现</string>
+    <string name="logs">尚未实现</string>
+    <string name="support">技术联系电话:010-62600809</string>
     <!-- numbers -->
     <string name="zero">0</string>
     <string name="one">1</string>

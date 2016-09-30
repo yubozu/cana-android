@@ -11,13 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
-        android:text="@string/setting_tips"/>
+        android:text="@string/setting_tips"
+        android:visibility="gone"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/setting_device"
         android:textColor="@color/freebie_6"
+        android:id="@+id/btn_setting_device"
         android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
         android:background="@color/freebie_1"
         style="@style/Widget.AppCompat.Button.Borderless"/>
@@ -25,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/setting_logs"
+        android:id="@+id/btn_setting_logs"
         android:textColor="@color/freebie_6"
         android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
         android:background="@color/freebie_1"
@@ -35,6 +38,7 @@
         android:layout_height="wrap_content"
         android:text="@string/setting_support"
         android:textColor="@color/freebie_6"
+        android:id="@+id/btn_setting_support"
         android:layout_marginTop="@dimen/material_component_cards_primary_title_top_padding"
         android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
         android:background="@color/freebie_1"
@@ -44,8 +48,16 @@
         android:layout_height="wrap_content"
         android:text="@string/setting_about"
         android:textColor="@color/freebie_6"
+        android:id="@+id/btn_setting_about"
         android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
         android:background="@color/freebie_1"
         style="@style/Widget.AppCompat.Button.Borderless"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textColor="@color/freebie_4"
+        android:textSize="20sp"
+        android:id="@+id/tv_setting"/>
 
 </LinearLayout>
