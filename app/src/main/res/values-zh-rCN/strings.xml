@@ -77,6 +77,11 @@
     <string name="count_right_answer">正确的答案是%1$s。</string>
     <string name="count_wrong_answer">输入有误!一共尝试了%1$d次。</string>
 
+    <string name="countt_try_input">您的输入为：\n</string>
+    <string name="countt_input_rightanswer">\n您的输入正确！\n\n</string>
+    <string name="countt_input_wronganswer">\n您的输入错误！\n\n</string>
+    <string name="countt_right_answer">正确答案是：</string>
+
     <!-- Face -->
     <string name="face_tips">本测试将录制您的面部表情，请仔细聆听语音，按照提示完成相应动作，并保证面部完整地出现在画面中。</string>
     <string name="face_task_1">请闭眼</string>
@@ -124,6 +129,7 @@
     <string name="save_success">保存成功</string>
     <string name="are_you_sure">你确定吗?</string>
     <string name="cannot_recover">请注意,该操作将无法进行恢复。</string>
+
 
 </resources>
 

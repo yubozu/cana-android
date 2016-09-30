@@ -27,7 +27,6 @@ public class TapperMainActivity extends Activity {
     int left = 0;
 
     MediaPlayer mp;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +55,6 @@ public class TapperMainActivity extends Activity {
 
     private void initWidget() {
         toggleHand = (ToggleButton) findViewById(R.id.toggle_hand);
-
         bt_begin = (Button) findViewById(R.id.bt_begin);
         bt_begin.setOnClickListener(new View.OnClickListener() {
             @Override

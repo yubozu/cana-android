@@ -95,7 +95,7 @@ public class FeedBackActivity extends Activity {
 
         final History history = new History(uuid, moduleName, filePath, 0, "");
         String content = getResources().getString(R.string.page_user) + ":" + name + "\n";
-        content += ModuleHelper.getEvaluation(history);
+        content += ModuleHelper.getEvaluation(history,FeedBackActivity.this);
 
         tvEvaluation.setText(content);
         tvModule.setText(ModuleHelper.getName(this, history.type));

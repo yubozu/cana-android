@@ -1,11 +1,16 @@
 package cn.ac.ict.cana.modules.count;
 
+import android.app.Activity;
+import android.content.Context;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.models.History;
+import cn.ac.ict.cana.modules.tapper.TapperMainActivity;
 
 /**
  * Author: saukymo
@@ -17,7 +22,7 @@ public class CountEvaluation {
 
     }
 
-    static public String evaluation(History history){
+    static public String evaluation(History history,Context context){
 
 //        Do something here.
 
@@ -44,9 +49,9 @@ public class CountEvaluation {
         }
 
         String result = "";
-        result += isRight?"您的输入正确！\n\n":"您的输入错误！\n\n";
-        result += "正确答案是："+rightAnswer+"\n";
-        result += "您的输入为：\n";
+        result += isRight?context.getString(R.string.countt_input_rightanswer):context.getString(R.string.countt_input_wronganswer);
+        result += context.getString(R.string.countt_right_answer)+rightAnswer+"\n";
+        result += context.getString(R.string.countt_try_input);
         for(String s:tryInput){
             result += s+"\n";
         }

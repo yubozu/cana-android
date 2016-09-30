@@ -1,5 +1,7 @@
 package cn.ac.ict.cana.modules.tapper;
 
+import android.content.Context;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,7 +19,7 @@ public class TapperEvaluation {
 
     }
 
-    static public String evaluation(History history){
+    static public String evaluation(History history,Context context){
 
         boolean isRight = false;
         ArrayList<Integer> handList = new ArrayList<>();
