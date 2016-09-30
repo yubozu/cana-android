@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">PD助手</string>
-    <string name="welcome_image">示例图</string>
-    <string name="welcome_tip">Health @ ICT</string>
-    <string name="welcome_year">2016</string>
+    <string name="welcome_tip">帕金森病智慧医疗联合实验室</string>
+    <string name="welcome_name">中科 宣武</string>
     <!-- numbers -->
     <string name="zero">0</string>
     <string name="one">1</string>
@@ -36,7 +35,7 @@
     <string name="btn_begin">开始测试</string>
     <string name="btn_start_record">开始录音</string>
     <string name="btn_finish">完成测试</string>
-    <string name="btn_discard">bu保存</string>
+
     <!-- page -->
     <string name="page_exam">检测</string>
     <string name="page_user">用户</string>
@@ -111,8 +110,8 @@
     <string name="tapper_middle_finger">中指</string>
     <string name="tapper_tips">请用食指和中指以最快的速度交替点击按钮,持续10秒钟</string>
     <string name="tapper_count_down">测试倒计时: %d</string>
-    <string name="tapper_main_hand">请选择测试手:</string>
-    <string name="tapper_main_lefthand">左手</string>
+    <string name = "tapper_main_hand">请选择测试手:</string>
+    <string name = "tapper_main_lefthand">左手</string>
     <string name="tapper_main_righthand">右手</string>
     <string name="tapper_image_description">示例图</string>
 </resources>
