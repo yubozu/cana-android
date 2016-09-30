@@ -48,6 +48,7 @@ public class MainActivity extends Activity {
     @AfterViews
     public void init() {
         viewPager.setAdapter(mMainAdapter);
+        callArrayList = new ArrayList<>();
         int color =  Color.parseColor("#68BED9");
 
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,7 +17,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="10dp"
-        android:text="@string/module_count"
         android:textColor="@color/freebie_4"
         android:textSize="@dimen/material_component_text_title_text_size" />
 
@@ -23,9 +24,92 @@
         android:id="@+id/tv_evaluation"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:paddingStart="@dimen/material_component_button_text_left_and_right_padding"
+        android:paddingEnd="@dimen/material_component_button_text_left_and_right_padding"
+        android:paddingTop="@dimen/material_component_bottom_sheet_edge_top_bottom_margins"
+        android:paddingBottom="@dimen/material_component_bottom_sheet_edge_top_bottom_margins"
+        android:textSize="@dimen/material_component_lists_single_line_text_size"
+        android:textColor="@color/freebie_6"
+        android:background="@color/freebie_1"
         android:layout_weight="0.1"
         />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/freebie_1"
+        android:paddingStart="@dimen/material_component_button_text_left_and_right_padding"
+        android:paddingEnd="@dimen/material_component_button_text_left_and_right_padding"
+        android:paddingTop="@dimen/material_component_bottom_sheet_edge_top_bottom_margins"
+        android:paddingBottom="@dimen/material_component_bottom_sheet_edge_top_bottom_margins"
+        android:layout_marginBottom="@dimen/material_component_cards_space_between_cards">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/material_component_button_height"
+            android:gravity="center_vertical"
+            android:text="@string/please_evaluate"
+            android:textColor="@color/freebie_2"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/material_component_lists_single_line_with_avatar_height"
+            android:orientation="horizontal"
+           >
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="@color/freebie_2"
+                android:layout_weight="0.4"
+                android:text="@string/rating"/>
+
+            <com.iarcuschin.simpleratingbar.SimpleRatingBar
+                android:gravity="center_vertical"
+                android:layout_weight="0.6"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:srb_starSize="40dp"
+                app:srb_numberOfStars="5"
+                app:srb_rating="5"
+                android:id="@+id/rating_bar"
+                />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/material_component_lists_single_line_with_avatar_height"
+                android:orientation="horizontal"
+                >
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textColor="@color/freebie_2"
+                android:layout_weight="0.4"
+                android:text="@string/doctor_name"/>
+
+            <com.cengalabs.flatui.views.FlatEditText
+                android:id="@+id/edittext_doctor"
+                android:layout_weight="0.6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:maxLines="1"
+                android:gravity="center_vertical"
+                android:hint="@string/input_doctor_name"
+                android:includeFontPadding="true"
+                flatui:fl_fieldStyle="fl_flat"
+                flatui:fl_theme="@array/freebie_reverse_edit_text"/>
+
+        </LinearLayout>
+    </LinearLayout>
     <Button
         android:id="@+id/btn_save"
         android:layout_width="match_parent"

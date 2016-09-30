@@ -16,12 +16,16 @@ public class History {
     public boolean isUpload;
     public String createdTime;
     public String ext;
+    public int rating;
+    public String doctor;
 
-    public History(String uuid, String historyType, String filePath) {
+    public History(String uuid, String historyType, String filePath, int rating, String doctor) {
         this.uuid = uuid;
         this.isUpload = false;
         this.filePath = filePath;
         this.type = historyType;
+        this.rating = rating;
+        this.doctor = doctor;
     }
 
     public static String getFilePath(Context context, String type) {
@@ -39,13 +43,15 @@ public class History {
         return context.getFilesDir().getAbsolutePath()+"/" + randomUUID().toString() + ext;
     }
 
-    public History(long historyId, String uuid, String historyType, String historyFilePath, boolean historyIsUpload, String historyCreatedTime) {
+    public History(long historyId, String uuid, String historyType, String historyFilePath, boolean historyIsUpload, String historyCreatedTime, int rating, String doctor) {
         id = historyId;
         this.uuid = uuid;
         type = historyType;
         filePath = historyFilePath;
         isUpload = historyIsUpload;
         createdTime = historyCreatedTime;
+        this.rating = rating;
+        this.doctor = doctor;
     }
 
 }
