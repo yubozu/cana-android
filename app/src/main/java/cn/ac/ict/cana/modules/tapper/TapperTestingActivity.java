@@ -1,9 +1,7 @@
 package cn.ac.ict.cana.modules.tapper;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
@@ -76,7 +74,8 @@ public class TapperTestingActivity extends Activity {
             public String getText(long timeRemainingInMillis) {
                 if(timeRemainingInMillis<=0)
                 {
-                    showDialog();
+                    saveToStorage();
+                    startActivity(new Intent(TapperTestingActivity.this, ModuleHelper.getActivityAfterExam()));
                 }
                 return timeRemainingInMillis/1000+1+"秒";
             }
@@ -103,28 +102,6 @@ public class TapperTestingActivity extends Activity {
     }
 
 
-    public void showDialog() {
-        new AlertDialog.Builder(this).setCancelable(false).setTitle(getString(R.string.dialog_title)).setMessage(getString(R.string.dialog_content)).setPositiveButton(getString(R.string.btn_save), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                saveToStorage();
-                startActivity(new Intent(TapperTestingActivity.this, ModuleHelper.getActivityAfterExam()));
-                finish();
-                initNum();
-                setEnable(false);
-            }
-        }).setNegativeButton(getString(R.string.btn_cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                content.clear();
-                initNum();
-                setEnable(false);
-                startActivity(new Intent(TapperTestingActivity.this, ModuleHelper.getActivityAfterExam()));
-                finish();
-            }
-        }).show();
-    }
-
     private void initNum() {
         leftCount = 0;
         rightCount = 0;
@@ -132,7 +109,7 @@ public class TapperTestingActivity extends Activity {
         tvRight.setText(String.valueOf(0));
     }
 
-    public void saveToStorage(){
+    public void saveToStorage() {
         SharedPreferences sharedPreferences = getSharedPreferences("Cana", Context.MODE_PRIVATE);
 
         String filePath = History.getFilePath(this, ModuleHelper.MODULE_TAPPER);
@@ -141,8 +118,8 @@ public class TapperTestingActivity extends Activity {
         try {
             FileWriter fileWrite = new FileWriter(file, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWrite);
-            bufferedWriter.write(isRight+"\n");
-            for (String line : content){
+            bufferedWriter.write(isRight + "\n");
+            for (String line : content) {
                 bufferedWriter.write(line + "\n");
             }
             //Important! Have a new line in the end of txt file.
@@ -168,4 +145,5 @@ public class TapperTestingActivity extends Activity {
             mp = null;
         }
     }
+
 }
