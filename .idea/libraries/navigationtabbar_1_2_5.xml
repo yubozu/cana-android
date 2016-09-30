@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="navigationtabbar-1.2.5">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.devlight.navigationtabbar/navigationtabbar/1.2.5/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.devlight.navigationtabbar/navigationtabbar/1.2.5/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.devlight.navigationtabbar/navigationtabbar/1.2.5/bd1614ecd6823832679609b208b8304eb99f0703/navigationtabbar-1.2.5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
