@@ -37,6 +37,7 @@ public class HistoryProvider {
     private OkHttpClient client;
     private UserProvider userProvider;
     private String baseUrl = "b4cce327.ngrok.io";
+//    private String baseUrl = "test.tunnel.mkdef.com:8080";
     private String[] mHistoryColumns = {DataBaseHelper.HISTORY_ID, DataBaseHelper.HISTORY_USER_UUID, DataBaseHelper.HISTORY_TYPE, DataBaseHelper.HISTORY_FILE,
             DataBaseHelper.HISTORY_IS_UPLOADED, "datetime(history_create_time, 'localtime') as history_create_time", DataBaseHelper.HISTORY_DOCTOR, DataBaseHelper.HISTORY_RATING};
     private int total;
@@ -152,7 +153,8 @@ public class HistoryProvider {
                             RequestBody.create(MediaType.parse("text/plain"), file))
                     .addFormDataPart("uuid", user.uuid)
                     .addFormDataPart("name", user.name)
-                    .addFormDataPart("gender", user.gender?"Female":"Male")
+                    .addFormDataPart("gender", String.valueOf(user.gender))
+                    .addFormDataPart("age", String.valueOf(user.age))
                     .addFormDataPart("date", history.createdTime)
                     .addFormDataPart("type", history.type)
                     .addFormDataPart("rating", String.valueOf(history.rating))
