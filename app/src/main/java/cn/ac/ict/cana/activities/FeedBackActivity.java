@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.iarcuschin.simpleratingbar.SimpleRatingBar;
@@ -34,14 +35,16 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class FeedBackActivity extends Activity {
 
-    Button btn_save;
-    Button btn_cancel;
-    TextView tv_evaluation;
-    TextView tv_module;
+    Button btnSave;
+    Button btnCancel;
+    TextView tvEvaluation;
+    TextView tvModule;
+    EditText editTextDocotr;
     private SharedPreferences sharedPreferences;
     SimpleRatingBar ratingBar;
     ToastManager toastManager;
     int rate;
+    String doctor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +56,11 @@ public class FeedBackActivity extends Activity {
 
     private void init(){
         toastManager = new ToastManager(this);
-        rate = 5;
+        editTextDocotr = (EditText) findViewById(R.id.edittext_doctor);
+        rate = 0;
         ratingBar = (SimpleRatingBar) findViewById(R.id.rating_bar);
         ratingBar.setStepSize(1);
-        ratingBar.setRating(5.0f);
+        ratingBar.setRating(0f);
         ratingBar.setFillColor(ContextCompat.getColor(this, R.color.freebie_2));
         ratingBar.setBorderColor(ContextCompat.getColor(this, R.color.freebie_2));
         ratingBar.setPressedBorderColor(ContextCompat.getColor(this, R.color.freebie_2));
@@ -74,36 +78,46 @@ public class FeedBackActivity extends Activity {
             }
         });
 
-        tv_evaluation = (TextView) findViewById(R.id.tv_evaluation);
-        tv_module = (TextView) findViewById(R.id.tv_module_name);
+        tvEvaluation = (TextView) findViewById(R.id.tv_evaluation);
+        tvModule = (TextView) findViewById(R.id.tv_module_name);
 
         sharedPreferences = getSharedPreferences("Cana", Context.MODE_PRIVATE);
         String uuid = sharedPreferences.getString("SelectedUser", "None");
         String moduleName = sharedPreferences.getString("ModuleName", "None");
         String filePath = sharedPreferences.getString("HistoryFilePath", "None");
 
+//        Set to doctor who used last time by default.
+        doctor = sharedPreferences.getString("DoctorName", "");
+        editTextDocotr.setText(doctor);
+
         UserProvider userProvider = new UserProvider(DataBaseHelper.getInstance(this));
         String name = userProvider.getUsernameByUuid(uuid);
 
-        final History history = new History(uuid, moduleName, filePath);
+        final History history = new History(uuid, moduleName, filePath, 0, "");
         String content = "Name: " + name + "\n";
         content += ModuleHelper.getEvaluation(history);
 
-        tv_evaluation.setText(content);
-        tv_module.setText(ModuleHelper.getName(this, history.type));
+        tvEvaluation.setText(content);
+        tvModule.setText(ModuleHelper.getName(this, history.type));
 
-        btn_save = (Button) findViewById(R.id.btn_save);
-        btn_cancel = (Button) findViewById(R.id.btn_cancel);
-        btn_save.setOnClickListener(new View.OnClickListener() {
+        btnSave = (Button) findViewById(R.id.btn_save);
+        btnCancel = (Button) findViewById(R.id.btn_cancel);
+        btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                toastManager.show("Exam saved with rating " + rate);
-                saveToStorage(history);
-                startNextActivity();
+                if (!editTextDocotr.getText().toString().equals("")) {
+                    toastManager.show("Save success.");
+                    history.rating = rate;
+                    history.doctor = editTextDocotr.getText().toString();
+                    saveToStorage(history);
+                    startNextActivity();
+                } else {
+                  toastManager.show("Please input doctor's name");
+                }
             }
         });
 
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
+        btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(FeedBackActivity.this, SweetAlertDialog.WARNING_TYPE)
@@ -132,8 +146,10 @@ public class FeedBackActivity extends Activity {
     }
 
     private void startNextActivity(){
+
         startActivity(new Intent(FeedBackActivity.this, MainActivity_.class));
         finish();
+
     }
 
     private void deleteHistory(History history){
@@ -150,6 +166,7 @@ public class FeedBackActivity extends Activity {
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putLong("HistoryId", history.id);
+        editor.putString("DoctorName", history.doctor);
         editor.apply();
 
         EventBus.getDefault().post(new NewHistoryEvent());
