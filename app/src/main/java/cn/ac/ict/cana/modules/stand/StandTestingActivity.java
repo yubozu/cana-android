@@ -3,7 +3,6 @@ package cn.ac.ict.cana.modules.stand;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
@@ -87,7 +86,7 @@ public class StandTestingActivity extends Activity {
                     stopSensors();
                     showDialog();
                 }
-                return timeRemainingInMillis/1000+1+"秒";
+                return String.valueOf(timeRemainingInMillis/1000+1);
             }
         });
         ttv.start(start,end);
@@ -123,25 +122,10 @@ public class StandTestingActivity extends Activity {
     }
     private void showDialog()
     {
-        builder = new AlertDialog.Builder(StandTestingActivity.this);
-        builder.setTitle(getString(R.string.dialog_title));
-        builder.setMessage(getString(R.string.dialog_content));
-        builder.setPositiveButton(getString(R.string.btn_save), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
                 saveToStorage();
                 startActivity(new Intent(StandTestingActivity.this, ModuleHelper.getActivityAfterExam()));
                 finish();
-            }
-        });
-        builder.setNegativeButton(getString(R.string.btn_cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(StandTestingActivity.this, ModuleHelper.getActivityAfterExam()));
-                finish();
-            }
-        });
-        builder.show();
+
     }
     class AccEventListener implements SensorEventListener {
 

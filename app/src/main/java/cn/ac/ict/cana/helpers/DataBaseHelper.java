@@ -38,6 +38,9 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public static final String HISTORY_FILE = "history_file";
     public static final String HISTORY_IS_UPLOADED = "history_is_uploaded";
     public static final String HISTORY_CREATE_TIME = "history_create_time";
+    public static final String HISTORY_RATING = "history_rating";
+    public static final String HISTORY_DOCTOR = "history_doctor";
+
 
     private static final String HISTORY_TABLE_CREATE = "CREATE TABLE " + HISTORY_TABLE_NAME + "("
             + HISTORY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -45,7 +48,9 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             + HISTORY_TYPE + " CHAR(20) NOT NULL,"
             + HISTORY_FILE + " CHAR(256) NOT NULL,"
             + HISTORY_IS_UPLOADED + " INTEGER NOT NULL,"
-            + HISTORY_CREATE_TIME + " TIMESTAMP NOT NULL DEFAULT current_timestamp"
+            + HISTORY_CREATE_TIME + " TIMESTAMP NOT NULL DEFAULT current_timestamp, "
+            + HISTORY_RATING + " INTEGER NOT NULL,"
+            + HISTORY_DOCTOR + " CHAR(20) NOT NULL"
             + ");";
 
     private volatile static DataBaseHelper mDataBaseHelper;

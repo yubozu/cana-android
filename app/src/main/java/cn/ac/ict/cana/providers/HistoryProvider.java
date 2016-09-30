@@ -38,7 +38,7 @@ public class HistoryProvider {
     private UserProvider userProvider;
     private String baseUrl = "b4cce327.ngrok.io";
     private String[] mHistoryColumns = {DataBaseHelper.HISTORY_ID, DataBaseHelper.HISTORY_USER_UUID, DataBaseHelper.HISTORY_TYPE, DataBaseHelper.HISTORY_FILE,
-            DataBaseHelper.HISTORY_IS_UPLOADED, "datetime(history_create_time, 'localtime') as history_create_time"};
+            DataBaseHelper.HISTORY_IS_UPLOADED, "datetime(history_create_time, 'localtime') as history_create_time", DataBaseHelper.HISTORY_DOCTOR, DataBaseHelper.HISTORY_RATING};
     private int total;
     private ArrayList<Call> callList;
 
@@ -61,7 +61,8 @@ public class HistoryProvider {
         values.put(DataBaseHelper.HISTORY_TYPE, history.type);
         values.put(DataBaseHelper.HISTORY_FILE, history.filePath);
         values.put(DataBaseHelper.HISTORY_IS_UPLOADED, history.isUpload);
-
+        values.put(DataBaseHelper.HISTORY_RATING, history.rating);
+        values.put(DataBaseHelper.HISTORY_DOCTOR, history.doctor);
         return mDatabase.insert(DataBaseHelper.HISTORY_TABLE_NAME, null, values);
     }
     
@@ -80,7 +81,9 @@ public class HistoryProvider {
                 String file = cursor.getString(cursor.getColumnIndex(DataBaseHelper.HISTORY_FILE));
                 boolean isUploaded = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.HISTORY_IS_UPLOADED)) == 1;
                 String createdTime = cursor.getString(cursor.getColumnIndex(DataBaseHelper.HISTORY_CREATE_TIME));
-                histories.add(new History(id, uuid, type, file, isUploaded, createdTime));
+                int rating = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.HISTORY_RATING));
+                String doctor = cursor.getString(cursor.getColumnIndex(DataBaseHelper.HISTORY_DOCTOR));
+                histories.add(new History(id, uuid, type, file, isUploaded, createdTime, rating, doctor));
             }
             cursor.close();
         }
@@ -152,7 +155,8 @@ public class HistoryProvider {
                     .addFormDataPart("gender", user.gender?"Female":"Male")
                     .addFormDataPart("date", history.createdTime)
                     .addFormDataPart("type", history.type)
-                    // TODO: fill in all information. Check with content write in file.
+                    .addFormDataPart("rating", String.valueOf(history.rating))
+                    .addFormDataPart("doctor", history.doctor)
                     .build();
             Request request = new Request.Builder().url(url).post(formBody).build();
             Call call = client.newCall(request);

@@ -26,15 +26,10 @@
         android:src="@drawable/count" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="10dp"
+        style="@style/module_main_page"
         android:text="@string/count_tips"
-        android:lineSpacingMultiplier="1.3"
         android:layout_weight="0.1"
-        android:textColor="@color/freebie_6"
-        android:textSize="@dimen/material_component_lists_single_line_text_size" />
+    />
 
     <Button
         android:layout_width="match_parent"

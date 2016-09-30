@@ -125,4 +125,5 @@
     <!-- Tooltips -->
     <!-- Title -->
     <dimen name="material_component_text_title_text_size">25sp</dimen>
+    <dimen name="material_component_text_module_tips_text_size">16dp</dimen>
 </resources>

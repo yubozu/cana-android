@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">PD助手</string>
-    <string name="welcome_image">示例图</string>
-    <string name="welcome_tip">Health @ ICT</string>
-    <string name="welcome_year">2016</string>
+    <string name="welcome_tip">帕金森病智慧医疗联合实验室</string>
+    <string name="welcome_name">中科 宣武</string>
     <!-- numbers -->
     <string name="zero">0</string>
     <string name="one">1</string>
@@ -36,7 +35,8 @@
     <string name="btn_begin">开始测试</string>
     <string name="btn_start_record">开始录音</string>
     <string name="btn_finish">完成测试</string>
-    <string name="btn_discard">bu保存</string>
+    <string name="btn_discard">不保存</string>
+
     <!-- page -->
     <string name="page_exam">检测</string>
     <string name="page_user">用户</string>
@@ -71,14 +71,14 @@
     <string name="user_female">女</string>
 
     <!-- Count -->
-    <string name="count_tips">\n请您记住接下来屏幕上出现的数字，点击继续按钮进行测试！</string>
+    <string name="count_tips">\n请您记住接下来屏幕上出现的数字，点击继续按钮开始测试！</string>
     <string name="count_hint">请输入看到的数字</string>
     <string name="count_times">正确!一共进行了%1$d次尝试。您的输入为:</string>
     <string name="count_right_answer">正确的答案是%1$s。</string>
     <string name="count_wrong_answer">输入有误!一共尝试了%1$d次。</string>
 
     <!-- Face -->
-    <string name="face_tips">请打开手机扬声器，仔细聆听语音提示，并按照提示完成相应动作。</string>
+    <string name="face_tips">本测试将录制您的面部表情，请仔细聆听语音，按照提示完成相应动作，并保证面部完整地出现在画面中。</string>
     <string name="face_task_1">请闭眼</string>
     <string name="face_task_2">请放松，直视前方</string>
     <string name="face_task_3">请微笑并露出牙齿</string>
@@ -111,9 +111,19 @@
     <string name="tapper_middle_finger">中指</string>
     <string name="tapper_tips">请用食指和中指以最快的速度交替点击按钮,持续10秒钟</string>
     <string name="tapper_count_down">测试倒计时: %d</string>
-    <string name="tapper_main_hand">请选择测试手:</string>
-    <string name="tapper_main_lefthand">左手</string>
+    <string name = "tapper_main_hand">请选择测试手:</string>
+    <string name = "tapper_main_lefthand">左手</string>
     <string name="tapper_main_righthand">右手</string>
     <string name="tapper_image_description">示例图</string>
+    <string name="tapper_main_tip">请点击开始测试按钮,进入测试页面</string>
+    <!-- Feedback -->
+    <string name="input_doctor_name">请输入医生姓名</string>
+    <string name="doctor_name">医生姓名:</string>
+    <string name="rating">评分:</string>
+    <string name="please_evaluate">请评估此次测试:</string>
+    <string name="save_success">保存成功</string>
+    <string name="are_you_sure">你确定吗?</string>
+    <string name="cannot_recover">请注意,该操作将无法进行恢复。</string>
+
 </resources>
 
