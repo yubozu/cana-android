@@ -37,7 +37,7 @@ public class FeedBackActivity extends Activity {
 
     Button btnSave;
     Button btnCancel;
-    TextView tvEvaluation;
+    TextView tvEvaluation, tv_name, tv_time;
     TextView tvModule;
     EditText editTextDocotr;
     private SharedPreferences sharedPreferences;
@@ -80,7 +80,8 @@ public class FeedBackActivity extends Activity {
 
         tvEvaluation = (TextView) findViewById(R.id.tv_evaluation);
         tvModule = (TextView) findViewById(R.id.tv_module_name);
-
+        tv_name = (TextView) findViewById(R.id.tv_fb_name);
+        tv_time = (TextView) findViewById(R.id.tv_fb_time);
         sharedPreferences = getSharedPreferences("Cana", Context.MODE_PRIVATE);
         String uuid = sharedPreferences.getString("SelectedUser", "None");
         String moduleName = sharedPreferences.getString("ModuleName", "None");
@@ -94,10 +95,10 @@ public class FeedBackActivity extends Activity {
         String name = userProvider.getUsernameByUuid(uuid);
 
         final History history = new History(uuid, moduleName, filePath, 0, "");
-        String content = getResources().getString(R.string.page_user) + ":" + name + "\n";
-        content += ModuleHelper.getEvaluation(history);
+        tv_name.setText(name);
+        tv_time.setText(history.createdTime);
 
-        tvEvaluation.setText(content);
+        tvEvaluation.setText(ModuleHelper.getEvaluation(history));
         tvModule.setText(ModuleHelper.getName(this, history.type));
 
         btnSave = (Button) findViewById(R.id.btn_save);
