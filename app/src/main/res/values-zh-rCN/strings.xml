@@ -2,6 +2,7 @@
     <string name="app_name">PD助手</string>
     <string name="welcome_tip">帕金森病智慧医疗联合实验室</string>
     <string name="welcome_name">中科 宣武</string>
+    <string name="second_back">再点击一次退出</string>
     <!-- numbers -->
     <string name="zero">0</string>
     <string name="one">1</string>

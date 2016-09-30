@@ -150,6 +150,11 @@ public class FeedBackActivity extends Activity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        btnCancel.performClick();
+    }
+
     private void startNextActivity() {
 
         startActivity(new Intent(FeedBackActivity.this, MainActivity_.class));
