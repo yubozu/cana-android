@@ -17,6 +17,8 @@ import com.iarcuschin.simpleratingbar.SimpleRatingBar;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.events.NewHistoryEvent;
@@ -96,8 +98,10 @@ public class FeedBackActivity extends Activity {
 
         final History history = new History(uuid, moduleName, filePath, 0, "");
         tv_name.setText(name);
-        tv_time.setText(history.createdTime);
-
+        Date d = new Date();
+        d.setTime(System.currentTimeMillis());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        tv_time.setText(sdf.format(d));
         tvEvaluation.setText(ModuleHelper.getEvaluation(history));
         tvModule.setText(ModuleHelper.getName(this, history.type));
 
