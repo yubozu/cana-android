@@ -77,7 +77,7 @@ public class TapperTestingActivity extends Activity {
                     saveToStorage();
                     startActivity(new Intent(TapperTestingActivity.this, ModuleHelper.getActivityAfterExam()));
                 }
-                return timeRemainingInMillis/1000+1+"秒";
+                return String.valueOf(timeRemainingInMillis/1000+1);
             }
         });
         ttv.start(start,end);

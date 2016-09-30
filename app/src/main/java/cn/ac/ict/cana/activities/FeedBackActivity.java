@@ -5,10 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.iarcuschin.simpleratingbar.SimpleRatingBar;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -18,6 +21,7 @@ import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.events.NewHistoryEvent;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
+import cn.ac.ict.cana.helpers.ToastManager;
 import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.providers.HistoryProvider;
 import cn.ac.ict.cana.providers.UserProvider;
@@ -35,6 +39,9 @@ public class FeedBackActivity extends Activity {
     TextView tv_evaluation;
     TextView tv_module;
     private SharedPreferences sharedPreferences;
+    SimpleRatingBar ratingBar;
+    ToastManager toastManager;
+    int rate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +52,28 @@ public class FeedBackActivity extends Activity {
     }
 
     private void init(){
+        toastManager = new ToastManager(this);
+        rate = 5;
+        ratingBar = (SimpleRatingBar) findViewById(R.id.rating_bar);
+        ratingBar.setStepSize(1);
+        ratingBar.setRating(5.0f);
+        ratingBar.setFillColor(ContextCompat.getColor(this, R.color.freebie_2));
+        ratingBar.setBorderColor(ContextCompat.getColor(this, R.color.freebie_2));
+        ratingBar.setPressedBorderColor(ContextCompat.getColor(this, R.color.freebie_2));
+        ratingBar.setPressedFillColor(ContextCompat.getColor(this, R.color.freebie_2));
+        ratingBar.setOnRatingBarChangeListener(new SimpleRatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(SimpleRatingBar simpleRatingBar, float rating, boolean fromUser) {
+                Log.d("RateBar", "Rating: " + rating);
+            }
+        });
+        ratingBar.setOnRatingBarChangeListener(new SimpleRatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(SimpleRatingBar simpleRatingBar, float rating, boolean fromUser) {
+                rate = Math.round(rating);
+            }
+        });
+
         tv_evaluation = (TextView) findViewById(R.id.tv_evaluation);
         tv_module = (TextView) findViewById(R.id.tv_module_name);
 
@@ -68,6 +97,7 @@ public class FeedBackActivity extends Activity {
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                toastManager.show("Exam saved with rating " + rate);
                 saveToStorage(history);
                 startNextActivity();
             }
@@ -86,7 +116,7 @@ public class FeedBackActivity extends Activity {
                                 sDialog.dismissWithAnimation();
                             }
                         })
-                        .setCancelText(getString(R.string.btn_cancel))
+                        .setCancelText("bu baocun!")
                         .showCancelButton(true)
                         .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
                             @Override
