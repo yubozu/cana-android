@@ -62,6 +62,7 @@ public class TapperTestingActivity extends Activity {
             }
         });
         mp.start();
+        setEnable(false);
     }
 
     private void initTickTockView()
@@ -155,5 +156,16 @@ public class TapperTestingActivity extends Activity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("HistoryFilePath", filePath);
         editor.apply();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(mp.isPlaying())
+        {
+            mp.stop();
+            mp.release();
+            mp = null;
+        }
     }
 }
