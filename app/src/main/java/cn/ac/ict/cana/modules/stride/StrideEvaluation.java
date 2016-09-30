@@ -1,5 +1,7 @@
 package cn.ac.ict.cana.modules.stride;
 
+import android.content.Context;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -20,7 +22,7 @@ public class StrideEvaluation {
 
     }
 
-    static public String evaluation(History history){
+    static public String evaluation(History history,Context context){
         int trailCount = 0;
         int currentTrail = 0;
         boolean isAcc = FALSE;

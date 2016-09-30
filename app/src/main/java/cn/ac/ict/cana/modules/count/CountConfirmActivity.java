@@ -5,13 +5,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -21,8 +26,11 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import cn.ac.ict.cana.R;
+import cn.ac.ict.cana.events.NewHistoryEvent;
+import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.History;
+import cn.ac.ict.cana.providers.HistoryProvider;
 
 /**
  * Created by zhongxi on 2016/8/22.
@@ -61,6 +69,7 @@ public class CountConfirmActivity extends Activity {
         randomStr = randomStr.substring(0,6);
         nextet = (EditText)findViewById(R.id.et_answer);
         nextet.setInputType(EditorInfo.TYPE_CLASS_PHONE);
+        nextet.addTextChangedListener(mTextWatcher);
         nextbtn = (Button) findViewById(R.id.btn_confirm);
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +115,7 @@ public class CountConfirmActivity extends Activity {
         SharedPreferences sharedPreferences = getSharedPreferences("Cana", Context.MODE_PRIVATE);
 //        String uuid = sharedPreferences.getString("selectedUser", "None");
 //        HistoryProvider historyProvider = new HistoryProvider(DataBaseHelper.getInstance(this));
-////        History history = new History(this, uuid, ModuleHelper.MODULE_COUNT);
+//        History history = new History(this, uuid, ModuleHelper.MODULE_COUNT);
 
         // Example: How to write data to file.
         String filePath = History.getFilePath(this, ModuleHelper.MODULE_COUNT);
@@ -132,6 +141,33 @@ public class CountConfirmActivity extends Activity {
         editor.putString("HistoryFilePath", filePath);
         editor.apply();
 
-//        EventBus.getDefault().post(new NewHistoryEvent());
+//        Log.d("CountSaveToStorage", String.valueOf(history.id));
+        EventBus.getDefault().post(new NewHistoryEvent());
+
+//        Toast.makeText(getApplicationContext(), CountEvaluation.evaluation(history),Toast.LENGTH_SHORT).show();
     }
+
+    TextWatcher mTextWatcher = new TextWatcher() {
+
+        private CharSequence temp;
+        private int editStart;
+        private int editEnd;
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            temp = charSequence;
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if(temp.length()>=6){
+                ((InputMethodManager)getSystemService(INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(CountConfirmActivity.this.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
+    };
 }

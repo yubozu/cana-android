@@ -1,5 +1,7 @@
 package cn.ac.ict.cana.modules.sound;
 
+import android.content.Context;
+
 import cn.ac.ict.cana.models.History;
 
 /**
@@ -12,7 +14,7 @@ public class SoundEvaluation {
 
     }
 
-    static public String evaluation(History history){
+    static public String evaluation(History history,Context context){
 
 //        Do something here.
 

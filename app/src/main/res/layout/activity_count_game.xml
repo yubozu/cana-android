@@ -9,11 +9,12 @@
     <TextView
         android:id="@+id/tvnum"
         android:gravity="center"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:textSize="80sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="150sp"
         android:textStyle="bold"
         android:visibility="invisible"
+        android:textColor="@color/freebie_4"
         />
 
 </LinearLayout>
