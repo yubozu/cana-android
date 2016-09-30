@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import cn.ac.ict.cana.R;
+import cn.ac.ict.cana.activities.MainActivity_;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.utils.FloatVector;
@@ -193,6 +194,7 @@ public class GoActivity extends Activity {
 
         }
         stop();
+        MainActivity_.intent(GoActivity.this).start();
         super.onPause();
     }
 

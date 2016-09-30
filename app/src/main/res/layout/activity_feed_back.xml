@@ -22,8 +22,7 @@
     <!--Info of user-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1"
+        android:layout_height="wrap_content"
         android:background="@color/freebie_1"
         android:orientation="vertical"
         android:paddingBottom="@dimen/material_component_bottom_sheet_edge_top_bottom_margins"
@@ -55,17 +54,14 @@
         <!--second info of user-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:text="@string/test_time"
                 android:textColor="@color/freebie_2" />
-
             <TextView
                 android:id="@+id/tv_fb_time"
                 android:layout_width="match_parent"
@@ -78,7 +74,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.1"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
