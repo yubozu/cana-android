@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/material_component_button_height"
             android:gravity="center_vertical"
-            android:text="Fields below filled by doctor:"
+            android:text="@string/please_evaluate"
             android:textColor="@color/freebie_2"/>
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                 android:gravity="center_vertical"
                 android:textColor="@color/freebie_2"
                 android:layout_weight="0.4"
-                android:text="Rating:"/>
+                android:text="@string/rating"/>
 
             <com.iarcuschin.simpleratingbar.SimpleRatingBar
                 android:gravity="center_vertical"
@@ -89,7 +89,7 @@
                 android:gravity="center_vertical"
                 android:textColor="@color/freebie_2"
                 android:layout_weight="0.4"
-                android:text="Your name:"/>
+                android:text="@string/doctor_name"/>
 
             <com.cengalabs.flatui.views.FlatEditText
                 android:id="@+id/edittext_doctor"
@@ -103,7 +103,7 @@
                 android:paddingBottom="10dp"
                 android:maxLines="1"
                 android:gravity="center_vertical"
-                android:hint="Input doctor's name"
+                android:hint="@string/input_doctor_name"
                 android:includeFontPadding="true"
                 flatui:fl_fieldStyle="fl_flat"
                 flatui:fl_theme="@array/freebie_reverse_edit_text"/>

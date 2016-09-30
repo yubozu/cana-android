@@ -35,6 +35,7 @@
     <string name="btn_begin">开始测试</string>
     <string name="btn_start_record">开始录音</string>
     <string name="btn_finish">完成测试</string>
+    <string name="btn_discard">不保存</string>
 
     <!-- page -->
     <string name="page_exam">检测</string>
@@ -115,5 +116,12 @@
     <string name="tapper_main_righthand">右手</string>
     <string name="tapper_image_description">示例图</string>
     <string name="tapper_main_tip">请点击开始测试按钮,进入测试页面</string>
+    <!-- Feedback -->
+    <string name="input_doctor_name">请输入医生姓名</string>
+    <string name="doctor_name">医生姓名:</string>
+    <string name="rating">评分:</string>
+    <string name="please_evaluate">请评估此次测试:</string>
+    <string name="save_success">保存成功</string>
+
 </resources>
 

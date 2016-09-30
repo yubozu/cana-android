@@ -54,7 +54,7 @@ public class FeedBackActivity extends Activity {
         init();
     }
 
-    private void init(){
+    private void init() {
         toastManager = new ToastManager(this);
         editTextDocotr = (EditText) findViewById(R.id.edittext_doctor);
         rate = 0;
@@ -94,7 +94,7 @@ public class FeedBackActivity extends Activity {
         String name = userProvider.getUsernameByUuid(uuid);
 
         final History history = new History(uuid, moduleName, filePath, 0, "");
-        String content = "Name: " + name + "\n";
+        String content = getResources().getString(R.string.page_user) + ":" + name + "\n";
         content += ModuleHelper.getEvaluation(history);
 
         tvEvaluation.setText(content);
@@ -106,13 +106,13 @@ public class FeedBackActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (!editTextDocotr.getText().toString().equals("")) {
-                    toastManager.show("Save success.");
+                    toastManager.show(getResources().getText(R.string.save_success));
                     history.rating = rate;
                     history.doctor = editTextDocotr.getText().toString();
                     saveToStorage(history);
                     startNextActivity();
                 } else {
-                  toastManager.show("Please input doctor's name");
+                    toastManager.show(getResources().getText(R.string.input_doctor_name));
                 }
             }
         });
@@ -120,6 +120,7 @@ public class FeedBackActivity extends Activity {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TODO:
                 SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(FeedBackActivity.this, SweetAlertDialog.WARNING_TYPE)
                         .setTitleText("Are you sure?")
                         .setContentText("Won't be able to recover this file!")
@@ -130,7 +131,7 @@ public class FeedBackActivity extends Activity {
                                 sDialog.dismissWithAnimation();
                             }
                         })
-                        .setCancelText("bu baocun!")
+                        .setCancelText(String.valueOf(getResources().getText(R.string.btn_discard)))
                         .showCancelButton(true)
                         .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
                             @Override
@@ -145,14 +146,14 @@ public class FeedBackActivity extends Activity {
         });
     }
 
-    private void startNextActivity(){
+    private void startNextActivity() {
 
         startActivity(new Intent(FeedBackActivity.this, MainActivity_.class));
         finish();
 
     }
 
-    private void deleteHistory(History history){
+    private void deleteHistory(History history) {
         File file = new File(history.filePath);
         if (file.exists()) {
             Boolean result = file.delete();
@@ -160,7 +161,7 @@ public class FeedBackActivity extends Activity {
         }
     }
 
-    private void saveToStorage(History history){
+    private void saveToStorage(History history) {
         HistoryProvider historyProvider = new HistoryProvider(DataBaseHelper.getInstance(this));
         history.id = historyProvider.InsertHistory(history);
 
