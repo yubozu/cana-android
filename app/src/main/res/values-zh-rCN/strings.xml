@@ -71,14 +71,14 @@
     <string name="user_female">女</string>
 
     <!-- Count -->
-    <string name="count_tips">数字记忆，一款记忆能力的儿童类小游戏。想要锻炼好记忆，教你的宝宝从小开始，从数字开始练起，小孩子的记忆能力是最好的，学得快，容易上手，而且还记得牢。今天这款游戏是专门为你的宝宝量身定做的，监督着他，你们一起来玩玩记忆游戏吧！</string>
+    <string name="count_tips">\n请您记住接下来屏幕上出现的数字，点击继续按钮开始测试！</string>
     <string name="count_hint">请输入看到的数字</string>
     <string name="count_times">正确!一共进行了%1$d次尝试。您的输入为:</string>
     <string name="count_right_answer">正确的答案是%1$s。</string>
     <string name="count_wrong_answer">输入有误!一共尝试了%1$d次。</string>
 
     <!-- Face -->
-    <string name="face_tips">请打开手机扬声器，仔细聆听语音提示，并按照提示完成相应动作。</string>
+    <string name="face_tips">本测试将录制您的面部表情，请仔细聆听语音，按照提示完成相应动作，并保证面部完整地出现在画面中。</string>
     <string name="face_task_1">请闭眼</string>
     <string name="face_task_2">请放松，直视前方</string>
     <string name="face_task_3">请微笑并露出牙齿</string>
