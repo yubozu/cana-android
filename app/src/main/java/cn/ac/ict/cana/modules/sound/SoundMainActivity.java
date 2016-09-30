@@ -1,8 +1,6 @@
 package cn.ac.ict.cana.modules.sound;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaRecorder;
@@ -58,32 +56,14 @@ public class SoundMainActivity extends FragmentActivity {
     }
 
     public void showDialog(final boolean isFirstPager) {
-        new AlertDialog.Builder(this).setCancelable(false).setTitle(getString(R.string.dialog_title)).setMessage(R.string.dialog_content).setPositiveButton(getString(R.string.btn_save), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                SaveToStorage();
-                if (isFirstPager) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.content, new SecondFragment()).commit();
-                } else {
-                    startActivity(new Intent(SoundMainActivity.this, MainActivity_.class));
-                    finish();
-                }
-            }
-        }).setNegativeButton(getString(R.string.btn_cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        SaveToStorage();
+        if (isFirstPager) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.content, new SecondFragment()).commit();
+        } else {
+            startActivity(new Intent(SoundMainActivity.this, MainActivity_.class));
+            finish();
+        }
 
-                File file = new File(path);
-                if (file.exists()) {
-                    file.delete();
-                }
-
-                if (!isFirstPager) {
-                    startActivity(new Intent(SoundMainActivity.this, MainActivity_.class));
-                    finish();
-                }
-            }
-        }).show();
     }
 
     private void SaveToStorage(){

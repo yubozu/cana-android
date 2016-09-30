@@ -16,9 +16,7 @@
 
 package cn.ac.ict.cana.modules.face.view;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -135,22 +133,23 @@ public class VideoCaptureView extends FrameLayout implements OnClickListener {
             mThumbnailIv.setImageBitmap(videoThumbnail);
         }
         customHandler.removeCallbacks(updateTimerThread);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("结束");
-        builder.setMessage("是否保存");
-        builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mAcceptBtnIv.performClick();
-            }
-        });
-        builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mDeclineBtnIv.performClick();
-            }
-        });
-        builder.show();
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//        builder.setTitle("结束");
+//        builder.setMessage("是否保存");
+//        builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                mAcceptBtnIv.performClick();
+//            }
+//        });
+//        builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                mDeclineBtnIv.performClick();
+//            }
+//        });
+//        builder.show();
+        mAcceptBtnIv.performClick();
     }
 
 	@Override

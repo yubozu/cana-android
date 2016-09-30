@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">PD助手</string>
     <string name="welcome_image">示例图</string>
-    <string name="welcome_tip">ICT</string>
+    <string name="welcome_tip">Health @ ICT</string>
     <string name="welcome_year">2016</string>
     <!-- numbers -->
     <string name="zero">0</string>
