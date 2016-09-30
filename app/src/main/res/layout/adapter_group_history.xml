@@ -28,7 +28,6 @@
         android:includeFontPadding="false"
         android:maxEms="11"
         android:maxLines="1"
-        android:singleLine="true"
         android:textColor="#ff333333"
         android:textSize="15.0sp" />
 
