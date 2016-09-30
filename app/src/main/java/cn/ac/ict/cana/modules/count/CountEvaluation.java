@@ -43,8 +43,15 @@ public class CountEvaluation {
             e.printStackTrace();
         }
 
+        String result = "";
+        result += isRight?"您的输入正确！\n\n":"您的输入错误！\n\n";
+        result += "正确答案是："+rightAnswer+"\n";
+        result += "您的输入为：\n";
+        for(String s:tryInput){
+            result += s+"\n";
+        }
 //        return rightAnswer+":"+isRight+":"+linet;
-        return linet;
+        return result;
 
     }
 }
