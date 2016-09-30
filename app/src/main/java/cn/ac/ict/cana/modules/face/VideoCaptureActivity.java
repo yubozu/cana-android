@@ -39,6 +39,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import cn.ac.ict.cana.R;
+import cn.ac.ict.cana.activities.MainActivity_;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.modules.face.camera.CameraWrapper;
@@ -212,9 +213,10 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
 
     @Override
     protected void onPause() {
-        if (mVideoRecorder != null) {
-            mVideoRecorder.stopRecording(null);
-        }
+        super.onPause();
+//        if (mVideoRecorder != null) {
+//            mVideoRecorder.stopRecording(null);
+//        }
         if(mp1!=null)
         {
             mp1.stop();
@@ -230,13 +232,13 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
             mp3.stop();
             mp3 = null;
         }
+        if(timer!=null)
+        {
+            timer.cancel();
+            timer = null;
+        }
         releaseAllResources();
-        this.finish();
-        super.onPause();
-    }
-
-    @Override
-    public void onBackPressed() {
+        //iv_bt.performClick();
         finishCancelled();
     }
 
@@ -296,7 +298,9 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
         {
             mVideoFile.delete();
         }
+        MainActivity_.intent(this).start();
         finish();
+
     }
 
     private void finishError(final String message) {

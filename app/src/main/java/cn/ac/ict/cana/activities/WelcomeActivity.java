@@ -21,4 +21,9 @@ public class WelcomeActivity extends Activity {
             }
         },2500);
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }
