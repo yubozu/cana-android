@@ -169,6 +169,7 @@ public class MainActivity extends Activity {
     public void onBackPressed(){
         Log.d("onBackPressed", "Function entered");
         cancelUpload();
+        super.onBackPressed();
     }
 
 }

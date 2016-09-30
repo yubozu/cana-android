@@ -19,7 +19,13 @@
         android:layout_margin="10dp"
         android:textColor="@color/freebie_4"
         android:textSize="@dimen/material_component_text_title_text_size" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:background="@color/freebie_1">
 
+    </LinearLayout>
     <TextView
         android:id="@+id/tv_evaluation"
         android:layout_width="match_parent"
@@ -40,6 +46,7 @@
         android:orientation="vertical"
         android:background="@color/freebie_1"
         android:paddingStart="@dimen/material_component_button_text_left_and_right_padding"
+        android:layout_marginTop="8dp"
         android:paddingEnd="@dimen/material_component_button_text_left_and_right_padding"
         android:paddingTop="@dimen/material_component_bottom_sheet_edge_top_bottom_margins"
         android:paddingBottom="@dimen/material_component_bottom_sheet_edge_top_bottom_margins"
