@@ -1,4 +1,4 @@
-package cn.ac.ict.cana.modules.face;
+package cn.ac.ict.cana.modules.sound;
 
 import android.content.Context;
 
@@ -9,8 +9,8 @@ import cn.ac.ict.cana.models.History;
  * Date: 9/28/16
  */
 
-public class FaceEvaluation {
-    public FaceEvaluation() {
+public class SoundEvaluation {
+    public SoundEvaluation() {
 
     }
 

@@ -36,21 +36,30 @@ public class CountMainActivity extends Activity {
         bt_begin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    mp.start();
-            }
-        });
+                if(mp!=null)
+                {
+                    mp.stop();
+                    mp.release();
+                    mp=null;
 
-        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        mp = MediaPlayer.create(getApplicationContext(), R.raw.cognition_guide);
-        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                vibrator.vibrate(pattern, -1);
+                }
                 Intent intent = new Intent(getApplicationContext(), CountGameActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
+
+//        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        mp = MediaPlayer.create(getApplicationContext(), R.raw.count_guide);
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+//                vibrator.vibrate(pattern, -1);
+                mp = null;
+            }
+        });
+
+        mp.start();
     }
 
     @Override

@@ -73,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tapper_tips"
-        style="@style/module_tips"
+        style="@style/module_main_page"
       />
 
     <LinearLayout
@@ -81,12 +81,13 @@
         android:layout_height="0dp"
         android:layout_weight="0.1"
         android:layout_marginBottom="10dp"
+        android:gravity="center_vertical"
         >
 
         <ImageButton
             android:id="@+id/btn_left"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="200dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
             android:background="@drawable/tapper_click"
@@ -101,7 +102,7 @@
         <ImageButton
             android:id="@+id/btn_right"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="200dp"
             android:layout_weight="1"
             android:scaleType="centerInside"
             android:background="@drawable/tapper_click"

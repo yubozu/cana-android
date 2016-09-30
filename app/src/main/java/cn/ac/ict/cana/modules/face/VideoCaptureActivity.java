@@ -27,7 +27,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore.Video.Thumbnails;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
@@ -36,15 +35,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.activities.MainActivity_;
-import cn.ac.ict.cana.events.NewHistoryEvent;
-import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.modules.face.camera.CameraWrapper;
@@ -55,7 +50,6 @@ import cn.ac.ict.cana.modules.face.recorder.VideoRecorder;
 import cn.ac.ict.cana.modules.face.recorder.VideoRecorderInterface;
 import cn.ac.ict.cana.modules.face.view.RecordingButtonInterface;
 import cn.ac.ict.cana.modules.face.view.VideoCaptureView;
-import cn.ac.ict.cana.providers.HistoryProvider;
 
 public class VideoCaptureActivity extends Activity implements RecordingButtonInterface, VideoRecorderInterface {
 
@@ -219,9 +213,10 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
 
     @Override
     protected void onPause() {
-        if (mVideoRecorder != null) {
-            mVideoRecorder.stopRecording(null);
-        }
+        super.onPause();
+//        if (mVideoRecorder != null) {
+//            mVideoRecorder.stopRecording(null);
+//        }
         if(mp1!=null)
         {
             mp1.stop();
@@ -237,13 +232,13 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
             mp3.stop();
             mp3 = null;
         }
+        if(timer!=null)
+        {
+            timer.cancel();
+            timer = null;
+        }
         releaseAllResources();
-        this.finish();
-        super.onPause();
-    }
-
-    @Override
-    public void onBackPressed() {
+        //iv_bt.performClick();
         finishCancelled();
     }
 
@@ -293,7 +288,7 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
 
     private void finishCompleted() {
         saveToStorage();
-        startActivity(new Intent(this,MainActivity_.class));
+        startActivity(new Intent(this, ModuleHelper.getActivityAfterExam()));
         finish();
     }
 
@@ -303,7 +298,9 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
         {
             mVideoFile.delete();
         }
+        MainActivity_.intent(this).start();
         finish();
+
     }
 
     private void finishError(final String message) {
@@ -364,21 +361,12 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
 
     public void saveToStorage() {
         SharedPreferences sharedPreferences = getSharedPreferences("Cana", Context.MODE_PRIVATE);
-        String uuid = sharedPreferences.getString("selectedUser", "None");
-        HistoryProvider historyProvider = new HistoryProvider(DataBaseHelper.getInstance(this));
-        History history = new History(this, uuid, ModuleHelper.MODULE_FACE);
-
-        // Example: How to write data to file.
-        mVideoFile.saveTo(history.filePath);
-        history.id = historyProvider.InsertHistory(history);
+        String filePath = History.getFilePath(this, ModuleHelper.MODULE_FACE);
+        mVideoFile.saveTo(filePath);
 
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putLong("HistoryId", history.id);
+        editor.putString("HistoryFilePath", filePath);
         editor.apply();
-
-        Log.d("CountSaveToStorage", String.valueOf(history.id));
-        EventBus.getDefault().post(new NewHistoryEvent());
-
     }
 }

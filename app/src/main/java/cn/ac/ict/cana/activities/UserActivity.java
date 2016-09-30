@@ -117,7 +117,7 @@ public class UserActivity extends Activity {
             public void onClick(View v) {
                 if (userAdapter.selectedUser != null) {
                     SharedPreferences.Editor editor = settings.edit();
-                    editor.putString("selectedUser", userAdapter.selectedUser.uuid);
+                    editor.putString("SelectedUser", userAdapter.selectedUser.uuid);
                     editor.apply();
                     startModuleActivity();
                     finish();

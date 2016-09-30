@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.gigamole.navigationtabbar.ntb.NavigationTabBar;
 
@@ -20,6 +21,8 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.adapters.MainAdapter;
@@ -28,6 +31,8 @@ import cn.ac.ict.cana.events.ResponseEvent;
 import cn.ac.ict.cana.helpers.ToastManager;
 import dmax.dialog.SpotsDialog;
 import okhttp3.Call;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 /**
  * Author: saukymo
@@ -40,14 +45,17 @@ public class MainActivity extends Activity {
     @ViewById(R.id.vp_horizontal_ntb) ViewPager viewPager;
     @Bean MainAdapter mMainAdapter;
     @Bean ToastManager toastManager;
-
+    Timer timer;
+    int back = 1;
     public ArrayList<Call> callArrayList;
     private SpotsDialog mProgressDialog;
     private int success, failed;
 
     @AfterViews
     public void init() {
+        timer = new Timer(false);
         viewPager.setAdapter(mMainAdapter);
+        callArrayList = new ArrayList<>();
         int color =  Color.parseColor("#68BED9");
 
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
@@ -166,8 +174,23 @@ public class MainActivity extends Activity {
 
     @Override
     public void onBackPressed(){
-        Log.d("onBackPressed", "Function entered");
-        cancelUpload();
+        Log.d("onBackPressed", back+"Function entered");
+        if(back==1)
+        {
+            Toast.makeText(MainActivity.this, getString(R.string.second_back), 2000).show();
+            back++;
+            TimerTask tt = new TimerTask() {
+                @Override
+                public void run() {
+                    back=1;
+                }
+            };
+            timer.schedule(tt,2000);
+        }else
+        {
+            cancelUpload();
+            finish();
+        }
     }
 
 }

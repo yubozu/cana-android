@@ -3,7 +3,6 @@ package cn.ac.ict.cana.modules.stand;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
@@ -14,12 +13,9 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.bcgdv.asia.lib.ticktock.TickTockView;
 import com.daimajia.numberprogressbar.NumberProgressBar;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -30,11 +26,8 @@ import java.util.Calendar;
 
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.activities.MainActivity_;
-import cn.ac.ict.cana.events.NewHistoryEvent;
-import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.History;
-import cn.ac.ict.cana.providers.HistoryProvider;
 import cn.ac.ict.cana.utils.FloatVector;
 
 
@@ -54,14 +47,16 @@ public class StandTestingActivity extends Activity {
     ArrayList<FloatVector> gyroVectors;
     boolean start = true;
     boolean isRight = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stand_testing);
-        isRight = getIntent().getBooleanExtra("isRight",true);
-
+        isRight = getIntent().getBooleanExtra("isRight", true);
+        init();
     }
-    private void init(){
+
+    private void init() {
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         accVectors = new ArrayList<>();
         gyroVectors = new ArrayList<>();
@@ -78,29 +73,28 @@ public class StandTestingActivity extends Activity {
         mp.start();
 
     }
-    private void initTickTockView()
-    {
-        ttv = (TickTockView)findViewById(R.id.ttv);
+
+    private void initTickTockView() {
+        ttv = (TickTockView) findViewById(R.id.ttv);
         Calendar start = Calendar.getInstance();
-        start.add(Calendar.SECOND,-1);
+        start.add(Calendar.SECOND, -1);
         Calendar end = Calendar.getInstance();
-        end.add(Calendar.SECOND,10);
+        end.add(Calendar.SECOND, 10);
         ttv.setOnTickListener(new TickTockView.OnTickListener() {
             @Override
             public String getText(long timeRemainingInMillis) {
-                if(timeRemainingInMillis<=0)
-                {
+                if (timeRemainingInMillis <= 0) {
                     vibrator.vibrate(pattern, -1);
                     stopSensors();
                     showDialog();
                 }
-                return timeRemainingInMillis/1000+1+"秒";
+                return String.valueOf(timeRemainingInMillis / 1000 + 1);
             }
         });
-        ttv.start(start,end);
+        ttv.start(start, end);
     }
-    private void initSensors()
-    {
+
+    private void initSensors() {
         accEventListener = new AccEventListener();
         gyroEventListener = new GyroEventListener();
         sm = (SensorManager) StandTestingActivity.this.getSystemService(Context.SENSOR_SERVICE);
@@ -112,54 +106,44 @@ public class StandTestingActivity extends Activity {
                 SensorManager.SENSOR_DELAY_GAME);
 
     }
-    private void initProgressBars()
-    {
-        pbx = (NumberProgressBar)findViewById(R.id.pb_x);
-        pby = (NumberProgressBar)findViewById(R.id.pb_y);
-        pbz = (NumberProgressBar)findViewById(R.id.pb_z);
+
+    private void initProgressBars() {
+        pbx = (NumberProgressBar) findViewById(R.id.pb_x);
+        pby = (NumberProgressBar) findViewById(R.id.pb_y);
+        pbz = (NumberProgressBar) findViewById(R.id.pb_z);
         pbx.setMax(100);
         pby.setMax(100);
         pbz.setMax(100);
 
     }
-    private void stopSensors()
-    {
-        sm.unregisterListener(accEventListener);
-        sm.unregisterListener(gyroEventListener);
-        ttv.stop();
+
+    private void stopSensors() {
+        if(sm!=null) {
+            sm.unregisterListener(accEventListener);
+            sm.unregisterListener(gyroEventListener);
+        }
+        if(ttv!=null) {
+            ttv.stop();
+        }
     }
-    private void showDialog()
-    {
-        builder = new AlertDialog.Builder(StandTestingActivity.this);
-        builder.setTitle(getString(R.string.dialog_title));
-        builder.setMessage(getString(R.string.dialog_content));
-        builder.setPositiveButton(getString(R.string.btn_save), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                saveToStorage();
-                startActivity(new Intent(StandTestingActivity.this, MainActivity_.class));
-                finish();
-            }
-        });
-        builder.setNegativeButton(getString(R.string.btn_cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(StandTestingActivity.this, MainActivity_.class));
-                finish();
-            }
-        });
-        builder.show();
+
+    private void showDialog() {
+        saveToStorage();
+        startActivity(new Intent(StandTestingActivity.this, ModuleHelper.getActivityAfterExam()));
+        finish();
+
     }
+
     class AccEventListener implements SensorEventListener {
 
         @Override
         public void onSensorChanged(SensorEvent event) {
-            if(start) {
+            if (start) {
                 FloatVector vector = new FloatVector(event.values[0], event.values[1], event.values[2]);
                 accVectors.add(vector);
-                pbx.setProgress((int)(event.values[0]*10));
-                pby.setProgress((int)(event.values[1]*10));
-                pbz.setProgress((int)(event.values[2]*10));
+                pbx.setProgress((int) (event.values[0] * 10));
+                pby.setProgress((int) (event.values[1] * 10));
+                pbz.setProgress((int) (event.values[2] * 10));
             }
         }
 
@@ -173,8 +157,8 @@ public class StandTestingActivity extends Activity {
 
         @Override
         public void onSensorChanged(SensorEvent event) {
-            if(start) {
-                FloatVector gyroVector = new  FloatVector(event.values[0], event.values[1], event.values[2]);
+            if (start) {
+                FloatVector gyroVector = new FloatVector(event.values[0], event.values[1], event.values[2]);
                 gyroVectors.add(gyroVector);
             }
         }
@@ -187,36 +171,36 @@ public class StandTestingActivity extends Activity {
 
     @Override
     protected void onPause() {
+        if (mp != null) {
+            mp.stop();
+            mp.release();
+            mp = null;
+        }
         stopSensors();
+        MainActivity_.intent(StandTestingActivity.this).start();
         this.finish();
+
         super.onPause();
     }
 
-    @Override
-    protected void onResume() {
-        init();
-        super.onResume();
-    }
 
-    public void saveToStorage(){
+    public void saveToStorage() {
         SharedPreferences sharedPreferences = getSharedPreferences("Cana", Context.MODE_PRIVATE);
-        String uuid = sharedPreferences.getString("selectedUser", "None");
-        HistoryProvider historyProvider = new HistoryProvider(DataBaseHelper.getInstance(this));
-        History history = new History(this, uuid, ModuleHelper.MODULE_STAND);
 
+        String filePath = History.getFilePath(this, ModuleHelper.MODULE_STAND);
         // Example: How to write data to file.
-        File file = new File(history.filePath);
+        File file = new File(filePath);
         try {
             FileWriter fileWrite = new FileWriter(file, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWrite);
-            bufferedWriter.write(isRight+"\n");
+            bufferedWriter.write(isRight + "\n");
             bufferedWriter.write("ACC \n");
-            for (FloatVector acc: accVectors) {
+            for (FloatVector acc : accVectors) {
                 bufferedWriter.write(acc.timeStamp + ", " + acc.x + ", " + acc.y + ", " + acc.z + "\n");
                 Log.d("GoActivity", String.valueOf(acc.timeStamp));
             }
             bufferedWriter.write("GYRO \n");
-            for (FloatVector gyro: gyroVectors) {
+            for (FloatVector gyro : gyroVectors) {
                 bufferedWriter.write(gyro.timeStamp + ", " + gyro.x + ", " + gyro.y + ", " + gyro.z + "\n");
             }
 
@@ -229,15 +213,8 @@ public class StandTestingActivity extends Activity {
             Log.e("ExamAdapter", e.toString());
         }
 
-        history.id = historyProvider.InsertHistory(history);
-
-
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putLong("HistoryId", history.id);
+        editor.putString("HistoryFilePath", filePath);
         editor.apply();
-
-        Log.d("CountSaveToStorage", String.valueOf(history.id));
-        EventBus.getDefault().post(new NewHistoryEvent());
-        Toast.makeText(getApplicationContext(), StandEvaluation.evaluation(history),Toast.LENGTH_SHORT).show();
     }
 }

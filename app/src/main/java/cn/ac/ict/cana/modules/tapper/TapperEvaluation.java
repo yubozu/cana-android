@@ -1,5 +1,7 @@
 package cn.ac.ict.cana.modules.tapper;
 
+import android.content.Context;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,12 +14,13 @@ import cn.ac.ict.cana.models.History;
  * Date: 9/28/16
  */
 
-public class TappingEvaluation {
-    public TappingEvaluation() {
+public class TapperEvaluation {
+    public TapperEvaluation() {
 
     }
 
-    static public String evaluation(History history){
+    static public String evaluation(History history,Context context){
+
         boolean isRight = false;
         ArrayList<Integer> handList = new ArrayList<>();
         ArrayList<Long> timeList = new ArrayList<>();
@@ -52,5 +55,4 @@ public class TappingEvaluation {
 
         return handList.size()+":"+timeList.size();
     }
-    
 }

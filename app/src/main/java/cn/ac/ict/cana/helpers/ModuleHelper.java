@@ -1,17 +1,26 @@
 package cn.ac.ict.cana.helpers;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import cn.ac.ict.cana.R;
+import cn.ac.ict.cana.activities.FeedBackActivity;
 import cn.ac.ict.cana.activities.MainActivity_;
+import cn.ac.ict.cana.models.History;
+import cn.ac.ict.cana.modules.count.CountEvaluation;
 import cn.ac.ict.cana.modules.count.CountMainActivity;
+import cn.ac.ict.cana.modules.face.FaceEvaluation;
 import cn.ac.ict.cana.modules.face.FaceMainActivity;
+import cn.ac.ict.cana.modules.sound.SoundEvaluation;
 import cn.ac.ict.cana.modules.sound.SoundMainActivity;
+import cn.ac.ict.cana.modules.stand.StandEvaluation;
 import cn.ac.ict.cana.modules.stand.StandMainActivity;
+import cn.ac.ict.cana.modules.stride.StrideEvaluation;
 import cn.ac.ict.cana.modules.stride.StrideMainActivity;
+import cn.ac.ict.cana.modules.tapper.TapperEvaluation;
 import cn.ac.ict.cana.modules.tapper.TapperMainActivity;
 
 /**
@@ -73,5 +82,28 @@ public class ModuleHelper {
                 module = MainActivity_.class;
         }
         return module;
+    }
+
+    public static Class getActivityAfterExam(){
+        return FeedBackActivity.class;
+    }
+
+    public static String getEvaluation(History history,Context context) {
+        switch (history.type) {
+            case MODULE_COUNT:
+                return CountEvaluation.evaluation(history,context);
+            case MODULE_STRIDE:
+                return StrideEvaluation.evaluation(history,context);
+            case MODULE_STAND:
+                return StandEvaluation.evaluation(history,context);
+            case MODULE_FACE:
+                return FaceEvaluation.evaluation(history,context);
+            case MODULE_TAPPER:
+                return TapperEvaluation.evaluation(history,context);
+            case MODULE_SOUND:
+                return SoundEvaluation.evaluation(history,context);
+            default:
+                throw new Resources.NotFoundException();
+        }
     }
 }

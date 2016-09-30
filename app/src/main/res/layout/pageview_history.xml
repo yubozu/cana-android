@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/freebie_9"
-    android:paddingTop="@dimen/material_component_cards_primary_title_top_padding">
+    >
 
     <cn.ac.ict.cana.widget.TreeView
         android:id="@+id/tree_view"

@@ -16,9 +16,14 @@ public class WelcomeActivity extends Activity {
 
             @Override
             public void run() {
-                MainActivity_.intent(WelcomeActivity.this).start();
-                WelcomeActivity.this.finish();
+                PermissionActivity_.intent(WelcomeActivity.this).start();
+                finish();
             }
         },2500);
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }

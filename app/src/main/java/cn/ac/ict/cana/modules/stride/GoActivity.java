@@ -18,9 +18,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -31,11 +28,8 @@ import java.util.Locale;
 
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.activities.MainActivity_;
-import cn.ac.ict.cana.events.NewHistoryEvent;
-import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.History;
-import cn.ac.ict.cana.providers.HistoryProvider;
 import cn.ac.ict.cana.utils.FloatVector;
 
 public class GoActivity extends Activity {
@@ -159,7 +153,7 @@ public class GoActivity extends Activity {
                         accList.add(accFloatVectors);
                         gyroList.add(gyroFloatVectors);
                         saveToStorage();
-                        Intent intent = new Intent(GoActivity.this, MainActivity_.class);
+                        Intent intent = new Intent(GoActivity.this, ModuleHelper.getActivityAfterExam());
                         startActivity(intent);
                         finish();
                     }
@@ -167,7 +161,8 @@ public class GoActivity extends Activity {
                 builder.setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        MainActivity_.intent(GoActivity.this).start();
+                        Intent intent = new Intent(GoActivity.this, ModuleHelper.getActivityAfterExam());
+                        startActivity(intent);
                         finish();
                     }
                 });
@@ -199,17 +194,16 @@ public class GoActivity extends Activity {
 
         }
         stop();
+        MainActivity_.intent(GoActivity.this).start();
         super.onPause();
     }
 
     public void saveToStorage(){
         SharedPreferences sharedPreferences = getSharedPreferences("Cana", Context.MODE_PRIVATE);
-        String uuid = sharedPreferences.getString("selectedUser", "None");
-        HistoryProvider historyProvider = new HistoryProvider(DataBaseHelper.getInstance(this));
-        History history = new History(this, uuid, ModuleHelper.MODULE_STRIDE);
 
+        String filePath = History.getFilePath(this, ModuleHelper.MODULE_STRIDE);
         // Example: How to write data to file.
-        File file = new File(history.filePath);
+        File file = new File(filePath);
         try {
             FileWriter fileWrite = new FileWriter(file, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWrite);
@@ -237,16 +231,8 @@ public class GoActivity extends Activity {
             Log.e("ExamAdapter", e.toString());
         }
 
-        history.id = historyProvider.InsertHistory(history);
-
-
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putLong("HistoryId", history.id);
+        editor.putString("HistoryFilePath", filePath);
         editor.apply();
-
-        Log.d("CountSaveToStorage", String.valueOf(history.id));
-        EventBus.getDefault().post(new NewHistoryEvent());
-
-        Toast.makeText(getApplicationContext(), StrideEvaluation.evaluation(history),Toast.LENGTH_SHORT).show();
     }
 }
