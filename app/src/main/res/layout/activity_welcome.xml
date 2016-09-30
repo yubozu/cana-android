@@ -3,22 +3,33 @@
     android:id="@+id/activity_welcome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    >
+    android:background="#ffffff">
+
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/ic_app"
         android:layout_centerInParent="true"
         android:contentDescription="@string/welcome_tip"
-        />
+        android:src="@drawable/ic_app" />
+
     <TextView
+        android:id="@+id/tv_welcome_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/welcome_tip"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:textSize="20sp"
-        android:layout_marginBottom="10dp"/>
+        android:text="@string/welcome_name"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/tv_welcome_tip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tv_welcome_name"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:text="@string/welcome_tip"
+        android:textSize="20sp" />
+
 
 </RelativeLayout>
