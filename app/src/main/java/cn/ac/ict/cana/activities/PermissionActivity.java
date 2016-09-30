@@ -100,9 +100,9 @@ public class PermissionActivity extends Activity {
     public void startOurApp(){
         Log.d("PermissionActivity", "Start Main activity");
 //        toastManager.show("Start main activity.");
-        Intent intent = new Intent(PermissionActivity.this,WelcomeActivity.class);
+        Intent intent = new Intent(PermissionActivity.this, MainActivity_.class);
         startActivity(intent);
-        PermissionActivity.this.finish();
+        finish();
     }
 
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {

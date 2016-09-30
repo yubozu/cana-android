@@ -27,7 +27,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore.Video.Thumbnails;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
@@ -36,14 +35,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
 import cn.ac.ict.cana.R;
-import cn.ac.ict.cana.events.NewHistoryEvent;
-import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.modules.face.camera.CameraWrapper;
@@ -54,7 +49,6 @@ import cn.ac.ict.cana.modules.face.recorder.VideoRecorder;
 import cn.ac.ict.cana.modules.face.recorder.VideoRecorderInterface;
 import cn.ac.ict.cana.modules.face.view.RecordingButtonInterface;
 import cn.ac.ict.cana.modules.face.view.VideoCaptureView;
-import cn.ac.ict.cana.providers.HistoryProvider;
 
 public class VideoCaptureActivity extends Activity implements RecordingButtonInterface, VideoRecorderInterface {
 
@@ -363,21 +357,12 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
 
     public void saveToStorage() {
         SharedPreferences sharedPreferences = getSharedPreferences("Cana", Context.MODE_PRIVATE);
-        String uuid = sharedPreferences.getString("selectedUser", "None");
-        HistoryProvider historyProvider = new HistoryProvider(DataBaseHelper.getInstance(this));
-        History history = new History(this, uuid, ModuleHelper.MODULE_FACE);
-
-        // Example: How to write data to file.
-        mVideoFile.saveTo(history.filePath);
-        history.id = historyProvider.InsertHistory(history);
+        String filePath = History.getFilePath(this, ModuleHelper.MODULE_FACE);
+        mVideoFile.saveTo(filePath);
 
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putLong("HistoryId", history.id);
+        editor.putString("HistoryFilePath", filePath);
         editor.apply();
-
-        Log.d("CountSaveToStorage", String.valueOf(history.id));
-        EventBus.getDefault().post(new NewHistoryEvent());
-
     }
 }

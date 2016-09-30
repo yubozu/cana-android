@@ -17,10 +17,15 @@ public class History {
     public String createdTime;
     public String ext;
 
-    public History(Context context, String uuid, String historyType){
+    public History(String uuid, String historyType, String filePath) {
         this.uuid = uuid;
-        type = historyType;
+        this.isUpload = false;
+        this.filePath = filePath;
+        this.type = historyType;
+    }
 
+    public static String getFilePath(Context context, String type) {
+        String ext;
         switch (type) {
             case "Face":
                 ext = ".mp4";
@@ -31,9 +36,7 @@ public class History {
             default:
                 ext = ".txt";
         }
-        filePath = context.getFilesDir().getAbsolutePath()+"/" + randomUUID().toString() + ext;
-
-        isUpload = false;
+        return context.getFilesDir().getAbsolutePath()+"/" + randomUUID().toString() + ext;
     }
 
     public History(long historyId, String uuid, String historyType, String historyFilePath, boolean historyIsUpload, String historyCreatedTime) {

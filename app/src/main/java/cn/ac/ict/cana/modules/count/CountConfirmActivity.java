@@ -1,9 +1,7 @@
 package cn.ac.ict.cana.modules.count;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,8 +16,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -28,8 +24,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import cn.ac.ict.cana.R;
-import cn.ac.ict.cana.events.NewHistoryEvent;
-import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.modules.stand.StandEvaluation;
@@ -81,22 +75,13 @@ public class CountConfirmActivity extends Activity {
                 result.add(str);
                 if(str.equals(randomStr)){
                     isRight = true;
-                    Toast.makeText(CountConfirmActivity.this, String.format(Locale.CHINA, getString(R.string.count_times), times + 1),Toast.LENGTH_SHORT).show();
-                    String msg = String.format(Locale.CHINA, getString(R.string.count_right_answer), randomStr);
-                    for (String x:result){
-                        msg+="\n"+x;
-                    }
-                    dialog(msg);
+                    saveAndContinue();
 
                 }else{
                     if(!isRight) {
                         times++;
                         if(times >=5){
-                            String msg = String.format(Locale.CHINA, getString(R.string.count_right_answer), randomStr);
-                            for (String x:result){
-                                msg+="\n"+x;
-                            }
-                            dialog(msg);
+                            saveAndContinue();
                         }
                     }
                     Toast.makeText(CountConfirmActivity.this, String.format(Locale.CHINA, getString(R.string.count_wrong_answer), times),Toast.LENGTH_SHORT).show();
@@ -107,51 +92,31 @@ public class CountConfirmActivity extends Activity {
         result = new ArrayList<>();
     }
 
-    protected void dialog(String msg) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(CountConfirmActivity.this);
-        builder.setMessage(getString(R.string.dialog_content));
+    protected void saveAndContinue() {
+        String content = randomStr;
+        if(isRight){
+            content+=";1";
+        }else{
+            content+=";0";
+        }
+        for(String x: result){
+            content+=";"+x;
+        }
 
-        builder.setTitle(getString(R.string.dialog_title));
-        builder.setPositiveButton(getString(R.string.btn_save), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String content = randomStr;
-                if(isRight){
-                    content+=";1";
-                }else{
-                    content+=";0";
-                }
-                for(String x: result){
-                    content+=";"+x;
-                }
-
-                saveToStorage(content);
-                startActivity(new Intent(CountConfirmActivity.this, ModuleHelper.getActivityAfterExam()));
-                finish();
-                dialog.dismiss();
-            }
-        });
-
-        builder.setNegativeButton(getString(R.string.btn_cancel), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(CountConfirmActivity.this, ModuleHelper.getActivityAfterExam()));
-                finish();
-                dialog.dismiss();
-            }
-        });
-
-        builder.create().show();
+        saveToStorage(content);
+        startActivity(new Intent(CountConfirmActivity.this, ModuleHelper.getActivityAfterExam()));
+        finish();
     }
 
     public void saveToStorage(String content){
         SharedPreferences sharedPreferences = getSharedPreferences("Cana", Context.MODE_PRIVATE);
-        String uuid = sharedPreferences.getString("selectedUser", "None");
-        HistoryProvider historyProvider = new HistoryProvider(DataBaseHelper.getInstance(this));
-        History history = new History(this, uuid, ModuleHelper.MODULE_COUNT);
+//        String uuid = sharedPreferences.getString("selectedUser", "None");
+//        HistoryProvider historyProvider = new HistoryProvider(DataBaseHelper.getInstance(this));
+////        History history = new History(this, uuid, ModuleHelper.MODULE_COUNT);
 
         // Example: How to write data to file.
-        File file = new File(history.filePath);
+        String filePath = History.getFilePath(this, ModuleHelper.MODULE_COUNT);
+        File file = new File(filePath);
         try {
             FileWriter fileWrite = new FileWriter(file, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWrite);
@@ -166,11 +131,11 @@ public class CountConfirmActivity extends Activity {
             Log.e("ExamAdapter", e.toString());
         }
 
-        history.id = historyProvider.InsertHistory(history);
+//        history.id = historyProvider.InsertHistory(history);
 
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putLong("HistoryId", history.id);
+        editor.putString("HistoryFilePath", filePath);
         editor.apply();
 
         Log.d("CountSaveToStorage", String.valueOf(history.id));

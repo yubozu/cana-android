@@ -1,15 +1,9 @@
 package cn.ac.ict.cana.models;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import cn.ac.ict.cana.activities.MainActivity;
 import cn.ac.ict.cana.activities.UserActivity;
 
 /**
@@ -29,6 +23,7 @@ public class Exam {
         this.name = builder.name;
     }
 
+    //TODO: This method shouldn't be here. Move it out.
     public void go(Context context) {
         Intent intent = new Intent();
 

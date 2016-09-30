@@ -20,6 +20,7 @@
         android:textSize="@dimen/material_component_text_title_text_size" />
 
     <TextView
+        android:id="@+id/tv_evaluation"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
