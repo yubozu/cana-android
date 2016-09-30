@@ -27,6 +27,7 @@ public class FirstFragment extends Fragment {
     @BindView(btn_start_recorder)
     Button mBtnStartRecorder;
     SoundMainActivity mActivity;
+    private MyCount myCount;
 
     public FirstFragment() {
         super();
@@ -43,13 +44,29 @@ public class FirstFragment extends Fragment {
         return view;
     }
 
+    boolean isStartRecorder;
     @OnClick(btn_start_recorder)
     public void click() {
         if (mBtnStartRecorder.isEnabled()) {
             mActivity.prepareRecorder(fileName + "_", "first_");
         }
-        setEnable(false);
-        new MyCount(10000, 1000).start();
+        //setEnable(false);
+        setBtnText();
+    }
+
+    private void setBtnText() {
+        isStartRecorder = !isStartRecorder;
+        if (isStartRecorder) {
+            myCount = new MyCount(30000, 1000);
+            myCount.start();
+            mBtnStartRecorder.setText("结束！");
+            mBtnStartRecorder.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.freebie_2));
+        } else {
+            myCount.cancel();
+            finishRecord();
+            mBtnStartRecorder.setText("开始录音！");
+            mBtnStartRecorder.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.freebie_4));
+        }
     }
 
 
@@ -76,14 +93,21 @@ public class FirstFragment extends Fragment {
         @Override
         public void onTick(long l) {
             mBtnStartRecorder.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.freebie_2));
-            mBtnStartRecorder.setText(String.format(Locale.CHINA, getString(R.string.sound_count_down), (l / 1000)));
+          //  mBtnStartRecorder.setText(String.format(Locale.CHINA, getString(R.string.sound_count_down), (l / 1000)));
         }
 
         @Override
         public void onFinish() {
-            release();
-            mActivity.showDialog(true);
+            finishRecord();
         }
+    }
+
+    /**
+     * 完成录音
+     */
+    private void finishRecord() {
+        release();
+        mActivity.showDialog(true);
     }
 
 

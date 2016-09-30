@@ -33,7 +33,6 @@ public class SecondFragment extends Fragment {
         super();
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,14 +43,30 @@ public class SecondFragment extends Fragment {
         return view;
     }
 
+    boolean isStartRecorder;
+    private MyCount myCount;
     @OnClick(R.id.btn_start_recorder)
     public void click() {
         if (mBtnStartRecorder.isEnabled()) {
             mActivity.prepareRecorder(fileName + "_", "second_");
         }
-        setEnable(false);
-        new MyCount(10000, 1000).start();
+        setBtnText();
     }
+    private void setBtnText() {
+        isStartRecorder = !isStartRecorder;
+        if (isStartRecorder) {
+            myCount = new MyCount(30000, 1000);
+            myCount.start();
+            mBtnStartRecorder.setText("结束！");
+            mBtnStartRecorder.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.freebie_2));
+        } else {
+            myCount.cancel();
+            finishRecord();
+            mBtnStartRecorder.setText("开始录音！");
+            mBtnStartRecorder.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.freebie_4));
+        }
+    }
+
 
     private void setEnable(boolean enabled) {
         mBtnStartRecorder.setEnabled(enabled);
@@ -76,13 +91,17 @@ public class SecondFragment extends Fragment {
         @Override
         public void onTick(long l) {
             mBtnStartRecorder.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.freebie_2));
-            mBtnStartRecorder.setText(String.format(Locale.CHINA, getString(R.string.sound_count_down), (l / 1000)));
+           // mBtnStartRecorder.setText(String.format(Locale.CHINA, getString(R.string.sound_count_down), (l / 1000)));
         }
 
         @Override
         public void onFinish() {
-            release();
-            mActivity.showDialog(false);
+            finishRecord();
         }
+    }
+
+    private void finishRecord() {
+        release();
+        mActivity.showDialog(false);
     }
 }

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="flatui-3.0.0">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.eluleci/flatui/3.0.0/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.eluleci/flatui/3.0.0/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.eluleci/flatui/3.0.0/9a5f06e178df3fd657fdd94ede0764d408d8ed0d/flatui-3.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
