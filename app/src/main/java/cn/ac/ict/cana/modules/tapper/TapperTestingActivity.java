@@ -170,4 +170,16 @@ public class TapperTestingActivity extends Activity {
         EventBus.getDefault().post(new NewHistoryEvent());
         Toast.makeText(getApplicationContext(),TappingEvaluation.evaluation(history),Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(mp.isPlaying())
+        {
+            mp.stop();
+            mp.release();
+            mp = null;
+        }
+
+    }
 }
