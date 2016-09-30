@@ -114,5 +114,6 @@
     <string name = "tapper_main_lefthand">左手</string>
     <string name="tapper_main_righthand">右手</string>
     <string name="tapper_image_description">示例图</string>
+    <string name="tapper_main_tip">请点击开始测试按钮,进入测试页面</string>
 </resources>
 

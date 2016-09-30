@@ -86,7 +86,7 @@ public class FeedBackActivity extends Activity {
                                 sDialog.dismissWithAnimation();
                             }
                         })
-                        .setCancelText(getString(R.string.btn_discard))
+                        .setCancelText(getString(R.string.btn_cancel))
                         .showCancelButton(true)
                         .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
                             @Override
