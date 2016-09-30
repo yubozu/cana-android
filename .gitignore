@@ -6,3 +6,4 @@ app/build/
 build/
 cana-android.iml
 local.properties
+*.iml
