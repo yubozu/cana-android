@@ -83,8 +83,8 @@
     <string name="face_finish_error">视频拍摄失败，错误:</string>
 
     <!-- Sound -->
-    <string name="sound_task_1">请大声清楚的回答我:\n昨天晚上，您在哪吃的晚餐，吃了些什么?</string>
-    <string name="sound_task_2">请大声朗读以下这段话:\n今天我的心情特别好!</string>
+    <string name="sound_task_1">请大声清楚的完成以下两项语言测试，注意录音时尽量靠近话筒，如图所示，尽量声音洪亮，准备好请点击开始录音！</string>
+    <string name="sound_task_2">1.昨天晚上，您在哪吃的晚餐，吃了些什么?\n\n\n\n2.请大声的朗读以下这段话：\n今天天气不错，风和日丽的。我们今天没有课，感觉挺爽的。</string>
     <string name="sound_count_down">录音倒计时: %1$d秒</string>
 
     <!-- Stand -->
@@ -113,5 +113,12 @@
     <string name = "tapper_main_lefthand">左手</string>
     <string name="tapper_main_righthand">右手</string>
     <string name="tapper_image_description">示例图</string>
+
+    <array name="SoundQueston">
+        <item>1.昨天晚上，您在哪吃的晚餐，吃了些什么?</item>
+        <item>2.请大声的朗读以下这段话：\n今天天气不错，风和日丽的。我们今天没有课，感觉挺爽的。</item>
+        <item>3.请大声的朗读以下这段话：\n今天天气不错，风和日丽的。我们今天没有课，感觉挺爽的。</item>
+        <item>4.请大声的朗读以下这段话：\n今天天气不错，风和日丽的。我们今天没有课，感觉挺爽的。</item>
+    </array>
 </resources>
 

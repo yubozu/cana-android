@@ -47,11 +47,12 @@ public class FirstFragment extends Fragment {
     boolean isStartRecorder;
     @OnClick(btn_start_recorder)
     public void click() {
-        if (mBtnStartRecorder.isEnabled()) {
-            mActivity.prepareRecorder(fileName + "_", "first_");
-        }
+       // if (mBtnStartRecorder.isEnabled()) {
+           // mActivity.prepareRecorder(fileName + "_", "first_");
+        getFragmentManager().beginTransaction().replace(R.id.content, new SecondFragment()).commit();
+       // }
         //setEnable(false);
-        setBtnText();
+       // setBtnText();
     }
 
     private void setBtnText() {

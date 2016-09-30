@@ -19,7 +19,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:text="@string/sound_task_1"
-        android:textSize="@dimen/material_component_lists_single_line_text_size" />
+        android:textSize="@dimen/material_component_text_title_text_size" />
 
     <ImageView
         android:layout_width="match_parent"
