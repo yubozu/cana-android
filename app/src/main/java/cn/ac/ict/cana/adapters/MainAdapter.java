@@ -11,9 +11,9 @@ import org.androidannotations.annotations.RootContext;
 
 import java.util.HashMap;
 
-import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.pages.ExamPage;
 import cn.ac.ict.cana.pages.HistoryPage;
+import cn.ac.ict.cana.pages.SettingPage;
 import cn.ac.ict.cana.pages.UserPage;
 
 /**
@@ -60,7 +60,7 @@ public class MainAdapter extends PagerAdapter {
                     Log.d("MainAdapter history", String.valueOf(mContext));
                     break;
                 case 3:
-                    view = View.inflate(mContext, R.layout.pageview_setting, null);
+                    view = SettingPage.InitialSettingPageView(mContext);
                     Log.d("MainAdapter setting", String.valueOf(mContext));
                     break;
             }
