@@ -2,6 +2,7 @@ package cn.ac.ict.cana.modules.tapper;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +25,8 @@ public class TapperMainActivity extends Activity {
     ImageButton btn_right;
     int right = 0;
     int left = 0;
+
+    MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,15 @@ public class TapperMainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 isRight = toggleHand.isChecked();
+
+                if(mp!=null)
+                {
+                    mp.stop();
+                    mp.release();
+                    mp=null;
+
+                }
+
                 Intent intent = new Intent(TapperMainActivity.this, TapperTestingActivity.class);
                 intent.putExtra("isRight", isRight);
                 startActivity(intent);
@@ -66,6 +78,8 @@ public class TapperMainActivity extends Activity {
             }
         });
 
+        mp = MediaPlayer.create(getApplicationContext(), R.raw.tapper_guide);
+        mp.start();
 
     }
 

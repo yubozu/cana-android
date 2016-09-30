@@ -2,6 +2,7 @@ package cn.ac.ict.cana.modules.stride;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,8 @@ public class StrideMainActivity extends Activity {
     RadioGroup rg_trail;
     int trail = 1;
     Button bt_begin;
+
+    MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +38,23 @@ public class StrideMainActivity extends Activity {
                 trail = Integer.parseInt(rb.getText().toString());
             }
         });
+        mp = MediaPlayer.create(getApplicationContext(), R.raw.stride_guide);
+        mp.start();
     }
 
     class onBeginListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
+
+            if(mp!=null)
+            {
+                mp.stop();
+                mp.release();
+                mp=null;
+
+            }
+
             Intent intent = new Intent(getApplicationContext(), GoActivity.class);
 
             intent.putExtra("trail", trail);
@@ -48,5 +62,17 @@ public class StrideMainActivity extends Activity {
             finish();
 
         }
+    }
+
+    @Override
+    protected void onStop() {
+        if(mp!=null)
+        {
+            mp.stop();
+            mp.release();
+            mp=null;
+
+        }
+        super.onStop();
     }
 }

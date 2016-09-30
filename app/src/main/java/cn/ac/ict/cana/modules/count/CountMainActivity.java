@@ -17,9 +17,9 @@ import cn.ac.ict.cana.R;
 public class CountMainActivity extends Activity {
 
     Button bt_begin;
-//    Vibrator vibrator;
+    Vibrator vibrator;
     MediaPlayer mp;
-//    long[] pattern = {100, 400};
+    long[] pattern = {100, 400};
 
 
     @Override
@@ -50,7 +50,7 @@ public class CountMainActivity extends Activity {
         });
 
 //        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        mp = MediaPlayer.create(getApplicationContext(), R.raw.cognition_guide);
+        mp = MediaPlayer.create(getApplicationContext(), R.raw.count_guide);
         mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
