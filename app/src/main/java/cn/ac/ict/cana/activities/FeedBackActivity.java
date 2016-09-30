@@ -102,7 +102,7 @@ public class FeedBackActivity extends Activity {
         d.setTime(System.currentTimeMillis());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         tv_time.setText(sdf.format(d));
-        tvEvaluation.setText(ModuleHelper.getEvaluation(history));
+        tvEvaluation.setText(ModuleHelper.getEvaluation(history,FeedBackActivity.this));
         tvModule.setText(ModuleHelper.getName(this, history.type));
 
         btnSave = (Button) findViewById(R.id.btn_save);
