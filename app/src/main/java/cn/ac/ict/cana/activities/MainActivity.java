@@ -32,8 +32,6 @@ import cn.ac.ict.cana.helpers.ToastManager;
 import dmax.dialog.SpotsDialog;
 import okhttp3.Call;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
-
 /**
  * Author: saukymo
  * Date: 9/13/16
@@ -177,7 +175,7 @@ public class MainActivity extends Activity {
         Log.d("onBackPressed", back+"Function entered");
         if(back==1)
         {
-            Toast.makeText(MainActivity.this, getString(R.string.second_back), 2000).show();
+            Toast.makeText(MainActivity.this, getString(R.string.second_back), Toast.LENGTH_SHORT).show();
             back++;
             TimerTask tt = new TimerTask() {
                 @Override

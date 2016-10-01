@@ -1,6 +1,7 @@
 package cn.ac.ict.cana.modules.sound;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 
 import cn.ac.ict.cana.models.History;
 
@@ -15,9 +16,15 @@ public class SoundEvaluation {
     }
 
     static public String evaluation(History history,Context context){
-
-//        Do something here.
-
-        return "Example evaluation string";
+        String content = "";
+        MediaPlayer mp = new MediaPlayer();
+        try {
+            mp.setDataSource(history.filePath);
+            content = String.valueOf(mp.getDuration());
+        }catch (Exception e)
+        {
+            content = e.toString();
+        }
+        return content;
     }
 }

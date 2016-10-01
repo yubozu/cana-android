@@ -25,6 +25,7 @@ import android.media.CamcorderProfile;
 import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.util.Log;
 import android.view.SurfaceHolder;
 
 import java.io.IOException;
@@ -125,6 +126,8 @@ public class CameraWrapper {
 
         params.setPreviewSize(previewSize.getWidth(), previewSize.getHeight());
         params.setPreviewFormat(ImageFormat.NV21);
+        Log.e("param","configureForPreview");
+
         mNativeCamera.updateNativeCameraParameters(params);
         mNativeCamera.setDisplayOrientation((getRotationCorrection()+180)%360);
         CLog.d(CLog.CAMERA, "Preview size: " + previewSize.getWidth() + "x" + previewSize.getHeight());

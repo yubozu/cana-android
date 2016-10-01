@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore.Video.Thumbnails;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
@@ -39,7 +40,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import cn.ac.ict.cana.R;
-import cn.ac.ict.cana.activities.MainActivity_;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.modules.face.camera.CameraWrapper;
@@ -202,11 +202,11 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
         mVideoCaptureView.setRecordingButtonInterface(this);
         boolean showTimer = this.getIntent().getBooleanExtra(EXTRA_SHOW_TIMER, true);
         mVideoCaptureView.showTimer(showTimer);
-        if (mVideoRecorded) {
-            mVideoCaptureView.updateUIRecordingFinished(getVideoThumbnail());
-        } else {
-            mVideoCaptureView.updateUINotRecording();
-        }
+//        if (mVideoRecorded) {
+//            mVideoCaptureView.updateUIRecordingFinished(getVideoThumbnail());
+//        } else {
+//            mVideoCaptureView.updateUINotRecording();
+//        }
         mVideoCaptureView.showTimer(mCaptureConfiguration.getShowTimer());
 
     }
@@ -244,6 +244,7 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
 
     @Override
     public void onRecordButtonClicked() {
+        Log.d("ddd","recordbtn");
         try {
             mVideoRecorder.toggleRecording();
         } catch (AlreadyUsedException e) {
@@ -253,11 +254,13 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
 
     @Override
     public void onAcceptButtonClicked() {
+        Log.d("ddd", "onAcceptButtonClicked");
         finishCompleted();
     }
 
     @Override
     public void onDeclineButtonClicked() {
+        Log.d("ddd", "onDeclineButtonClicked: ");
         finishCancelled();
     }
 
@@ -286,9 +289,10 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
         finishError(message);
     }
 
-    private void finishCompleted() {
+    public void finishCompleted() {
         saveToStorage();
-        startActivity(new Intent(this, ModuleHelper.getActivityAfterExam()));
+        Intent intent = new Intent(VideoCaptureActivity.this, ModuleHelper.getActivityAfterExam());
+        startActivity(intent);
         finish();
     }
 
@@ -298,7 +302,6 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
         {
             mVideoFile.delete();
         }
-        MainActivity_.intent(this).start();
         finish();
 
     }
@@ -314,6 +317,7 @@ public class VideoCaptureActivity extends Activity implements RecordingButtonInt
 
     private void releaseAllResources() {
         if (mVideoRecorder != null) {
+            Log.d("releaseAllResources", "In VideoCapture");
             mVideoRecorder.releaseAllResources();
         }
     }

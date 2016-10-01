@@ -24,7 +24,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ac.ict.cana.R;
-import cn.ac.ict.cana.activities.MainActivity_;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.History;
 
@@ -75,8 +74,11 @@ public class TapperTestingActivity extends Activity {
             public String getText(long timeRemainingInMillis) {
                 if(timeRemainingInMillis<=0)
                 {
+//                    mp.release();
+//                    mp = null;
                     saveToStorage();
                     startActivity(new Intent(TapperTestingActivity.this, ModuleHelper.getActivityAfterExam()));
+                    finish();
                 }
                 return String.valueOf(timeRemainingInMillis/1000+1);
             }
@@ -150,7 +152,8 @@ public class TapperTestingActivity extends Activity {
             ttv.stop();
             ttv = null;
         }
-        MainActivity_.intent(TapperTestingActivity.this).start();
+//        MainActivity_.intent(TapperTestingActivity.this).start();
+        finish();
         super.onPause();
     }
 

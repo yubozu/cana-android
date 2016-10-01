@@ -72,7 +72,6 @@ public class TapperMainActivity extends Activity {
                 Intent intent = new Intent(TapperMainActivity.this, TapperTestingActivity.class);
                 intent.putExtra("isRight", isRight);
                 startActivity(intent);
-
             }
         });
 
@@ -81,4 +80,15 @@ public class TapperMainActivity extends Activity {
 
     }
 
+    @Override
+    protected void onPause() {
+        if(mp!=null)
+        {
+            mp.stop();
+            mp.release();
+            mp = null;
+        }
+        finish();
+        super.onPause();
+    }
 }

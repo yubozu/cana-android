@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 
 import cn.ac.ict.cana.R;
-import cn.ac.ict.cana.modules.count.CountGameActivity;
 
 public class FaceMainActivity extends Activity {
     private Button bt_begin;
@@ -43,7 +42,7 @@ public class FaceMainActivity extends Activity {
     }
 
     @Override
-    protected void onStop() {
+    protected void onPause() {
         if(mp!=null)
         {
             mp.stop();
@@ -51,7 +50,8 @@ public class FaceMainActivity extends Activity {
             mp=null;
 
         }
-        super.onStop();
+        finish();
+        super.onPause();
     }
 
 }
