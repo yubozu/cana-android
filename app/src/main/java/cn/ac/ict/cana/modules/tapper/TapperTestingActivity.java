@@ -24,6 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.ac.ict.cana.R;
+import cn.ac.ict.cana.activities.MainActivity_;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.History;
 
@@ -137,13 +138,20 @@ public class TapperTestingActivity extends Activity {
 
     @Override
     protected void onPause() {
-        super.onPause();
-        if(mp.isPlaying())
+
+        if(mp!=null)
         {
             mp.stop();
             mp.release();
             mp = null;
         }
+        if(ttv!=null)
+        {
+            ttv.stop();
+            ttv = null;
+        }
+        MainActivity_.intent(TapperTestingActivity.this).start();
+        super.onPause();
     }
 
 }

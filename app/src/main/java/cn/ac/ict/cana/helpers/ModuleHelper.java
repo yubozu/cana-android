@@ -88,20 +88,20 @@ public class ModuleHelper {
         return FeedBackActivity.class;
     }
 
-    public static String getEvaluation(History history) {
+    public static String getEvaluation(History history,Context context) {
         switch (history.type) {
             case MODULE_COUNT:
-                return CountEvaluation.evaluation(history);
+                return CountEvaluation.evaluation(history,context);
             case MODULE_STRIDE:
-                return StrideEvaluation.evaluation(history);
+                return StrideEvaluation.evaluation(history,context);
             case MODULE_STAND:
-                return StandEvaluation.evaluation(history);
+                return StandEvaluation.evaluation(history,context);
             case MODULE_FACE:
-                return FaceEvaluation.evaluation(history);
+                return FaceEvaluation.evaluation(history,context);
             case MODULE_TAPPER:
-                return TapperEvaluation.evaluation(history);
+                return TapperEvaluation.evaluation(history,context);
             case MODULE_SOUND:
-                return SoundEvaluation.evaluation(history);
+                return SoundEvaluation.evaluation(history,context);
             default:
                 throw new Resources.NotFoundException();
         }

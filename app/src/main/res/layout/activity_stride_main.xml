@@ -66,7 +66,7 @@
     <com.cengalabs.flatui.views.FlatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/module_tips"
+        style="@style/module_main_page"
         android:text="@string/stride_main_tip"
         />
 

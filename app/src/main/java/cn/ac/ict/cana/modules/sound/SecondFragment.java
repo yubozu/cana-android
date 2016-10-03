@@ -9,7 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.bcgdv.asia.lib.ticktock.TickTockView;
+
+import java.util.Calendar;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -27,12 +31,20 @@ public class SecondFragment extends Fragment {
     @BindView(R.id.btn_start_recorder)
     Button mBtnStartRecorder;
 
+    @BindView(R.id.tv_quston)
+    TextView mQueston;
+    private String[] questons;
+    int currentQueston = 0;
+
+    @BindView(R.id.ttv_tapper)
+    TickTockView ttv;
+
     private SoundMainActivity mActivity;
+
 
     public SecondFragment() {
         super();
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,17 +53,48 @@ public class SecondFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_second, container, false);
         ButterKnife.bind(this, view);
         mActivity = (SoundMainActivity) getActivity();
+
+        mActivity.prepareRecorder(fileName + "_", "second_");
+        initTickTockView();
+
+        questons = getResources().getStringArray(R.array.SoundQueston);
+        mQueston.setText(questons[0]);
         return view;
     }
 
+    boolean isStartRecorder;
+    private MyCount myCount;
     @OnClick(R.id.btn_start_recorder)
     public void click() {
-        if (mBtnStartRecorder.isEnabled()) {
+       /* if (mBtnStartRecorder.isEnabled()) {
             mActivity.prepareRecorder(fileName + "_", "second_");
         }
-        setEnable(false);
-        new MyCount(10000, 1000).start();
+        setBtnText();*/
+        ++ currentQueston;
+        if (currentQueston == questons.length - 1) {
+            mBtnStartRecorder.setText("结束！");
+        }
+        if (currentQueston < questons.length) {
+            mQueston.setText(questons[currentQueston]);
+        } else {
+            finishRecord();
+        }
     }
+    private void setBtnText() {
+        isStartRecorder = !isStartRecorder;
+        if (isStartRecorder) {
+            myCount = new MyCount(30000, 1000);
+            myCount.start();
+            mBtnStartRecorder.setText("结束！");
+            mBtnStartRecorder.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.freebie_2));
+        } else {
+            myCount.cancel();
+            finishRecord();
+            mBtnStartRecorder.setText("开始录音！");
+            mBtnStartRecorder.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.freebie_4));
+        }
+    }
+
 
     private void setEnable(boolean enabled) {
         mBtnStartRecorder.setEnabled(enabled);
@@ -76,13 +119,36 @@ public class SecondFragment extends Fragment {
         @Override
         public void onTick(long l) {
             mBtnStartRecorder.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.freebie_2));
-            mBtnStartRecorder.setText(String.format(Locale.CHINA, getString(R.string.sound_count_down), (l / 1000)));
+           // mBtnStartRecorder.setText(String.format(Locale.CHINA, getString(R.string.sound_count_down), (l / 1000)));
         }
 
         @Override
         public void onFinish() {
-            release();
-            mActivity.showDialog(false);
+            finishRecord();
         }
+    }
+
+    private void finishRecord() {
+        release();
+        mActivity.showDialog(false);
+    }
+
+    private void initTickTockView()
+    {
+        Calendar start = Calendar.getInstance();
+        start.add(Calendar.SECOND,-1);
+        Calendar end = Calendar.getInstance();
+        end.add(Calendar.SECOND,60);
+        ttv.setOnTickListener(new TickTockView.OnTickListener() {
+            @Override
+            public String getText(long timeRemainingInMillis) {
+                if(timeRemainingInMillis<=0)
+                {
+                    finishRecord();
+                }
+                return timeRemainingInMillis/1000+1+"秒";
+            }
+        });
+        ttv.start(start,end);
     }
 }

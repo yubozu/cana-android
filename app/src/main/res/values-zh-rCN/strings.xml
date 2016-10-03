@@ -3,6 +3,10 @@
     <string name="welcome_tip">帕金森病智慧医疗联合实验室</string>
     <string name="welcome_name">中科 宣武</string>
     <string name="second_back">再点击一次退出</string>
+    <string name="about">帕金森病智慧医疗联合实验室\n中国科学院计算技术研究所\n首都医科大学宣武医院</string>
+    <string name="device">尚未实现</string>
+    <string name="logs">尚未实现</string>
+    <string name="support">技术联系电话:010-62600809</string>
     <!-- numbers -->
     <string name="zero">0</string>
     <string name="one">1</string>
@@ -72,22 +76,27 @@
     <string name="user_female">女</string>
 
     <!-- Count -->
-    <string name="count_tips">数字记忆，一款记忆能力的儿童类小游戏。想要锻炼好记忆，教你的宝宝从小开始，从数字开始练起，小孩子的记忆能力是最好的，学得快，容易上手，而且还记得牢。今天这款游戏是专门为你的宝宝量身定做的，监督着他，你们一起来玩玩记忆游戏吧！</string>
+    <string name="count_tips">\n请您记住接下来屏幕上出现的数字，点击继续按钮开始测试！</string>
     <string name="count_hint">请输入看到的数字</string>
     <string name="count_times">正确!一共进行了%1$d次尝试。您的输入为:</string>
     <string name="count_right_answer">正确的答案是%1$s。</string>
     <string name="count_wrong_answer">输入有误!一共尝试了%1$d次。</string>
 
+    <string name="countt_try_input">您的输入为：\n</string>
+    <string name="countt_input_rightanswer">\n您的输入正确！\n\n</string>
+    <string name="countt_input_wronganswer">\n您的输入错误！\n\n</string>
+    <string name="countt_right_answer">正确答案是：</string>
+
     <!-- Face -->
-    <string name="face_tips">请打开手机扬声器，仔细聆听语音提示，并按照提示完成相应动作。</string>
+    <string name="face_tips">本测试将录制您的面部表情，请仔细聆听语音，按照提示完成相应动作，并保证面部完整地出现在画面中。</string>
     <string name="face_task_1">请闭眼</string>
     <string name="face_task_2">请放松，直视前方</string>
     <string name="face_task_3">请微笑并露出牙齿</string>
     <string name="face_finish_error">视频拍摄失败，错误:</string>
 
     <!-- Sound -->
-    <string name="sound_task_1">请大声清楚的回答我:\n昨天晚上，您在哪吃的晚餐，吃了些什么?</string>
-    <string name="sound_task_2">请大声朗读以下这段话:\n今天我的心情特别好!</string>
+    <string name="sound_task_1">请大声清楚的完成以下两项语言测试，注意录音时尽量靠近话筒，如图所示，尽量声音洪亮，准备好请点击开始录音！</string>
+    <string name="sound_task_2">1.昨天晚上，您在哪吃的晚餐，吃了些什么?\n\n\n\n2.请大声的朗读以下这段话：\n今天天气不错，风和日丽的。我们今天没有课，感觉挺爽的。</string>
     <string name="sound_count_down">录音倒计时: %1$d秒</string>
 
     <!-- Stand -->
@@ -128,5 +137,10 @@
     <string name="test_time">测试时间:</string>
     <string name="test_user">测试用户:</string>
     <string name="initial_result">初步结果:</string>
+
+    <array name="SoundQueston">
+        <item>1.昨天晚上，您在哪吃的晚餐，吃了些什么?</item>
+        <item>2.请大声的朗读以下这段话：\n今天天气不错，风和日丽的。我们今天没有课，感觉挺爽的。</item>
+    </array>
 </resources>
 
