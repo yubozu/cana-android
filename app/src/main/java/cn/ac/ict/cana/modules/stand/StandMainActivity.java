@@ -53,7 +53,7 @@ public class StandMainActivity extends Activity {
     }
 
     @Override
-    protected void onStop() {
+    protected void onPause() {
         if(mp!=null)
         {
             mp.stop();
@@ -61,7 +61,8 @@ public class StandMainActivity extends Activity {
             mp=null;
 
         }
-        super.onStop();
+        finish();
+        super.onPause();
     }
 
 }

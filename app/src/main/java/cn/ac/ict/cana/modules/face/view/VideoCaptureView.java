@@ -21,6 +21,7 @@ import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -42,23 +43,26 @@ public class VideoCaptureView extends FrameLayout implements OnClickListener {
     private TextView mTimerTv;
     private Handler customHandler = new Handler();
     private long startTime = 0L;
-
+    Context context;
     private RecordingButtonInterface mRecordingInterface;
     private boolean mShowTimer;
 
 	public VideoCaptureView(Context context) {
 		super(context);
 		initialize(context);
+        this.context  = context;
 	}
 
 	public VideoCaptureView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		initialize(context);
+        this.context = context;
 	}
 
 	public VideoCaptureView(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		initialize(context);
+        this.context = context;
 	}
 
 	private void initialize(Context context) {
@@ -154,12 +158,13 @@ public class VideoCaptureView extends FrameLayout implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		if (mRecordingInterface == null) return;
-
+		if (mRecordingInterface == null)
+            return;
 		if (v.getId() == mRecordBtnIv.getId()) {
 			mRecordingInterface.onRecordButtonClicked();
 		} else if (v.getId() == mAcceptBtnIv.getId()) {
-			mRecordingInterface.onAcceptButtonClicked();
+            Log.d("ddd","ddd");
+            mRecordingInterface.onAcceptButtonClicked();
 		} else if (v.getId() == mDeclineBtnIv.getId()) {
 			mRecordingInterface.onDeclineButtonClicked();
 		}
