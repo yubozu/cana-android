@@ -1,7 +1,6 @@
 package cn.ac.ict.cana.modules.count;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -63,7 +62,7 @@ public class CountMainActivity extends Activity {
     }
 
     @Override
-    protected void onStop() {
+    protected void onPause() {
         if(mp!=null)
         {
             mp.stop();
@@ -71,7 +70,8 @@ public class CountMainActivity extends Activity {
             mp=null;
 
         }
-        super.onStop();
+        finish();
+        super.onPause();
     }
 }
 

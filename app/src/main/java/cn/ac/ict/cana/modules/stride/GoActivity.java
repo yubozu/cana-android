@@ -3,7 +3,6 @@ package cn.ac.ict.cana.modules.stride;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
@@ -27,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import cn.ac.ict.cana.R;
-import cn.ac.ict.cana.activities.MainActivity_;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.utils.FloatVector;
@@ -51,6 +49,7 @@ public class GoActivity extends Activity {
     AlertDialog.Builder builder;
     int currentTrail = 1;
     int trailCount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,13 +66,13 @@ public class GoActivity extends Activity {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 flag = true;
-                btnGo.setText(String.format(getString(R.string.stride_btn_text),currentTrail,trailCount));
+                btnGo.setText(String.format(getString(R.string.stride_btn_text), currentTrail, trailCount));
                 btnGo.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.freebie_2));
                 btnGo.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.freebie_1));
                 btnGo.setVisibility(View.VISIBLE);
                 vibrator.vibrate(pattern, -1);
                 goContent.setText(getString(R.string.stride_testing));
-                start=true;
+                start = true;
 
             }
         });
@@ -104,10 +103,10 @@ public class GoActivity extends Activity {
 
         @Override
         public void onSensorChanged(SensorEvent event) {
-        if(start) {
-            FloatVector vector = new FloatVector(event.values[0], event.values[1], event.values[2]);
-            accFloatVectors.add(vector);
-        }
+            if (start) {
+                FloatVector vector = new FloatVector(event.values[0], event.values[1], event.values[2]);
+                accFloatVectors.add(vector);
+            }
         }
 
         @Override
@@ -120,7 +119,7 @@ public class GoActivity extends Activity {
 
         @Override
         public void onSensorChanged(SensorEvent event) {
-            if(start) {
+            if (start) {
                 FloatVector gyroFloatVector = new FloatVector(event.values[0], event.values[1], event.values[2]);
                 gyroFloatVectors.add(gyroFloatVector);
             }
@@ -136,7 +135,7 @@ public class GoActivity extends Activity {
 
         @Override
         public void onClick(View v) {
-            if (currentTrail<trailCount) {
+            if (currentTrail < trailCount) {
                 stop();
                 accList.add(accFloatVectors);
                 gyroList.add(gyroFloatVectors);
@@ -144,29 +143,33 @@ public class GoActivity extends Activity {
                 prepare(currentTrail);
             } else {
                 stop();
-                builder = new AlertDialog.Builder(GoActivity.this);
-                builder.setTitle(getString(R.string.dialog_title));
-                builder.setMessage(getString(R.string.dialog_content));
-                builder.setPositiveButton(getString(R.string.btn_save), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        accList.add(accFloatVectors);
-                        gyroList.add(gyroFloatVectors);
-                        saveToStorage();
-                        Intent intent = new Intent(GoActivity.this, ModuleHelper.getActivityAfterExam());
-                        startActivity(intent);
-                        finish();
-                    }
-                });
-                builder.setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(GoActivity.this, ModuleHelper.getActivityAfterExam());
-                        startActivity(intent);
-                        finish();
-                    }
-                });
-                builder.show();
+//                builder = new AlertDialog.Builder(GoActivity.this);
+//                builder.setTitle(getString(R.string.dialog_title));
+//                builder.setMessage(getString(R.string.dialog_content));
+//                builder.setPositiveButton(getString(R.string.btn_save), new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        accList.add(accFloatVectors);
+//                        gyroList.add(gyroFloatVectors);
+//                        saveToStorage();
+//                        Intent intent = new Intent(GoActivity.this, ModuleHelper.getActivityAfterExam());
+//                        startActivity(intent);
+//                        finish();
+//                    }
+//                });
+//                builder.setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        Intent intent = new Intent(GoActivity.this, ModuleHelper.getActivityAfterExam());
+//                        startActivity(intent);
+//                        finish();
+//                    }
+//                });
+//                builder.show();
+                saveToStorage();
+                Intent intent = new Intent(GoActivity.this, ModuleHelper.getActivityAfterExam());
+                startActivity(intent);
+                finish();
             }
 
         }
@@ -186,19 +189,18 @@ public class GoActivity extends Activity {
 
     @Override
     protected void onPause() {
-        if(mp!=null)
-        {
+        if (mp != null) {
             mp.stop();
             mp.release();
-            mp=null;
+            mp = null;
 
         }
         stop();
-        MainActivity_.intent(GoActivity.this).start();
+        finish();
         super.onPause();
     }
 
-    public void saveToStorage(){
+    public void saveToStorage() {
         SharedPreferences sharedPreferences = getSharedPreferences("Cana", Context.MODE_PRIVATE);
 
         String filePath = History.getFilePath(this, ModuleHelper.MODULE_STRIDE);
@@ -207,18 +209,18 @@ public class GoActivity extends Activity {
         try {
             FileWriter fileWrite = new FileWriter(file, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWrite);
-            bufferedWriter.write(trailCount+"\n");
-            for (ArrayList<FloatVector> trail: accList){
+            bufferedWriter.write(trailCount + "\n");
+            for (ArrayList<FloatVector> trail : accList) {
                 bufferedWriter.write("ACC " + (accList.indexOf(trail) + 1) + "\n");
-                for (FloatVector acc: trail) {
+                for (FloatVector acc : trail) {
                     bufferedWriter.write(acc.timeStamp + ", " + acc.x + ", " + acc.y + ", " + acc.z + "\n");
                     Log.d("GoActivity", String.valueOf(acc.timeStamp));
                 }
             }
 
-            for (ArrayList<FloatVector> trail: gyroList){
+            for (ArrayList<FloatVector> trail : gyroList) {
                 bufferedWriter.write("GYRO " + (gyroList.indexOf(trail) + 1) + "\n");
-                for (FloatVector gyro: trail) {
+                for (FloatVector gyro : trail) {
                     bufferedWriter.write(gyro.timeStamp + ", " + gyro.x + ", " + gyro.y + ", " + gyro.z + "\n");
                 }
             }

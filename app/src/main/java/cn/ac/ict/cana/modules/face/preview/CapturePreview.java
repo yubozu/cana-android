@@ -65,15 +65,15 @@ public class CapturePreview implements SurfaceHolder.Callback {
 			e.printStackTrace();
 			CLog.d(CLog.PREVIEW, "Failed to show preview - invalid parameters set to camera preview");
 			mInterface.onCapturePreviewFailed();
-			return;
+//			return;
 		}
 
-		try {
-			mCameraWrapper.enableAutoFocus();
-		} catch (final RuntimeException e) {
-			e.printStackTrace();
-			CLog.d(CLog.PREVIEW, "AutoFocus not available for preview");
-		}
+//		try {
+//			mCameraWrapper.enableAutoFocus();
+//		} catch (final RuntimeException e) {
+//			e.printStackTrace();
+//			CLog.d(CLog.PREVIEW, "AutoFocus not available for preview");
+//		}
 
 		try {
 			mCameraWrapper.startPreview(holder);

@@ -52,11 +52,9 @@ public class StrideMainActivity extends Activity {
                 mp.stop();
                 mp.release();
                 mp=null;
-
             }
 
             Intent intent = new Intent(getApplicationContext(), GoActivity.class);
-
             intent.putExtra("trail", trail);
             startActivity(intent);
             finish();
@@ -65,7 +63,7 @@ public class StrideMainActivity extends Activity {
     }
 
     @Override
-    protected void onStop() {
+    protected void onPause() {
         if(mp!=null)
         {
             mp.stop();
@@ -73,6 +71,8 @@ public class StrideMainActivity extends Activity {
             mp=null;
 
         }
-        super.onStop();
+        finish();
+        super.onPause();
     }
+
 }

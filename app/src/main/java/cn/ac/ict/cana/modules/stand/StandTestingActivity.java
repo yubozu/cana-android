@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import cn.ac.ict.cana.R;
-import cn.ac.ict.cana.activities.MainActivity_;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.utils.FloatVector;
@@ -81,12 +80,13 @@ public class StandTestingActivity extends Activity {
         Calendar end = Calendar.getInstance();
         end.add(Calendar.SECOND, 10);
         ttv.setOnTickListener(new TickTockView.OnTickListener() {
+
             @Override
             public String getText(long timeRemainingInMillis) {
                 if (timeRemainingInMillis <= 0) {
                     vibrator.vibrate(pattern, -1);
                     stopSensors();
-                    showDialog();
+                    executeFinish();
                 }
                 return String.valueOf(timeRemainingInMillis / 1000 + 1);
             }
@@ -127,7 +127,7 @@ public class StandTestingActivity extends Activity {
         }
     }
 
-    private void showDialog() {
+    private void executeFinish() {
         saveToStorage();
         startActivity(new Intent(StandTestingActivity.this, ModuleHelper.getActivityAfterExam()));
         finish();
@@ -177,8 +177,7 @@ public class StandTestingActivity extends Activity {
             mp = null;
         }
         stopSensors();
-        MainActivity_.intent(StandTestingActivity.this).start();
-        this.finish();
+        finish();
 
         super.onPause();
     }
