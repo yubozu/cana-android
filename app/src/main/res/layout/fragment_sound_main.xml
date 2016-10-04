@@ -15,16 +15,13 @@
         android:textSize="@dimen/material_component_text_title_text_size" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        style="@style/module_main_page"
         android:text="@string/sound_task_1"
-        android:textSize="@dimen/material_component_text_title_text_size" />
+        />
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/yuyin1"/>
+        style="@style/module_images"
+        android:src="@drawable/yuyin2"/>
 
     <Button
         android:id="@+id/btn_start_recorder"

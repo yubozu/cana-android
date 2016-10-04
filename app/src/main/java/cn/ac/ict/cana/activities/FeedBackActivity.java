@@ -110,7 +110,7 @@ public class FeedBackActivity extends Activity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!editTextDocotr.getText().toString().equals("")) {
+                if (!editTextDocotr.getText().toString().equals("")&&!(ratingBar.getRating()==0)) {
                     toastManager.show(getResources().getText(R.string.save_success));
                     history.rating = rate;
                     history.doctor = editTextDocotr.getText().toString();
@@ -156,7 +156,6 @@ public class FeedBackActivity extends Activity {
     }
 
     private void startNextActivity() {
-
         startActivity(new Intent(FeedBackActivity.this, MainActivity_.class));
         finish();
 

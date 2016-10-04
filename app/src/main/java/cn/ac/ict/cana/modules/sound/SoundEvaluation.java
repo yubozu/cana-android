@@ -3,6 +3,7 @@ package cn.ac.ict.cana.modules.sound;
 import android.content.Context;
 import android.media.MediaPlayer;
 
+import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.models.History;
 
 /**
@@ -25,6 +26,6 @@ public class SoundEvaluation {
         {
             content = e.toString();
         }
-        return content;
+        return context.getString(R.string.default_feedback);
     }
 }
