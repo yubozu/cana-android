@@ -2,6 +2,7 @@ package cn.ac.ict.cana.modules.face;
 
 import android.content.Context;
 
+import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.models.History;
 
 /**
@@ -18,6 +19,6 @@ public class FaceEvaluation {
 
 //        Do something here.
 
-        return "Example evaluation string";
+        return context.getString(R.string.default_feedback);
     }
 }

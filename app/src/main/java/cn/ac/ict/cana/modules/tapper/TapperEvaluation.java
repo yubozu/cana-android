@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.models.History;
 
 /**
@@ -53,6 +54,6 @@ public class TapperEvaluation {
             e.printStackTrace();
         }
 
-        return handList.size()+":"+timeList.size();
+        return context.getString(R.string.default_feedback);
     }
 }

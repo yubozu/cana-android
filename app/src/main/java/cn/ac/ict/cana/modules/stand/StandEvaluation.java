@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.utils.FloatVector;
 
@@ -70,7 +71,7 @@ public class StandEvaluation {
             e.printStackTrace();
         }
 
-        return accFloatVectors.size()+"";
+        return context.getString(R.string.default_feedback);
     }
 
 }

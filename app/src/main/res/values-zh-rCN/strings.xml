@@ -7,6 +7,8 @@
     <string name="device">尚未实现</string>
     <string name="logs">尚未实现</string>
     <string name="support">技术联系电话:010-62600809</string>
+    <string name="default_feedback">无初步结果</string>
+    <string name = "change_volume">请调大音量以听取语音提示!</string>
     <!-- numbers -->
     <string name="zero">0</string>
     <string name="one">1</string>
@@ -128,7 +130,7 @@
     <string name="tapper_image_description">示例图</string>
     <string name="tapper_main_tip">请点击开始测试按钮,进入测试页面</string>
     <!-- Feedback -->
-    <string name="input_doctor_name">请输入医生姓名</string>
+    <string name="input_doctor_name">请输入医生姓名并进行评分</string>
     <string name="doctor_name">医生姓名:</string>
     <string name="rating">评分:</string>
     <string name="please_evaluate">请评估此次测试:</string>
@@ -141,7 +143,7 @@
 
     <array name="SoundQueston">
         <item>1.昨天晚上，您在哪吃的晚餐，吃了些什么?</item>
-        <item>2.请大声的朗读以下这段话：\n今天天气不错，风和日丽的。我们今天没有课，感觉挺爽的。</item>
+        <item>2.请大声的朗读以下这段话：\n今天天气不错，风和日丽的。</item>
     </array>
 </resources>
 
