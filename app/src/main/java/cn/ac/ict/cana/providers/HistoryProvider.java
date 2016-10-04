@@ -177,6 +177,7 @@ public class HistoryProvider {
                     String jsonData = response.body().string();
                     try {
                         // TODO: Change to Gson
+                        Log.d("Respond", jsonData);
                         JSONObject Jobject = new JSONObject(jsonData);
                         Log.d("toJson", Jobject.toString());
                         updateHistoryUploadedById(history.id);

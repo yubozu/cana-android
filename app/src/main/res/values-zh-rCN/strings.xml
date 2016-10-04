@@ -132,6 +132,7 @@
     <!-- Feedback -->
     <string name="input_doctor_name">请输入医生姓名并进行评分</string>
     <string name="doctor_name">医生姓名:</string>
+    <string name="doctor_name_hint">请输入医生姓名</string>
     <string name="rating">评分:</string>
     <string name="please_evaluate">请评估此次测试:</string>
     <string name="save_success">保存成功</string>
