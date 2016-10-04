@@ -157,7 +157,7 @@
                 android:layout_margin="5dip"
                 android:layout_weight="0.6"
                 android:gravity="center_vertical"
-                android:hint="@string/input_doctor_name"
+                android:hint="@string/doctor_name_hint"
                 android:includeFontPadding="true"
                 android:maxLines="1"
                 android:paddingBottom="10dp"
