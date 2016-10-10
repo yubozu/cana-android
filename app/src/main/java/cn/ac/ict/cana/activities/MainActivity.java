@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.gigamole.navigationtabbar.ntb.NavigationTabBar;
+import com.pushlink.android.PushLink;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
@@ -191,4 +192,9 @@ public class MainActivity extends Activity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        PushLink.setCurrentActivity(this);
+    }
 }
