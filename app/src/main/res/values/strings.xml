@@ -100,7 +100,7 @@
     <string name="test_user">User:</string>
     <string name="three">3</string>
     <string name="two">2</string>
-    <string name="upload_failed">\"%1Upload: $d completed, %2$d error\"</string>
+    <string name="upload_failed">\"Upload: %1$d completed, %2$d error\"</string>
     <string name="upload_success">Upload completed</string>
     <string name="user_age">Age</string>
     <string name="user_female">Female</string>
