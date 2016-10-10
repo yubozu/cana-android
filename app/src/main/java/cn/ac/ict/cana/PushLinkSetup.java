@@ -1,6 +1,7 @@
 package cn.ac.ict.cana;
 
 import android.app.Application;
+import android.provider.Settings;
 
 import com.pushlink.android.PushLink;
 
@@ -10,9 +11,14 @@ import com.pushlink.android.PushLink;
  */
 
 public class PushLinkSetup extends Application {
+
+    private String android_id;
+
     @Override
     public void onCreate() {
         super.onCreate();
-        PushLink.start(this, R.drawable.ic_app, "yourApiKey", "yourDeviceID");
+        android_id = Settings.Secure.getString(this.getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+        PushLink.start(this, R.drawable.ic_app, "a6fcc607t71ai95q", android_id);
     }
 }
