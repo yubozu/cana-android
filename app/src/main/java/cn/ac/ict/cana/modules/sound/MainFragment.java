@@ -1,5 +1,6 @@
 package cn.ac.ict.cana.modules.sound;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ public class MainFragment extends Fragment {
     @BindView(btn_start_recorder)
     Button mBtnStartRecorder;
     SoundMainActivity mActivity;
+    MediaPlayer mp;
 //    private MyCount myCount;
 
     public MainFragment() {
@@ -35,11 +37,20 @@ public class MainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sound_main, container, false);
         ButterKnife.bind(this, view);
         mActivity = (SoundMainActivity) getActivity();
+        mp = MediaPlayer.create(mActivity.getApplicationContext(), R.raw.sound_guide);
+        mp.start();
         return view;
     }
 //    boolean isStartRecorder;
     @OnClick(btn_start_recorder)
     public void click() {
+        if(mp!=null)
+        {
+            mp.stop();
+            mp.release();
+            mp=null;
+
+        }
        // if (mBtnStartRecorder.isEnabled()) {
         mActivity.prepareRecorder();
         getFragmentManager().beginTransaction().replace(R.id.content, new TestingFragment()).commit();
