@@ -55,12 +55,25 @@ public class MainFragment extends Fragment {
         mActivity.prepareRecorder();
         getFragmentManager().beginTransaction().replace(R.id.content, new TestingFragment()).commit();
 //        setBtnText();
-       // }
+
         //setEnable(false);
        // setBtnText();
     }
 
-//    private void setBtnText() {
+    @Override
+    public void onPause() {
+        if(mp!=null)
+        {
+            mp.stop();
+            mp.release();
+            mp=null;
+
+        }
+        //mActivity.finish();
+        super.onPause();
+    }
+
+//  @Overrideprivate void setBtnText() {
 //        mBtnStartRecorder.setText("开始");
 //        mBtnStartRecorder.setBackgroundColor(ContextCompat.getColor(getActivity().getApplicationContext(), R.color.freebie_2));
 //        isStartRecorder = !isStartRecorder;
