@@ -1,7 +1,10 @@
 package cn.ac.ict.cana.modules.stand;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +12,8 @@ import android.widget.Button;
 import android.widget.ToggleButton;
 
 import cn.ac.ict.cana.R;
+import cn.ac.ict.cana.activities.MainActivity_;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class StandMainActivity extends Activity {
     private Button bt_begin;
@@ -47,9 +52,26 @@ public class StandMainActivity extends Activity {
                 finish();
             }
         });
-
-        mp = MediaPlayer.create(getApplicationContext(), R.raw.stand_guide);
-        mp.start();
+        SensorManager sm = (SensorManager) StandMainActivity.this.getSystemService(Context.SENSOR_SERVICE);
+        Sensor acc = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        Sensor gyro = sm.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        if(acc==null ||gyro==null)
+        {
+            SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(StandMainActivity.this, SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText(getString(R.string.attention))
+                    .setContentText(getString(R.string.not_support))
+                    .setConfirmText(getString(R.string.btn_confirm))
+                    .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sDialog) {
+                            startActivity(new Intent(StandMainActivity.this, MainActivity_.class));
+                        }
+                    });
+            sweetAlertDialog.show();
+        }else {
+            mp = MediaPlayer.create(getApplicationContext(), R.raw.stand_guide);
+            mp.start();
+        }
     }
 
     @Override

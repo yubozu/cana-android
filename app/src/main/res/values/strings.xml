@@ -111,5 +111,7 @@
     <string name="welcome_name">ICT XWHCMU\n v1.0</string>
     <string name="welcome_tip">Smart Healthcare For Parkinson\'s Disease Joint Center</string>
     <string name="zero">0</string>
+    <string name="attention">Attention</string>
+    <string name="not_support">Your device cannot support this test.</string>
 </resources>
 
