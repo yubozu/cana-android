@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">PD助手</string>
     <string name="welcome_tip">帕金森病智慧医疗联合实验室</string>
-    <string name="welcome_name">中科 宣武\n v1.0</string>
+    <string name="welcome_name">中科 宣武\n v1.2</string>
     <string name="second_back">再点击一次退出</string>
     <string name="about">帕金森病智慧医疗联合实验室\n中国科学院计算技术研究所\n首都医科大学宣武医院</string>
     <string name="device">尚未实现</string>
@@ -43,6 +43,8 @@
     <string name="btn_start_record">开始录音</string>
     <string name="btn_finish">完成测试</string>
     <string name="btn_discard">不保存</string>
+    <string name="btn_next_btn">下一题</string>
+    <string name="btn_stop_record">结束录音</string>
 
     <!-- page -->
     <string name="page_exam">检测</string>
@@ -129,6 +131,7 @@
     <string name="tapper_main_righthand">右手</string>
     <string name="tapper_image_description">示例图</string>
     <string name="tapper_main_tip">请点击开始测试按钮,进入测试页面</string>
+
     <!-- Feedback -->
     <string name="input_doctor_name">请输入医生姓名并进行评分</string>
     <string name="doctor_name">医生姓名:</string>
@@ -146,7 +149,9 @@
         <item>1.昨天晚上，您在哪吃的晚餐，吃了些什么?</item>
         <item>2.请大声的朗读以下这段话：\n今天天气不错，风和日丽的。</item>
     </array>
-    <string name="btn_next_btn">下一题</string>
-    <string name="btn_stop_record">结束录音</string>
+
+    <!-- TODO: Translate to Chinese -->
+    <string name="attention">Attention</string>
+    <string name="not_support">Your device cannot support this test.</string>
 </resources>
 
