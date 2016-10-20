@@ -7,11 +7,11 @@ import android.os.Handler;
 import android.view.Display;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.Random;
@@ -35,8 +35,9 @@ public class CountGameActivity extends Activity {
     private int tempRandom;
     private int delayMillis;
     private Runnable myRunnable;
-    private String randomStr = "";
-//    private Patient patient;
+    private String randomStr="";
+
+    private AlphaAnimation alphaAnimation;
 
 
     @Override
@@ -55,20 +56,28 @@ public class CountGameActivity extends Activity {
         tvnumHeight = 200;
         set = new AnimationSet(true);
 
-        scaleAnimation = new ScaleAnimation(1.0F, 0.0F, 1.0F, 0.0F, Animation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
-        scaleAnimation.setDuration(2000);
-        scaleAnimation.setInterpolator(new AccelerateInterpolator());
-        scaleAnimation.setFillAfter(true);
+//        scaleAnimation = new ScaleAnimation(1.0F, 0.0F, 1.0F, 0.0F, Animation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
+//        scaleAnimation = new ScaleAnimation(1.0F, 1.0F, 1.0F, 1.0F, Animation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
+//        scaleAnimation.setDuration(2000);
+//        scaleAnimation.setInterpolator(new AccelerateInterpolator());
+//        scaleAnimation.setFillAfter(true);
+//
+////        rotateAnimation = new RotateAnimation(0, 359, Animation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
+//        rotateAnimation = new RotateAnimation(0, 0, Animation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
+//        rotateAnimation.setDuration(2000);
+//        rotateAnimation.setInterpolator(new AccelerateInterpolator());
+//        rotateAnimation.setFillAfter(true);
 
-        rotateAnimation = new RotateAnimation(0, 359, Animation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
-        rotateAnimation.setDuration(2000);
-        rotateAnimation.setInterpolator(new AccelerateInterpolator());
-        rotateAnimation.setFillAfter(true);
+        alphaAnimation = new AlphaAnimation(1,0f);
+        alphaAnimation.setDuration(2000);
+        alphaAnimation.setInterpolator(new AccelerateInterpolator());
+        alphaAnimation.setFillAfter(true);
 
-        set.addAnimation(scaleAnimation);
-        set.addAnimation(rotateAnimation);
+//        set.addAnimation(scaleAnimation);
+//        set.addAnimation(rotateAnimation);
+        set.addAnimation(alphaAnimation);
 
-        rotateAnimation.setAnimationListener(new Animation.AnimationListener() {
+        alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
                 tvnum.setVisibility(View.VISIBLE);
@@ -81,8 +90,10 @@ public class CountGameActivity extends Activity {
                     genRandomNumber();
                 } else {
                     Intent intent = new Intent();
-                    intent.setClass(CountGameActivity.this, CountConfirmActivity.class);
+//                    intent.setClass(CountGameActivity.this, CountConfirmActivity.class);
+                    intent.setClass(CountGameActivity.this, CountSimKeyboardActivity.class);
                     intent.putExtra("data", randomStr);
+                    intent.putExtra("version","picture");
 //                    intent.putExtra("patient", patient);
                     startActivity(intent);
                     finish();
@@ -102,14 +113,14 @@ public class CountGameActivity extends Activity {
     }
 
     public void genRandomNumber() {
-        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) tvnum.getLayoutParams();
-        layoutParams.leftMargin = random.nextInt(width - 2 * tvnumWidth) + tvnumWidth;
-        layoutParams.topMargin = random.nextInt(height - 2 * tvnumHeight) + tvnumHeight;
+//        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) tvnum.getLayoutParams();
+//        layoutParams.leftMargin = random.nextInt(width - 2 * tvnumWidth) + tvnumWidth;
+//        layoutParams.topMargin = random.nextInt(height - 2 * tvnumHeight) + tvnumHeight;
         tempRandom = random.nextInt(10);
 
         randomStr += tempRandom;
 
-        tvnum.setLayoutParams(layoutParams);
+//        tvnum.setLayoutParams(layoutParams);
         tvnum.setText(String.valueOf(tempRandom));
 
         myHandler = new Handler();

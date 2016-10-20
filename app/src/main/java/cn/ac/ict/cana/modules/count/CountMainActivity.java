@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import cn.ac.ict.cana.R;
 
@@ -15,10 +18,14 @@ import cn.ac.ict.cana.R;
  */
 public class CountMainActivity extends Activity {
 
-    Button bt_begin;
+//    Button bt_begin;
     Vibrator vibrator;
     MediaPlayer mp;
     long[] pattern = {100, 400};
+//    RadioGroup vchoice_RG;
+    Intent intent;
+    Button picBtn;
+    Button souBtn;
 
 
     @Override
@@ -31,10 +38,25 @@ public class CountMainActivity extends Activity {
 
     public void init(){
 
-        bt_begin = (Button)findViewById(R.id.count_begin);
-        bt_begin.setOnClickListener(new View.OnClickListener() {
+        picBtn = (Button)findViewById(R.id.count_picture_btn);
+        souBtn = (Button)findViewById(R.id.count_sound_btn);
+
+//        vchoice_RG = (RadioGroup)findViewById(R.id.count_version_choice);
+//        vchoice_RG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                int radioButtonId = vchoice_RG.getCheckedRadioButtonId();
+//                if(radioButtonId == R.id.count_picture){
+//                    intent = new Intent(getApplicationContext(), CountGameActivity.class);
+//                }else{
+//                    intent = new Intent(getApplicationContext(), CountSoundActivity.class);;
+//                }
+//            }
+//        });
+        picBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                intent = new Intent(getApplicationContext(), CountGameActivity.class);
                 if(mp!=null)
                 {
                     mp.stop();
@@ -42,12 +64,49 @@ public class CountMainActivity extends Activity {
                     mp=null;
 
                 }
-                Intent intent = new Intent(getApplicationContext(), CountGameActivity.class);
+
                 startActivity(intent);
                 finish();
+
             }
         });
 
+        souBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(getApplicationContext(), CountSoundActivity.class);
+                if(mp!=null)
+                {
+                    mp.stop();
+                    mp.release();
+                    mp=null;
+
+                }
+
+                startActivity(intent);
+                finish();
+
+            }
+        });
+
+//        bt_begin = (Button)findViewById(R.id.count_begin);
+//        bt_begin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if(mp!=null)
+//                {
+//                    mp.stop();
+//                    mp.release();
+//                    mp=null;
+//
+//                }
+//
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
+
+//        intent = new Intent(getApplicationContext(), CountGameActivity.class);
 //        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         mp = MediaPlayer.create(getApplicationContext(), R.raw.count_guide);
         mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {

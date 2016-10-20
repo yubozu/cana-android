@@ -24,7 +24,7 @@
     <string name="count_hint">Please input the numbers</string>
     <string name="count_right_answer">The right answer is %1$s</string>
     <string name="count_times">Correct! You have tried %1$d times, and you input:</string>
-    <string name="count_tips">Press the button to start and remember the numbers shown in the screen</string>
+    <string name="count_tips">Make a choice butween picture version and sound version, Press the button to start</string>
     <string name="count_wrong_answer">Wrong answers! You have tried %1$d times</string>
     <string name="countt_input_rightanswer">Right answer!</string>
     <string name="countt_input_wronganswer">Wrong answer!</string>
@@ -113,5 +113,12 @@
     <string name="zero">0</string>
     <string name="attention">Attention</string>
     <string name="not_support">Your device cannot support this test.</string>
+    <string name="count_test_version_sound">Sound Version</string>
+    <string name="count_test_version_picture">Picture Version</string>
+    <string name="count_listen_carefully_begin">Please listen carefully and remember numbers, now let\'s begin</string>
+    <string name="count_listen_carefully_finish">Please listen carefully and remember numbers</string>
+    <string name="count_sim_delete">delete</string>
+    <string name="count_sim_clear">clear</string>
+    <string name="count_sim_input">Please input numbers</string>
 </resources>
 

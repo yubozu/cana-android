@@ -43,6 +43,12 @@
         <activity android:name=".modules.count.CountConfirmActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity android:name=".modules.count.CountSimKeyboardActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity android:name=".modules.count.CountSoundActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
 
         <!-- Module: Stride-->
         <activity android:name=".modules.stride.GoActivity"

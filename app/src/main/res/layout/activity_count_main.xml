@@ -18,25 +18,83 @@
         android:textColor="@color/freebie_4"
         android:textSize="@dimen/material_component_text_title_text_size" />
 
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:scaleType="fitCenter"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/count" />
+    <!--<ImageView-->
+        <!--android:layout_width="300dp"-->
+        <!--android:layout_height="300dp"-->
+        <!--android:scaleType="fitCenter"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:src="@drawable/count" />-->
+
+
+
 
     <TextView
         style="@style/module_main_page"
+        android:layout_weight="0.5"
         android:text="@string/count_tips"
-        android:layout_weight="0.1"
     />
 
     <Button
+        android:id = "@+id/count_picture_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id = "@+id/count_begin"
-        style="@style/PrimaryButton"
-        android:text="@string/btn_continue"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="10dp"
+        android:textColor="@color/freebie_9"
+        android:textSize="40sp"
+        android:gravity="center"
+        android:text="@string/count_test_version_picture"
+        android:background="@drawable/count_main_button_style"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
+    <Button
+        android:id = "@+id/count_sound_btn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="10dp"
+        android:textColor="@color/freebie_9"
+        android:textSize="40sp"
+        android:gravity="center"
+        android:text="@string/count_test_version_sound"
+        android:background="@drawable/count_main_button_style"/>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_weight="0.5"
+        android:layout_height="30dp" />
+
+    <!--<RadioGroup-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_weight="0.1"-->
+        <!--android:id = "@+id/count_version_choice">-->
+    <!--<RadioButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:textColor="#000000"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="图片版"-->
+        <!--android:checked="true"-->
+        <!--android:id="@+id/count_picture"/>-->
+    <!--<RadioButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:textColor="#000000"-->
+        <!--android:text="语音版"-->
+        <!--android:id="@+id/count_sound"/>-->
+    <!--</RadioGroup>-->
+
+    <!--<Button-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id = "@+id/count_begin"-->
+        <!--style="@style/PrimaryButton"-->
+        <!--android:text="@string/btn_continue"/>-->
 
 
 

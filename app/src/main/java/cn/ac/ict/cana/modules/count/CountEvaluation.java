@@ -27,6 +27,7 @@ public class CountEvaluation {
 //        Do something here.
 
         boolean isRight = false;
+        boolean isSound = false;
         String rightAnswer = "";
         String linet = "";
         ArrayList<String> tryInput = new ArrayList<String>();
@@ -39,7 +40,8 @@ public class CountEvaluation {
             String[] strings = line.trim().split(";");
             rightAnswer = strings[0].trim();
             isRight = strings[1].trim().equals("0")?false:true;
-            for(int i=2;i<strings.length;i++){
+            isSound = strings[2].trim().equals("0")?false:true;
+            for(int i=3;i<strings.length;i++){
                 tryInput.add(strings[i]);
             }
 
@@ -49,6 +51,7 @@ public class CountEvaluation {
         }
 
         String result = "";
+        result += isSound?context.getString(R.string.count_test_version_sound):context.getString(R.string.count_test_version_picture);
         result += isRight?context.getString(R.string.countt_input_rightanswer):context.getString(R.string.countt_input_wronganswer);
         result += context.getString(R.string.countt_right_answer)+rightAnswer+"\n";
         result += context.getString(R.string.countt_try_input);

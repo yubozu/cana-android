@@ -78,16 +78,23 @@
     <string name="user_female">女</string>
 
     <!-- Count -->
-    <string name="count_tips">\n请您记住接下来屏幕上出现的数字，点击继续按钮开始测试！</string>
+    <string name="count_tips">\n请选择图片版或者语音版进行记忆测试！</string>
     <string name="count_hint">请输入看到的数字</string>
     <string name="count_times">正确!一共进行了%1$d次尝试。您的输入为:</string>
     <string name="count_right_answer">正确的答案是%1$s。</string>
-    <string name="count_wrong_answer">输入有误!一共尝试了%1$d次。</string>
+    <string name="count_wrong_answer">输入有误!\n一共尝试了%1$d次。</string>
+    <string name="count_listen_carefully_begin">请仔细听接下来朗读的数字，叮声后开始</string>
+    <string name="count_listen_carefully_finish">请仔细听，并记住其中的数字</string>
+    <string name="count_sim_delete">删除</string>
+    <string name="count_sim_clear">清空</string>
+    <string name="count_sim_input">请输入数字</string>
 
     <string name="countt_try_input">您的输入为：\n</string>
     <string name="countt_input_rightanswer">\n您的输入正确！\n\n</string>
     <string name="countt_input_wronganswer">\n您的输入错误！\n\n</string>
     <string name="countt_right_answer">正确答案是：</string>
+    <string name="count_test_version_sound">语音版</string>
+    <string name="count_test_version_picture">图片版</string>
 
     <!-- Face -->
     <string name="face_tips">本测试将录制您的面部表情，请仔细聆听语音，按照提示完成相应动作，并保证面部完整地出现在画面中。</string>
