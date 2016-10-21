@@ -74,7 +74,7 @@ public class CountGameActivity extends Activity {
 //        rotateAnimation.setInterpolator(new AccelerateInterpolator());
 //        rotateAnimation.setFillAfter(true);
 
-        alphaAnimation = new AlphaAnimation(1,0f);
+        alphaAnimation = new AlphaAnimation(1,1f);
         alphaAnimation.setDuration(2000);
         alphaAnimation.setInterpolator(new AccelerateInterpolator());
         alphaAnimation.setFillAfter(true);
@@ -91,7 +91,7 @@ public class CountGameActivity extends Activity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                tvnum.setVisibility(View.INVISIBLE);
+//                tvnum.setVisibility(View.INVISIBLE);
                 if (count <= 5) {
                     genRandomNumber();
                 } else {
