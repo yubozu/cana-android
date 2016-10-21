@@ -14,7 +14,9 @@ import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
 
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 import cn.ac.ict.cana.R;
 
@@ -39,6 +41,8 @@ public class CountGameActivity extends Activity {
 
     private AlphaAnimation alphaAnimation;
 
+    private Set<Integer> dataPool;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,8 @@ public class CountGameActivity extends Activity {
         tvnumWidth = 200;
         tvnumHeight = 200;
         set = new AnimationSet(true);
+
+        dataPool = new HashSet<>();
 
 //        scaleAnimation = new ScaleAnimation(1.0F, 0.0F, 1.0F, 0.0F, Animation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
 //        scaleAnimation = new ScaleAnimation(1.0F, 1.0F, 1.0F, 1.0F, Animation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
@@ -89,6 +95,9 @@ public class CountGameActivity extends Activity {
                 if (count <= 5) {
                     genRandomNumber();
                 } else {
+
+                    dataPool.clear();
+
                     Intent intent = new Intent();
 //                    intent.setClass(CountGameActivity.this, CountConfirmActivity.class);
                     intent.setClass(CountGameActivity.this, CountSimKeyboardActivity.class);
@@ -116,7 +125,12 @@ public class CountGameActivity extends Activity {
 //        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) tvnum.getLayoutParams();
 //        layoutParams.leftMargin = random.nextInt(width - 2 * tvnumWidth) + tvnumWidth;
 //        layoutParams.topMargin = random.nextInt(height - 2 * tvnumHeight) + tvnumHeight;
+
         tempRandom = random.nextInt(10);
+        while(dataPool.contains(tempRandom)){
+            tempRandom = random.nextInt(10);
+        }
+        dataPool.add(tempRandom);
 
         randomStr += tempRandom;
 

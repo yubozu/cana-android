@@ -91,7 +91,6 @@ public class CountSimKeyboardActivity extends Activity {
         };
 
         for(int i=0;i<11;i++){
-            Log.e("dddd",i+" ");
             poolMap.put("index"+i,pool.load(this,source[i],1));
         }
         pool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
