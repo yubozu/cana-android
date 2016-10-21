@@ -62,7 +62,7 @@ public class CountGameActivity extends Activity {
 //        scaleAnimation.setInterpolator(new AccelerateInterpolator());
 //        scaleAnimation.setFillAfter(true);
 //
-////        rotateAnimation = new RotateAnimation(0, 359, Animation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
+//        rotateAnimation = new RotateAnimation(0, 359, Animation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
 //        rotateAnimation = new RotateAnimation(0, 0, Animation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
 //        rotateAnimation.setDuration(2000);
 //        rotateAnimation.setInterpolator(new AccelerateInterpolator());

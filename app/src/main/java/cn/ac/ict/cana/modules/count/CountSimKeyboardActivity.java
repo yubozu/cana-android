@@ -16,7 +16,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -75,7 +74,7 @@ public class CountSimKeyboardActivity extends Activity {
 
         isMusic = true;
         isNotFull = true;
-        pool = new SoundPool(10, AudioManager.STREAM_MUSIC,0);
+        pool = new SoundPool(11, AudioManager.STREAM_MUSIC,0);
         poolMap = new HashMap<>();
         source = new int[]{
                 R.raw.counts0,
@@ -88,10 +87,11 @@ public class CountSimKeyboardActivity extends Activity {
                 R.raw.counts7,
                 R.raw.counts8,
                 R.raw.counts9,
-                R.raw.countsdel
+                R.raw.counts_del
         };
 
         for(int i=0;i<11;i++){
+            Log.e("dddd",i+" ");
             poolMap.put("index"+i,pool.load(this,source[i],1));
         }
         pool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
