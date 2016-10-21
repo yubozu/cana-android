@@ -10,7 +10,7 @@ android {
         applicationId "cn.ac.ict.cana"
         minSdkVersion 17
         targetSdkVersion 24
-        versionCode 3
+        versionCode 4
         versionName "1.2"
     }
     buildTypes {
