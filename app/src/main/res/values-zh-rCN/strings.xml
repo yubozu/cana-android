@@ -101,7 +101,7 @@
     <string name="count_test_version_picture">图片版</string>
 
     <!-- Face -->
-    <string name="face_tips">本测试将录制您的面部表情，请仔细聆听语音，按照提示完成相应动作，并保证面部完整地出现在画面中。</string>
+    <string name="face_tips">本测试将录制您的面部表情，请保持设备位于眼睛正前方约30厘米处，测试中请仔细聆听语音，按照提示完成相应动作。</string>
     <string name="face_task_1">请闭眼</string>
     <string name="face_task_2">请放松，直视前方</string>
     <string name="face_task_3">请微笑并露出牙齿</string>
@@ -127,9 +127,12 @@
     <string name="stride_distance">每次测试行走距离</string>
     <string name="stride_prepare">请做好准备</string>
     <string name="stride_testing">正在测试</string>
-    <string name="stride_next_turn">"即将检测: 第 %1$d 个来回,共 %2$d 个来回"</string>
-    <string name="stride_btn_text">"完成第 %1$d 个来回,共 %2$d 个来回"</string>
-
+    <string name="stride_next_turn">即将检测</string>
+    <string name="stride_btn_text">完成</string>
+    <string name="stride_tug_btn">Tug测试</string>
+    <string name="stride_walking_btn">行走1分钟</string>
+    <string name="stride_walking_tip">请将设备置于胸前，持续行走1分钟，点击开始按钮后5秒钟测试开始。</string>
+    <string name="stride_walking_carryon">若无法坚持行走，请点击结束</string>
     <!-- Tapper -->
     <string name="tapper_index_finger">食指</string>
     <string name="tapper_middle_finger">中指</string>

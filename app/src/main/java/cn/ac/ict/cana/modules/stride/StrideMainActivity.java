@@ -9,19 +9,13 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.activities.MainActivity_;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class StrideMainActivity extends Activity {
-
-    RadioGroup rg_trail;
-    int trail = 1;
     Button bt_begin;
-
     MediaPlayer mp;
 
     @Override
@@ -36,8 +30,7 @@ public class StrideMainActivity extends Activity {
         SensorManager sm = (SensorManager) StrideMainActivity.this.getSystemService(Context.SENSOR_SERVICE);
         Sensor acc = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         Sensor gyro = sm.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
-        if(acc==null ||gyro==null)
-        {
+        if (acc == null || gyro == null) {
             SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(StrideMainActivity.this, SweetAlertDialog.WARNING_TYPE)
                     .setTitleText(getString(R.string.attention))
                     .setContentText(getString(R.string.not_support))
@@ -49,21 +42,12 @@ public class StrideMainActivity extends Activity {
                         }
                     });
             sweetAlertDialog.show();
-        }else {
+        } else {
             mp = MediaPlayer.create(getApplicationContext(), R.raw.stride_guide);
             mp.start();
         }
-        rg_trail = (RadioGroup) findViewById(R.id.rg_trail);
         bt_begin = (Button) findViewById(R.id.bt_begin);
         bt_begin.setOnClickListener(new onBeginListener());
-        rg_trail.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                int radioButtonId = group.getCheckedRadioButtonId();
-                RadioButton rb = (RadioButton) findViewById(radioButtonId);
-                trail = Integer.parseInt(rb.getText().toString());
-            }
-        });
 
     }
 
@@ -72,15 +56,13 @@ public class StrideMainActivity extends Activity {
         @Override
         public void onClick(View v) {
 
-            if(mp!=null)
-            {
+            if (mp != null) {
                 mp.stop();
                 mp.release();
-                mp=null;
+                mp = null;
             }
 
             Intent intent = new Intent(getApplicationContext(), GoActivity.class);
-            intent.putExtra("trail", trail);
             startActivity(intent);
             finish();
 
@@ -89,11 +71,10 @@ public class StrideMainActivity extends Activity {
 
     @Override
     protected void onPause() {
-        if(mp!=null)
-        {
+        if (mp != null) {
             mp.stop();
             mp.release();
-            mp=null;
+            mp = null;
 
         }
         finish();

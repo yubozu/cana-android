@@ -19,50 +19,6 @@
         android:textColor="@color/freebie_4"
         android:textSize="@dimen/material_component_text_title_text_size" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <com.cengalabs.flatui.views.FlatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:gravity="center_vertical"
-            android:text="@string/stride_trail_numbers"
-            android:textSize="16sp"
-            flatui:fl_theme="@array/freebie_theme" />
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id = "@+id/rg_trail">
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:textColor="#000000"
-                android:layout_height="match_parent"
-                android:text="@string/one"
-                android:checked="true"
-                android:id="@+id/trail_1"/>
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textColor="#000000"
-                android:text="@string/two"
-                android:id="@+id/trail_2"/>
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textColor="#000000"
-                android:text="@string/three"
-                android:id="@+id/trail_3"/>
-
-        </RadioGroup>
-    </LinearLayout>
     <com.cengalabs.flatui.views.FlatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

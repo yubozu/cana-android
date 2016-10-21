@@ -1,7 +1,6 @@
 package cn.ac.ict.cana.modules.stand;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,7 +34,6 @@ public class StandTestingActivity extends Activity {
     private NumberProgressBar pby;
     private NumberProgressBar pbz;
     private TickTockView ttv;
-    AlertDialog.Builder builder;
     Vibrator vibrator;
     MediaPlayer mp;
     long[] pattern = {100, 400};
@@ -67,6 +65,7 @@ public class StandTestingActivity extends Activity {
                 initSensors();
                 initProgressBars();
                 initTickTockView();
+                start = true;
             }
         });
         mp.start();

@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.utils.FloatVector;
 
@@ -24,37 +23,27 @@ public class StrideEvaluation {
     }
 
     static public String evaluation(History history,Context context){
-        int trailCount = 0;
-        int currentTrail = 0;
         boolean isAcc = FALSE;
         ArrayList<FloatVector> accFloatVectors = null;
         ArrayList<FloatVector> gyroFloatVectors = null;
-        ArrayList<ArrayList<FloatVector>> accList = new ArrayList<>();
-        ArrayList<ArrayList<FloatVector>> gyroList = new ArrayList<>();
-//        Do something here.
+        int type = 0;
         try {
             FileReader reader = new FileReader(history.filePath);
             BufferedReader br = new BufferedReader(reader);
             String line = br.readLine();
-            trailCount = Integer.parseInt(line);
+            if(line.trim().equals("Stride Walking"))
+            {
+                type = 1;
+            }
             line = br.readLine();
             while(line!=null && !line.isEmpty())
             {
                 if(line.startsWith("ACC"))
                 {
-                    currentTrail++;
-                    if(accFloatVectors!=null)
-                    {
-                     accList.add(accFloatVectors);
-                    }
                     accFloatVectors = new ArrayList<>();
                     isAcc = true;
                 }else if (line.startsWith("GYRO"))
                 {
-                    if(gyroFloatVectors!=null)
-                    {
-                        gyroList.add(gyroFloatVectors);
-                    }
                     gyroFloatVectors = new ArrayList<>();
                     isAcc = false;
                 }else
@@ -81,18 +70,9 @@ public class StrideEvaluation {
         }catch (IOException e)
         {
             e.printStackTrace();
-        }finally {
-            if(accFloatVectors!=null)
-            {
-                accList.add(accFloatVectors);
-            }
-            if(gyroFloatVectors!=null)
-            {
-                gyroList.add(gyroFloatVectors);
-            }
         }
-
-        return context.getString(R.string.default_feedback);
+        return String.valueOf(type);
+//        return context.getString(R.string.default_feedback);
     }
 
 }

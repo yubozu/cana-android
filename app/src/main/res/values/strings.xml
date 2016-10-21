@@ -12,8 +12,8 @@
     <string name="btn_next_btn">Next</string>
     <string name="about">Smart Healthcare For Parkinson\'s Disease Joint Center</string>
     <string name="are_you_sure">Are you sure?</string>
-    <string name= "input_hint">Hint</string>
-    <string name= "input_full_hint">Valid number is 6 digits, your input is full, please click ok to validate or delete to re-enter the answer.</string>
+    <string name="input_hint">Hint</string>
+    <string name="input_full_hint">Valid number is 6 digits, your input is full, please click ok to validate or delete to re-enter the answer.</string>
     <string name="btn_begin">BEGIN</string>
     <string name="btn_cancel">Cancel</string>
     <string name="btn_confirm">Confirm</string>

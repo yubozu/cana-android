@@ -19,7 +19,7 @@ import cn.ac.ict.cana.modules.sound.SoundMainActivity;
 import cn.ac.ict.cana.modules.stand.StandEvaluation;
 import cn.ac.ict.cana.modules.stand.StandMainActivity;
 import cn.ac.ict.cana.modules.stride.StrideEvaluation;
-import cn.ac.ict.cana.modules.stride.StrideMainActivity;
+import cn.ac.ict.cana.modules.stride.StrideItemActivity;
 import cn.ac.ict.cana.modules.tapper.TapperEvaluation;
 import cn.ac.ict.cana.modules.tapper.TapperMainActivity;
 
@@ -64,7 +64,7 @@ public class ModuleHelper {
                 module = CountMainActivity.class;
                 break;
             case MODULE_STRIDE:
-                module = StrideMainActivity.class;
+                module = StrideItemActivity.class;
                 break;
             case MODULE_STAND:
                 module = StandMainActivity.class;
