@@ -34,7 +34,7 @@ import cn.ac.ict.cana.utils.FloatVector;
 public class StrideWalkingActivity extends Activity {
     private TickTockView ttv;
     Vibrator vibrator;
-    MediaPlayer mp;
+    MediaPlayer mp,mpGuide;
     long[] pattern = {100, 400};
     SensorManager sm;
     AccEventListener accEventListener;
@@ -56,6 +56,13 @@ public class StrideWalkingActivity extends Activity {
         tv = (TextView)findViewById(R.id.tv_stride_walking);
         accVectors = new ArrayList<>();
         gyroVectors = new ArrayList<>();
+        mpGuide = MediaPlayer.create(getApplicationContext(), R.raw.stride_walking_guide);
+        mpGuide.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                mpGuide = null;
+            }
+        });
         mp = MediaPlayer.create(getApplicationContext(), R.raw.countdown);
         mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
@@ -76,6 +83,14 @@ public class StrideWalkingActivity extends Activity {
             public void onClick(View view) {
                 if(!start)
                 {
+                    if(mpGuide!=null)
+                    {
+                        mpGuide.stop();
+                        mpGuide.release();
+                        mpGuide=null;
+
+                    }
+
                     mp.start();
                     tv.setText(getString(R.string.stride_prepare));
                     goBtn.setVisibility(View.INVISIBLE);
@@ -90,6 +105,8 @@ public class StrideWalkingActivity extends Activity {
                 }
             }
         });
+
+        mpGuide.start();
     }
 
     private void initTickTockView() {
@@ -179,6 +196,14 @@ public class StrideWalkingActivity extends Activity {
 
     @Override
     protected void onPause() {
+        if(mpGuide!=null)
+        {
+            mpGuide.stop();
+            mpGuide.release();
+            mpGuide=null;
+
+        }
+
         if (mp != null) {
             mp.stop();
             mp.release();
