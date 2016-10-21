@@ -20,20 +20,20 @@ import cn.ac.ict.cana.R;
  */
 public class CountSoundActivity extends Activity {
 
-    public final static int DATALNEGTH = 6;
-    public SoundPool pool;
-    public Map<String,Integer> poolMap;
-    public Handler myHandler;
-    public Runnable runnable;
-    public int delayMillis;
-    public static int count = -1;
-    public boolean isLoad;
-    public String strRandom;
-    MediaPlayer mp;
+    private final static int DATALNEGTH = 6;
+    private SoundPool pool;
+    private Map<String,Integer> poolMap;
+    private Handler myHandler;
+    private Runnable runnable;
+    private int delayMillis;
+    private static int count = -1;
+    private boolean isLoad;
+    private String strRandom;
+    private MediaPlayer mp;
 
-    TextView tv;
+    private TextView tv;
 
-    int[] source = new int[]{
+    private int[] source = new int[]{
             R.raw.counts0,
             R.raw.counts1,
             R.raw.counts2,
@@ -47,7 +47,7 @@ public class CountSoundActivity extends Activity {
             R.raw.counts_dang
 
     };
-    int[] index = new int[DATALNEGTH];
+    private int[] index = new int[DATALNEGTH];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

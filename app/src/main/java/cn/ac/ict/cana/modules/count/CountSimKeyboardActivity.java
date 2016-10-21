@@ -56,11 +56,12 @@ public class CountSimKeyboardActivity extends Activity {
     private String[] chars;
 
     private int[] source;
-    public SoundPool pool;
-    public Map<String,Integer> poolMap;
-    public boolean  isLoad;
+    private SoundPool pool;
+    private Map<String,Integer> poolMap;
+    private boolean  isLoad;
     public boolean isMusic;
     private Button musicBtn;
+    private boolean isNotFull;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,7 @@ public class CountSimKeyboardActivity extends Activity {
     public void init(){
 
         isMusic = true;
+        isNotFull = true;
         pool = new SoundPool(10, AudioManager.STREAM_MUSIC,0);
         poolMap = new HashMap<>();
         source = new int[]{
@@ -154,18 +156,21 @@ public class CountSimKeyboardActivity extends Activity {
                     }
 //                    Toast.makeText(CountSimKeyboardActivity.this, String.format(Locale.CHINA, getString(R.string.count_wrong_answer), times),Toast.LENGTH_SHORT).show();
 
-                    SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(CountSimKeyboardActivity.this, SweetAlertDialog.WARNING_TYPE)
-                            .setTitleText(getString(R.string.are_you_sure))
-                            .setContentText(String.format(Locale.CHINA, getString(R.string.count_wrong_answer),times))
-                            .setConfirmText(getString(R.string.btn_confirm))
-                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                @Override
-                                public void onClick(SweetAlertDialog sDialog) {
-                                    sDialog.dismissWithAnimation();
+                    if(times<5){
+                        SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(CountSimKeyboardActivity.this, SweetAlertDialog.WARNING_TYPE)
+                                .setTitleText(getString(R.string.input_hint))
+                                .setContentText(String.format(Locale.CHINA, getString(R.string.count_wrong_answer),times))
+                                .setConfirmText(getString(R.string.btn_confirm))
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sDialog) {
+                                        sDialog.dismissWithAnimation();
 //                                    sDialog.cancel();
-                                }
-                            });
-                    sweetAlertDialog.show();
+                                    }
+                                });
+                        sweetAlertDialog.show();
+                    }
+
                 }
             }
         });
@@ -203,23 +208,48 @@ public class CountSimKeyboardActivity extends Activity {
 
                     String btnText = btn.getText().toString().trim();
 
-                    if(isMusic) {
-                        try {
+                    if(!isNotFull&&btnText.length()<2){
+                        SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(CountSimKeyboardActivity.this, SweetAlertDialog.WARNING_TYPE)
+                                .setTitleText(getString(R.string.input_hint))
+                                .setContentText(getString(R.string.input_full_hint))
+                                .setConfirmText(getString(R.string.btn_confirm))
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sDialog) {
+                                        sDialog.dismissWithAnimation();
+//                                    sDialog.cancel();
+                                    }
+                                });
+                        sweetAlertDialog.show();
+                    }
+
+                    if(isMusic&&isNotFull) {
+                        if(btnText.length()<2){
                             pool.play(poolMap.get("index" + String.valueOf(btnText)), 1.0f, 1.0f, 0, 1, 1.0f);
-                        } catch (Exception e) {
+                        } else{
                             pool.play(poolMap.get("index" + 10), 1.0f, 1.0f, 0, 1, 1.0f);
                         }
+                    }
+                    if(isMusic && !isNotFull){
+                        pool.play(poolMap.get("index" + 10), 1.0f, 1.0f, 0, 1, 1.0f);
                     }
 
                     String str = tv.getText().toString();
                     if(btnText.equals("删除")||btnText.equals("delete")){
                         deleteText(arg0);
+                        isNotFull = true;
                     }else if(btnText.equals("清空")||btnText.equals("clear")){
                         clearText(arg0);
+                        isNotFull = true;
                     }else{
 
                         btnText = str.concat(btnText);
                         tv.setText(btnText);
+                        if(btnText.length()>5){
+                            isNotFull = false;
+                        }else{
+                            isNotFull = true;
+                        }
                     }
                 }
 

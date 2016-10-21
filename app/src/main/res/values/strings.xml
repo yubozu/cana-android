@@ -12,6 +12,8 @@
     <string name="btn_next_btn">Next</string>
     <string name="about">Smart Healthcare For Parkinson\'s Disease Joint Center</string>
     <string name="are_you_sure">Are you sure?</string>
+    <string name= "input_hint">Hint</string>
+    <string name= "input_full_hint">Valid number is 6 digits, your input is full, please click ok to validate or delete to re-enter the answer.</string>
     <string name="btn_begin">BEGIN</string>
     <string name="btn_cancel">Cancel</string>
     <string name="btn_confirm">Confirm</string>
@@ -25,7 +27,7 @@
     <string name="count_right_answer">The right answer is %1$s</string>
     <string name="count_times">Correct! You have tried %1$d times, and you input:</string>
     <string name="count_tips">Make a choice butween picture version and sound version, Press the button to start</string>
-    <string name="count_wrong_answer">Wrong answers! You have tried %1$d times</string>
+    <string name="count_wrong_answer">Wrong answers! \nYou have tried %1$d times</string>
     <string name="countt_input_rightanswer">Right answer!</string>
     <string name="countt_input_wronganswer">Wrong answer!</string>
     <string name="countt_right_answer">Right answer:</string>

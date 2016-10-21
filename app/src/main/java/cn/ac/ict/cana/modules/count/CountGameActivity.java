@@ -20,7 +20,7 @@ import cn.ac.ict.cana.R;
 
 public class CountGameActivity extends Activity {
 
-    Handler mHandler = new Handler();
+    private Handler mHandler = new Handler();
     private ScaleAnimation scaleAnimation;
     private TextView tvnum;
     private int width;

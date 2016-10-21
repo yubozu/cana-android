@@ -19,13 +19,13 @@ import cn.ac.ict.cana.R;
 public class CountMainActivity extends Activity {
 
 //    Button bt_begin;
-    Vibrator vibrator;
-    MediaPlayer mp;
-    long[] pattern = {100, 400};
+//    Vibrator vibrator;
+    private MediaPlayer mp;
+    private long[] pattern = {100, 400};
 //    RadioGroup vchoice_RG;
-    Intent intent;
-    Button picBtn;
-    Button souBtn;
+    private Intent intent;
+    private Button picBtn;
+    private Button souBtn;
 
 
     @Override
