@@ -80,7 +80,7 @@
     <string name="user_female">女</string>
 
     <!-- Count -->
-    <string name="count_tips">\n请选择图片版或者语音版进行记忆测试！</string>
+    <string name="count_tips">\n请您记住接下来出现的数字，选择图片版或语音版进行记忆测试！</string>
     <string name="count_hint">请输入看到的数字</string>
     <string name="count_times">正确!一共进行了%1$d次尝试。您的输入为:</string>
     <string name="count_right_answer">正确的答案是%1$s。</string>
@@ -101,21 +101,21 @@
     <string name="count_test_version_picture">图片版</string>
 
     <!-- Face -->
-    <string name="face_tips">本测试将录制您的面部表情，请保持设备位于眼睛正前方约30厘米处，测试中请仔细聆听语音，按照提示完成相应动作。</string>
+    <string name="face_tips">本测试将录制您的面部表情，请将手机上举，录制过程中保持摄像头与您的双眼在同一水平，并保证面部完整的出现在画面中。请仔细聆听语音，按照提示完成相应动作。</string>
     <string name="face_task_1">请闭眼</string>
     <string name="face_task_2">请放松，直视前方</string>
     <string name="face_task_3">请微笑并露出牙齿</string>
     <string name="face_finish_error">视频拍摄失败，错误:</string>
 
     <!-- Sound -->
-    <string name="sound_task_1">请大声清楚的完成以下两项语言测试，注意录音时尽量靠近话筒，如图所示，尽量声音洪亮，准备好请点击开始录音！</string>
+    <string name="sound_task_1">请大声清楚的完成以下两项语言测试，注意录音时，嘴尽量靠近话筒，距离在5cm以内，如图所示，尽量声音洪亮，准备好后请点击开始录音。</string>
     <string name="sound_complete">完成</string>
     <string name="sound_recoding">正在录音...</string>
 
 
     <!-- Stand -->
     <string name="stand_image_description">示例图</string>
-    <string name="stand_tips">请点击开始后,手持设备,双手交叉并单腿站立10秒钟</string>
+    <string name="stand_tips">点击开始测试后，手持设备，双手交叉抱肩，倒计时5秒钟后，测试正式开始，请保持上述姿势，单腿站立10秒钟。左脚和右脚分别完成。</string>
     <string name="stand_left">左脚</string>
     <string name="stand_right">右脚</string>
     <string name="stand_chooseFoot">请选择抬起脚:</string>
@@ -136,7 +136,7 @@
     <!-- Tapper -->
     <string name="tapper_index_finger">食指</string>
     <string name="tapper_middle_finger">中指</string>
-    <string name="tapper_tips">请用食指和中指以最快的速度交替点击按钮,持续10秒钟</string>
+    <string name="tapper_tips">请用食指和中指以最快的速度，最大幅度交替点击按钮。点击开始测试，倒计时5秒后，测试正式开始。</string>
     <string name="tapper_count_down">测试倒计时: %d</string>
     <string name = "tapper_main_hand">请选择测试手:</string>
     <string name = "tapper_main_lefthand">左手</string>
