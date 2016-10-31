@@ -8,10 +8,10 @@ import static java.util.UUID.randomUUID;
  */
 public class User {
     public long id;
-    public final String uuid;
-    public final String name;
-    public final int age;
-    public final boolean gender;
+    public  String uuid = null;
+    public  String name = null;
+    public  int age;
+    public  boolean gender;
     public  String clinicalNumber = null;
     public  String studyNumber = null;
     public  String identification = null;
@@ -23,7 +23,6 @@ public class User {
         gender = userGender;
         this.uuid = uuid;
     }
-
     public User(String userName, int userAge, boolean userGender) {
         id = 0;
         name = userName;

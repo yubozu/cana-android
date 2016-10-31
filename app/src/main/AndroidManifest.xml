@@ -119,7 +119,10 @@
             android:name=".activities.MedicalInfoActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-
+        <activity
+            android:name=".activities.UserAddActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
     </application>
 
 </manifest>

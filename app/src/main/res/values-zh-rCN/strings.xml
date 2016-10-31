@@ -176,7 +176,7 @@
     <!-- TODO: Translate to Chinese -->
     <string name="attention">Attention</string>
     <string name="not_support">Your device cannot support this test.</string>
-
-
+    <string name="btn_edit">编辑</string>
+    <string name="add_tips">添加用户</string>
 </resources>
 
