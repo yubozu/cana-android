@@ -1,8 +1,11 @@
 package cn.ac.ict.cana.activities;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -12,6 +15,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import cn.ac.ict.cana.R;
+import cn.ac.ict.cana.helpers.ModuleHelper;
 
 /**
  * Author: saukymo
@@ -22,7 +26,7 @@ public class MedicalInfoActivity extends Activity {
     ToggleButton tgPDMedicine, tgLeftMedicine, tgCurrentStatus;
     TextView etTimeSinceLast;
     LinearLayout linearLayout;
-    int time;
+    String intervalTime;
     SharedPreferences settings;
 
     @Override
@@ -56,15 +60,31 @@ public class MedicalInfoActivity extends Activity {
                 currentStatus = tgCurrentStatus.isChecked();
                 takingLeftMed = tgLeftMedicine.isChecked();
                 takingPDMed = tgPDMedicine.isChecked();
-                try {
-                    time = Integer.parseInt(etTimeSinceLast.getText().toString());
-                }catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
+                intervalTime = etTimeSinceLast.getText().toString();
 
+                if (!intervalTime.isEmpty() || !takingPDMed) {
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putString("ClinicalState", String.valueOf(currentStatus));
+                    editor.putString("PDMedicine", String.valueOf(takingPDMed));
+                    editor.putString("Dopamine", String.valueOf(takingLeftMed));
+                    editor.apply();
+                    startModuleActivity();
+                    finish();
+                }
             }
         });
+    }
 
+    private void startModuleActivity() {
+        Intent intent = new Intent();
+
+        settings = getSharedPreferences("Cana", Context.MODE_PRIVATE);
+        String ModuleName = settings.getString("ModuleName", "None");
+
+        Log.d("StartModule", ModuleName);
+
+        intent.setClass(this, ModuleHelper.getModule(ModuleName));
+        startActivity(intent);
+        finish();
     }
 }

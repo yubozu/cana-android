@@ -1,7 +1,6 @@
 package cn.ac.ict.cana.activities;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -22,7 +21,6 @@ import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.adapters.UserAdapter;
 import cn.ac.ict.cana.events.NewUserEvent;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
-import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.User;
 import cn.ac.ict.cana.providers.UserProvider;
 
@@ -138,12 +136,7 @@ public class UserActivity extends Activity {
     private void startModuleActivity() {
         Intent intent = new Intent();
 
-        settings = getSharedPreferences("Cana", Context.MODE_PRIVATE);
-        String ModuleName = settings.getString("ModuleName", "None");
-
-        Log.d("StartModule", ModuleName);
-
-        intent.setClass(this, ModuleHelper.getModule(ModuleName));
+        intent.setClass(this, MedicalInfoActivity.class);
         startActivity(intent);
         finish();
     }
