@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +40,9 @@ public class UserActivity extends Activity {
     TextView etUsername;
     TextView etAge;
     ToggleButton tgGender;
+    TextView etUserClinicalNumber;
+    TextView etUserStudyNumber;
+    TextView etUserIdentification;
 
     UserProvider userProvider = new UserProvider(DataBaseHelper.getInstance(this));
 
@@ -63,6 +67,9 @@ public class UserActivity extends Activity {
         etUsername = (TextView) findViewById(R.id.edittext_username);
         etAge = (TextView) findViewById(R.id.edittext_age);
         tgGender = (ToggleButton) findViewById(R.id.toggle_gender);
+        etUserClinicalNumber = (TextView) findViewById(R.id.edittext_clinicalnumber);
+        etUserStudyNumber = (TextView) findViewById(R.id.edittext_studynumber);
+        etUserIdentification = (TextView) findViewById(R.id.edittext_identification);
         linearLayout.setVisibility(View.GONE);
 
         userProvider = new UserProvider(DataBaseHelper.getInstance(this));
@@ -89,17 +96,18 @@ public class UserActivity extends Activity {
         btSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!etUsername.getText().toString().equals("") && !etAge.getText().toString().equals("")) {
+                if (!etUsername.getText().toString().equals("") && !etAge.getText().toString().equals("") && !TextUtils.isEmpty(etUserClinicalNumber.getText())&& !TextUtils.isEmpty(etUserStudyNumber.getText())) {
                     String username = etUsername.getText().toString();
                     int age = Integer.parseInt(etAge.getText().toString());
+                    String userClinicalNumber = etUserClinicalNumber.getText().toString();
+                    String userStudyNumber = etUserStudyNumber.getText().toString();
+                    String userIdentification  = etUserIdentification.getText().toString();
 
-
-                    User user = new User(username, age, tgGender.isChecked());
+                    User user = new User(username, age, tgGender.isChecked(),userClinicalNumber,userStudyNumber,userIdentification);
                     Log.d("UserActivity", "Add new user uuid:" + user.uuid);
                     user.id = userProvider.InsertUser(user);
                     userAdapter.selectedUser = user;
                     EventBus.getDefault().post(new NewUserEvent(user));
-
                     resetForm();
                 }
             }

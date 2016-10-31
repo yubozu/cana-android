@@ -122,5 +122,17 @@
     <string name="count_sim_delete">delete</string>
     <string name="count_sim_clear">clear</string>
     <string name="count_sim_input">Please input numbers</string>
+    <string name="user_clinicalnumber">Clinical Number</string>
+    <string name="user_studynumber">Study Number</string>
+    <string name="user_identification">Identification</string>
+    <string name="tips_medical_info">Please fulfill the following form carefully! </string>
+    <string name="take_pd_medicine">Are you taking medicines for PD?</string>
+    <string name ="clinical_status_current">Current clinical status:</string>
+    <string name="take_left_medicine">Are you taking levodopa drugs？</string>
+    <string name="time_since_last">Time from last medicine (min)：</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="open_era">Open Era</string>
+    <string name="close_era">Close Era</string>
 </resources>
 

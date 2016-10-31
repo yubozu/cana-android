@@ -78,7 +78,9 @@
     <string name="user_gender">性别</string>
     <string name="user_male">男</string>
     <string name="user_female">女</string>
-
+    <string name="user_clinicalnumber">门诊/住院编号</string>
+    <string name="user_studynumber">研究编号</string>
+    <string name="user_identification">身份证号</string>
     <!-- Count -->
     <string name="count_tips">\n请您记住接下来出现的数字，选择图片版或语音版进行记忆测试！</string>
     <string name="count_hint">请输入看到的数字</string>
@@ -162,8 +164,19 @@
         <item>2.请大声的朗读以下这段话：\n今天天气不错，风和日丽的。</item>
     </array>
 
+    <string name="tips_medical_info">请仔细如实填写一下信息！</string>
+    <string name="take_pd_medicine">是否服用治疗帕金森病的药物：</string>
+    <string name ="clinical_status_current">目前的临床状态：</string>
+    <string name="take_left_medicine">是否服用左旋多巴类药物：</string>
+    <string name="time_since_last">距离上次服药时间(分钟)：</string>
+    <string name="open_era">开期</string>
+    <string name="close_era">关期</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
     <!-- TODO: Translate to Chinese -->
     <string name="attention">Attention</string>
     <string name="not_support">Your device cannot support this test.</string>
+
+
 </resources>
 

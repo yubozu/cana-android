@@ -9,7 +9,7 @@
     android:paddingEnd="@dimen/material_layout_keylines_screen_edge_margin"
     android:paddingTop="@dimen/material_component_cards_primary_title_top_padding"
     >
-
+<!--title tip-->
     <com.cengalabs.flatui.views.FlatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         android:text="@string/user_tips"
         android:textSize="16sp"
         flatui:fl_theme="@array/freebie_theme" />
-
+<!--add new user model-->
     <LinearLayout
         android:id="@+id/layout_add_new_user"
         android:layout_width="match_parent"
@@ -97,6 +97,55 @@
                     flatui:fl_theme="@array/freebie_theme" />
 
         </LinearLayout>
+        <com.cengalabs.flatui.views.FlatEditText
+            android:id="@+id/edittext_clinicalnumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:maxLines="1"
+            android:gravity="center_vertical"
+            android:hint="@string/user_clinicalnumber"
+            android:inputType="number"
+            android:includeFontPadding="true"
+            flatui:fl_fieldStyle="fl_flat"
+            flatui:fl_theme="@array/freebie_edittext" />
+        <com.cengalabs.flatui.views.FlatEditText
+            android:id="@+id/edittext_studynumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:maxLines="1"
+            android:gravity="center_vertical"
+            android:hint="@string/user_studynumber"
+            android:inputType="number"
+            android:includeFontPadding="true"
+            flatui:fl_fieldStyle="fl_flat"
+            flatui:fl_theme="@array/freebie_edittext" />
+
+        <com.cengalabs.flatui.views.FlatEditText
+            android:id="@+id/edittext_identification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:maxLines="1"
+            android:gravity="center_vertical"
+            android:hint="@string/user_identification"
+            android:inputType="number"
+            android:includeFontPadding="true"
+            flatui:fl_fieldStyle="fl_flat"
+            flatui:fl_theme="@array/freebie_edittext" />
 
         <Button
             android:id="@+id/bt_save_user"
@@ -120,7 +169,7 @@
             style="@style/Widget.AppCompat.Button.Borderless"/>
 
     </LinearLayout>
-
+    <!--show user list-->
     <ListView
         android:id="@+id/lv_user"
         android:layout_width="match_parent"
