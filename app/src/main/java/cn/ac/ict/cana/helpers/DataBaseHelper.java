@@ -12,7 +12,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
     // database
     public static final String DB_NAME = "cana.db";
-    public static final int DB_VERSION = 1;
+    public static final int DB_VERSION = 2;
 
     // User-info table
     public static final String USER_TABLE_NAME = "user_table";
@@ -21,13 +21,19 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public static final String USER_NAME = "user_name";
     public static final String USER_AGE = "user_age";
     public static final String USER_GENDER = "user_gender";
+    public static final String USER_CLINICAL_NUMBER = "user_clinical_number";
+    public static final String USER_STUDY_NUMBER = "user_study_number";
+    public static final String USER_IDENTIFICATION = "user_identification";
 
     private static final String USER_TABLE_CREATE = "CREATE TABLE " + USER_TABLE_NAME + "("
             + USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + USER_UUID + " CHAR(256) NOT NULL,"
             + USER_NAME + " CHAR(256) NOT NULL,"
             + USER_AGE + " INTEGER NOT NULL,"
-            + USER_GENDER + " INTEGER NOT NULL"
+            + USER_GENDER + " INTEGER NOT NULL,"
+            + USER_CLINICAL_NUMBER + "CHAR(256),"
+            + USER_STUDY_NUMBER + "CHAR(256),"
+            + USER_IDENTIFICATION + "CHAR(256)"
             + ");";
 
     // History table
@@ -79,7 +85,10 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // No need.
+        db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + HISTORY_TABLE_NAME);
+        db.execSQL(USER_TABLE_CREATE);
+        db.execSQL(HISTORY_TABLE_CREATE);
     }
 
 }

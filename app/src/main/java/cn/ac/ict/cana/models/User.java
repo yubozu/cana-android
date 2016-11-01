@@ -16,21 +16,17 @@ public class User {
     public  String studyNumber = null;
     public  String identification = null;
 
-    public User(long userId, String uuid, String userName, int userAge, boolean userGender) {
+    public User(long userId, String uuid, String userName, int userAge, boolean userGender, String clinicalNumber, String studyNumber, String identification) {
         id = userId;
         name = userName;
         age = userAge;
         gender = userGender;
+        this.clinicalNumber = clinicalNumber;
+        this.studyNumber  = studyNumber;
+        this.identification = identification;
         this.uuid = uuid;
     }
 
-    public User(String userName, int userAge, boolean userGender) {
-        id = 0;
-        name = userName;
-        age = userAge;
-        gender = userGender;
-        uuid = randomUUID().toString();
-    }
     public User(String userName, int userAge, boolean userGender, String clinicalNumber, String studyNumber, String identification)
     {
         id = 0;

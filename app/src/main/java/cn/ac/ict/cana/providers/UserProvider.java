@@ -18,7 +18,10 @@ import cn.ac.ict.cana.models.User;
 public class UserProvider {
 
     private SQLiteDatabase mDatabase;
-    private String[] mUserColumns = {DataBaseHelper.USER_ID, DataBaseHelper.USER_UUID, DataBaseHelper.USER_NAME, DataBaseHelper.USER_AGE, DataBaseHelper.USER_GENDER};
+    private String[] mUserColumns = {DataBaseHelper.USER_ID, DataBaseHelper.USER_UUID,
+            DataBaseHelper.USER_NAME, DataBaseHelper.USER_AGE, DataBaseHelper.USER_GENDER,
+            DataBaseHelper.USER_CLINICAL_NUMBER, DataBaseHelper.USER_IDENTIFICATION, DataBaseHelper.USER_STUDY_NUMBER
+    };
 
     public UserProvider(DataBaseHelper dataBaseHelper) {
         mDatabase = dataBaseHelper.getWritableDatabase();
@@ -31,7 +34,9 @@ public class UserProvider {
         values.put(DataBaseHelper.USER_NAME, user.name);
         values.put(DataBaseHelper.USER_AGE, user.age);
         values.put(DataBaseHelper.USER_GENDER, user.gender?1 : 0);
-
+        values.put(DataBaseHelper.USER_CLINICAL_NUMBER, user.clinicalNumber);
+        values.put(DataBaseHelper.USER_IDENTIFICATION, user.identification);
+        values.put(DataBaseHelper.USER_STUDY_NUMBER, user.studyNumber);
         return mDatabase.insert(DataBaseHelper.USER_TABLE_NAME, null, values);
     }
 
@@ -50,7 +55,10 @@ public class UserProvider {
                 String name = cursor.getString(cursor.getColumnIndex(DataBaseHelper.USER_NAME));
                 int age = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.USER_AGE));
                 boolean gender = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.USER_GENDER)) == 1;
-                users.add(new User(id, uuid, name, age, gender));
+                String clinicalNumber = cursor.getString(cursor.getColumnIndex(DataBaseHelper.USER_CLINICAL_NUMBER));
+                String studyNumber = cursor.getString(cursor.getColumnIndex(DataBaseHelper.USER_STUDY_NUMBER));
+                String identification = cursor.getString(cursor.getColumnIndex(DataBaseHelper.USER_IDENTIFICATION));
+                users.add(new User(id, uuid, name, age, gender, clinicalNumber, studyNumber, identification));
             }
             cursor.close();
         }
@@ -81,6 +89,15 @@ public class UserProvider {
         }
         cursor.close();
         return username;
+    }
+
+    public void deleteUsers(ArrayList<ContentValues> items) {
+        ArrayList<Long> ids = getIds(items);
+
+        String idString = TextUtils.join(",", ids);
+        String QueryString = String.format("DELETE FROM " +DataBaseHelper.HISTORY_TABLE_NAME + " WHERE " +DataBaseHelper.HISTORY_ID + " IN (%s)", new String[]{idString});
+
+        mDatabase.execSQL(QueryString);
     }
 
 }
