@@ -46,6 +46,9 @@ public class DataBaseHelper extends SQLiteOpenHelper{
     public static final String HISTORY_CREATE_TIME = "history_create_time";
     public static final String HISTORY_RATING = "history_rating";
     public static final String HISTORY_DOCTOR = "history_doctor";
+    public static final String HISTORY_CLINICAL_STATUS = "history_clinical_status";
+    public static final String HISTORY_PD_MEDICINE = "history_pd_medicine";
+    public static final String HISTORY_DOPAMINE = "history_dopamine";
 
 
     private static final String HISTORY_TABLE_CREATE = "CREATE TABLE " + HISTORY_TABLE_NAME + "("
@@ -57,6 +60,9 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             + HISTORY_CREATE_TIME + " TIMESTAMP NOT NULL DEFAULT current_timestamp, "
             + HISTORY_RATING + " INTEGER NOT NULL,"
             + HISTORY_DOCTOR + " CHAR(20) NOT NULL"
+            + HISTORY_CLINICAL_STATUS + " INTEGER NOT NULL,"
+            + HISTORY_PD_MEDICINE + " INTEGER NOT NULL,"
+            + HISTORY_DOPAMINE + " INTEGER NOT NULL"
             + ");";
 
     private volatile static DataBaseHelper mDataBaseHelper;

@@ -72,7 +72,7 @@
     <string name="setting_about">关于我们</string>
 
     <!-- User -->
-    <string name="user_tips">选择一个用户或添加一个新用户</string>
+    <string name="user_tips">选择一个用户</string>
     <string name="user_name">名字</string>
     <string name="user_age">年龄</string>
     <string name="user_gender">性别</string>

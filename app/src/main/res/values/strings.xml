@@ -109,7 +109,7 @@
     <string name="user_gender">Gender</string>
     <string name="user_male">Male</string>
     <string name="user_name">User</string>
-    <string name="user_tips">Choose a user or create one</string>
+    <string name="user_tips">Select a user</string>
     <string name="welcome_name">ICT XWHCMU\n v1.2</string>
     <string name="welcome_tip">Smart Healthcare For Parkinson\'s Disease Joint Center</string>
     <string name="zero">0</string>

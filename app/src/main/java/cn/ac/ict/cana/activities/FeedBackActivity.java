@@ -41,7 +41,7 @@ public class FeedBackActivity extends Activity {
     Button btnCancel;
     TextView tvEvaluation, tv_name, tv_time;
     TextView tvModule;
-    EditText editTextDocotr;
+    EditText editTextDoctor;
     private SharedPreferences sharedPreferences;
     SimpleRatingBar ratingBar;
     ToastManager toastManager;
@@ -58,7 +58,7 @@ public class FeedBackActivity extends Activity {
 
     private void init() {
         toastManager = new ToastManager(this);
-        editTextDocotr = (EditText) findViewById(R.id.edittext_doctor);
+        editTextDoctor = (EditText) findViewById(R.id.edittext_doctor);
         rate = 0;
         ratingBar = (SimpleRatingBar) findViewById(R.id.rating_bar);
         ratingBar.setStepSize(1);
@@ -88,15 +88,17 @@ public class FeedBackActivity extends Activity {
         String uuid = sharedPreferences.getString("SelectedUser", "None");
         String moduleName = sharedPreferences.getString("ModuleName", "None");
         String filePath = sharedPreferences.getString("HistoryFilePath", "None");
-
+        boolean clinicalStatus = sharedPreferences.getBoolean("ClinicalState", false);
+        boolean pdMedicine = sharedPreferences.getBoolean("PDMedicine", false);
+        int intervalTime = sharedPreferences.getInt("Dopamine", -1);
 //        Set to doctor who used last time by default.
         doctor = sharedPreferences.getString("DoctorName", "");
-        editTextDocotr.setText(doctor);
+        editTextDoctor.setText(doctor);
 
         UserProvider userProvider = new UserProvider(DataBaseHelper.getInstance(this));
         String name = userProvider.getUsernameByUuid(uuid);
 
-        final History history = new History(uuid, moduleName, filePath, 0, "");
+        final History history = new History(uuid, moduleName, filePath, 0, "", clinicalStatus, pdMedicine, intervalTime);
         tv_name.setText(name);
         Date d = new Date();
         d.setTime(System.currentTimeMillis());
@@ -110,10 +112,10 @@ public class FeedBackActivity extends Activity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!editTextDocotr.getText().toString().equals("")&&!(ratingBar.getRating()==0)) {
+                if (!editTextDoctor.getText().toString().equals("")&&!(ratingBar.getRating()==0)) {
                     toastManager.show(getResources().getText(R.string.save_success));
                     history.rating = rate;
-                    history.doctor = editTextDocotr.getText().toString();
+                    history.doctor = editTextDoctor.getText().toString();
                     saveToStorage(history);
                     startNextActivity();
                 } else {

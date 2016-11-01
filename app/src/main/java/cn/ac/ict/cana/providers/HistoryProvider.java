@@ -3,6 +3,7 @@ package cn.ac.ict.cana.providers;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -84,7 +85,10 @@ public class HistoryProvider {
                 String createdTime = cursor.getString(cursor.getColumnIndex(DataBaseHelper.HISTORY_CREATE_TIME));
                 int rating = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.HISTORY_RATING));
                 String doctor = cursor.getString(cursor.getColumnIndex(DataBaseHelper.HISTORY_DOCTOR));
-                histories.add(new History(id, uuid, type, file, isUploaded, createdTime, rating, doctor));
+                boolean cinicalStatus = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.HISTORY_CLINICAL_STATUS)) == 1;
+                boolean pdMedicine = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.HISTORY_PD_MEDICINE)) == 1;
+                int dopamine = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.HISTORY_DOPAMINE));
+                histories.add(new History(id, uuid, type, file, isUploaded, createdTime, rating, doctor, cinicalStatus, pdMedicine, dopamine));
             }
             cursor.close();
         }

@@ -26,7 +26,7 @@ public class MedicalInfoActivity extends Activity {
     ToggleButton tgPDMedicine, tgLeftMedicine, tgCurrentStatus;
     TextView etTimeSinceLast;
     LinearLayout linearLayout;
-    String intervalTime;
+    int intervalTime;
     SharedPreferences settings;
 
     @Override
@@ -60,13 +60,15 @@ public class MedicalInfoActivity extends Activity {
                 currentStatus = tgCurrentStatus.isChecked();
                 takingLeftMed = tgLeftMedicine.isChecked();
                 takingPDMed = tgPDMedicine.isChecked();
-                intervalTime = etTimeSinceLast.getText().toString();
 
-                if (!intervalTime.isEmpty() || !takingPDMed) {
+                if (!etTimeSinceLast.getText().toString().isEmpty() || !takingPDMed) {
+                    intervalTime = -1;
+                    if (takingPDMed)
+                        intervalTime = Integer.parseInt(etTimeSinceLast.getText().toString());
                     SharedPreferences.Editor editor = settings.edit();
-                    editor.putString("ClinicalState", String.valueOf(currentStatus));
-                    editor.putString("PDMedicine", String.valueOf(takingPDMed));
-                    editor.putString("Dopamine", String.valueOf(takingLeftMed));
+                    editor.putBoolean("ClinicalState", currentStatus);
+                    editor.putBoolean("PDMedicine", takingPDMed);
+                    editor.putInt("Dopamine", intervalTime);
                     editor.apply();
                     startModuleActivity();
                     finish();
