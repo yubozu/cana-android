@@ -168,7 +168,7 @@ public class HistoryProvider {
                     .addFormDataPart("doctor", history.doctor)
                     .addFormDataPart("clinical_status", String.valueOf(history.ClinicalStatus))
                     .addFormDataPart("pd_medicine", String.valueOf(history.PDMedicine))
-                    .addFormDataPart("Dopamine", String.valueOf(history.Dopamine))
+                    .addFormDataPart("dopamine", String.valueOf(history.Dopamine))
                     .addFormDataPart("clinical_id", user.clinicalNumber)
                     .addFormDataPart("study_id", user.studyNumber)
                     .addFormDataPart("identification_number", user.identification)
