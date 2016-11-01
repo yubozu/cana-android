@@ -12,7 +12,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
     // database
     public static final String DB_NAME = "cana.db";
-    public static final int DB_VERSION = 2;
+    public static final int DB_VERSION = 3;
 
     // User-info table
     public static final String USER_TABLE_NAME = "user_table";
@@ -59,7 +59,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             + HISTORY_IS_UPLOADED + " INTEGER NOT NULL,"
             + HISTORY_CREATE_TIME + " TIMESTAMP NOT NULL DEFAULT current_timestamp, "
             + HISTORY_RATING + " INTEGER NOT NULL,"
-            + HISTORY_DOCTOR + " CHAR(20) NOT NULL"
+            + HISTORY_DOCTOR + " CHAR(20) NOT NULL,"
             + HISTORY_CLINICAL_STATUS + " INTEGER NOT NULL,"
             + HISTORY_PD_MEDICINE + " INTEGER NOT NULL,"
             + HISTORY_DOPAMINE + " INTEGER NOT NULL"

@@ -35,7 +35,7 @@ public class MedicalInfoActivity extends Activity {
         setContentView(R.layout.activity_medical_info);
         init();
     }
-    boolean currentStatus, takingPDMed, takingLeftMed;
+    boolean currentStatus, takingPDMed, tookDopamine;
     protected void init() {
         settings = getSharedPreferences("Cana", 0);
 
@@ -45,28 +45,29 @@ public class MedicalInfoActivity extends Activity {
         etTimeSinceLast = (EditText) findViewById(R.id.edittext_time_since_last);
         btContinue = (Button) findViewById(R.id.bt_continue);
         linearLayout = (LinearLayout)findViewById(R.id.ll_time);
-        linearLayout.setVisibility(View.GONE);
         tgLeftMedicine.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                int visible = !b?View.VISIBLE:View.GONE;
+                int visible = b?View.VISIBLE:View.GONE;
                 linearLayout.setVisibility(visible);
             }
         });
+        tgLeftMedicine.setChecked(false);
         btContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO: add an action
                 currentStatus = tgCurrentStatus.isChecked();
-                takingLeftMed = tgLeftMedicine.isChecked();
                 takingPDMed = tgPDMedicine.isChecked();
-
-                if (!etTimeSinceLast.getText().toString().isEmpty() || !takingPDMed) {
+                tookDopamine = tgLeftMedicine.isChecked();
+                Log.d("MedicalInfo", String.valueOf(tookDopamine));
+                if (!etTimeSinceLast.getText().toString().isEmpty() || !tookDopamine) {
                     intervalTime = -1;
-                    if (takingPDMed)
+                    if (tookDopamine)
                         intervalTime = Integer.parseInt(etTimeSinceLast.getText().toString());
+                    Log.d("intervalTime", String.valueOf(intervalTime));
                     SharedPreferences.Editor editor = settings.edit();
-                    editor.putBoolean("ClinicalState", currentStatus);
+                    editor.putBoolean("ClinicalStatus", currentStatus);
                     editor.putBoolean("PDMedicine", takingPDMed);
                     editor.putInt("Dopamine", intervalTime);
                     editor.apply();

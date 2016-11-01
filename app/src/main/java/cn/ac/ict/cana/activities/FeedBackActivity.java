@@ -88,7 +88,7 @@ public class FeedBackActivity extends Activity {
         String uuid = sharedPreferences.getString("SelectedUser", "None");
         String moduleName = sharedPreferences.getString("ModuleName", "None");
         String filePath = sharedPreferences.getString("HistoryFilePath", "None");
-        boolean clinicalStatus = sharedPreferences.getBoolean("ClinicalState", false);
+        boolean clinicalStatus = sharedPreferences.getBoolean("ClinicalStatus", false);
         boolean pdMedicine = sharedPreferences.getBoolean("PDMedicine", false);
         int intervalTime = sharedPreferences.getInt("Dopamine", -1);
 //        Set to doctor who used last time by default.
@@ -172,6 +172,7 @@ public class FeedBackActivity extends Activity {
     }
 
     private void saveToStorage(History history) {
+        Log.d("saveToStorage", history.type);
         HistoryProvider historyProvider = new HistoryProvider(DataBaseHelper.getInstance(this));
         history.id = historyProvider.InsertHistory(history);
 

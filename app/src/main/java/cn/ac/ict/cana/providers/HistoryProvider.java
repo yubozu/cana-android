@@ -3,7 +3,6 @@ package cn.ac.ict.cana.providers;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -40,7 +39,8 @@ public class HistoryProvider {
     private String baseUrl = "6d880eae.ngrok.io";
 //    private String baseUrl = "test.tunnel.mkdef.com:8080";
     private String[] mHistoryColumns = {DataBaseHelper.HISTORY_ID, DataBaseHelper.HISTORY_USER_UUID, DataBaseHelper.HISTORY_TYPE, DataBaseHelper.HISTORY_FILE,
-            DataBaseHelper.HISTORY_IS_UPLOADED, "datetime(history_create_time, 'localtime') as history_create_time", DataBaseHelper.HISTORY_DOCTOR, DataBaseHelper.HISTORY_RATING};
+            DataBaseHelper.HISTORY_IS_UPLOADED, "datetime(history_create_time, 'localtime') as history_create_time", DataBaseHelper.HISTORY_DOCTOR, DataBaseHelper.HISTORY_RATING,
+            DataBaseHelper.HISTORY_CLINICAL_STATUS, DataBaseHelper.HISTORY_PD_MEDICINE, DataBaseHelper.HISTORY_DOPAMINE};
     private int total;
     private ArrayList<Call> callList;
 
@@ -65,6 +65,9 @@ public class HistoryProvider {
         values.put(DataBaseHelper.HISTORY_IS_UPLOADED, history.isUpload);
         values.put(DataBaseHelper.HISTORY_RATING, history.rating);
         values.put(DataBaseHelper.HISTORY_DOCTOR, history.doctor);
+        values.put(DataBaseHelper.HISTORY_CLINICAL_STATUS, history.ClinicalStatus);
+        values.put(DataBaseHelper.HISTORY_PD_MEDICINE, history.PDMedicine);
+        values.put(DataBaseHelper.HISTORY_DOPAMINE, history.Dopamine);
         return mDatabase.insert(DataBaseHelper.HISTORY_TABLE_NAME, null, values);
     }
     
@@ -85,10 +88,10 @@ public class HistoryProvider {
                 String createdTime = cursor.getString(cursor.getColumnIndex(DataBaseHelper.HISTORY_CREATE_TIME));
                 int rating = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.HISTORY_RATING));
                 String doctor = cursor.getString(cursor.getColumnIndex(DataBaseHelper.HISTORY_DOCTOR));
-                boolean cinicalStatus = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.HISTORY_CLINICAL_STATUS)) == 1;
+                boolean clinicalStatus = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.HISTORY_CLINICAL_STATUS)) == 1;
                 boolean pdMedicine = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.HISTORY_PD_MEDICINE)) == 1;
                 int dopamine = cursor.getInt(cursor.getColumnIndex(DataBaseHelper.HISTORY_DOPAMINE));
-                histories.add(new History(id, uuid, type, file, isUploaded, createdTime, rating, doctor, cinicalStatus, pdMedicine, dopamine));
+                histories.add(new History(id, uuid, type, file, isUploaded, createdTime, rating, doctor, clinicalStatus, pdMedicine, dopamine));
             }
             cursor.close();
         }
@@ -163,6 +166,12 @@ public class HistoryProvider {
                     .addFormDataPart("type", history.type)
                     .addFormDataPart("rating", String.valueOf(history.rating))
                     .addFormDataPart("doctor", history.doctor)
+                    .addFormDataPart("clinical_status", String.valueOf(history.ClinicalStatus))
+                    .addFormDataPart("pd_medicine", String.valueOf(history.PDMedicine))
+                    .addFormDataPart("Dopamine", String.valueOf(history.Dopamine))
+                    .addFormDataPart("clinical_id", user.clinicalNumber)
+                    .addFormDataPart("study_id", user.studyNumber)
+                    .addFormDataPart("identification_number", user.identification)
                     .build();
             Request request = new Request.Builder().url(url).post(formBody).build();
             Call call = client.newCall(request);

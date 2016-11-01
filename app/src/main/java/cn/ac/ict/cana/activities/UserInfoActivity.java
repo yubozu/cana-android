@@ -28,8 +28,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  * Date: 9/19/16
  */
 public class UserInfoActivity extends Activity {
-    Button btSave,btEdit,btDelete;
-    Button btCancel;
+    Button btSave,btEdit,btCancel;
     EditText etUsername, etAge;
     ToggleButton tgGender;
     TextView etUserClinicalNumber, tvAddTitle;
@@ -65,7 +64,6 @@ public class UserInfoActivity extends Activity {
         etUserStudyNumber = (TextView) findViewById(R.id.edittext_studynumber);
         etUserIdentification = (TextView) findViewById(R.id.edittext_identification);
         btEdit = (Button)findViewById(R.id.bt_edit_user);
-        btDelete = (Button)findViewById(R.id.bt_delete_user);
         final int from  = intent.getIntExtra("from",1);
         userProvider = new UserProvider(DataBaseHelper.getInstance(this));
         if(from==1)
@@ -148,33 +146,6 @@ public class UserInfoActivity extends Activity {
                                     Toast.makeText(UserInfoActivity.this, "保存", Toast.LENGTH_SHORT).show();
                                     sDialog.dismissWithAnimation();
                                     init();
-                                }
-                            })
-                            .setCancelText(String.valueOf(getResources().getText(R.string.btn_discard)))
-                            .showCancelButton(true)
-                            .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                @Override
-                                public void onClick(SweetAlertDialog sDialog) {
-                                    sDialog.cancel();
-                                }
-                            });
-                    sweetAlertDialog.show();
-                }
-            });
-            btDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(UserInfoActivity.this, SweetAlertDialog.WARNING_TYPE)
-                            .setTitleText(getString(R.string.are_you_sure))
-                            .setContentText(getString(R.string.cannot_recover))
-                            .setConfirmText("删除")
-                            .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                @Override
-                                public void onClick(SweetAlertDialog sDialog) {
-                                    userProvider.deleteUser(user);
-                                    Toast.makeText(UserInfoActivity.this, "删除", Toast.LENGTH_SHORT).show();
-                                    sDialog.dismissWithAnimation();
-                                    MainActivity_.intent(UserInfoActivity.this).start();
                                 }
                             })
                             .setCancelText(String.valueOf(getResources().getText(R.string.btn_discard)))
