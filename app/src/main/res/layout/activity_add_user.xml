@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:flatui="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/freebie_9"
-    android:paddingStart="@dimen/material_layout_keylines_screen_edge_margin"
+    android:orientation="vertical"
     android:paddingEnd="@dimen/material_layout_keylines_screen_edge_margin"
-    android:paddingTop="@dimen/material_component_cards_primary_title_top_padding"
-    >
-<!--title tip-->
+    android:paddingStart="@dimen/material_layout_keylines_screen_edge_margin"
+    android:paddingTop="@dimen/material_component_cards_primary_title_top_padding">
+    <!--title tip-->
     <com.cengalabs.flatui.views.FlatTextView
         android:id="@+id/tv_title_add"
         android:layout_width="wrap_content"
@@ -17,54 +16,99 @@
         android:layout_margin="5dip"
         android:gravity="center_vertical"
         android:text="@string/add_tips"
-        android:textSize="16sp"
+        android:textSize="18sp"
         flatui:fl_theme="@array/freebie_theme" />
-<!--add new user model-->
+    <!--add new user model-->
     <LinearLayout
         android:id="@+id/layout_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.cengalabs.flatui.views.FlatEditText
-            android:id="@+id/edittext_username"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:maxLines="1"
-            android:gravity="center_vertical"
-            android:hint="@string/user_name"
-            android:includeFontPadding="true"
-            flatui:fl_fieldStyle="fl_flat"
-            flatui:fl_theme="@array/freebie_edittext" />
+            android:orientation="horizontal">
 
-        <com.cengalabs.flatui.views.FlatEditText
-            android:id="@+id/edittext_age"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:maxLines="1"
-            android:gravity="center_vertical"
-            android:hint="@string/user_age"
-            android:inputType="number"
-            android:includeFontPadding="true"
-            flatui:fl_fieldStyle="fl_flat"
-            flatui:fl_theme="@array/freebie_edittext" />
+            <com.cengalabs.flatui.views.FlatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:gravity="center_vertical"
+                android:text="@string/user_name"
+                android:textSize="18sp"
+                flatui:fl_theme="@array/freebie_theme" />
 
+            <com.cengalabs.flatui.views.FlatEditText
+                android:id="@+id/edittext_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:gravity="center_vertical"
+                android:includeFontPadding="true"
+                android:maxLines="1"
+                android:paddingBottom="10dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:background="@drawable/edit_selector"
+                android:paddingTop="10dp"
+                flatui:fl_fieldStyle="fl_flat"
+                flatui:fl_theme="@array/freebie_edittext" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dip"
             android:orientation="horizontal">
+
+            <com.cengalabs.flatui.views.FlatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:gravity="center_vertical"
+                android:text="@string/user_age"
+                android:textSize="18sp"
+                flatui:fl_theme="@array/freebie_theme" />
+
+            <com.cengalabs.flatui.views.FlatEditText
+                android:id="@+id/edittext_age"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:background="@drawable/edit_selector"
+                android:gravity="center_vertical"
+                android:hint="@string/user_age"
+                android:includeFontPadding="true"
+                android:inputType="number"
+                android:maxLines="1"
+                android:paddingBottom="10dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                flatui:fl_fieldStyle="fl_flat"
+                flatui:fl_theme="@array/freebie_edittext" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.cengalabs.flatui.views.FlatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:gravity="center_vertical"
+                android:text="@string/user_gender"
+                android:textSize="18sp"
+                flatui:fl_theme="@array/freebie_theme" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dip"
+                android:orientation="horizontal">
 
                 <com.cengalabs.flatui.views.FlatTextView
                     android:layout_width="wrap_content"
@@ -72,21 +116,21 @@
                     android:layout_margin="5dip"
                     android:gravity="center_vertical"
                     android:text="@string/user_male"
-                    android:textSize="16dp"
+                    android:textSize="18dp"
                     flatui:fl_theme="@array/freebie_theme" />
 
                 <com.cengalabs.flatui.views.FlatToggleButton
                     android:id="@+id/toggle_gender"
                     android:layout_width="72dp"
                     android:layout_height="36dp"
-                    android:text=""
-                    android:textOn=""
-                    android:textOff=""
                     android:checked="true"
-                    flatui:fl_space="14dp"
+                    android:text=""
+                    android:background="@drawable/edit_selector"
+                    android:textOff=""
+                    android:textOn=""
                     flatui:fl_cornerRadius="18dp"
-                    flatui:fl_theme="@array/freebie_toggle"
-                    />
+                    flatui:fl_space="14dp"
+                    flatui:fl_theme="@array/freebie_toggle" />
 
                 <com.cengalabs.flatui.views.FlatTextView
                     android:layout_width="wrap_content"
@@ -94,112 +138,160 @@
                     android:layout_margin="5dip"
                     android:gravity="center_vertical"
                     android:text="@string/user_female"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     flatui:fl_theme="@array/freebie_theme" />
 
+            </LinearLayout>
         </LinearLayout>
-        <com.cengalabs.flatui.views.FlatEditText
-            android:id="@+id/edittext_clinicalnumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:maxLines="1"
-            android:gravity="center_vertical"
-            android:hint="@string/user_clinicalnumber"
-            android:inputType="number"
-            android:includeFontPadding="true"
-            flatui:fl_fieldStyle="fl_flat"
-            flatui:fl_theme="@array/freebie_edittext" />
-        <com.cengalabs.flatui.views.FlatEditText
-            android:id="@+id/edittext_studynumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:maxLines="1"
-            android:gravity="center_vertical"
-            android:hint="@string/user_studynumber"
-            android:inputType="number"
-            android:includeFontPadding="true"
-            flatui:fl_fieldStyle="fl_flat"
-            flatui:fl_theme="@array/freebie_edittext" />
 
-        <com.cengalabs.flatui.views.FlatEditText
-            android:id="@+id/edittext_identification"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dip"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:maxLines="1"
-            android:gravity="center_vertical"
-            android:hint="@string/user_identification"
-            android:inputType="number"
-            android:includeFontPadding="true"
-            flatui:fl_fieldStyle="fl_flat"
-            flatui:fl_theme="@array/freebie_edittext" />
+            android:orientation="horizontal">
+
+            <com.cengalabs.flatui.views.FlatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:gravity="center_vertical"
+                android:text="@string/user_clinicalnumber"
+                android:textSize="18sp"
+                flatui:fl_theme="@array/freebie_theme" />
+
+            <com.cengalabs.flatui.views.FlatEditText
+                android:id="@+id/edittext_clinicalnumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:gravity="center_vertical"
+                android:background="@drawable/edit_selector"
+                android:includeFontPadding="true"
+                android:inputType="number"
+                android:maxLines="1"
+                android:paddingBottom="10dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                flatui:fl_fieldStyle="fl_flat"
+                flatui:fl_theme="@array/freebie_edittext" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.cengalabs.flatui.views.FlatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:gravity="center_vertical"
+                android:text="@string/user_studynumber"
+                android:textSize="18sp"
+                flatui:fl_theme="@array/freebie_theme" />
+
+            <com.cengalabs.flatui.views.FlatEditText
+                android:id="@+id/edittext_studynumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:gravity="center_vertical"
+                android:background="@drawable/edit_selector"
+                android:includeFontPadding="true"
+                android:inputType="number"
+                android:maxLines="1"
+                android:paddingBottom="10dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                flatui:fl_fieldStyle="fl_flat"
+                flatui:fl_theme="@array/freebie_edittext" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.cengalabs.flatui.views.FlatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:gravity="center_vertical"
+                android:text="@string/user_identification"
+                android:textSize="18sp"
+                flatui:fl_theme="@array/freebie_theme" />
+            <com.cengalabs.flatui.views.FlatEditText
+                android:id="@+id/edittext_identification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:gravity="center_vertical"
+                android:includeFontPadding="true"
+                android:inputType="number"
+                android:maxLines="1"
+                android:background="@drawable/edit_selector"
+                android:paddingBottom="10dp"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp"
+                android:paddingTop="10dp"
+                flatui:fl_fieldStyle="fl_flat"
+                flatui:fl_theme="@array/freebie_edittext" />
+        </LinearLayout>
 
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/ll_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/ll_add">
+        android:orientation="vertical">
+
         <Button
             android:id="@+id/bt_save_user"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/material_component_dialogs_padding_around_buttons"
             android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
-            android:text="@string/btn_save"
-            android:textColor="@color/freebie_1"
+            android:layout_marginTop="@dimen/material_component_dialogs_padding_around_buttons"
             android:background="@color/freebie_2"
-            style="@style/Widget.AppCompat.Button.Borderless"/>
+            android:text="@string/btn_save"
+            android:textColor="@color/freebie_1" />
 
         <Button
             android:id="@+id/bt_cancel"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
-            android:text="@string/btn_cancel"
-            android:textColor="@color/freebie_2"
             android:background="@color/freebie_1"
-            style="@style/Widget.AppCompat.Button.Borderless"/>
+            android:text="@string/btn_cancel"
+            android:textColor="@color/freebie_2" />
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/ll_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/ll_edit">
+        android:orientation="vertical">
+
         <Button
             android:id="@+id/bt_edit_user"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/material_component_dialogs_padding_around_buttons"
             android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
-            android:text="@string/btn_edit"
-            android:textColor="@color/freebie_1"
+            android:layout_marginTop="@dimen/material_component_dialogs_padding_around_buttons"
             android:background="@color/freebie_2"
-            style="@style/Widget.AppCompat.Button.Borderless"/>
+            android:text="@string/btn_edit"
+            android:textColor="@color/freebie_1" />
 
         <Button
             android:id="@+id/bt_delete_user"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
-            android:text="@string/btn_delete"
-            android:textColor="@color/freebie_2"
             android:background="@color/freebie_1"
-            style="@style/Widget.AppCompat.Button.Borderless"/>
+            android:text="@string/btn_delete"
+            android:textColor="@color/freebie_2" />
     </LinearLayout>
 
 

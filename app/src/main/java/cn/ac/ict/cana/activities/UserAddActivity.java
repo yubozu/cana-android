@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,8 +30,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class UserAddActivity extends Activity {
     Button btSave,btEdit,btDelete;
     Button btCancel;
-    TextView etUsername;
-    TextView etAge;
+    EditText etUsername, etAge;
     ToggleButton tgGender;
     TextView etUserClinicalNumber, tvAddTitle;
     TextView etUserStudyNumber;
@@ -57,8 +57,8 @@ public class UserAddActivity extends Activity {
         llInfo = (LinearLayout)findViewById(R.id.layout_info);
         btSave = (Button) findViewById(R.id.bt_save_user);
         btCancel = (Button) findViewById(R.id.bt_cancel);
-        etUsername = (TextView) findViewById(R.id.edittext_username);
-        etAge = (TextView) findViewById(R.id.edittext_age);
+        etUsername = (EditText) findViewById(R.id.edittext_username);
+        etAge = (EditText) findViewById(R.id.edittext_age);
         tgGender = (ToggleButton) findViewById(R.id.toggle_gender);
         etUserClinicalNumber = (TextView) findViewById(R.id.edittext_clinicalnumber);
         etUserStudyNumber = (TextView) findViewById(R.id.edittext_studynumber);
@@ -112,10 +112,21 @@ public class UserAddActivity extends Activity {
             etUserStudyNumber.setText(user.studyNumber);
             etUserIdentification.setText(user.identification);
             tgGender.setChecked(user.gender);
+            etUsername.setEnabled(false);
+            etAge.setEnabled(false);
+            etUserClinicalNumber.setEnabled(false);
+            etUserStudyNumber.setEnabled(false);
+            etUserIdentification.setEnabled(false);
+            tgGender.setClickable(false);
             btEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    llInfo.setFocusable(true);
+                    etUsername.setEnabled(true);
+                    tgGender.setClickable(true);
+                    etAge.setEnabled(true);
+                    etUserClinicalNumber.setEnabled(true);
+                    etUserStudyNumber.setEnabled(true);
+                    etUserIdentification.setEnabled(true);
                     etUsername.requestFocus();
                     llEdit.setVisibility(View.GONE);
                     llAdd.setVisibility(View.VISIBLE);
