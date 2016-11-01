@@ -37,7 +37,7 @@ public class MedicalInfoActivity extends Activity {
     }
     boolean currentStatus, takingPDMed, takingLeftMed;
     protected void init() {
-      //  settings = getSharedPreferences("Cana", 0);
+        settings = getSharedPreferences("Cana", 0);
 
         tgCurrentStatus = (ToggleButton) findViewById(R.id.toggle_current_status);
         tgPDMedicine = (ToggleButton) findViewById(R.id.toggle_pd_medicine);

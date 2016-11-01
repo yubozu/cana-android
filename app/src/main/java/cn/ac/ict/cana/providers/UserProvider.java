@@ -27,7 +27,7 @@ public class UserProvider {
         mDatabase = dataBaseHelper.getWritableDatabase();
     }
 
-    public long InsertUser(User user) {
+    public long insertUser(User user) {
         ContentValues values = new ContentValues();
 
         values.put(DataBaseHelper.USER_UUID, user.uuid);
@@ -39,6 +39,20 @@ public class UserProvider {
         values.put(DataBaseHelper.USER_STUDY_NUMBER, user.studyNumber);
         return mDatabase.insert(DataBaseHelper.USER_TABLE_NAME, null, values);
     }
+
+    public void updateUser(User user) {
+        ContentValues values = new ContentValues();
+
+        values.put(DataBaseHelper.USER_UUID, user.uuid);
+        values.put(DataBaseHelper.USER_NAME, user.name);
+        values.put(DataBaseHelper.USER_AGE, user.age);
+        values.put(DataBaseHelper.USER_GENDER, user.gender?1 : 0);
+        values.put(DataBaseHelper.USER_CLINICAL_NUMBER, user.clinicalNumber);
+        values.put(DataBaseHelper.USER_IDENTIFICATION, user.identification);
+        values.put(DataBaseHelper.USER_STUDY_NUMBER, user.studyNumber);
+        mDatabase.update(DataBaseHelper.USER_TABLE_NAME, values, "_id=" + user.id, null);
+    }
+
 
     public ArrayList<User> getUsers() {
         Cursor cursor = mDatabase.query(DataBaseHelper.USER_TABLE_NAME, mUserColumns, null, null, null, null, DataBaseHelper.USER_ID);
@@ -88,6 +102,7 @@ public class UserProvider {
         Cursor cursor = mDatabase.rawQuery(QueryString, null);
         return loadUsersFromCursor(cursor).get(0);
     }
+
     public String getUsernameByUuid(String uuid){
         String username = "";
         String QueryString = String.format("SELECT " + DataBaseHelper.USER_NAME + " FROM " + DataBaseHelper.USER_TABLE_NAME + " WHERE " +DataBaseHelper.USER_UUID + " = '%s'", uuid);
@@ -99,12 +114,9 @@ public class UserProvider {
         return username;
     }
 
-    public void deleteUsers(ArrayList<ContentValues> items) {
-        ArrayList<Long> ids = getIds(items);
+    public void deleteUser(User user) {
 
-        String idString = TextUtils.join(",", ids);
-        String QueryString = String.format("DELETE FROM " +DataBaseHelper.HISTORY_TABLE_NAME + " WHERE " +DataBaseHelper.HISTORY_ID + " IN (%s)", new String[]{idString});
-
+        String QueryString = String.format("DELETE FROM " +DataBaseHelper.USER_TABLE_NAME + " WHERE " +DataBaseHelper.USER_ID + "== %d", user.id);
         mDatabase.execSQL(QueryString);
     }
 

@@ -31,9 +31,9 @@ public class DataBaseHelper extends SQLiteOpenHelper{
             + USER_NAME + " CHAR(256) NOT NULL,"
             + USER_AGE + " INTEGER NOT NULL,"
             + USER_GENDER + " INTEGER NOT NULL,"
-            + USER_CLINICAL_NUMBER + "CHAR(256),"
-            + USER_STUDY_NUMBER + "CHAR(256),"
-            + USER_IDENTIFICATION + "CHAR(256)"
+            + USER_CLINICAL_NUMBER + " CHAR(256),"
+            + USER_STUDY_NUMBER + " CHAR(256),"
+            + USER_IDENTIFICATION + " CHAR(256)"
             + ");";
 
     // History table

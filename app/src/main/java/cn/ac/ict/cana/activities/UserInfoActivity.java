@@ -27,7 +27,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  * Author: saukymo
  * Date: 9/19/16
  */
-public class UserAddActivity extends Activity {
+public class UserInfoActivity extends Activity {
     Button btSave,btEdit,btDelete;
     Button btCancel;
     EditText etUsername, etAge;
@@ -50,6 +50,7 @@ public class UserAddActivity extends Activity {
     }
 
     private void init() {
+
         tvAddTitle = (TextView)findViewById(R.id.tv_title_add);
         settings = getSharedPreferences("Cana", 0);
         llEdit = (LinearLayout)findViewById(R.id.ll_edit);
@@ -83,10 +84,10 @@ public class UserAddActivity extends Activity {
                         String userIdentification  = etUserIdentification.getText().toString();
                         User user = new User(username, age, tgGender.isChecked(),userClinicalNumber,userStudyNumber,userIdentification);
                         Log.d("UserActivity", "Add new user uuid:" + user.uuid);
-                        user.id = userProvider.InsertUser(user);
+                        user.id = userProvider.insertUser(user);
                         //userAdapter.selectedUser = user;
                         EventBus.getDefault().post(new NewUserEvent(user));
-                        MainActivity_.intent(UserAddActivity.this).start();
+                        MainActivity_.intent(UserInfoActivity.this).start();
                         finish();
                     }
                 }
@@ -95,7 +96,7 @@ public class UserAddActivity extends Activity {
             btCancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity_.intent(UserAddActivity.this).start();
+                    MainActivity_.intent(UserInfoActivity.this).start();
                     finish();
                 }
             });
@@ -135,15 +136,16 @@ public class UserAddActivity extends Activity {
             btSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(UserAddActivity.this, SweetAlertDialog.WARNING_TYPE)
+                    SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(UserInfoActivity.this, SweetAlertDialog.WARNING_TYPE)
                             .setTitleText(getString(R.string.are_you_sure))
                             .setContentText(getString(R.string.cannot_recover))
                             .setConfirmText("保存")
                             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
-                                    // TODO: Update the user by uuid
-                                    Toast.makeText(UserAddActivity.this, "保存", Toast.LENGTH_SHORT).show();
+                                    // TODO: Update new values of user.
+                                    userProvider.updateUser(user);
+                                    Toast.makeText(UserInfoActivity.this, "保存", Toast.LENGTH_SHORT).show();
                                     sDialog.dismissWithAnimation();
                                     init();
                                 }
@@ -162,17 +164,17 @@ public class UserAddActivity extends Activity {
             btDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(UserAddActivity.this, SweetAlertDialog.WARNING_TYPE)
+                    SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(UserInfoActivity.this, SweetAlertDialog.WARNING_TYPE)
                             .setTitleText(getString(R.string.are_you_sure))
                             .setContentText(getString(R.string.cannot_recover))
                             .setConfirmText("删除")
                             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
-                                    //TODO: Delete the user by uuid
-                                    Toast.makeText(UserAddActivity.this, "删除", Toast.LENGTH_SHORT).show();
+                                    userProvider.deleteUser(user);
+                                    Toast.makeText(UserInfoActivity.this, "删除", Toast.LENGTH_SHORT).show();
                                     sDialog.dismissWithAnimation();
-                                    MainActivity_.intent(UserAddActivity.this).start();
+                                    MainActivity_.intent(UserInfoActivity.this).start();
                                 }
                             })
                             .setCancelText(String.valueOf(getResources().getText(R.string.btn_discard)))

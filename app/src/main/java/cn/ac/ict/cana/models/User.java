@@ -16,7 +16,7 @@ public class User {
     public  String studyNumber = null;
     public  String identification = null;
 
-    public User(long userId, String uuid, String userName, int userAge, boolean userGender) {
+    public User(long userId, String uuid, String userName, int userAge, boolean userGender, String clinicalNumber, String studyNumber, String identification) {
         id = userId;
         name = userName;
         age = userAge;

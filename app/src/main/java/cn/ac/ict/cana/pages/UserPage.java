@@ -13,7 +13,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import cn.ac.ict.cana.R;
-import cn.ac.ict.cana.activities.UserAddActivity;
+import cn.ac.ict.cana.activities.UserInfoActivity;
 import cn.ac.ict.cana.adapters.UserAdapterForMain;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.models.User;
@@ -37,7 +37,7 @@ public class UserPage{
         bt_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, UserAddActivity.class);
+                Intent intent = new Intent(context, UserInfoActivity.class);
                 intent.putExtra("from",1);
                 context.startActivity(intent);
             }
@@ -47,7 +47,7 @@ public class UserPage{
         lvUser.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(context,UserAddActivity.class);
+                Intent intent = new Intent(context,UserInfoActivity.class);
                 intent.putExtra("from",2);
                 intent.putExtra("uuid",userList.get(i).uuid);
                 context.startActivity(intent);
