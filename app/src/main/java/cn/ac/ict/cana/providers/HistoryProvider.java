@@ -36,8 +36,8 @@ public class HistoryProvider {
     private SQLiteDatabase mDatabase;
     private OkHttpClient client;
     private UserProvider userProvider;
-    private String baseUrl = "6d880eae.ngrok.io";
-//    private String baseUrl = "test.tunnel.mkdef.com:8080";
+    private String baseUrl = "0a9d1f2e.ngrok.io";
+//    private String baseUrl = "21830fdc.test.tunnel.mkdef.com:8080";
     private String[] mHistoryColumns = {DataBaseHelper.HISTORY_ID, DataBaseHelper.HISTORY_USER_UUID, DataBaseHelper.HISTORY_TYPE, DataBaseHelper.HISTORY_FILE,
             DataBaseHelper.HISTORY_IS_UPLOADED, "datetime(history_create_time, 'localtime') as history_create_time", DataBaseHelper.HISTORY_DOCTOR, DataBaseHelper.HISTORY_RATING,
             DataBaseHelper.HISTORY_CLINICAL_STATUS, DataBaseHelper.HISTORY_PD_MEDICINE, DataBaseHelper.HISTORY_DOPAMINE};
