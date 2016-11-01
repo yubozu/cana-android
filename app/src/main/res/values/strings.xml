@@ -134,5 +134,7 @@
     <string name="no">No</string>
     <string name="open_era">Open Era</string>
     <string name="close_era">Close Era</string>
+    <string name="add_tips">Add an user</string>
+    <string name="btn_edit">Edit</string>
 </resources>
 
