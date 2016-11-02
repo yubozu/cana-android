@@ -18,6 +18,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.events.NewUserEvent;
+import cn.ac.ict.cana.events.UpdateUserEvent;
 import cn.ac.ict.cana.helpers.DataBaseHelper;
 import cn.ac.ict.cana.models.User;
 import cn.ac.ict.cana.providers.UserProvider;
@@ -151,6 +152,7 @@ public class UserInfoActivity extends Activity {
                                     userProvider.updateUser(newUser);
                                     Toast.makeText(UserInfoActivity.this, "保存", Toast.LENGTH_SHORT).show();
                                     sDialog.dismissWithAnimation();
+                                    EventBus.getDefault().post(new UpdateUserEvent());
                                     init();
                                 }
                             })

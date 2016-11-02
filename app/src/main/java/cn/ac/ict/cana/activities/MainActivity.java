@@ -29,6 +29,7 @@ import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.adapters.MainAdapter;
 import cn.ac.ict.cana.events.CheckedItemChangedEvent;
 import cn.ac.ict.cana.events.ResponseEvent;
+import cn.ac.ict.cana.events.UpdateUserEvent;
 import cn.ac.ict.cana.helpers.ToastManager;
 import dmax.dialog.SpotsDialog;
 import okhttp3.Call;
@@ -119,7 +120,7 @@ public class MainActivity extends Activity {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public  void onCheckedItemChangedEvent(CheckedItemChangedEvent event) {
+    public void onCheckedItemChangedEvent(CheckedItemChangedEvent event) {
         Button uploadButton = (Button) findViewById(R.id.bt_upload);
         if (event.count == 0) {
             uploadButton.setEnabled(false);
@@ -127,6 +128,12 @@ public class MainActivity extends Activity {
             uploadButton.setEnabled(true);
         }
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onUpdateUserEvent(UpdateUserEvent event) {
+        this.recreate();
+    }
+
 
     public void cancelUpload(){
         Log.d("cancelUpload", "Number of upload call: " + callArrayList.size());
@@ -163,12 +170,6 @@ public class MainActivity extends Activity {
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
-    }
-
-    @Override
-    public void onStop() {
-        EventBus.getDefault().unregister(this);
-        super.onStop();
     }
 
     @Override
