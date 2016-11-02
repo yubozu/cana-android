@@ -53,6 +53,7 @@ public class MainActivity extends Activity {
 
     @AfterViews
     public void init() {
+        EventBus.getDefault().register(this);
         timer = new Timer(false);
         viewPager.setAdapter(mMainAdapter);
         callArrayList = new ArrayList<>();
@@ -93,17 +94,7 @@ public class MainActivity extends Activity {
         navigationTabBar.setTitleSize(40);
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onResponseEvent(ResponseEvent event) {
-        if (event.success) {
-            success += 1;
-        } else {
-          failed += 1;
-        }
-        if (success + failed >= event.total) {
-            finishUpload();
-        }
-    }
+
 
     private void finishUpload(){
         if (failed + success == 0){
@@ -117,6 +108,18 @@ public class MainActivity extends Activity {
         }
         success = 0;
         failed = 0;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onResponseEvent(ResponseEvent event) {
+        if (event.success) {
+            success += 1;
+        } else {
+            failed += 1;
+        }
+        if (success + failed >= event.total) {
+            finishUpload();
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -169,7 +172,6 @@ public class MainActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -197,5 +199,6 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
         PushLink.setCurrentActivity(this);
+
     }
 }
