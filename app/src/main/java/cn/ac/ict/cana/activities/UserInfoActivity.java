@@ -144,9 +144,9 @@ public class UserInfoActivity extends Activity {
                                     String name = etUsername.getText().toString();
                                     boolean gender = tgGender.isChecked();
                                     int age = Integer.parseInt(etAge.getText().toString());
-                                    String clinicalNumber = etUserClinicalNumber.toString();
-                                    String studyNumber = etUserStudyNumber.toString();
-                                    String identification = etUserIdentification.toString();
+                                    String clinicalNumber = etUserClinicalNumber.getText().toString();
+                                    String studyNumber = etUserStudyNumber.getText().toString();
+                                    String identification = etUserIdentification.getText().toString();
                                     User newUser = new User(user.id, user.uuid, name, age, gender, clinicalNumber, studyNumber, identification);
                                     userProvider.updateUser(newUser);
                                     Toast.makeText(UserInfoActivity.this, "保存", Toast.LENGTH_SHORT).show();
