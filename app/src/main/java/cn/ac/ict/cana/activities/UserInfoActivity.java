@@ -141,8 +141,14 @@ public class UserInfoActivity extends Activity {
                             .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                 @Override
                                 public void onClick(SweetAlertDialog sDialog) {
-                                    // TODO: Update new values of user.
-                                    userProvider.updateUser(user);
+                                    String name = etUsername.getText().toString();
+                                    boolean gender = tgGender.isChecked();
+                                    int age = Integer.parseInt(etAge.getText().toString());
+                                    String clinicalNumber = etUserClinicalNumber.toString();
+                                    String studyNumber = etUserStudyNumber.toString();
+                                    String identification = etUserIdentification.toString();
+                                    User newUser = new User(user.id, user.uuid, name, age, gender, clinicalNumber, studyNumber, identification);
+                                    userProvider.updateUser(newUser);
                                     Toast.makeText(UserInfoActivity.this, "保存", Toast.LENGTH_SHORT).show();
                                     sDialog.dismissWithAnimation();
                                     init();
