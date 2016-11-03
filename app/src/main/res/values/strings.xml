@@ -136,5 +136,9 @@
     <string name="close_era">Close Era</string>
     <string name="add_tips">Add an user</string>
     <string name="btn_edit">Edit</string>
+    <string name="stride_tug_btn">Tug Test</string>
+    <string name="stride_walking_btn">Walk one minutes</string>
+    <string name="stride_walking_tip">请将设备置于胸前，持续行走1分钟，点击开始按钮后5秒钟测试开始。</string>
+    <string name="stride_walking_carryon">若无法坚持行走，请点击结束</string>
 </resources>
 
