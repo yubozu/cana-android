@@ -16,6 +16,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -156,18 +157,20 @@ public class CountSimKeyboardActivity extends Activity {
 //                    Toast.makeText(CountSimKeyboardActivity.this, String.format(Locale.CHINA, getString(R.string.count_wrong_answer), times),Toast.LENGTH_SHORT).show();
 
                     if(times<5){
-                        SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(CountSimKeyboardActivity.this, SweetAlertDialog.WARNING_TYPE)
-                                .setTitleText(getString(R.string.input_hint))
-                                .setContentText(String.format(Locale.CHINA, getString(R.string.count_wrong_answer),times))
-                                .setConfirmText(getString(R.string.btn_confirm))
-                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                    @Override
-                                    public void onClick(SweetAlertDialog sDialog) {
-                                        sDialog.dismissWithAnimation();
-//                                    sDialog.cancel();
-                                    }
-                                });
-                        sweetAlertDialog.show();
+                        Toast.makeText(CountSimKeyboardActivity.this,String.format(Locale.CHINA, getString(R.string.count_wrong_answer),times),Toast.LENGTH_SHORT).show();
+
+//                        SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(CountSimKeyboardActivity.this, SweetAlertDialog.WARNING_TYPE)
+//                                .setTitleText(getString(R.string.input_hint))
+//                                .setContentText(String.format(Locale.CHINA, getString(R.string.count_wrong_answer),times))
+//                                .setConfirmText(getString(R.string.btn_confirm))
+//                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+//                                    @Override
+//                                    public void onClick(SweetAlertDialog sDialog) {
+//                                        sDialog.dismissWithAnimation();
+////                                    sDialog.cancel();
+//                                    }
+//                                });
+//                        sweetAlertDialog.show();
                     }
 
                 }
@@ -208,18 +211,20 @@ public class CountSimKeyboardActivity extends Activity {
                     String btnText = btn.getText().toString().trim();
 
                     if(!isNotFull&&btnText.length()<2){
-                        SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(CountSimKeyboardActivity.this, SweetAlertDialog.WARNING_TYPE)
-                                .setTitleText(getString(R.string.input_hint))
-                                .setContentText(getString(R.string.input_full_hint))
-                                .setConfirmText(getString(R.string.btn_confirm))
-                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                                    @Override
-                                    public void onClick(SweetAlertDialog sDialog) {
-                                        sDialog.dismissWithAnimation();
-//                                    sDialog.cancel();
-                                    }
-                                });
-                        sweetAlertDialog.show();
+
+                        Toast.makeText(CountSimKeyboardActivity.this,getString(R.string.input_full_hint),Toast.LENGTH_SHORT).show();
+//                        SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(CountSimKeyboardActivity.this, SweetAlertDialog.WARNING_TYPE)
+//                                .setTitleText(getString(R.string.input_hint))
+//                                .setContentText(getString(R.string.input_full_hint))
+//                                .setConfirmText(getString(R.string.btn_confirm))
+//                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+//                                    @Override
+//                                    public void onClick(SweetAlertDialog sDialog) {
+//                                        sDialog.dismissWithAnimation();
+////                                    sDialog.cancel();
+//                                    }
+//                                });
+//                        sweetAlertDialog.show();
                     }
 
                     if(isMusic&&isNotFull) {

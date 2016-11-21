@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -27,6 +28,8 @@ import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.utils.FloatVector;
+import jama.Matrix;
+import jkalman.JKalman;
 
 public class GoActivity extends Activity {
     TextView goContent;
@@ -127,6 +130,8 @@ public class GoActivity extends Activity {
         public void onClick(View v) {
             stop();
             saveToStorage(accFloatVectors,gyroFloatVectors);
+            int test = getStrideNumbers(genKalman(genOneDimension(accFloatVectors)));
+            Toast.makeText(GoActivity.this,"哈哈"+test,Toast.LENGTH_LONG).show();
             Intent intent = new Intent(GoActivity.this, ModuleHelper.getActivityAfterExam());
             startActivity(intent);
             finish();
@@ -188,5 +193,74 @@ public class GoActivity extends Activity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("HistoryFilePath", filePath);
         editor.apply();
+    }
+
+    public static ArrayList<Double> genOneDimension(ArrayList<FloatVector> accList){
+        ArrayList<Double> result = new ArrayList<>();
+        double temp;
+        for(int i=0;i<accList.size();i++) {
+            temp = Math.sqrt(accList.get(i).x *accList.get(i).x + accList.get(i).y * accList.get(i).y + accList.get(i).z *accList.get(i).z);
+            result.add(temp);
+        }
+        Log.e("dddOneDe",":"+result.size());
+        return result;
+    }
+
+    public static ArrayList<Double> genKalman(ArrayList<Double> accList){
+        ArrayList<Double> result = new ArrayList<>();
+        try {
+            JKalman kalman = new JKalman(1, 1);
+            double[][] A= new double[][]{{1}};
+            double[][] H= new double[][]{{1}};
+            double[][] Q= new double[][]{{1}};
+            double[][] R= new double[][]{{6}};
+            kalman.setTransition_matrix(new Matrix(A));
+            kalman.setMeasurement_matrix(new Matrix(H));
+            kalman.setProcess_noise_cov(new Matrix(Q));
+            kalman.setMeasurement_noise_cov(new Matrix(R));
+            kalman.setError_cov_post(kalman.getError_cov_post().identity());
+
+            //开始位置
+            Matrix statePost = new Matrix(1,1);
+            statePost.set(0, 0, accList.get(0));
+            kalman.setState_post(statePost);
+
+            Matrix measurementZ = new Matrix(1,1);
+            Matrix predictX = null;
+            Matrix currectionX = null;
+            for(double data : accList){
+                measurementZ.set(0, 0,data);
+                predictX = kalman.Predict();
+                currectionX = kalman.Correct(measurementZ);
+                result.add(currectionX.get(0,0));
+                Log.e("dddOneDe","currectionX:"+currectionX);
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        Log.e("dddOneDe",":"+result.size());
+    return result;
+    }
+
+    public static int getStrideNumbers(ArrayList<Double> arrayList){
+        int result = 0;
+        double last = arrayList.get(0);
+        int lastIndex = 0;
+        boolean isIncreased = true;
+        for(int i=0;i<arrayList.size();i++){
+            if(arrayList.get(i)>=last){
+                last = arrayList.get(i);
+                lastIndex = i;
+                isIncreased = true;
+            }else {
+                if((isIncreased)&&(i-lastIndex>=10)){
+                    result++;
+                }
+                isIncreased = false;
+            }
+        }
+        Log.e("dddOneDe",":"+result);
+        return result;
     }
 }

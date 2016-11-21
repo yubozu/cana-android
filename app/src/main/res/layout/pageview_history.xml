@@ -23,17 +23,40 @@
         android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
         />
 
-    <Button
-        android:id="@+id/bt_upload"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn_upload"
-        android:layout_marginStart="@dimen/material_layout_keylines_screen_edge_margin"
-        android:layout_marginEnd="@dimen/material_layout_keylines_screen_edge_margin"
-        android:textColor="@color/freebie_1"
-        android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
-        android:background="@color/freebie_4"
-        style="@style/Widget.AppCompat.Button.Borderless"/>
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_upload_all"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_upload_all"
+            android:layout_marginStart="@dimen/material_layout_keylines_screen_edge_margin"
+            android:layout_marginEnd="@dimen/material_layout_keylines_screen_edge_margin"
+            android:textColor="@color/freebie_1"
+            android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
+            android:background="@color/freebie_4"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+        <Button
+            android:id="@+id/bt_upload"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_upload"
+            android:layout_marginStart="@dimen/material_layout_keylines_screen_edge_margin"
+            android:layout_marginEnd="@dimen/material_layout_keylines_screen_edge_margin"
+            android:textColor="@color/freebie_1"
+            android:layout_marginBottom="@dimen/material_component_dialogs_padding_around_buttons"
+            android:background="@color/freebie_4"
+            style="@style/Widget.AppCompat.Button.Borderless"/>
+
+
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/bt_delete"

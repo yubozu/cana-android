@@ -35,6 +35,7 @@
     <string name="btn_add">添加</string>
     <string name="btn_continue">继续</string>
     <string name="btn_upload">上传</string>
+    <string name="btn_upload_all">全部上传</string>
     <string name="btn_delete">删除</string>
     <string name="btn_cancel">取消</string>
     <string name="btn_save">保存</string>
@@ -177,6 +178,16 @@
     <string name="attention">Attention</string>
     <string name="not_support">Your device cannot support this test.</string>
 
+    <!--Evaluation guide-->
+    <string name="pd_level">PD等级</string>
+    <string name="evaluation_guide_name">评分指导</string>
+    <string name="evaluation_guide_count">数字记忆评估</string>
+    <string name="evaluation_guide_face">0：正常：正常的面部表情。\n1：轻微：轻度的面具脸，仅有瞬目频率的减少。\n2：轻度：除了瞬目频率减少外，下面部也有表情减少，也即口周的运动减少，如自发性微笑减少，但嘴唇没有分开。\n3：中度：有面具脸，嘴唇在嘴部不动时有时会张开。\n4：重度：有面具脸，嘴唇在嘴部不动时大多数情况下是张开的。</string>
+    <string name="evaluation_guide_sound">0：正常：没有言语问题。\n1：轻微：丧失正常的音调，发音或音量，但所有的字句仍能很容易听懂。\n2：轻度：丧失正常的音调，发音或音量，有少数字句不清楚，但总体上语句还是能较容易听懂。\n3：中度：患者语言难以理解。尽管不是所有的语句都难以听懂，但至少是有一些已很难听懂。\n4：重度：患者大部分的语言难以听懂或难以理解</string>
+    <string name="evaluation_guide_stand">0：正常：没有问题，可以快速毫不迟疑的站起来。\n1：轻微：站起来的速度比正常慢；或是需要尝试一次以上；或是需要往前坐才能站起来。但是不需要扶扶手。\n2：轻度：自己手扶扶手即可轻松站起来。\n3：中度：需要扶扶手，但容易再跌回椅子上；或是需要尝试一次以上才能扶着扶手站起来，但还是不需要别人帮助。\n4：重度：没有别人帮助的情况下站不起来。</string>
+    <string name="evaluation_guide_stride">0：正常：没有问题。\n1：轻微：轻微的步态损害但可以独立行走。\n2：轻度：有明显的步态损害但还可以独立行走。\n3：中度：需要辅助工具才能安全的行走（拐杖或助行器）但不需要别人的帮助。\n4：重度：完全不能行走或是只有在别人的帮助下才能行走。</string>
+    <string name="evaluation_guide_tapper">0：正常：没有问题。\n1：轻微：有下列情形之一：a）手指拍打动作的正常节律被一次或两次中断或迟疑打断；b）动作轻微变慢；c）手指拍打的幅度在接近第10次时减小。\n2：轻度： 有下列情形之一：a）在手指拍打的过程中有3到5次的停顿。b）动作轻度缓慢；c）手指拍打的幅度在拍打次数到一半时即开始减小。\n3：中度：有下列情形之一：a）手指拍打过程中有5次以上的停顿或是至少有一次较长时间的冻结（僵住）；b）动作中度变慢；c）手指拍打的幅度从拍打的第一次即开始逐渐减小。\n4：重度：由于动作的迟缓，中断或是幅度的减少患者不能或是几乎不能完成此项动作。</string>
+    <string name="evaluation_guide_none">暂无提示</string>
 
 </resources>
 

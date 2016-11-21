@@ -106,4 +106,31 @@ public class ModuleHelper {
                 throw new Resources.NotFoundException();
         }
     }
+
+    public static String getEvaluationGuide(Context context, String moduleName) {
+        String tips;
+        switch (moduleName) {
+            case MODULE_COUNT:
+                tips = context.getString(R.string.evaluation_guide_count);
+                break;
+            case MODULE_STRIDE:
+                tips = context.getString(R.string.evaluation_guide_stride);
+                break;
+            case MODULE_STAND:
+                tips = context.getString(R.string.evaluation_guide_stand);
+                break;
+            case MODULE_FACE:
+                tips = context.getString(R.string.evaluation_guide_face);
+                break;
+            case MODULE_TAPPER:
+                tips = context.getString(R.string.evaluation_guide_tapper);
+                break;
+            case MODULE_SOUND:
+                tips = context.getString(R.string.evaluation_guide_sound);
+                break;
+            default:
+                tips = context.getString(R.string.evaluation_guide_none);;
+        }
+        return tips;
+    }
 }

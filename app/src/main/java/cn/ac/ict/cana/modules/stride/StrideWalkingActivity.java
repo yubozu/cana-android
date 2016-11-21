@@ -29,6 +29,7 @@ import cn.ac.ict.cana.R;
 import cn.ac.ict.cana.helpers.ModuleHelper;
 import cn.ac.ict.cana.models.History;
 import cn.ac.ict.cana.utils.FloatVector;
+import jkalman.JKalman;
 
 
 public class StrideWalkingActivity extends Activity {

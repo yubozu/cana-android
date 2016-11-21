@@ -5,14 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
-
-import com.iarcuschin.simpleratingbar.SimpleRatingBar;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -42,11 +42,14 @@ public class FeedBackActivity extends Activity {
     TextView tvEvaluation, tv_name, tv_time;
     TextView tvModule;
     EditText editTextDocotr;
+    TextView tvEvaluationGuide;
     private SharedPreferences sharedPreferences;
-    SimpleRatingBar ratingBar;
     ToastManager toastManager;
     int rate;
     String doctor;
+    private Spinner pdlevelSpinner;
+    private ArrayAdapter<CharSequence> spinnerPdlevelAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,33 +60,31 @@ public class FeedBackActivity extends Activity {
     }
 
     private void init() {
-        toastManager = new ToastManager(this);
-        editTextDocotr = (EditText) findViewById(R.id.edittext_doctor);
-        rate = 0;
-        ratingBar = (SimpleRatingBar) findViewById(R.id.rating_bar);
-        ratingBar.setStepSize(1);
-        ratingBar.setRating(0f);
-        ratingBar.setFillColor(ContextCompat.getColor(this, R.color.freebie_2));
-        ratingBar.setBorderColor(ContextCompat.getColor(this, R.color.freebie_2));
-        ratingBar.setPressedBorderColor(ContextCompat.getColor(this, R.color.freebie_2));
-        ratingBar.setPressedFillColor(ContextCompat.getColor(this, R.color.freebie_2));
-        ratingBar.setOnRatingBarChangeListener(new SimpleRatingBar.OnRatingBarChangeListener() {
+        pdlevelSpinner = (Spinner) findViewById(R.id.spinner_pd_level);
+        spinnerPdlevelAdapter =
+                ArrayAdapter.createFromResource(this, R.array.array_pdlevel, android.R.layout.simple_spinner_item);
+        pdlevelSpinner.setAdapter(spinnerPdlevelAdapter);
+        pdlevelSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onRatingChanged(SimpleRatingBar simpleRatingBar, float rating, boolean fromUser) {
-                Log.d("RateBar", "Rating: " + rating);
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                rate = Integer.valueOf(spinnerPdlevelAdapter.getItem(position).toString());
             }
-        });
-        ratingBar.setOnRatingBarChangeListener(new SimpleRatingBar.OnRatingBarChangeListener() {
+
             @Override
-            public void onRatingChanged(SimpleRatingBar simpleRatingBar, float rating, boolean fromUser) {
-                rate = Math.round(rating);
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
+        toastManager = new ToastManager(this);
+        editTextDocotr = (EditText) findViewById(R.id.edittext_doctor);
+        rate = 0;
         tvEvaluation = (TextView) findViewById(R.id.tv_evaluation);
         tvModule = (TextView) findViewById(R.id.tv_module_name);
         tv_name = (TextView) findViewById(R.id.tv_fb_name);
         tv_time = (TextView) findViewById(R.id.tv_fb_time);
+        tvEvaluationGuide = (TextView)findViewById(R.id.evaluation_guide_name);
         sharedPreferences = getSharedPreferences("Cana", Context.MODE_PRIVATE);
         String uuid = sharedPreferences.getString("SelectedUser", "None");
         String moduleName = sharedPreferences.getString("ModuleName", "None");
@@ -104,13 +105,14 @@ public class FeedBackActivity extends Activity {
         tv_time.setText(sdf.format(d));
         tvEvaluation.setText(ModuleHelper.getEvaluation(history,FeedBackActivity.this));
         tvModule.setText(ModuleHelper.getName(this, history.type));
+        tvEvaluationGuide.setText(ModuleHelper.getEvaluationGuide(FeedBackActivity.this,moduleName));
 
         btnSave = (Button) findViewById(R.id.btn_save);
         btnCancel = (Button) findViewById(R.id.btn_cancel);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!editTextDocotr.getText().toString().equals("")&&!(ratingBar.getRating()==0)) {
+                if (!editTextDocotr.getText().toString().equals("")) {
                     toastManager.show(getResources().getText(R.string.save_success));
                     history.rating = rate;
                     history.doctor = editTextDocotr.getText().toString();

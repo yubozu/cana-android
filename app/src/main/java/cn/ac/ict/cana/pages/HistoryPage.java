@@ -54,11 +54,26 @@ public class HistoryPage{
         });
         uploadButton.setEnabled(false);
 
+        Button uploadallButton = (Button) view.findViewById(R.id.bt_upload_all);
+        uploadallButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity activity = (MainActivity) context;
+
+                ArrayList<ContentValues> Ids  = new ArrayList<>(historyAdapter.getCheckedIds());
+
+                activity.callArrayList = historyProvider.uploadHistories(Ids);
+                activity.showProgressBar(true, "Start Uploading..");
+            }
+        });
+        uploadButton.setEnabled(false);
+
+
         Button deleteButton = (Button) view.findViewById(R.id.bt_delete);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<ContentValues> Ids  = new ArrayList<>(historyAdapter.getCheckedIds());
+                ArrayList<ContentValues> Ids  = new ArrayList<>(historyAdapter.getUnUploadIds());
                 historyProvider.deleteHistories(Ids);
                 historyAdapter.removeItems(Ids);
             }

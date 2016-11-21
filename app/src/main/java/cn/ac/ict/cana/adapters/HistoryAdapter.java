@@ -43,6 +43,7 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
     private  ArrayList<String> mGroups;
     private ArrayList<ArrayList<History>> mChildren;
     private final Set<ContentValues> mCheckedItems = new HashSet<>();
+    private final Set<ContentValues> mUnuploadedItems = new HashSet<>();
     private Context mContext;
     private UserProvider userProvider;
     public HistoryAdapter(Context context, TreeView treeView, ArrayList<String> mGroups, ArrayList<ArrayList<History>> mChildren) {
@@ -152,6 +153,25 @@ public class HistoryAdapter extends BaseTreeViewAdapter {
         });
 
         return convertView;
+    }
+
+    public Set<ContentValues>getUnUploadIds() {
+        ContentValues contentValues;
+        for(int group = 0; group<getGroupCount();group++){
+            for(int child =0;child<getChildrenCount(group);child++){
+                History history = mChildren.get(group).get(child);
+                if(history.isUpload==false){
+                    contentValues= new ContentValues();
+                    contentValues.put("id", history.id);
+                    contentValues.put("groupPosition", group);
+                    contentValues.put("childPosition", child);
+                    mUnuploadedItems.add(contentValues);
+                }
+            }
+
+
+        }
+        return mUnuploadedItems;
     }
 
     public Set<ContentValues> getCheckedIds() {
